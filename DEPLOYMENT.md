@@ -102,7 +102,8 @@ Every time you push to the `main` branch:
 2. The workflow connects to your EC2 instance via SSH
 3. It pulls the latest code from the repository
 4. Sets proper permissions
-5. Restarts the web server
+5. Automatically renews SSL certificate if needed (within 30 days of expiry)
+6. Restarts the web server
 
 ### Manual Deployment
 You can also trigger deployment manually:
