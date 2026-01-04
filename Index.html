@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Primary Meta Tags -->
     <title>Choco-naut™ | Premium Indian Artisan Dark Chocolate | Bean to Bar Chocolate India</title>
     <meta name="title" content="Choco-naut™ | Premium Indian Artisan Dark Chocolate | Bean to Bar Chocolate India">
     <meta name="description" content="Discover Choco-naut™ - India's finest bean-to-bar artisan chocolate made from single-origin cacao from Kerala and Karnataka. Handcrafted dark chocolate, milk chocolate, and chocolate bars with no palm oil. Order premium Indian chocolate online.">
@@ -13,7 +12,6 @@
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://choconaut.in/">
     
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://choconaut.in/">
     <meta property="og:title" content="Choco-naut™ | Premium Indian Artisan Dark Chocolate | Bean to Bar">
@@ -21,14 +19,12 @@
     <meta property="og:image" content="https://choconaut.in/images/bg.jpg">
     <meta property="og:site_name" content="Choco-naut">
     
-    <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://choconaut.in/">
     <meta property="twitter:title" content="Choco-naut™ | Premium Indian Artisan Dark Chocolate">
     <meta property="twitter:description" content="Handcrafted bean-to-bar chocolate from single-origin Indian cacao. Premium dark chocolate made in India.">
     <meta property="twitter:image" content="https://choconaut.in/images/bg.jpg">
     
-    <!-- Structured Data / Schema.org -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -504,6 +500,7 @@
                 <input type="text" id="name" class="checkout-input" placeholder="Name" required>
                 <input type="email" id="email" class="checkout-input" placeholder="Email (For Confirmation)" required>
                 <input type="tel" id="phone" class="checkout-input" placeholder="Phone" required>
+                <input type="tel" id="pincode" class="checkout-input" placeholder="6-Digit Pincode" maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                 <textarea id="address" class="checkout-input" rows="2" placeholder="Address" required></textarea>
                 <button onclick="startPayment()" class="pay-btn">💳 PAY SECURELY</button>
             </div>
@@ -775,6 +772,42 @@
         }
 
         // --- 8. CHECKOUT & PAYMENT ---
+
+        // NEW: VALIDATION FUNCTION FOR INDIAN MAINLAND
+        function validateMainlandIndia(pin) {
+            // 1. Basic format check (6 digits, numeric)
+            if (!/^\d{6}$/.test(pin)) {
+                sfx('error');
+                alert("⚠️ Please enter a valid 6-digit Indian Pincode.");
+                return false;
+            }
+
+            // 2. Identify Non-Mainland / Restricted Prefixes
+            // 744 = Andaman & Nicobar Islands
+            // 68255 = Lakshadweep range
+            const restrictedPrefixes = ['744']; 
+            
+            const isLakshadweep = pin.startsWith('68255');
+            const isAndaman = restrictedPrefixes.some(prefix => pin.startsWith(prefix));
+
+            if (isAndaman || isLakshadweep) {
+                sfx('error');
+                alert("🚫 We currently do not ship to Island territories (Andaman & Nicobar, Lakshadweep). Mainland India only.");
+                return false;
+            }
+
+            // 3. Indian Post Access Check (General Range)
+            // Valid ranges roughly 110000 to 899999
+            const pinNum = parseInt(pin, 10);
+            if ((pinNum < 110000 || pinNum > 899999) && !pin.startsWith('9')) {
+                sfx('error');
+                alert("🚫 Service unavailable for this Pincode.");
+                return false;
+            }
+
+            return true;
+        }
+
         function openCart() {
             sfx('click');
             const list = document.getElementById('cartItems'); list.innerHTML = "";
@@ -794,12 +827,23 @@
             sfx('click');
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
-            const address = document.getElementById('address').value;
             const email = document.getElementById('email').value;
+            
+            // NEW: Get Pincode
+            const pincode = document.getElementById('pincode').value;
+            let address = document.getElementById('address').value;
 
-            if (finalTotal === 0 || !name || !phone || !address || !email) { 
-                sfx('error'); alert("Please fill all details including Email."); return; 
+            if (finalTotal === 0 || !name || !phone || !address || !email || !pincode) { 
+                sfx('error'); alert("Please fill all details including Pincode."); return; 
             }
+
+            // NEW: Run Validation
+            if (!validateMainlandIndia(pincode)) {
+                return; // Stop here if validation fails
+            }
+
+            // Combine for records
+            address += ` (PIN: ${pincode})`;
 
             // 1. Log Pending Order
             logOrderToSheet("Pending");
