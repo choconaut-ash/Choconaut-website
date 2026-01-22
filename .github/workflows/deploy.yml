@@ -5,6 +5,9 @@ on:
     branches:
       - main
   workflow_dispatch:
+  schedule:
+    # Run every Sunday at 2 AM UTC to check and renew SSL certificate
+    - cron: '0 2 * * 0'
 
 jobs:
   deploy:
@@ -23,19 +26,19 @@ jobs:
           port: 22
           script: |
             # Navigate to the web directory
-            cd /var/www/html || cd /home/${{ secrets.EC2_USERNAME }}/website
+            cd /var/www/html
             
             # Pull latest changes
-            sudo git pull origin main || git pull origin main
+            sudo git pull origin main
             
             # Set proper permissions
-            sudo chown -R apache:apache . || sudo chown -R www-data:www-data . || sudo chown -R ${{ secrets.EC2_USERNAME }}:${{ secrets.EC2_USERNAME }} .
+            sudo chown -R apache:apache .
             sudo chmod -R 755 .
             
             # Renew SSL certificate if needed (runs silently, only renews if within 30 days of expiry)
             sudo certbot-3 renew --quiet || sudo certbot renew --quiet || true
             
             # Restart web server
-            sudo systemctl restart httpd || sudo systemctl restart apache2 || sudo systemctl restart nginx || true
+            sudo systemctl restart httpd
             
             echo "Deployment completed successfully!"

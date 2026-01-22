@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choco-naut&trade; | Space Chocolate</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <style>
+        :root {
+            --gold: #ffc107;
+            --space-black: #0a0503;
+            --card-bg: #140f0d;
+            --text-gray: #cccccc;
+            --accent-orange: #ff6f00;
+            --success: #25d366;
+            --danger: #ff3b30;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        
+        body { 
+            background-color: var(--space-black); 
+            color: #fff; 
+            font-family: 'Rajdhani', sans-serif; 
+            line-height: 1.6; 
+            overflow-x: hidden; 
+            padding-top: 60px; 
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 { font-family: 'Orbitron', sans-serif; text-transform: uppercase; }
+        p { font-size: 1.1rem; color: var(--text-gray); }
+
+        /* --- NAV --- */
+        nav { 
+            position: fixed; top: 0; left: 0; width: 100%; 
+            padding: 10px 5%; 
+            display: flex; justify-content: space-between; align-items: center; 
+            background: rgba(10, 5, 3, 0.95); border-bottom: 1px solid #333; 
+            z-index: 5000; backdrop-filter: blur(10px); 
+            flex-wrap: wrap; 
+        }
+        .nav-logo { font-family: 'Orbitron'; font-weight: 900; color: var(--gold); text-decoration: none; font-size: 1.4rem; cursor: pointer; white-space: nowrap; }
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { color: #fff; text-decoration: none; font-weight: bold; font-size: 1rem; transition: 0.3s; white-space: nowrap; }
+        .nav-links a:hover { color: var(--gold); }
+
+        /* --- HERO --- */
+        .hero { 
+            min-height: 100vh; 
+            width: 100%; position: relative; display: flex; align-items: center; justify-content: center; 
+            text-align: center; overflow: hidden; margin-top: -60px; 
+            padding: 20px;
+        }
+        .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; object-fit: cover; animation: zoomFloat 20s infinite alternate; }
+        @keyframes zoomFloat { from { transform: scale(1); } to { transform: scale(1.1); } }
+        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, rgba(0,0,0,0.3) 0%, rgba(10, 5, 3, 0.95) 100%); z-index: 0; }
+        
+        .hero-content { 
+            position: relative; z-index: 2; 
+            padding: 30px; 
+            border: 1px solid var(--gold); 
+            background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(10px); 
+            max-width: 90%; width: 800px;
+            box-shadow: 0 0 50px rgba(255, 193, 7, 0.15); 
+        }
+        .hero h1 { 
+            font-size: clamp(2.5rem, 8vw, 4.5rem); 
+            line-height: 1.1; margin-bottom: 15px; color: #fff; 
+            text-shadow: 0 5px 15px rgba(0,0,0,0.8); 
+        }
+        .tagline { font-size: clamp(0.9rem, 3vw, 1.4rem); color: var(--gold); letter-spacing: 3px; margin-bottom: 20px; display: block; }
+        .btn-main { display: inline-block; padding: 15px 30px; margin-top: 20px; background: var(--gold); color: #000; font-family: 'Orbitron'; font-weight: 900; text-decoration: none; font-size: 1.1rem; clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%); transition: 0.3s; }
+        .btn-main:hover { transform: scale(1.05); background: #fff; }
+
+        /* --- SECTIONS COMMON --- */
+        section { width: 100%; overflow: hidden; }
+        .section-header { text-align: center; margin-bottom: 40px; color: var(--gold); font-size: clamp(1.8rem, 5vw, 2.8rem); text-shadow: 0 0 20px rgba(255, 193, 7, 0.3); }
+
+        /* --- STORY --- */
+        .story-section { padding: 60px 5%; background: #110b09; text-align: center; border-bottom: 1px solid #333; }
+        .story-box { max-width: 900px; margin: 0 auto; }
+        .highlight { color: var(--gold); font-weight: bold; }
+        .story-box h2 { font-size: clamp(1.8rem, 5vw, 2.5rem); margin-bottom: 20px; color: var(--gold); }
+
+        /* --- PROCESS --- */
+        .process-section { padding: 60px 5%; background: #0a0503; border-bottom: 1px solid #333; }
+        .process-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
+            gap: 20px; justify-content: center; margin-top: 40px; 
+            max-width: 1400px; margin-left: auto; margin-right: auto;
+        }
+        .process-card { background: #1a1210; padding: 25px; border: 1px solid #333; border-radius: 10px; text-align: center; transition: 0.3s; cursor: pointer; height: 100%; }
+        .process-card:hover { border-color: var(--gold); transform: translateY(-5px); }
+        .p-icon { font-size: 3rem; display: block; margin-bottom: 15px; }
+        .p-title { color: #fff; margin-bottom: 10px; font-size: 1.2rem; }
+        .p-desc { font-size: 0.9rem; color: #aaa; }
+
+        /* --- BENEFITS --- */
+        .benefits-section { padding: 60px 5%; background: #140f0d; border-bottom: 1px solid #333; }
+        .b-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px; max-width: 1200px; margin: 0 auto; }
+        .b-card { background: #0a0503; padding: 25px; border-left: 3px solid var(--gold); cursor: pointer; }
+        .b-card:hover { background: #1a1210; }
+        .b-head { font-size: 1.3rem; color: #fff; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .b-icon { color: var(--gold); font-size: 1.6rem; }
+        .b-list li { margin-bottom: 10px; list-style: none; display: flex; gap: 10px; color: #bbb; }
+        .b-list li::before { content: "✓"; color: var(--success); font-weight: bold; }
+        
+        .cacao-info { 
+            display: flex; flex-direction: column; 
+            gap: 30px; margin-top: 40px; align-items: center; justify-content: center; 
+            background: #1e1614; padding: 30px; border-radius: 20px; border: 1px solid #333; 
+        }
+        @media (min-width: 768px) {
+            .cacao-info { flex-direction: row; text-align: left; }
+        }
+        .info-text { flex: 1; min-width: 250px;}
+        .info-stat { width: 100%; flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .stat-box { background: #000; padding: 15px; text-align: center; border: 1px solid var(--gold); }
+        .stat-val { font-size: 1.8rem; font-weight: 900; color: var(--gold); display: block; }
+        .stat-lbl { font-size: 0.8rem; color: #aaa; text-transform: uppercase; }
+
+        /* --- SHOP --- */
+        .products { padding: 60px 5%; background: #0a0503; }
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
+            gap: 30px; max-width: 1300px; margin: 0 auto; 
+        }
+        .card { background: #1e1614; border: 1px solid #3e2723; border-radius: 12px; overflow: hidden; transition: 0.3s; position: relative; display: flex; flex-direction: column; }
+        .card:hover { transform: translateY(-5px); border-color: var(--gold); box-shadow: 0 10px 40px rgba(0,0,0,0.6); }
+        .card.out-of-stock { opacity: 0.6; pointer-events: none; border-color: #333; }
+        .card.out-of-stock .product-img { filter: grayscale(100%); }
+        .img-box { width: 100%; aspect-ratio: 1 / 1; background: #000; overflow: hidden; border-bottom: 2px solid var(--gold); cursor: pointer; position: relative; }
+        .product-img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .card:hover .product-img { transform: scale(1.1); }
+        .sold-out-badge { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--danger); color: #fff; padding: 10px 20px; font-size: 1.2rem; font-weight: 900; border: 2px solid #fff; z-index: 10; display: none; }
+        .card.out-of-stock .sold-out-badge { display: block; }
+        .card-info { padding: 20px; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;}
+        .origin-badge { font-size: 0.8rem; color: var(--accent-orange); letter-spacing: 1px; text-transform: uppercase; display: block; margin-bottom: 10px; }
+        .price { font-size: 1.4rem; color: var(--gold); font-weight: bold; margin-bottom: 10px; display: block; }
+        .qty-controls { display: flex; justify-content: center; gap: 10px; align-items: center; margin-top: 10px; }
+        .q-btn { width: 40px; height: 40px; background: #333; color: #fff; border: none; cursor: pointer; font-weight: bold; border-radius: 5px; font-size: 1.2rem; }
+        .q-btn:hover { background: var(--gold); color: #000; }
+        .q-btn:disabled { background: #222; color: #555; cursor: not-allowed; }
+        .q-display { width: 40px; text-align: center; font-weight: bold; }
+
+        /* --- CONTACT --- */
+        .contact-section { padding: 60px 5%; background: #140f0d; border-top: 1px solid #333; }
+        .contact-container { display: flex; flex-direction: column; gap: 40px; max-width: 1100px; margin: 0 auto; }
+        @media (min-width: 768px) {
+            .contact-container { flex-direction: row; }
+        }
+        .contact-info, .contact-form { flex: 1; }
+        .contact-form { background: #0a0503; padding: 25px; border: 1px solid #333; }
+        .c-item { margin-bottom: 20px; display: flex; align-items: center; gap: 15px; }
+        .c-icon { font-size: 1.5rem; color: var(--gold); }
+        .c-input { width: 100%; padding: 12px; margin-bottom: 15px; background: #000; border: 1px solid #333; color: #fff; font-family: 'Rajdhani'; font-size: 1rem; }
+        .c-btn { width: 100%; padding: 12px; background: #333; color: #fff; border: 1px solid #555; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .c-btn:hover { background: var(--gold); color: #000; }
+
+        /* --- UI ELEMENTS --- */
+        .cart-bar { 
+            position: fixed; bottom: 20px; left: 50%; transform: translate(-50%, 200%); 
+            background: rgba(255, 255, 255, 0.95); color: #000; 
+            padding: 15px 25px; border-radius: 50px; 
+            display: flex; align-items: center; justify-content: space-between; gap: 15px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.8); border: 2px solid var(--gold); 
+            transition: 0.4s; z-index: 999; cursor: pointer; 
+            width: 90%; max-width: 500px;
+        }
+        .cart-bar.active { transform: translate(-50%, 0); }
+
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); z-index: 10000; display: none; align-items: center; justify-content: center; padding: 20px; }
+        .modal-overlay.open { display: flex; animation: fadeIn 0.3s; }
+        @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+
+        .modal-box { 
+            background: #140f0d; width: 100%; max-width: 650px; 
+            border: 1px solid var(--gold); padding: 25px; position: relative; 
+            box-shadow: 0 0 50px rgba(255, 193, 7, 0.2); 
+            max-height: 90vh; overflow-y: auto; 
+            border-radius: 8px;
+        }
+        .close-btn { position: absolute; top: 10px; right: 15px; color: #fff; font-size: 2rem; cursor: pointer; z-index: 100; }
+        
+        .checkout-input { width: 100%; padding: 15px; margin-bottom: 15px; background: #000; border: 1px solid #333; color: #fff; font-family: 'Rajdhani'; font-size: 1rem; }
+        .pay-btn { width: 100%; padding: 18px; background: var(--gold); color: #000; font-weight: 900; font-size: 1.2rem; cursor: pointer; font-family: 'Orbitron'; border: none; margin-bottom: 10px;}
+        .coupon-box { display: flex; gap: 10px; margin-bottom: 20px; border-top: 1px solid #333; padding-top: 20px; }
+        .coupon-input { flex: 1; background: #000; border: 1px solid #333; color: #fff; padding: 10px; font-family: 'Rajdhani'; text-transform: uppercase; min-width: 0; }
+        .coupon-btn { background: #333; color: #fff; border: 1px solid #555; padding: 0 20px; cursor: pointer; font-weight: bold; }
+        .coupon-btn:hover { background: var(--gold); color: #000; }
+
+        .slider-container { position: relative; width: 100%; height: 0; padding-bottom: 75%; /* 4:3 Aspect Ratio */ background: #000; margin-bottom: 20px; border: 1px solid #333; overflow: hidden; }
+        .slider-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; }
+        .slider-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); color: var(--gold); border: none; font-size: 1.5rem; padding: 10px; cursor: pointer; z-index: 10; }
+        .slider-nav:hover { background: var(--gold); color: #000; }
+        .prev-btn { left: 0; } .next-btn { right: 0; }
+        .slide-caption { position: absolute; bottom: 0; left: 0; width: 100%; background: rgba(0,0,0,0.8); color: #fff; text-align: center; padding: 10px; font-family: 'Orbitron'; font-size: 0.9rem; letter-spacing: 2px; }
+        .modal-desc { text-align: center; color: var(--accent-orange); font-size: 1.1rem; margin-bottom: 15px; font-style: italic; }
+        
+        .invoice-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        .invoice-table th { text-align: left; border-bottom: 1px solid #555; padding: 5px; }
+        .invoice-table td { border-bottom: 1px solid #222; padding: 5px; }
+        .invoice-actions { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+
+        footer { padding: 40px 5%; background: #000; text-align: center; border-top: 1px solid #222; }
+        .trust-badges { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 20px; color: #666; font-size: 0.9rem; }
+
+        /* --- MOBILE SPECIFIC TWEAKS --- */
+        @media (max-width: 600px) {
+            nav { padding: 10px 20px; flex-direction: column; gap: 10px; }
+            .nav-links { gap: 20px; width: 100%; justify-content: center; padding-top: 5px; border-top: 1px solid #333; margin-top: 5px;}
+            .nav-links a { font-size: 0.9rem; }
+            .hero-content { padding: 20px; margin-top: 0; }
+            .section-header { margin-bottom: 30px; }
+            .grid, .process-grid, .b-grid { gap: 20px; }
+            .modal-box { padding: 15px; }
+            .cart-bar { flex-direction: column; gap: 5px; text-align: center; padding: 10px 20px; border-radius: 15px; bottom: 10px;}
+            .invoice-actions { flex-direction: column; }
+        }
+    </style>
+</head>
+<body onload="initInventory()">
+<h1 style="color: red; font-size: 50px; background: white; z-index: 9999; position: relative;">CAN YOU SEE ME?</h1>
+
+
+    <nav>
+        <a class="nav-logo" onclick="sfx('click')">CHOCO-NAUT&trade;</a>
+        <div class="nav-links">
+            <a href="#about" onclick="sfx('click')">ABOUT</a>
+            <a href="#benefits" onclick="sfx('click')">BENEFITS</a>
+            <a href="#shop" onclick="sfx('click')">SUPPLIES</a>
+            <a href="#contact" onclick="sfx('click')">CONTACT</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <img src="images/bg.jpg" onerror="this.src='https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=2072'" class="hero-bg" alt="Background">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="tagline">INDIAN ORIGIN • BEAN TO BAR</span>
+            <h1>CHOCO-NAUT&trade;</h1>
+            <p style="color: #ddd; margin-bottom: 30px;">
+                Handcrafted artisan chocolate that takes your tastebuds to zero gravity. 
+            </p>
+            <a href="#shop" class="btn-main" onclick="sfx('click')">INITIATE LAUNCH</a>
+        </div>
+    </section>
+
+    <section id="about" class="story-section">
+        <div class="story-box">
+            <h2 style="color: var(--gold); margin-bottom: 20px;">ABOUT THE MISSION</h2>
+            <p style="margin-bottom: 20px;">
+                At Choco-naut&trade;, we don't just make chocolate; we engineer an experience. 
+                Our journey begins on the lush, tropical estates of <span class="highlight">Idukki (Kerala)</span> and 
+                <span class="highlight">Dakshina Kannada (Karnataka)</span>.
+            </p>
+            <p>
+                Unlike mass-produced candy, we source single-origin Indian Cacao beans known for their 
+                fruity, spicy, and woody notes. We work directly with farmers to ensure ethical sourcing 
+                and premium quality fermentation.
+            </p>
+        </div>
+    </section>
+
+    <section class="process-section">
+        <h2 class="section-header" style="margin-bottom: 10px;">FLIGHT TRAJECTORY</h2>
+        <p style="text-align: center; margin-bottom: 20px;">Our 4-Stage Protocol from Bean to Bar</p>
+        <div class="process-grid">
+            <div class="process-card" onclick="sfx('click')">
+                <span class="p-icon">🔥</span>
+                <h4 class="p-title">1. SLOW ROAST</h4>
+                <p class="p-desc">We gently roast the beans at low temperatures to unlock the hidden aromatic profiles.</p>
+            </div>
+            <div class="process-card" onclick="sfx('click')">
+                <span class="p-icon">🌪️</span>
+                <h4 class="p-title">2. CRACK & WINNOW</h4>
+                <p class="p-desc">The beans are cracked and the shells (husk) are removed using air flow.</p>
+            </div>
+            <div class="process-card" onclick="sfx('click')">
+                <span class="p-icon">⚙️</span>
+                <h4 class="p-title">3. STONE GRIND</h4>
+                <p class="p-desc">We grind the nibs with organic sugar in stone melangers for 72 hours continuously.</p>
+            </div>
+            <div class="process-card" onclick="sfx('click')">
+                <span class="p-icon">🌡️</span>
+                <h4 class="p-title">4. TEMPER & MOLD</h4>
+                <p class="p-desc">The liquid chocolate is tempered to give it that perfect glossy finish and snap.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="benefits" class="benefits-section">
+        <h2 class="section-header">VITALITY SUPPORT SYSTEMS</h2>
+        
+        <div class="cacao-info">
+            <div class="info-text">
+                <h3 style="color: var(--gold); margin-bottom: 15px;">THE POWER SOURCE: CACAO</h3>
+                <p style="margin-bottom: 15px;">
+                    We don't use fillers. We use pure Cacao Butter and Nibs. 
+                    Cacao Butter is the pure, cold-pressed oil from the bean.
+                </p>
+                <p>Packed with vital nutrients, this is not just a treat; it is fuel for your daily mission.</p>
+            </div>
+            <div class="info-stat">
+                <div class="stat-box">
+                    <span class="stat-val">0%</span>
+                    <span class="stat-lbl">Palm Oil</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-val">100%</span>
+                    <span class="stat-lbl">Real Cacao</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="b-grid">
+            <div class="b-card" onclick="sfx('click')">
+                <div class="b-head"><span class="b-icon">💧</span> CACAO BUTTER</div>
+                <ul class="b-list">
+                    <li>Heart-healthy Stearic Acid</li>
+                    <li>Melts at body temperature</li>
+                </ul>
+            </div>
+            <div class="b-card" onclick="sfx('click')">
+                <div class="b-head"><span class="b-icon">🌑</span> CACAO NIBS</div>
+                <ul class="b-list">
+                    <li>High in dietary fiber</li>
+                    <li>Natural mood enhancer</li>
+                </ul>
+            </div>
+            <div class="b-card" onclick="sfx('click')">
+                <div class="b-head"><span class="b-icon">🛡️</span> DARK CHOCOLATE</div>
+                <ul class="b-list">
+                    <li>Powerful Antioxidants</li>
+                    <li>Reduces stress levels</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="shop" class="products">
+        <h2 class="section-header">FLIGHT SUPPLIES</h2>
+        <div class="grid">
+            <div class="card" id="card-milkyway">
+                <div class="sold-out-badge">SOLD OUT</div>
+                <div class="img-box" onclick="openProduct('milkyway')">
+                    <img src="images/milkyway.jpg" onerror="this.src='https://images.unsplash.com/photo-1548142813-c3a8350e941b?w=600'" class="product-img">
+                </div>
+                <div class="card-info">
+                    <div>
+                        <h3>Milkyway Explorer</h3>
+                        <span class="origin-badge">100% Milk White Chocolate</span>
+                        <span class="price">₹270</span>
+                    </div>
+                    <div class="qty-controls">
+                        <button class="q-btn" id="btn-minus-milkyway" onclick="updateQty('milkyway', -1)">-</button>
+                        <span id="qty-milkyway" class="q-display">0</span>
+                        <button class="q-btn" id="btn-plus-milkyway" onclick="updateQty('milkyway', 1)">+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card" id="card-darkmatter">
+                <div class="sold-out-badge">SOLD OUT</div>
+                <div class="img-box" onclick="openProduct('darkmatter')">
+                    <img src="images/darkmatter.jpg" onerror="this.src='https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=600'" class="product-img">
+                </div>
+                <div class="card-info">
+                    <div>
+                        <h3>Dark Matter (70%)</h3>
+                        <span class="origin-badge">Single Origin</span>
+                        <span class="price">₹270</span>
+                    </div>
+                    <div class="qty-controls">
+                        <button class="q-btn" id="btn-minus-darkmatter" onclick="updateQty('darkmatter', -1)">-</button>
+                        <span id="qty-darkmatter" class="q-display">0</span>
+                        <button class="q-btn" id="btn-plus-darkmatter" onclick="updateQty('darkmatter', 1)">+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card" id="card-asteroid">
+                <div class="sold-out-badge">SOLD OUT</div>
+                <div class="img-box" onclick="openProduct('asteroid')">
+                    <img src="images/asteroid.jpg" onerror="this.src='https://images.unsplash.com/photo-1511381939415-e44015466834?w=600'" class="product-img">
+                </div>
+                <div class="card-info">
+                    <div>
+                        <h3>Asteroid Crunch</h3>
+                        <span class="origin-badge">Roasted Almonds</span>
+                        <span class="price">₹340</span>
+                    </div>
+                    <div class="qty-controls">
+                        <button class="q-btn" id="btn-minus-asteroid" onclick="updateQty('asteroid', -1)">-</button>
+                        <span id="qty-asteroid" class="q-display">0</span>
+                        <button class="q-btn" id="btn-plus-asteroid" onclick="updateQty('asteroid', 1)">+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card" id="card-nebula">
+                <div class="sold-out-badge">SOLD OUT</div>
+                <div class="img-box" onclick="openProduct('nebula')">
+                    <img src="images/nebula.jpg" onerror="this.src='https://images.unsplash.com/photo-1621446730506-2351d6e23583?w=600'" class="product-img">
+                </div>
+                <div class="card-info">
+                    <div>
+                        <h3>Nebula Swirl</h3>
+                        <span class="origin-badge">Sea Salt Butterscotch</span>
+                        <span class="price">₹300</span>
+                    </div>
+                    <div class="qty-controls">
+                        <button class="q-btn" id="btn-minus-nebula" onclick="updateQty('nebula', -1)">-</button>
+                        <span id="qty-nebula" class="q-display">0</span>
+                        <button class="q-btn" id="btn-plus-nebula" onclick="updateQty('nebula', 1)">+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card" id="card-velvet">
+                <div class="sold-out-badge">SOLD OUT</div>
+                <div class="img-box" onclick="openProduct('velvet')">
+                    <img src="images/velvet.jpg" onerror="this.src='https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=600'" class="product-img">
+                </div>
+                <div class="card-info">
+                    <div>
+                        <h3>Velvet Comet</h3>
+                        <span class="origin-badge">50% Dark Milk Chocolate</span>
+                        <span class="price">₹270</span>
+                    </div>
+                    <div class="qty-controls">
+                        <button class="q-btn" id="btn-minus-velvet" onclick="updateQty('velvet', -1)">-</button>
+                        <span id="qty-velvet" class="q-display">0</span>
+                        <button class="q-btn" id="btn-plus-velvet" onclick="updateQty('velvet', 1)">+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card" id="card-smooth">
+                <div class="sold-out-badge">SOLD OUT</div>
+                <div class="img-box" onclick="openProduct('smooth')">
+                    <img src="images/smooth.jpg" onerror="this.src='https://images.unsplash.com/photo-1548142813-c3a8350e941b?w=600'" class="product-img">
+                </div>
+                <div class="card-info">
+                    <div>
+                        <h3>Smooth Astro</h3>
+                        <span class="origin-badge">35% Classic Milk Chocolate</span>
+                        <span class="price">₹270</span>
+                    </div>
+                    <div class="qty-controls">
+                        <button class="q-btn" id="btn-minus-smooth" onclick="updateQty('smooth', -1)">-</button>
+                        <span id="qty-smooth" class="q-display">0</span>
+                        <button class="q-btn" id="btn-plus-smooth" onclick="updateQty('smooth', 1)">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <h2 class="section-header">HAILING FREQUENCIES</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <p style="margin-bottom: 25px;">
+                    Have a question about our products or want to discuss bulk orders for your next space mission? 
+                    Contact Mission Control.
+                </p>
+                <div class="c-item"><span class="c-icon">📍</span><span><strong>HQ:</strong> Faridabad Sector 29, Earth</span></div>
+                <div class="c-item"><span class="c-icon">📞</span><span><strong>Comm Link:</strong> +91 76781 07458</span></div>
+                <div class="c-item"><span class="c-icon">✉️</span><span><strong>Email:</strong> contact@choco-naut.in</span></div>
+            </div>
+            <div class="contact-form">
+                <h3 style="color: var(--gold); margin-bottom: 15px;">SEND TRANSMISSION</h3>
+                <input type="text" class="c-input" placeholder="Your Name">
+                <input type="email" class="c-input" placeholder="Your Email">
+                <textarea rows="3" class="c-input" placeholder="Message"></textarea>
+                <button class="c-btn" onclick="sfx('click')">TRANSMIT DATA</button>
+            </div>
+        </div>
+    </section>
+
+    <div id="cartBar" class="cart-bar" onclick="openCart()">
+        <div style="flex:1"><span style="font-size: 0.8rem; color: #888;">MISSION TOTAL</span><div style="font-size: 1.2rem; font-weight: bold;">TOTAL: <span id="totalPrice">₹0</span></div></div>
+        <span style="font-weight: bold; border-bottom: 2px solid #000; font-size: 0.9rem;">VIEW CART & PAY -></span>
+    </div>
+
+    <div id="productModal" class="modal-overlay">
+        <div class="modal-box">
+            <span class="close-btn" onclick="closeProduct()">&times;</span>
+            <h2 id="productTitle" style="color: var(--gold); text-align: center; margin-bottom: 5px;"></h2>
+            <p id="productDesc" class="modal-desc"></p>
+            
+            <div class="slider-container">
+                <button class="slider-nav prev-btn" onclick="changeSlide(-1)">&#10094;</button>
+                <img id="sliderImage" class="slider-img" src="" alt="Product Detail">
+                <button class="slider-nav next-btn" onclick="changeSlide(1)">&#10095;</button>
+                <div id="slideCaption" class="slide-caption">MAIN VIEW</div>
+            </div>
+            
+            <p style="text-align: center; color: #888; font-size: 0.9rem;">
+                Click arrows to view: Packaging, USP, Benefits, Ingredients & Nutrition.
+            </p>
+        </div>
+    </div>
+
+    <div id="cartOverlay" class="modal-overlay">
+        <div class="modal-box">
+            <span class="close-btn" onclick="closeCart()">&times;</span>
+            <h2 style="color: var(--gold); text-align: center; margin-bottom: 5px;">MISSION MANIFEST</h2>
+            
+            <p class="delivery-notice" style="text-align:center; color:#888; margin-bottom:15px; font-size:0.9rem;">Orders above ₹1200 qualify for Free Zero-G Shipping!</p>
+            
+            <div id="cartItems"></div>
+            
+            <div class="coupon-box">
+                <input type="text" id="couponCode" class="coupon-input" placeholder="Enter Code (Min Order ₹800)">
+                <button onclick="applyCoupon()" class="coupon-btn">APPLY</button>
+            </div>
+            
+            <div style="margin-top: 10px;">
+                <div style="display:flex; justify-content:space-between; margin-bottom:5px;"><span>Subtotal:</span><span id="subTotalVal" style="color: #fff;">₹0</span></div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:5px; display:none;" id="discountDisplay"><span>Discount:</span><span id="discountVal" style="color:var(--success)">-₹0</span></div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:5px;"><span>Delivery Charge:</span><span id="deliveryVal">₹99</span></div>
+                <div style="text-align: right; font-size: 1.5rem; color: var(--gold); font-weight: bold; margin-top: 10px;">Total: <span id="modalTotal">₹0</span></div>
+            </div>
+
+            <hr style="border-color: #333; margin: 20px 0;">
+            
+            <div class="checkout-form">
+                <input type="text" id="name" class="checkout-input" placeholder="Name" required>
+                <input type="email" id="email" class="checkout-input" placeholder="Email (For Confirmation)" required>
+                <input type="tel" id="phone" class="checkout-input" placeholder="Phone" required>
+                <textarea id="address" class="checkout-input" rows="2" placeholder="Address" required></textarea>
+                <button onclick="startPayment()" class="pay-btn">💳 PAY SECURELY</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="invoiceModal" class="modal-overlay">
+        <div class="modal-box" style="background: #0a0503; border: 2px solid var(--success);">
+            <div style="text-align: center; border-bottom: 1px solid #333; padding-bottom: 20px;">
+                <h1 style="color: var(--gold); font-size:1.5rem;">CHOCO-NAUT&trade;</h1>
+                <p style="color: var(--success); font-weight: bold; letter-spacing: 2px;">PAYMENT SUCCESSFUL</p>
+                <p id="invoiceId" style="color: #666; font-size: 0.9rem;">#INV-00000</p>
+            </div>
+            
+            <div style="margin-top: 20px; font-family: monospace; font-size:0.9rem;">
+                <p><strong>Billed To:</strong> <span id="invName"></span></p>
+                <p><strong>Phone:</strong> <span id="invPhone"></span></p>
+                <p><strong>Address:</strong> <span id="invAddr"></span></p>
+            </div>
+
+            <table class="invoice-table">
+                <thead><tr><th>Item</th><th>Qty</th><th>Price</th></tr></thead>
+                <tbody id="invoiceItems"></tbody>
+            </table>
+
+            <div style="text-align: right; border-top: 1px solid #333; padding-top: 10px;">
+                <p>Subtotal: <span id="invSub">₹0</span></p>
+                <p style="color: var(--success);">Discount: <span id="invDisc">-₹0</span></p>
+                <p>Delivery: <span id="invDel">₹0</span></p>
+                <h2 style="color: var(--gold);">PAID: <span id="invTotal">₹0</span></h2>
+            </div>
+
+            <div class="invoice-actions">
+                <button onclick="window.print()" class="pay-btn" style="background: #fff; color: #000; flex:1; font-size:1rem;">🖨️ PRINT / PDF</button>
+                <button onclick="sendWhatsApp()" class="pay-btn" style="background: var(--success); color: #fff; flex:1; font-size:1rem;">📱 WHATSAPP</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="trust-badges">
+            <span>🚫 No Palm Oil</span>
+            <span>🌱 Vegan Friendly Options</span>
+            <span>🥥 Pure Cocoa Butter</span>
+            <span>🇮🇳 Made in India</span>
+        </div>
+        <h2 style="color: var(--gold); margin-bottom: 10px;">CHOCO-NAUT&trade;</h2>
+        <p>&copy; 2025. Omakase Enterprises. All Systems Operational.</p>
+        <p style="font-size: 0.9rem; color: #666; margin-top: 10px;">
+            FSSAI License No: 20825004004523 | Email: omakase.enterprises@gmail.com
+        </p>
+    </footer>
+
+    <script>
+        // --- 1. GOOGLE APPS SCRIPT URL ---
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxFgczawhEUPt3ceHYN2HaexasKH3C3sSmgbcqnHPlcpF6q0-nrqvz_aN74VCqIfl8/exec"; 
+        
+        // --- 2. RAZORPAY KEY ---
+        const RAZORPAY_KEY = "rzp_live_Ryvp1z5m2CNlEo"; 
+
+        // --- 3. DATA & STATE ---
+        const products = { milkyway: 270, darkmatter: 270, asteroid: 340, nebula: 300, velvet: 270, smooth: 270 };
+        const names = { milkyway: "Milkyway", darkmatter: "Dark Matter", asteroid: "Asteroid", nebula: "Nebula", velvet: "Velvet", smooth: "Smooth" };
+        let cart = { milkyway: 0, darkmatter: 0, asteroid: 0, nebula: 0, velvet: 0, smooth: 0 };
+        let inventory = {}; 
+        let currentSessionOrderId = "ORD-" + Date.now();
+        
+        let subtotal = 0, discount = 0, deliveryCharge = 99, finalTotal = 0, paymentId = "", activeCoupon = 0;
+        const coupons = { "WELCOME10": 10, "SPACE20": 20, "CHOCO10": 10 };
+
+        // --- 4. SYNTHESIZED SOUND ENGINE ---
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        const audioCtx = new AudioContext();
+
+        function sfx(type) {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            const now = audioCtx.currentTime;
+            
+            if (type === 'click') {
+                osc.type = 'sine'; osc.frequency.setValueAtTime(800, now); osc.frequency.exponentialRampToValueAtTime(300, now + 0.1);
+                gain.gain.setValueAtTime(0.1, now); gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+                osc.start(now); osc.stop(now + 0.1);
+            } else if (type === 'tick') {
+                osc.type = 'square'; osc.frequency.setValueAtTime(150, now);
+                gain.gain.setValueAtTime(0.05, now); gain.gain.exponentialRampToValueAtTime(0.01, now + 0.05);
+                osc.start(now); osc.stop(now + 0.05);
+            } else if (type === 'success') {
+                osc.type = 'sine'; osc.frequency.setValueAtTime(400, now); osc.frequency.setValueAtTime(600, now + 0.1);
+                gain.gain.setValueAtTime(0.1, now); gain.gain.linearRampToValueAtTime(0, now + 0.3);
+                osc.start(now); osc.stop(now + 0.3);
+            } else if (type === 'error') {
+                osc.type = 'sawtooth'; osc.frequency.setValueAtTime(100, now);
+                gain.gain.setValueAtTime(0.1, now); gain.gain.linearRampToValueAtTime(0, now + 0.2);
+                osc.start(now); osc.stop(now + 0.2);
+            }
+            osc.connect(gain); gain.connect(audioCtx.destination);
+        }
+
+        // --- 5. INVENTORY LOGIC (SYNC WITH GOOGLE SHEETS) ---
+        async function initInventory() {
+            if(!SCRIPT_URL || SCRIPT_URL.includes("PASTE_YOUR")) {
+                console.warn("Script URL missing. Stock validation disabled.");
+                return;
+            }
+            try {
+                const response = await fetch(SCRIPT_URL);
+                inventory = await response.json();
+                console.log("Cargo Manifest Synced:", inventory);
+                updateStockUI();
+            } catch (error) {
+                console.error("Connection to Mission Control failed:", error);
+            }
+        }
+
+        function updateStockUI() {
+            for (let pid in products) {
+                const cardEl = document.getElementById('card-' + pid);
+                const plusBtn = document.getElementById('btn-plus-' + pid);
+                const minusBtn = document.getElementById('btn-minus-' + pid);
+                
+                if (inventory[pid] !== undefined && inventory[pid] <= 0) {
+                    cardEl.classList.add('out-of-stock');
+                    plusBtn.disabled = true;
+                    minusBtn.disabled = true;
+                } else {
+                    cardEl.classList.remove('out-of-stock');
+                    plusBtn.disabled = false;
+                    minusBtn.disabled = false;
+                }
+            }
+        }
+
+        async function logOrderToSheet(statusType) {
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+            const email = document.getElementById('email').value;
+
+            if (!name || !phone) return; 
+
+            let itemSummary = "";
+            for (let k in cart) {
+                if (cart[k] > 0) itemSummary += `${names[k]} (${cart[k]}), `;
+            }
+
+            const payload = {
+                type: "logOrder",
+                data: {
+                    orderId: currentSessionOrderId,
+                    name: name,
+                    email: email,
+                    phone: phone,
+                    address: address,
+                    itemSummary: itemSummary.replace(/, $/, ""), 
+                    total: finalTotal,
+                    items: cart 
+                }
+            };
+
+            try {
+                await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+            } catch (e) {
+                console.error("Log failed", e);
+            }
+        }
+
+        // --- 6. CART & QUANTITY LOGIC ---
+        function updateQty(id, val) {
+            if (val > 0 && inventory[id] !== undefined) {
+                if (cart[id] >= inventory[id]) {
+                    sfx('error');
+                    alert(ACCESS DENIED: Only ${inventory[id]} units of ${names[id]} remaining in stock.);
+                    return;
+                }
+            }
+            cart[id] += val; if(cart[id] < 0) cart[id] = 0;
+            document.getElementById('qty-' + id).innerText = cart[id];
+            sfx('tick'); calculateTotals();
+        }
+
+        function calculateTotals() {
+            subtotal = 0; let count = 0;
+            for(let k in cart) { subtotal += cart[k] * products[k]; count += cart[k]; }
+
+            if(subtotal > 1200) deliveryCharge = 0;
+            else if (subtotal > 0) deliveryCharge = 99;
+            else deliveryCharge = 0; 
+
+            if(subtotal <= 800) activeCoupon = 0;
+
+            discount = Math.round(subtotal * (activeCoupon / 100));
+            finalTotal = subtotal + deliveryCharge - discount;
+
+            document.getElementById('totalPrice').innerText = '₹' + finalTotal;
+            document.getElementById('subTotalVal').innerText = '₹' + subtotal;
+            document.getElementById('deliveryVal').innerText = deliveryCharge === 0 ? 'FREE' : '₹' + deliveryCharge;
+            document.getElementById('modalTotal').innerText = '₹' + finalTotal;
+            
+            document.getElementById('discountDisplay').style.display = discount > 0 ? 'flex' : 'none';
+            document.getElementById('discountVal').innerText = '-₹' + discount;
+
+            const bar = document.getElementById('cartBar');
+            if(count > 0) bar.classList.add('active'); else bar.classList.remove('active');
+        }
+
+        function applyCoupon() {
+            const code = document.getElementById('couponCode').value.toUpperCase().trim();
+            sfx('click');
+            if(subtotal <= 800) { sfx('error'); alert("⚠️ Minimum order of ₹800 required."); return; }
+            if(coupons[code]) {
+                sfx('success'); activeCoupon = coupons[code]; alert("✅ Code Applied!"); calculateTotals();
+            } else {
+                sfx('error'); alert("❌ Invalid Code"); activeCoupon = 0; calculateTotals();
+            }
+        }
+
+        // --- 7. POPUPS & SLIDER ---
+        const productDetails = {
+            milkyway: { title: "Milkyway Explorer", desc: "Silky smooth White Chocolate infused with pure Vanilla.", images: ["images/milkyway.jpg", "images/milkyway_pack.jpg", "images/milkyway_usp.jpg", "images/milkyway_benefit.jpg", "images/milkyway_ing.jpg", "images/milkyway_nutri.jpg"] },
+            darkmatter: { title: "Dark Matter (70%)", desc: "Intense 70% Dark Chocolate with deep cocoa notes. Vegan.", images: ["images/darkmatter.jpg", "images/darkmatter_pack.jpg", "images/darkmatter_usp.jpg", "images/darkmatter_benefit.jpg", "images/darkmatter_ing.jpg", "images/darkmatter_nutri.jpg"] },
+            asteroid: { title: "Asteroid Crunch", desc: "Creamy Milk Chocolate loaded with jagged roasted Almond rocks.", images: ["images/asteroid.jpg", "images/asteroid_pack.jpg", "images/asteroid_usp.jpg", "images/asteroid_benefit.jpg", "images/asteroid_ing.jpg", "images/asteroid_nutri.jpg"] },
+            nebula: { title: "Nebula Swirl", desc: "A galaxy of golden butterscotch Caramel and Sea Salt.", images: ["images/nebula.jpg", "images/nebula_pack.jpg", "images/nebula_usp.jpg", "images/nebula_benefit.jpg", "images/nebula_ing.jpg", "images/nebula_nutri.jpg"] },
+            velvet: { title: "Velvet Comet", desc: "50% Semi-Sweet Chocolate. The perfect balance.", images: ["images/velvet.jpg", "images/velvet_pack.jpg", "images/velvet_usp.jpg", "images/velvet_benefit.jpg", "images/velvet_ing.jpg", "images/velvet_nutri.jpg"] },
+            smooth: { title: "Smooth Astro", desc: "Classic 35% Milk Chocolate. Rich, creamy, and nostalgic.", images: ["images/smooth.jpg", "images/smooth_pack.jpg", "images/smooth_usp.jpg", "images/smooth_benefit.jpg", "images/smooth_ing.jpg", "images/smooth_nutri.jpg"] }
+        };
+
+        const fallbacks = [
+            "https://images.unsplash.com/photo-1548142813-c3a8350e941b?w=600",
+            "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600",
+            "https://images.unsplash.com/photo-1511381939415-e44015466834?w=600",
+            "https://images.unsplash.com/photo-1548943487-a2e4e43b485c?w=600",
+            "https://images.unsplash.com/photo-1616486029423-aaa478965c96?w=600",
+            "https://images.unsplash.com/photo-1621446730506-2351d6e23583?w=600"
+        ];
+
+        let currentProduct = "", slideIndex = 0;
+        const slideCaptions = ["MAIN VIEW", "PACKAGING", "UNIQUE FEATURES", "BENEFITS", "INGREDIENTS", "NUTRITION INFO"];
+
+        function openProduct(pid) {
+            sfx('click'); currentProduct = pid; slideIndex = 0;
+            const data = productDetails[pid];
+            document.getElementById('productTitle').innerText = data.title;
+            document.getElementById('productDesc').innerText = data.desc;
+            updateSlide();
+            document.getElementById('productModal').classList.add('open');
+        }
+
+        function closeProduct() { sfx('click'); document.getElementById('productModal').classList.remove('open'); }
+
+        function changeSlide(direction) {
+            sfx('tick'); slideIndex += direction;
+            if(slideIndex > 5) slideIndex = 0; if(slideIndex < 0) slideIndex = 5;
+            updateSlide();
+        }
+
+        function updateSlide() {
+            const imgEl = document.getElementById('sliderImage');
+            const localSrc = productDetails[currentProduct].images[slideIndex];
+            imgEl.src = localSrc;
+            imgEl.onerror = function() { this.src = fallbacks[slideIndex]; };
+            document.getElementById('slideCaption').innerText = slideCaptions[slideIndex];
+        }
+
+        // --- 8. CHECKOUT & PAYMENT ---
+        function openCart() {
+            sfx('click');
+            const list = document.getElementById('cartItems'); list.innerHTML = "";
+            let hasItems = false;
+            for(let k in cart) {
+                if(cart[k] > 0) {
+                    hasItems = true;
+                    list.innerHTML += <div style="display:flex; justify-content:space-between; border-bottom:1px solid #333; padding:10px 0;"><div><strong>${names[k]}</strong><br><small>Qty: ${cart[k]}</small></div><div>₹${cart[k]*products[k]}</div></div>;
+                }
+            }
+            if(!hasItems) list.innerHTML = "<p style='text-align:center'>Cart is empty.</p>";
+            document.getElementById('cartOverlay').classList.add('open');
+        }
+        function closeCart() { sfx('click'); document.getElementById('cartOverlay').classList.remove('open'); }
+
+        function startPayment() {
+            sfx('click');
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+            const email = document.getElementById('email').value;
+
+            if (finalTotal === 0 || !name || !phone || !address || !email) { 
+                sfx('error'); alert("Please fill all details including Email."); return; 
+            }
+
+            // 1. Log Pending Order
+            logOrderToSheet("Pending");
+
+            var options = {
+                "key": RAZORPAY_KEY, 
+                "amount": finalTotal * 100, "currency": "INR", "name": "Choco-naut",
+                "handler": function (response){
+                    sfx('success'); 
+                    paymentId = response.razorpay_payment_id; 
+                    
+                    // 2. Log Confirmed Order (Trigger Inventory & Email)
+                    logOrderToSheet("Confirmed"); 
+                    
+                    generateInvoice(name, phone, address);
+                },
+                "prefill": { "name": name, "contact": phone, "email": email }, "theme": { "color": "#ffc107" }
+            };
+            var rzp1 = new Razorpay(options); rzp1.open();
+        }
+
+        function generateInvoice(name, phone, address) {
+            document.getElementById('cartOverlay').classList.remove('open');
+            document.getElementById('invoiceId').innerText = "#INV-" + Math.floor(Math.random() * 1000000);
+            document.getElementById('invName').innerText = name;
+            document.getElementById('invPhone').innerText = phone;
+            document.getElementById('invAddr').innerText = address;
+
+            const tbody = document.getElementById('invoiceItems'); tbody.innerHTML = "";
+            for(let k in cart) {
+                if(cart[k] > 0) {
+                    tbody.innerHTML += <tr><td>${names[k]}</td><td>${cart[k]}</td><td>₹${cart[k]*products[k]}</td></tr>;
+                }
+            }
+            document.getElementById('invSub').innerText = '₹' + subtotal;
+            document.getElementById('invDisc').innerText = '-₹' + discount;
+            document.getElementById('invDel').innerText = deliveryCharge === 0 ? 'FREE' : '₹' + deliveryCharge;
+            document.getElementById('invTotal').innerText = '₹' + finalTotal;
+            document.getElementById('invoiceModal').classList.add('open');
+        }
+
+        function sendWhatsApp() {
+            sfx('click');
+            const name = document.getElementById('invName').innerText;
+            const address = document.getElementById('invAddr').innerText;
+            let msg = 🚀 ORDER: CHOCO-NAUT %0APID: ${paymentId}%0A;
+            for(let k in cart) if(cart[k]>0) msg += 📦 ${names[k]} x ${cart[k]}%0A;
+            msg += 🚚 Delivery: ${deliveryCharge === 0 ? 'FREE' : '₹'+deliveryCharge}%0A;
+            msg += 💰 PAID: ₹${finalTotal}%0A👤 ${name}%0A📍 ${address};
+            window.open(https://wa.me/917678107458?text=${msg}, '_blank');
+        }
+    </script>
+</body>
+</html>
