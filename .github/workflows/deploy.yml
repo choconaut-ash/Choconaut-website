@@ -5,6 +5,9 @@ on:
     branches:
       - main
   workflow_dispatch:
+  schedule:
+    # Run every Sunday at 2 AM UTC to check and renew SSL certificate
+    - cron: '0 2 * * 0'
 
 jobs:
   deploy:
