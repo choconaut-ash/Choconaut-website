@@ -1,0 +1,41 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
+          script: |
+            # Navigate to the web directory
+            cd /var/www/html
+            
+            # Pull latest changes
+            sudo git pull origin main
+            
+            # Set proper permissions
+            sudo chown -R apache:apache .
+            sudo chmod -R 755 .
+            
+            # Renew SSL certificate if needed (runs silently, only renews if within 30 days of expiry)
+            sudo certbot-3 renew --quiet || sudo certbot renew --quiet || true
+            
+            # Restart web server
+            sudo systemctl restart httpd
+            
+            echo "Deployment completed successfully!"
