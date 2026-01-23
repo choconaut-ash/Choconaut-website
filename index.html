@@ -568,13 +568,17 @@
 
             <hr style="border-color: #333; margin: 20px 0;">
             
-            <div class="checkout-form">
+                        <div class="checkout-form">
                 <input type="text" id="name" class="checkout-input" placeholder="Name" required>
                 <input type="email" id="email" class="checkout-input" placeholder="Email (For Confirmation)" required>
                 <input type="tel" id="phone" class="checkout-input" placeholder="Phone" required>
-                <textarea id="address" class="checkout-input" rows="2" placeholder="Address" required></textarea>
+                
+                <input type="text" id="pincode" class="checkout-input" placeholder="Pincode (6 Digits)" maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 6);" required>
+                
+                <textarea id="address" class="checkout-input" rows="2" placeholder="Full Address (House No, Street, Landmark)" required></textarea>
                 <button onclick="startPayment()" class="pay-btn">💳 PAY SECURELY</button>
             </div>
+
         </div>
     </div>
 
@@ -604,10 +608,12 @@
                 <h2 style="color: var(--gold);">PAID: <span id="invTotal">₹0</span></h2>
             </div>
 
-            <div class="invoice-actions">
-                <button onclick="window.print()" class="pay-btn" style="background: #fff; color: #000; flex:1; font-size:1rem;">🖨️ PRINT / PDF</button>
+                     <div class="invoice-actions">
+                <button onclick="window.print()" class="pay-btn" style="background: #fff; color: #000; flex:1; font-size:1rem;">🖨️ PRINT</button>
                 <button onclick="sendWhatsApp()" class="pay-btn" style="background: var(--success); color: #fff; flex:1; font-size:1rem;">📱 WHATSAPP</button>
             </div>
+            <button onclick="redirectToHome()" class="pay-btn" style="background: #333; color: #fff; margin-top: 10px; border: 1px solid var(--gold);">🚀 MISSION COMPLETE (GO HOME)</button>
+
         </div>
     </div>
 <a href="https://api.whatsapp.com/send?phone=917678107458&text=Hello%20Choco-naut!%20I%20have%20a%20query." class="whatsapp-float" target="_blank" onclick="sfx('click')">
@@ -725,11 +731,14 @@
             }
         }
 
-        async function logOrderToSheet(statusType) {
+                async function logOrderToSheet(statusType, overrideAddress = null) {
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
-            const address = document.getElementById('address').value;
+            const rawAddress = document.getElementById('address').value;
             const email = document.getElementById('email').value;
+            
+            // Use the combined address if provided, otherwise use the raw input
+            const finalAddress = overrideAddress ? overrideAddress : rawAddress;
 
             if (!name || !phone) return; 
 
@@ -745,8 +754,8 @@
                     name: name,
                     email: email,
                     phone: phone,
-                    address: address,
-                    itemSummary: itemSummary.replace(/, $/, ""), 
+                    address: finalAddress, // Sending the Pincode-included address
+                    itemSummary: itemSummary.replace(/,$/, ""), 
                     total: finalTotal,
                     items: cart 
                 }
@@ -763,6 +772,7 @@
                 console.error("Log failed", e);
             }
         }
+
 
         // --- 6. CART & QUANTITY LOGIC ---
         function updateQty(id, val) {
@@ -877,35 +887,52 @@
         }
         function closeCart() { sfx('click'); document.getElementById('cartOverlay').classList.remove('open'); }
 
-        function startPayment() {
+                function startPayment() {
             sfx('click');
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
             const address = document.getElementById('address').value;
             const email = document.getElementById('email').value;
+            const pincode = document.getElementById('pincode').value; // Get Pincode
 
-            if (finalTotal === 0 || !name || !phone || !address || !email) { 
-                sfx('error'); alert("Please fill all details including Email."); return; 
+            // --- VALIDATION CHECKS ---
+            if (finalTotal === 0) {
+                 sfx('error'); alert("Cart is empty."); return;
             }
+            if (!name || !phone || !address || !email || !pincode) { 
+                sfx('error'); alert("⚠️ Please fill all details including Pincode."); return; 
+            }
+            if (pincode.length !== 6) {
+                sfx('error'); alert("⚠️ Please enter a valid 6-digit Pincode."); return;
+            }
+            // -------------------------
+
+            // Combine Address and Pincode for the record
+            const fullAddress = `${address} - Pincode: ${pincode}`;
 
             // 1. Log Pending Order
-            logOrderToSheet("Pending");
+            // Note: We use fullAddress now
+            logOrderToSheet("Pending", fullAddress); 
 
             var options = {
                 "key": RAZORPAY_KEY, 
-                "amount": finalTotal * 100, "currency": "INR", "name": "Choco-naut",
+                "amount": finalTotal * 100, 
+                "currency": "INR", 
+                "name": "Choco-naut",
                 "handler": function (response){
                     sfx('success'); 
                     paymentId = response.razorpay_payment_id; 
                     
-                    // 2. Log Confirmed Order (Trigger Inventory & Email)
-                    logOrderToSheet("Confirmed"); 
+                    // 2. Log Confirmed Order
+                    logOrderToSheet("Confirmed", fullAddress); 
                     
-                    generateInvoice(name, phone, address);
+                    generateInvoice(name, phone, fullAddress);
                 },
-                "prefill": { "name": name, "contact": phone, "email": email }, "theme": { "color": "#ffc107" }
+                "prefill": { "name": name, "contact": phone, "email": email }, 
+                "theme": { "color": "#ffc107" }
             };
-            var rzp1 = new Razorpay(options); rzp1.open();
+            var rzp1 = new Razorpay(options); 
+            rzp1.open();
         }
 
         function generateInvoice(name, phone, address) {
@@ -938,6 +965,11 @@
             msg += `💰 PAID: ₹${finalTotal}%0A👤 ${name}%0A📍 ${address}`;
             window.open(`https://wa.me/917678107458?text=${msg}`, '_blank');
         }
-    </script>
+        function redirectToHome() {
+            sfx('click');
+            // This reloads the page, effectively redirecting to "Home" and clearing the cart
+            window.location.href = window.location.pathname; 
+        }
+    </script>        
 </body>
 </html>
