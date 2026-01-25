@@ -9,9 +9,7 @@
     <meta name="description" content="Explore the universe of taste with Choco-naut. We offer premium artisan chocolates and luxury gift boxes in India. Handcrafted in Faridabad with a unique space theme.">
     
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="style.css">
-
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 <body onload="initInventory()">
@@ -134,112 +132,88 @@
     <section id="shop" class="products">
         <h2 class="section-header">FLIGHT SUPPLIES</h2>
         <div class="grid">
-            <div class="card" id="card-milkyway">
-                <div class="sold-out-badge">SOLD OUT</div>
-                <div class="img-box" onclick="openProduct('milkyway')">
+            
+            <div class="card" onclick="window.location.href='products.html#card-milkyway'" style="cursor: pointer;">
+                <div class="img-box">
                     <img src="images/milkyway.jpg" onerror="this.src='https://images.unsplash.com/photo-1548142813-c3a8350e941b?w=600'" class="product-img">
                 </div>
                 <div class="card-info">
                     <div>
                         <h3>Milkyway Explorer</h3>
                         <span class="origin-badge">100% Milk White Chocolate</span>
-                        <span class="price">₹270</span>
+                        <p style="font-size: 0.9rem; color: #aaa; margin: 10px 0;">Pure white chocolate infused with vanilla notes.</p>
                     </div>
-                    <div class="qty-controls">
-                        <button class="q-btn" id="btn-minus-milkyway" onclick="updateQty('milkyway', -1)">-</button>
-                        <span id="qty-milkyway" class="q-display">0</span>
-                        <button class="q-btn" id="btn-plus-milkyway" onclick="updateQty('milkyway', 1)">+</button>
-                    </div>
+                    <button class="c-btn" style="margin-top: 10px;">VIEW & ORDER -></button>
                 </div>
             </div>
-            <div class="card" id="card-darkmatter">
-                <div class="sold-out-badge">SOLD OUT</div>
-                <div class="img-box" onclick="openProduct('darkmatter')">
+
+            <div class="card" onclick="window.location.href='products.html#card-darkmatter'" style="cursor: pointer;">
+                <div class="img-box">
                     <img src="images/darkmatter.jpg" onerror="this.src='https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=600'" class="product-img">
                 </div>
                 <div class="card-info">
                     <div>
                         <h3>Dark Matter (70%)</h3>
                         <span class="origin-badge">Single Origin</span>
-                        <span class="price">₹270</span>
+                        <p style="font-size: 0.9rem; color: #aaa; margin: 10px 0;">Intense 70% dark vegan chocolate.</p>
                     </div>
-                    <div class="qty-controls">
-                        <button class="q-btn" id="btn-minus-darkmatter" onclick="updateQty('darkmatter', -1)">-</button>
-                        <span id="qty-darkmatter" class="q-display">0</span>
-                        <button class="q-btn" id="btn-plus-darkmatter" onclick="updateQty('darkmatter', 1)">+</button>
-                    </div>
+                    <button class="c-btn" style="margin-top: 10px;">VIEW & ORDER -></button>
                 </div>
             </div>
-            <div class="card" id="card-asteroid">
-                <div class="sold-out-badge">SOLD OUT</div>
-                <div class="img-box" onclick="openProduct('asteroid')">
+
+            <div class="card" onclick="window.location.href='products.html#card-asteroid'" style="cursor: pointer;">
+                <div class="img-box">
                     <img src="images/asteroid.jpg" onerror="this.src='https://images.unsplash.com/photo-1511381939415-e44015466834?w=600'" class="product-img">
                 </div>
                 <div class="card-info">
                     <div>
                         <h3>Asteroid Crunch</h3>
                         <span class="origin-badge">Roasted Almonds</span>
-                        <span class="price">₹340</span>
+                        <p style="font-size: 0.9rem; color: #aaa; margin: 10px 0;">Creamy milk chocolate with roasted almond rocks.</p>
                     </div>
-                    <div class="qty-controls">
-                        <button class="q-btn" id="btn-minus-asteroid" onclick="updateQty('asteroid', -1)">-</button>
-                        <span id="qty-asteroid" class="q-display">0</span>
-                        <button class="q-btn" id="btn-plus-asteroid" onclick="updateQty('asteroid', 1)">+</button>
-                    </div>
+                    <button class="c-btn" style="margin-top: 10px;">VIEW & ORDER -></button>
                 </div>
             </div>
-            <div class="card" id="card-nebula">
-                <div class="sold-out-badge">SOLD OUT</div>
-                <div class="img-box" onclick="openProduct('nebula')">
+
+            <div class="card" onclick="window.location.href='products.html#card-nebula'" style="cursor: pointer;">
+                <div class="img-box">
                     <img src="images/nebula.jpg" onerror="this.src='https://images.unsplash.com/photo-1621446730506-2351d6e23583?w=600'" class="product-img">
                 </div>
                 <div class="card-info">
                     <div>
                         <h3>Nebula Swirl</h3>
                         <span class="origin-badge">Himalayan Salt Butterscotch</span>
-                        <span class="price">₹300</span>
+                        <p style="font-size: 0.9rem; color: #aaa; margin: 10px 0;">Golden caramel with a pinch of sea salt.</p>
                     </div>
-                    <div class="qty-controls">
-                        <button class="q-btn" id="btn-minus-nebula" onclick="updateQty('nebula', -1)">-</button>
-                        <span id="qty-nebula" class="q-display">0</span>
-                        <button class="q-btn" id="btn-plus-nebula" onclick="updateQty('nebula', 1)">+</button>
-                    </div>
+                    <button class="c-btn" style="margin-top: 10px;">VIEW & ORDER -></button>
                 </div>
             </div>
-            <div class="card" id="card-velvet">
-                <div class="sold-out-badge">SOLD OUT</div>
-                <div class="img-box" onclick="openProduct('velvet')">
+
+            <div class="card" onclick="window.location.href='products.html#card-velvet'" style="cursor: pointer;">
+                <div class="img-box">
                     <img src="images/velvet.jpg" onerror="this.src='https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=600'" class="product-img">
                 </div>
                 <div class="card-info">
                     <div>
                         <h3>Velvet Comet</h3>
                         <span class="origin-badge">50% Semi-Sweet Chocolate</span>
-                        <span class="price">₹270</span>
+                        <p style="font-size: 0.9rem; color: #aaa; margin: 10px 0;">Perfectly balanced semi-sweet chocolate.</p>
                     </div>
-                    <div class="qty-controls">
-                        <button class="q-btn" id="btn-minus-velvet" onclick="updateQty('velvet', -1)">-</button>
-                        <span id="qty-velvet" class="q-display">0</span>
-                        <button class="q-btn" id="btn-plus-velvet" onclick="updateQty('velvet', 1)">+</button>
-                    </div>
+                    <button class="c-btn" style="margin-top: 10px;">VIEW & ORDER -></button>
                 </div>
             </div>
-            <div class="card" id="card-smooth">
-                <div class="sold-out-badge">SOLD OUT</div>
-                <div class="img-box" onclick="openProduct('smooth')">
+
+            <div class="card" onclick="window.location.href='products.html#card-smooth'" style="cursor: pointer;">
+                <div class="img-box">
                     <img src="images/smooth.jpg" onerror="this.src='https://images.unsplash.com/photo-1548142813-c3a8350e941b?w=600'" class="product-img">
                 </div>
                 <div class="card-info">
                     <div>
                         <h3>Smooth Astro</h3>
                         <span class="origin-badge">35% Classic Milk Chocolate</span>
-                        <span class="price">₹270</span>
+                        <p style="font-size: 0.9rem; color: #aaa; margin: 10px 0;">Rich, nostalgic classic milk chocolate.</p>
                     </div>
-                    <div class="qty-controls">
-                        <button class="q-btn" id="btn-minus-smooth" onclick="updateQty('smooth', -1)">-</button>
-                        <span id="qty-smooth" class="q-display">0</span>
-                        <button class="q-btn" id="btn-plus-smooth" onclick="updateQty('smooth', 1)">+</button>
-                    </div>
+                    <button class="c-btn" style="margin-top: 10px;">VIEW & ORDER -></button>
                 </div>
             </div>
         </div>
@@ -272,25 +246,6 @@
         <span style="font-weight: bold; border-bottom: 2px solid #000; font-size: 0.9rem;">VIEW CART & PAY -></span>
     </div>
 
-    <div id="productModal" class="modal-overlay">
-        <div class="modal-box">
-            <span class="close-btn" onclick="closeProduct()">&times;</span>
-            <h2 id="productTitle" style="color: var(--gold); text-align: center; margin-bottom: 5px;"></h2>
-            <p id="productDesc" class="modal-desc"></p>
-            
-            <div class="slider-container">
-                <button class="slider-nav prev-btn" onclick="changeSlide(-1)">&#10094;</button>
-                <img id="sliderImage" class="slider-img" src="" alt="Product Detail">
-                <button class="slider-nav next-btn" onclick="changeSlide(1)">&#10095;</button>
-                <div id="slideCaption" class="slide-caption">MAIN VIEW</div>
-            </div>
-            
-            <p style="text-align: center; color: #888; font-size: 0.9rem;">
-                Click arrows to view: Packaging, USP, Benefits, Ingredients & Nutrition.
-            </p>
-        </div>
-    </div>
-
     <div id="cartOverlay" class="modal-overlay">
         <div class="modal-box">
             <span class="close-btn" onclick="closeCart()">&times;</span>
@@ -314,14 +269,12 @@
 
             <hr style="border-color: #333; margin: 20px 0;">
             
-                        <div class="checkout-form">
+            <div class="checkout-form">
                 <input type="text" id="name" class="checkout-input" placeholder="Name" required>
                 <input type="email" id="email" class="checkout-input" placeholder="Email (For Confirmation)" required>
                 <input type="tel" id="phone" class="checkout-input" placeholder="Phone" required>
-                
                 <input type="text" id="pincode" class="checkout-input" placeholder="Pincode (6 Digits)" maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 6);" required>
-                
-                <textarea id="address" class="checkout-input" rows="2" placeholder="Full Address (House No, Street, Landmark)" required></textarea>
+                <textarea id="address" class="checkout-input" rows="2" placeholder="Full Address" required></textarea>
                 <button onclick="startPayment()" class="pay-btn">💳 PAY SECURELY</button>
             </div>
 
@@ -354,7 +307,7 @@
                 <h2 style="color: var(--gold);">PAID: <span id="invTotal">₹0</span></h2>
             </div>
 
-                     <div class="invoice-actions">
+            <div class="invoice-actions">
                 <button onclick="window.print()" class="pay-btn" style="background: #fff; color: #000; flex:1; font-size:1rem;">🖨️ PRINT</button>
                 <button onclick="sendWhatsApp()" class="pay-btn" style="background: var(--success); color: #fff; flex:1; font-size:1rem;">📱 WHATSAPP</button>
             </div>
@@ -362,30 +315,13 @@
 
         </div>
     </div>
-<a href="https://api.whatsapp.com/send?phone=917678107458&text=Hello%20Choco-naut!%20I%20have%20a%20query." class="whatsapp-float" target="_blank" onclick="sfx('click')">
-    <svg style="width:30px;height:30px;fill:white;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+    
+    <a href="https://api.whatsapp.com/send?phone=917678107458&text=Hello%20Choco-naut!%20I%20have%20a%20query." class="whatsapp-float" target="_blank" onclick="sfx('click')">
+        <svg style="width:30px;height:30px;fill:white;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
     </svg>
 </a>
-
-
-    <footer>
-        <div class="trust-badges">
-            <span>🚫 No Palm Oil</span>
-            <span>🌱 Vegan Friendly Options</span>
-            <span>🥥 Pure Cocoa Butter</span>
-            <span>🇮🇳 Made in India</span>
-        </div>
-        <h2 style="color: var(--gold); margin-bottom: 10px;">CHOCO-NAUT&trade;</h2>
-        <p>&copy; 2025. Omakase Enterprises. All Systems Operational.</p>
-        <p style="font-size: 0.9rem; color: #666; margin-top: 10px;">
-            FSSAI License No: 20825004004523 | Email: omakase.enterprises@gmail.com
-        </p>
-    </footer>
 
     <script src="script.js"></script>     
 </body>
 </html>
-
-
-
