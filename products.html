@@ -8,6 +8,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <style>
+        .flavor-desc {
+            font-size: 0.95rem;
+            color: #aaa;
+            margin: 15px 0;
+            font-style: italic;
+            line-height: 1.4;
+        }
+    </style>
 </head>
 <body onload="initInventory()">
 
@@ -27,6 +37,7 @@
 
     <section class="products">
         <div class="grid">
+            
             <div class="card" id="card-milkyway">
                 <div class="sold-out-badge">SOLD OUT</div>
                 <div class="img-box" onclick="openProduct('milkyway')">
@@ -36,6 +47,11 @@
                     <div>
                         <h3>Milkyway Explorer</h3>
                         <span class="origin-badge">100% Milk White Chocolate</span>
+                        
+                        <p class="flavor-desc">
+                            A journey into pure sweetness. This premium white chocolate is rich with cocoa butter and vanilla notes, guiding you through the bright stars of the Milky Way.
+                        </p>
+
                         <span class="price">₹270</span>
                     </div>
                     <div class="qty-controls">
@@ -55,6 +71,11 @@
                     <div>
                         <h3>Dark Matter (70%)</h3>
                         <span class="origin-badge">Single Origin</span>
+
+                        <p class="flavor-desc">
+                            Experience the gravity of pure cocoa. This 70% dark chocolate is intense, mysterious, and completely vegan. A sophisticated treat for the serious explorer.
+                        </p>
+
                         <span class="price">₹270</span>
                     </div>
                     <div class="qty-controls">
@@ -74,6 +95,11 @@
                     <div>
                         <h3>Asteroid Crunch</h3>
                         <span class="origin-badge">Roasted Almonds</span>
+
+                        <p class="flavor-desc">
+                            Brace for impact! We've packed our smooth chocolate with freshly roasted, crunchy almonds. It's a rocky texture explosion that satisfies your deepest cravings.
+                        </p>
+
                         <span class="price">₹340</span>
                     </div>
                     <div class="qty-controls">
@@ -93,6 +119,11 @@
                     <div>
                         <h3>Nebula Swirl</h3>
                         <span class="origin-badge">Himalayan Salt Butterscotch</span>
+
+                        <p class="flavor-desc">
+                            A swirling fusion of opposites. Sweet, golden butterscotch caramel meets the sharp tang of sea salt, creating a colorful nebula of flavor that dances on your tongue.
+                        </p>
+
                         <span class="price">₹300</span>
                     </div>
                     <div class="qty-controls">
@@ -112,6 +143,11 @@
                     <div>
                         <h3>Velvet Comet</h3>
                         <span class="origin-badge">50% Semi-Sweet Chocolate</span>
+
+                        <p class="flavor-desc">
+                            The perfect balance in the cosmos. Not too bitter, not too sweet. This semi-sweet bar trails a long, smooth finish of cocoa richness that lingers like a comet's tail.
+                        </p>
+
                         <span class="price">₹270</span>
                     </div>
                     <div class="qty-controls">
@@ -131,6 +167,11 @@
                     <div>
                         <h3>Smooth Astro</h3>
                         <span class="origin-badge">35% Classic Milk Chocolate</span>
+
+                        <p class="flavor-desc">
+                            Glide through a galaxy of silkiness. Our signature milk chocolate is tempered to perfection, offering a creamy, melt-in-your-mouth experience that feels like floating in zero gravity.
+                        </p>
+
                         <span class="price">₹270</span>
                     </div>
                     <div class="qty-controls">
@@ -157,14 +198,12 @@
             <span class="close-btn" onclick="closeProduct()">&times;</span>
             <h2 id="productTitle" style="color: var(--gold); text-align: center; margin-bottom: 5px;"></h2>
             <p id="productDesc" class="modal-desc"></p>
-            
             <div class="slider-container">
                 <button class="slider-nav prev-btn" onclick="changeSlide(-1)">&#10094;</button>
                 <img id="sliderImage" class="slider-img" src="" alt="Product Detail">
                 <button class="slider-nav next-btn" onclick="changeSlide(1)">&#10095;</button>
                 <div id="slideCaption" class="slide-caption">MAIN VIEW</div>
             </div>
-            
             <p style="text-align: center; color: #888; font-size: 0.9rem;">
                 Click arrows to view: Packaging, USP, Benefits, Ingredients & Nutrition.
             </p>
@@ -175,25 +214,19 @@
         <div class="modal-box">
             <span class="close-btn" onclick="closeCart()">&times;</span>
             <h2 style="color: var(--gold); text-align: center; margin-bottom: 5px;">MISSION MANIFEST</h2>
-            
             <p class="delivery-notice" style="text-align:center; color:#888; margin-bottom:15px; font-size:0.9rem;">Orders above ₹1200 qualify for Free Zero-G Shipping!</p>
-            
             <div id="cartItems"></div>
-            
             <div class="coupon-box">
                 <input type="text" id="couponCode" class="coupon-input" placeholder="Enter Code (Min Order ₹800)">
                 <button onclick="applyCoupon()" class="coupon-btn">APPLY</button>
             </div>
-            
             <div style="margin-top: 10px;">
                 <div style="display:flex; justify-content:space-between; margin-bottom:5px;"><span>Subtotal:</span><span id="subTotalVal" style="color: #fff;">₹0</span></div>
                 <div style="display:flex; justify-content:space-between; margin-bottom:5px; display:none;" id="discountDisplay"><span>Discount:</span><span id="discountVal" style="color:var(--success)">-₹0</span></div>
                 <div style="display:flex; justify-content:space-between; margin-bottom:5px;"><span>Delivery Charge:</span><span id="deliveryVal">₹99</span></div>
                 <div style="text-align: right; font-size: 1.5rem; color: var(--gold); font-weight: bold; margin-top: 10px;">Total: <span id="modalTotal">₹0</span></div>
             </div>
-
             <hr style="border-color: #333; margin: 20px 0;">
-            
             <div class="checkout-form">
                 <input type="text" id="name" class="checkout-input" placeholder="Name" required>
                 <input type="email" id="email" class="checkout-input" placeholder="Email (For Confirmation)" required>
@@ -202,7 +235,6 @@
                 <textarea id="address" class="checkout-input" rows="2" placeholder="Full Address" required></textarea>
                 <button onclick="startPayment()" class="pay-btn">💳 PAY SECURELY</button>
             </div>
-
         </div>
     </div>
 
@@ -213,31 +245,26 @@
                 <p style="color: var(--success); font-weight: bold; letter-spacing: 2px;">PAYMENT SUCCESSFUL</p>
                 <p id="invoiceId" style="color: #666; font-size: 0.9rem;">#INV-00000</p>
             </div>
-            
             <div style="margin-top: 20px; font-family: monospace; font-size:0.9rem;">
                 <p><strong>Billed To:</strong> <span id="invName"></span></p>
                 <p><strong>Phone:</strong> <span id="invPhone"></span></p>
                 <p><strong>Address:</strong> <span id="invAddr"></span></p>
             </div>
-
             <table class="invoice-table">
                 <thead><tr><th>Item</th><th>Qty</th><th>Price</th></tr></thead>
                 <tbody id="invoiceItems"></tbody>
             </table>
-
             <div style="text-align: right; border-top: 1px solid #333; padding-top: 10px;">
                 <p>Subtotal: <span id="invSub">₹0</span></p>
                 <p style="color: var(--success);">Discount: <span id="invDisc">-₹0</span></p>
                 <p>Delivery: <span id="invDel">₹0</span></p>
                 <h2 style="color: var(--gold);">PAID: <span id="invTotal">₹0</span></h2>
             </div>
-
             <div class="invoice-actions">
                 <button onclick="window.print()" class="pay-btn" style="background: #fff; color: #000; flex:1; font-size:1rem;">🖨️ PRINT</button>
                 <button onclick="sendWhatsApp()" class="pay-btn" style="background: var(--success); color: #fff; flex:1; font-size:1rem;">📱 WHATSAPP</button>
             </div>
             <button onclick="redirectToHome()" class="pay-btn" style="background: #333; color: #fff; margin-top: 10px; border: 1px solid var(--gold);">🚀 MISSION COMPLETE (GO HOME)</button>
-
         </div>
     </div>
 
