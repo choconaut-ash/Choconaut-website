@@ -38,6 +38,33 @@
     <section class="products">
         <div class="grid">
             
+            <div class="card" id="card-celestial" style="border: 2px solid #d4af37; box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);">
+                <div class="sold-out-badge">SOLD OUT</div>
+                <div style="position: absolute; top: 10px; right: 10px; background: #d4af37; color: #000; padding: 5px 10px; font-weight: bold; font-family: 'Rajdhani', sans-serif; z-index: 5;">LIMITED EDITION</div>
+                
+                <div class="img-box" onclick="openProduct('celestial')">
+                    <img src="images/celestial_box.jpg" onerror="this.src='https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=600'" class="product-img">
+                </div>
+                <div class="card-info">
+                    <div>
+                        <h3 style="color: #d4af37;">Celestial Luxury Combo</h3>
+                        <span class="origin-badge" style="background: #d4af37; color: #000; font-weight: bold;">Celebrate Your Love</span>
+                        
+                        <p class="flavor-desc">
+                            A curated collection of four artisan masterpieces. Two bestsellers paired with two exclusive unreleased flavors and a bespoke love letter. A journey written in the stars.
+                        </p>
+
+                        <span class="price">₹1699</span>
+                    </div>
+                    
+                    <div class="qty-controls">
+                        <button class="q-btn" id="btn-minus-celestial" onclick="updateQty('celestial', -1)">-</button>
+                        <span id="qty-celestial" class="q-display">0</span>
+                        <button class="q-btn" id="btn-plus-celestial" onclick="updateQty('celestial', 1)">+</button>
+                    </div>
+                    <button onclick="updateQty('celestial', 1)" style="width: 100%; margin-top: 15px; padding: 10px; background: #d4af37; color: #000; font-weight: bold; border: none; font-family: 'Orbitron', sans-serif; cursor: pointer;">ADD TO CART</button>
+                </div>
+            </div>
             <div class="card" id="card-milkyway">
                 <div class="sold-out-badge">SOLD OUT</div>
                 <div class="img-box" onclick="openProduct('milkyway')">
