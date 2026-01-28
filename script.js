@@ -3,9 +3,10 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxFgczawhEUPt3ceHYN2
 const RAZORPAY_KEY = "rzp_live_Ryvp1z5m2CNlEo"; 
 
 // --- 2. DATA & STATE ---
-const products = { milkyway: 270, darkmatter: 270, asteroid: 340, nebula: 300, velvet: 270, smooth: 270 };
-const names = { milkyway: "Milkyway", darkmatter: "Dark Matter", asteroid: "Asteroid", nebula: "Nebula", velvet: "Velvet", smooth: "Smooth" };
-let cart = { milkyway: 0, darkmatter: 0, asteroid: 0, nebula: 0, velvet: 0, smooth: 0 };
+// UPDATED: Added 'celestial' product here
+const products = { milkyway: 270, darkmatter: 270, asteroid: 340, nebula: 300, velvet: 270, smooth: 270, celestial: 1699 };
+const names = { milkyway: "Milkyway", darkmatter: "Dark Matter", asteroid: "Asteroid", nebula: "Nebula", velvet: "Velvet", smooth: "Smooth", celestial: "Celestial Luxury Combo" };
+let cart = { milkyway: 0, darkmatter: 0, asteroid: 0, nebula: 0, velvet: 0, smooth: 0, celestial: 0 };
 let inventory = {}; 
 let currentSessionOrderId = "ORD-" + Date.now();
 
@@ -205,7 +206,14 @@ const productDetails = {
     asteroid: { title: "Asteroid Crunch", desc: "Creamy Milk Chocolate loaded with jagged roasted Almond rocks.", images: ["images/asteroid.jpg", "images/asteroid_pack.jpg", "images/asteroid_usp.jpg", "images/asteroid_benefit.jpg", "images/asteroid_ing.jpg", "images/asteroid_nutri.jpg"] },
     nebula: { title: "Nebula Swirl", desc: "A galaxy of golden butterscotch Caramel and Sea Salt.", images: ["images/nebula.jpg", "images/nebula_pack.jpg", "images/nebula_usp.jpg", "images/nebula_benefit.jpg", "images/nebula_ing.jpg", "images/nebula_nutri.jpg"] },
     velvet: { title: "Velvet Comet", desc: "50% Semi-Sweet Chocolate. The perfect balance.", images: ["images/velvet.jpg", "images/velvet_pack.jpg", "images/velvet_usp.jpg", "images/velvet_benefit.jpg", "images/velvet_ing.jpg", "images/velvet_nutri.jpg"] },
-    smooth: { title: "Smooth Astro", desc: "Classic 35% Milk Chocolate. Rich, creamy, and nostalgic.", images: ["images/smooth.jpg", "images/smooth_pack.jpg", "images/smooth_usp.jpg", "images/smooth_benefit.jpg", "images/smooth_ing.jpg", "images/smooth_nutri.jpg"] }
+    smooth: { title: "Smooth Astro", desc: "Classic 35% Milk Chocolate. Rich, creamy, and nostalgic.", images: ["images/smooth.jpg", "images/smooth_pack.jpg", "images/smooth_usp.jpg", "images/smooth_benefit.jpg", "images/smooth_ing.jpg", "images/smooth_nutri.jpg"] },
+    
+    // UPDATED: Added new luxury product detail
+    celestial: { 
+        title: "Celestial Luxury Edition", 
+        desc: "A mouth-watering combo of 4 chocolates: 2 Choconaut bestsellers and 2 unique, unreleased flavors created especially for you. Includes a bespoke 'Celestial Love' letter card. A luxurious journey written in the stars.", 
+        images: ["images/celestial_box.jpg", "images/celestial_open.jpg", "images/celestial_card.jpg", "images/celestial_benefit.jpg", "images/celestial_ing.jpg", "images/celestial_nutri.jpg"] 
+    }
 };
 
 const fallbacks = [
