@@ -160,7 +160,11 @@
             
             <div class="card" onclick="window.location.href='products.html#card-celestial'" style="cursor: pointer; border: 2px solid #d4af37; box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);">
                 <div class="img-box">
-                    <img src="images/celestial_box.jpg" onerror="this.src='https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=600'" class="product-img">
+                    <img src="images/celestial_box.jpg" 
+                         onclick="event.stopPropagation(); this.src = this.src.includes('box') ? 'images/celestial_open.jpg' : 'images/celestial_box.jpg'" 
+                         onerror="this.src='https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=600'" 
+                         class="product-img" 
+                         title="Tap to peek inside!">
                 </div>
                 <div class="card-info" style="background: linear-gradient(to top, #1a1a1a, #000);">
                     <div>
@@ -372,6 +376,7 @@
                 
                 <button class="pay-btn" onclick="updateQty(currentProduct, 1); closeProduct();" style="width: 100%; background: var(--gold); color: #000;">ADD TO MISSION (CART)</button>
             </div>
+            <p style="text-align: center; color: #888; font-size: 0.9rem; padding-bottom:10px;">Tap arrows to see <strong>Inside the Box</strong>.</p>
         </div>
     </div>
     
