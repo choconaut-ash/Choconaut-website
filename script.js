@@ -3,10 +3,36 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxFgczawhEUPt3ceHYN2
 const RAZORPAY_KEY = "rzp_live_Ryvp1z5m2CNlEo"; 
 
 // --- 2. DATA & STATE ---
-// UPDATED: Added 'celestial' product here
-const products = { milkyway: 270, darkmatter: 270, asteroid: 340, nebula: 300, velvet: 270, smooth: 270, celestial: 1699 };
-const names = { milkyway: "Milkyway", darkmatter: "Dark Matter", asteroid: "Asteroid", nebula: "Nebula", velvet: "Velvet", smooth: "Smooth", celestial: "Celestial Luxury Combo" };
-let cart = { milkyway: 0, darkmatter: 0, asteroid: 0, nebula: 0, velvet: 0, smooth: 0, celestial: 0 };
+const products = { 
+    milkyway: 270, 
+    darkmatter: 270, 
+    asteroid: 340, 
+    nebula: 300, 
+    velvet: 270, 
+    smooth: 270, 
+    celestial: 1699 
+};
+
+const names = { 
+    milkyway: "Milkyway", 
+    darkmatter: "Dark Matter", 
+    asteroid: "Asteroid", 
+    nebula: "Nebula", 
+    velvet: "Velvet", 
+    smooth: "Smooth", 
+    celestial: "Celestial Luxury Combo" 
+};
+
+let cart = { 
+    milkyway: 0, 
+    darkmatter: 0, 
+    asteroid: 0, 
+    nebula: 0, 
+    velvet: 0, 
+    smooth: 0, 
+    celestial: 0 
+};
+
 let inventory = {}; 
 let currentSessionOrderId = "ORD-" + Date.now();
 
@@ -71,13 +97,12 @@ function updateStockUI() {
         const plusBtn = document.getElementById('btn-plus-' + pid);
         const minusBtn = document.getElementById('btn-minus-' + pid);
         
-        // Safety check: if elements don't exist on this page (e.g. About page), skip
         if (!cardEl) continue;
 
         if (inventory[pid] !== undefined && inventory[pid] <= 0) {
             cardEl.classList.add('out-of-stock');
-            plusBtn.disabled = true;
-            minusBtn.disabled = true;
+            if(plusBtn) plusBtn.disabled = true;
+            if(minusBtn) minusBtn.disabled = true;
             if(cart[pid] > 0) {
                 cart[pid] = 0;
                 const qtyDisplay = document.getElementById('qty-' + pid);
@@ -86,8 +111,8 @@ function updateStockUI() {
             }
         } else {
             cardEl.classList.remove('out-of-stock');
-            plusBtn.disabled = false;
-            minusBtn.disabled = false;
+            if(plusBtn) plusBtn.disabled = false;
+            if(minusBtn) minusBtn.disabled = false;
         }
     }
 }
@@ -144,7 +169,6 @@ function updateQty(id, val) {
     }
     cart[id] += val; if(cart[id] < 0) cart[id] = 0;
     
-    // Update display if it exists
     const display = document.getElementById('qty-' + id);
     if(display) display.innerText = cart[id];
     
@@ -164,7 +188,6 @@ function calculateTotals() {
     discount = Math.round(subtotal * (activeCoupon / 100));
     finalTotal = subtotal + deliveryCharge - discount;
 
-    // Update Cart Bar & Modal elements safely
     const elTotal = document.getElementById('totalPrice');
     const elSub = document.getElementById('subTotalVal');
     const elDel = document.getElementById('deliveryVal');
@@ -208,15 +231,16 @@ const productDetails = {
     velvet: { title: "Velvet Comet", desc: "50% Semi-Sweet Chocolate. The perfect balance.", images: ["images/velvet.jpg", "images/velvet_pack.jpg", "images/velvet_usp.jpg", "images/velvet_benefit.jpg", "images/velvet_ing.jpg", "images/velvet_nutri.jpg"] },
     smooth: { title: "Smooth Astro", desc: "Classic 35% Milk Chocolate. Rich, creamy, and nostalgic.", images: ["images/smooth.jpg", "images/smooth_pack.jpg", "images/smooth_usp.jpg", "images/smooth_benefit.jpg", "images/smooth_ing.jpg", "images/smooth_nutri.jpg"] },
     
-    // UPDATED: Added new luxury product detail
+    // UPDATED: Only 2 images for Celestial
     celestial: { 
         title: "Celestial Luxury Edition", 
         desc: "A curated quartet of artisan masterpieces. Two bestsellers paired with two exclusive unreleased flavors and a bespoke love letter. A journey written in the stars.", 
         images: [
-            "images/celestial_box.jpg",  // Image 1: Outside
-            "images/celestial_open.jpg"  // Image 2: Inside
+            "images/celestial_box.jpg", 
+            "images/celestial_open.jpg"
         ] 
-    };
+    }
+};
 
 const fallbacks = [
     "https://images.unsplash.com/photo-1548142813-c3a8350e941b?w=600",
@@ -241,18 +265,38 @@ function openProduct(pid) {
 
 function closeProduct() { sfx('click'); document.getElementById('productModal').classList.remove('open'); }
 
+// FIXED SLIDER LOGIC TO HANDLE VARIABLE IMAGE COUNTS
 function changeSlide(direction) {
-    sfx('tick'); slideIndex += direction;
-    if(slideIndex > 5) slideIndex = 0; if(slideIndex < 0) slideIndex = 5;
+    sfx('tick'); 
+    slideIndex += direction;
+    
+    const maxImages = productDetails[currentProduct].images.length;
+    
+    if(slideIndex >= maxImages) slideIndex = 0; 
+    if(slideIndex < 0) slideIndex = maxImages - 1;
+    
     updateSlide();
 }
 
 function updateSlide() {
     const imgEl = document.getElementById('sliderImage');
-    const localSrc = productDetails[currentProduct].images[slideIndex];
-    imgEl.src = localSrc;
-    imgEl.onerror = function() { this.src = fallbacks[slideIndex]; };
-    document.getElementById('slideCaption').innerText = slideCaptions[slideIndex];
+    const data = productDetails[currentProduct];
+    
+    if (data && data.images && data.images[slideIndex]) {
+        imgEl.src = data.images[slideIndex];
+    } else {
+        imgEl.src = fallbacks[0];
+    }
+    imgEl.onerror = function() { this.src = fallbacks[slideIndex] || fallbacks[0]; };
+    
+    const captionEl = document.getElementById('slideCaption');
+    if(captionEl) {
+        if (currentProduct === 'celestial') {
+            captionEl.innerText = slideIndex === 0 ? "OUTSIDE BOX" : "INSIDE BOX";
+        } else {
+            captionEl.innerText = slideCaptions[slideIndex] || "VIEW";
+        }
+    }
 }
 
 // --- 7. CHECKOUT & PAYMENT ---
