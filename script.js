@@ -211,10 +211,12 @@ const productDetails = {
     // UPDATED: Added new luxury product detail
     celestial: { 
         title: "Celestial Luxury Edition", 
-        desc: "A mouth-watering combo of 4 chocolates: 2 Choconaut bestsellers and 2 unique, unreleased flavors created especially for you. Includes a bespoke 'Celestial Love' letter card. A luxurious journey written in the stars.", 
-        images: ["images/celestial_box.jpg", "images/celestial_open.jpg", "images/celestial_card.jpg", "images/celestial_benefit.jpg", "images/celestial_ing.jpg", "images/celestial_nutri.jpg"] 
-    }
-};
+        desc: "A curated quartet of artisan masterpieces. Two bestsellers paired with two exclusive unreleased flavors and a bespoke love letter. A journey written in the stars.", 
+        images: [
+            "images/celestial_box.jpg",  // Image 1: Outside
+            "images/celestial_open.jpg"  // Image 2: Inside
+        ] 
+    };
 
 const fallbacks = [
     "https://images.unsplash.com/photo-1548142813-c3a8350e941b?w=600",
