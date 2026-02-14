@@ -17,23 +17,91 @@
             font-style: italic;
             line-height: 1.4;
         }
+
+        /* 1. CYCLING TOP BANNER */
+        .promo-banner {
+            position: fixed; top: 0; left: 0; width: 100%; height: 40px;
+            background: linear-gradient(90deg, #ff6f00, #ffca28, #ff6f00);
+            background-size: 200% 100%;
+            z-index: 6000; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 15px rgba(255, 111, 0, 0.4);
+            animation: gradientShift 3s linear infinite;
+            overflow: hidden;
+        }
+        @keyframes gradientShift { 0% {background-position: 100% 0;} 100% {background-position: -100% 0;} }
+
+        .promo-text-wrapper { position: relative; width: 100%; height: 100%; text-align: center; }
+        .promo-msg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Orbitron', sans-serif; font-weight: bold; font-size: 0.85rem; color: #000;
+            opacity: 0; transform: translateY(20px); transition: 0.5s; padding: 0 10px;
+        }
+
+        /* Cycle Animation */
+        .msg-1 { animation: cycleText1 8s infinite; }
+        .msg-2 { animation: cycleText2 8s infinite; }
+
+        @keyframes cycleText1 {
+            0%, 45% { opacity: 1; transform: translateY(0); }
+            50%, 100% { opacity: 0; transform: translateY(-20px); }
+        }
+        @keyframes cycleText2 {
+            0%, 45% { opacity: 0; transform: translateY(20px); }
+            50%, 95% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-20px); }
+        }
+
+        /* 2. GLOWING BUNDLE TAGS */
+        .bundle-tag {
+            color: var(--success); font-size: 0.75rem; font-weight: bold;
+            letter-spacing: 1px; text-transform: uppercase;
+            margin: 5px 0; display: inline-block;
+            border: 1px solid var(--success); padding: 2px 8px; border-radius: 4px;
+            animation: pulseTag 2s infinite;
+        }
+        @keyframes pulseTag {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
+            70% { box-shadow: 0 0 0 6px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* 3. LAYOUT OVERRIDES */
+        body { padding-top: 100px !important; } 
+        nav { top: 40px !important; } 
     </style>
 </head>
 <body onload="initInventory()">
 
-    <nav>
-    <a href="index.html" class="nav-logo">CHOCO-NAUT&trade;</a>
-    <div class="nav-links">
-        <a href="index.html">HOME</a>
-        <a href="about.html">ABOUT</a>
-        <a href="products.html" style="color: var(--gold);">FLAVORS</a>
-        <a href="index.html#contact">CONTACT</a>
+    <div class="promo-banner">
+        <div class="promo-text-wrapper">
+            <span class="promo-msg msg-1">🚀 INAUGURAL OFFER: Use Code <strong style="color:#000; background:#fff; padding:0 4px; margin: 0 5px;">WELCOME10</strong> for 10% OFF!</span>
+            <span class="promo-msg msg-2">⚠️ FLIGHT PROTOCOL: Buy <strong>4 Explorers</strong> (₹270) & Get <strong>12% OFF!</strong></span>
+        </div>
     </div>
+
+    <nav>
+        <a href="index.html" class="nav-logo" onclick="sfx('click')">CHOCO-NAUT&trade;</a>
+        <div class="nav-links">
+            <a href="index.html" onclick="sfx('click')">HOME</a>
+            <a href="about.html" onclick="sfx('click')">ABOUT</a>
+            <a href="products.html" style="color: var(--gold);" onclick="sfx('click')">FLAVORS</a>
+            <a href="index.html#contact" onclick="sfx('click')">CONTACT</a>
+        </div>
     </nav>
+    
     <header class="products-header">
         <h1>Explore Our Flavor Universe</h1>
         <p>Six distinct worlds of taste. Handcrafted for your journey.</p>
     </header>
+
+    <section style="background: #0a0503; padding: 20px 5% 0;">
+        <div style="border: 1px solid var(--gold); background: rgba(255, 193, 7, 0.1); padding: 15px; text-align: center; max-width: 800px; margin: 0 auto; border-radius: 5px;">
+            <p style="color: var(--gold); margin: 0; font-family: 'Orbitron'; font-size: 0.9rem; letter-spacing: 1px;">
+                // MISSION BRIEF: ASSEMBLE A CREW OF 4+ EXPLORERS (₹270) TO UNLOCK 12% FUEL CREDIT.
+            </p>
+        </div>
+    </section>
 
     <section class="products">
         <div class="grid">
@@ -65,6 +133,7 @@
                     <button onclick="updateQty('celestial', 1)" style="width: 100%; margin-top: 15px; padding: 10px; background: #d4af37; color: #000; font-weight: bold; border: none; font-family: 'Orbitron', sans-serif; cursor: pointer;">ADD TO CART</button>
                 </div>
             </div>
+            
             <div class="card" id="card-milkyway">
                 <div class="sold-out-badge">SOLD OUT</div>
                 <div class="img-box" onclick="openProduct('milkyway')">
@@ -74,6 +143,7 @@
                     <div>
                         <h3>Milkyway Explorer</h3>
                         <span class="origin-badge">100% Milk White Chocolate</span>
+                        <div class="bundle-tag">✨ BUNDLE ELIGIBLE</div>
                         
                         <p class="flavor-desc">
                             A journey into pure sweetness. This premium white chocolate is rich with cocoa butter and vanilla notes, guiding you through the bright stars of the Milky Way.
@@ -98,6 +168,7 @@
                     <div>
                         <h3>Dark Matter (70%)</h3>
                         <span class="origin-badge">Single Origin</span>
+                        <div class="bundle-tag">✨ BUNDLE ELIGIBLE</div>
 
                         <p class="flavor-desc">
                             Experience the gravity of pure cocoa. This 70% dark chocolate is intense, mysterious, and completely vegan. A sophisticated treat for the serious explorer.
@@ -170,6 +241,7 @@
                     <div>
                         <h3>Velvet Comet</h3>
                         <span class="origin-badge">50% Semi-Sweet Chocolate</span>
+                        <div class="bundle-tag">✨ BUNDLE ELIGIBLE</div>
 
                         <p class="flavor-desc">
                             The perfect balance in the cosmos. Not too bitter, not too sweet. This semi-sweet bar trails a long, smooth finish of cocoa richness that lingers like a comet's tail.
@@ -194,6 +266,7 @@
                     <div>
                         <h3>Smooth Astro</h3>
                         <span class="origin-badge">35% Classic Milk Chocolate</span>
+                        <div class="bundle-tag">✨ BUNDLE ELIGIBLE</div>
 
                         <p class="flavor-desc">
                             Glide through a galaxy of silkiness. Our signature milk chocolate is tempered to perfection, offering a creamy, melt-in-your-mouth experience that feels like floating in zero gravity.
@@ -296,6 +369,102 @@
     </div>
 
     <script src="script.js"></script>
+    
+    <script>
+        // 1. DEFINE ELIGIBLE PRODUCTS
+        const bundleEligible = ['milkyway', 'darkmatter', 'velvet', 'smooth'];
 
+        // 2. OVERRIDE THE CALCULATE TOTALS FUNCTION
+        // This function replaces the one in script.js to add the Bundle Logic and Co-Pilot Text
+        function calculateTotals() {
+            subtotal = 0; 
+            let count = 0;
+            
+            // Standard Calculation
+            for(let k in cart) { 
+                subtotal += cart[k] * products[k]; 
+                count += cart[k]; 
+            }
+
+            // BUNDLE LOGIC (Min 4 of Eligible Items)
+            let bundleCount = 0;
+            let bundleSubtotal = 0;
+            
+            bundleEligible.forEach(id => {
+                if (cart[id] > 0) {
+                    bundleCount += cart[id];
+                    bundleSubtotal += cart[id] * products[id];
+                }
+            });
+
+            // 12% Discount Trigger
+            let bundleDiscount = 0;
+            if (bundleCount >= 4) {
+                bundleDiscount = Math.round(bundleSubtotal * 0.12);
+            }
+
+            // Shipping & Coupons
+            let valueAfterBundle = subtotal - bundleDiscount;
+            
+            if(valueAfterBundle > 1200) deliveryCharge = 0;
+            else if (valueAfterBundle > 0) deliveryCharge = 99;
+            else deliveryCharge = 0;
+
+            if(valueAfterBundle <= 800) activeCoupon = 0;
+            let couponDiscount = Math.round(valueAfterBundle * (activeCoupon / 100));
+
+            finalTotal = valueAfterBundle + deliveryCharge - couponDiscount;
+
+            // UPDATE UI
+            const elTotal = document.getElementById('totalPrice');
+            const elSub = document.getElementById('subTotalVal');
+            const elDel = document.getElementById('deliveryVal');
+            const elModalTot = document.getElementById('modalTotal');
+            const elDiscDisp = document.getElementById('discountDisplay');
+            const elDiscVal = document.getElementById('discountVal');
+
+            if(elTotal) elTotal.innerText = '₹' + finalTotal;
+            if(elSub) elSub.innerText = '₹' + subtotal;
+            if(elDel) elDel.innerText = deliveryCharge === 0 ? 'FREE' : '₹' + deliveryCharge;
+            if(elModalTot) elModalTot.innerText = '₹' + finalTotal;
+            
+            // Show Savings
+            let totalSavings = bundleDiscount + couponDiscount;
+            if(elDiscDisp && elDiscVal) {
+                if (totalSavings > 0) {
+                    elDiscDisp.style.display = 'flex';
+                    let txt = '-₹' + totalSavings;
+                    if(bundleDiscount > 0) txt += " (Bundle + Coupon)";
+                    elDiscVal.innerText = txt;
+                } else {
+                    elDiscDisp.style.display = 'none';
+                }
+            }
+
+            // CO-PILOT: UPDATE CART BAR TEXT
+            const bar = document.getElementById('cartBar');
+            const barText = bar.querySelector('span'); 
+
+            if(bar) {
+                if(count > 0) {
+                    bar.classList.add('active');
+                    
+                    if (bundleCount > 0 && bundleCount < 4) {
+                        let needed = 4 - bundleCount;
+                        barText.innerHTML = `⚠️ <strong>ADD ${needed} MORE</strong> EXPLORERS FOR 12% OFF!`;
+                        barText.style.color = "#ff6f00"; 
+                    } else if (bundleCount >= 4) {
+                        barText.innerHTML = `✅ <strong>12% SQUAD DISCOUNT UNLOCKED!</strong>`;
+                        barText.style.color = "#25d366";
+                    } else {
+                        barText.innerHTML = "MISSION TOTAL";
+                        barText.style.color = "#888";
+                    }
+                } else {
+                    bar.classList.remove('active');
+                }
+            }
+        }
+    </script>
 </body>
 </html>
