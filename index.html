@@ -2,15 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    
     <title>Choco-naut | Luxury Valentine's Day Chocolate Gifts & Hampers</title>
 
     <meta name="google-site-verification" content="-HHmyENWfILCaJ2Nj1hZHnxLe7tLKOdSEAMjR_knBgA" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <meta name="description" content="Best Luxury Valentine's Day Chocolate Gift for Boyfriend & Girlfriend. Shop premium handcrafted bean-to-bar chocolates & hampers. Fast delivery in India. Order the Celestial Luxury Combo now!">
-    
-    <meta name="keywords" content="valentine day gift, chocolate day gift, valentine gift for boyfriend, valentine gift for girlfriend, luxury chocolate box, artisan chocolates india, bean to bar, choco-naut, handcrafted chocolate, dark chocolate gift, best valentine gift for husband, premium gift hamper, faridabad, chocolate delivery, celestial combo, pure chocolate, no palm oil">
+    <meta name="description" content="Best Luxury Valentine's Day Chocolate Gift for Boyfriend & Girlfriend. Shop premium handcrafted bean-to-bar chocolates & hampers. Fast delivery in India.">
+    <meta name="keywords" content="valentine day gift, chocolate day gift, valentine gift for boyfriend, valentine gift for girlfriend, luxury chocolate box, artisan chocolates india, bean to bar, choco-naut">
 
     <script type="application/ld+json">
     {
@@ -18,7 +15,7 @@
       "@type": "LocalBusiness",
       "name": "Choco-naut",
       "image": "https://www.choconaut.in/images/bg.jpg",
-      "description": "Pure, handcrafted space-themed chocolates made with real cocoa butter and natural ingredients.",
+      "description": "Pure, handcrafted space-themed chocolates made with real cocoa butter.",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Sector 29",
@@ -36,11 +33,69 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <style>
+        /* 1. CYCLING TOP BANNER */
+        .promo-banner {
+            position: fixed; top: 0; left: 0; width: 100%; height: 40px;
+            background: linear-gradient(90deg, #ff6f00, #ffca28, #ff6f00);
+            background-size: 200% 100%;
+            z-index: 6000; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 15px rgba(255, 111, 0, 0.4);
+            animation: gradientShift 3s linear infinite;
+            overflow: hidden;
+        }
+        @keyframes gradientShift { 0% {background-position: 100% 0;} 100% {background-position: -100% 0;} }
+
+        .promo-text-wrapper { position: relative; width: 100%; height: 100%; text-align: center; }
+        .promo-msg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Orbitron', sans-serif; font-weight: bold; font-size: 0.85rem; color: #000;
+            opacity: 0; transform: translateY(20px); transition: 0.5s; padding: 0 10px;
+        }
+
+        /* Cycle Animation */
+        .msg-1 { animation: cycleText1 8s infinite; }
+        .msg-2 { animation: cycleText2 8s infinite; }
+
+        @keyframes cycleText1 {
+            0%, 45% { opacity: 1; transform: translateY(0); }
+            50%, 100% { opacity: 0; transform: translateY(-20px); }
+        }
+        @keyframes cycleText2 {
+            0%, 45% { opacity: 0; transform: translateY(20px); }
+            50%, 95% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-20px); }
+        }
+
+        /* 2. GLOWING BUNDLE TAGS */
+        .bundle-tag {
+            color: var(--success); font-size: 0.75rem; font-weight: bold;
+            letter-spacing: 1px; text-transform: uppercase;
+            margin: 5px 0; display: inline-block;
+            border: 1px solid var(--success); padding: 2px 8px; border-radius: 4px;
+            animation: pulseTag 2s infinite;
+        }
+        @keyframes pulseTag {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
+            70% { box-shadow: 0 0 0 6px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* 3. LAYOUT OVERRIDES */
+        body { padding-top: 100px !important; } 
+        nav { top: 40px !important; } 
+        .hero { margin-top: -100px !important; }
+    </style>
 </head>
 <body onload="initInventory()">
-    
+
     <div class="promo-banner">
-    <p>🚀 INAUGURAL OFFER: Use Code <span style="background:#000; color:#fff; padding:2px 5px; border-radius:3px;">WELCOME10</span> to get FLAT 10% OFF!</p>
+        <div class="promo-text-wrapper">
+            <span class="promo-msg msg-1">🚀 INAUGURAL OFFER: Use Code <strong style="color:#000; background:#fff; padding:0 4px; margin: 0 5px;">WELCOME10</strong> for 10% OFF!</span>
+            <span class="promo-msg msg-2">⚠️ FLIGHT PROTOCOL: Buy <strong>4 Explorers</strong> (₹270) & Get <strong>12% OFF!</strong></span>
+        </div>
     </div>
 
     <nav>
@@ -66,6 +121,126 @@
         </div>
     </section>
 
+    <section style="background: #0a0503; padding: 20px 5% 0;">
+        <div style="border: 1px solid var(--gold); background: rgba(255, 193, 7, 0.1); padding: 15px; text-align: center; max-width: 800px; margin: 0 auto; border-radius: 5px;">
+            <p style="color: var(--gold); margin: 0; font-family: 'Orbitron'; font-size: 0.9rem; letter-spacing: 1px;">
+                // MISSION BRIEF: ASSEMBLE A CREW OF 4+ EXPLORERS (₹270) TO UNLOCK 12% FUEL CREDIT.
+            </p>
+        </div>
+    </section>
+
+    <section id="shop" class="products">
+        <h2 class="section-header">FLIGHT SUPPLIES</h2>
+        <div class="grid">
+            
+            <div class="card" onclick="window.location.href='products.html#card-celestial'" style="cursor: pointer; border: 2px solid #d4af37; box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);">
+                <div class="img-box">
+                    <img src="images/celestial_box.jpg" 
+                         onclick="event.stopPropagation(); this.src = this.src.includes('box') ? 'images/celestial_open.jpg' : 'images/celestial_box.jpg'" 
+                         onerror="this.src='https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=600'" 
+                         class="product-img" 
+                         title="Tap to peek inside!">
+                </div>
+                <div class="card-info" style="background: linear-gradient(to top, #1a1a1a, #000);">
+                    <div>
+                        <h3 style="color: #d4af37; font-family: 'Orbitron', sans-serif;">Celestial Luxury Combo</h3>
+                        <span class="origin-badge" style="background: #d4af37; color: #000; font-weight:bold;">LIMITED EDITION</span>
+                        <p style="font-size: 0.9rem; color: #ddd; margin: 10px 0;">Celebrate your love with 4 artisan masterpieces, unique flavors & a love letter.</p>
+                    </div>
+                    <button class="c-btn" style="margin-top: 10px; border-color: #d4af37; color: #d4af37;">VIEW & ORDER -></button>
+                </div>
+            </div>
+
+            <div class="card" onclick="window.location.href='products.html#card-milkyway'" style="cursor: pointer;">
+                <div class="img-box">
+                    <img src="images/milkyway.jpg" onerror="this.src='https://images.unsplash.com/photo-1548142813-c3a8350e941b?w=600'" class="product-img">
+                </div>
+                <div class="card-info">
+                    <div>
+                        <h3>Milkyway Explorer</h3>
+                        <span class="origin-badge">100% Milk White Chocolate</span>
+                        <div class="bundle-tag">✨ BUNDLE ELIGIBLE</div>
+                        <p style="font-size: 0.9rem; color: #aaa; margin: 10px 0;">Pure white chocolate infused with vanilla notes.</p>
+                    </div>
+                    <button class="c-btn" style="margin-top: 10px;">VIEW & ORDER -></button>
+                </div>
+            </div>
+
+            <div class="card" onclick="window.location.href='products.html#card-darkmatter'" style="cursor: pointer;">
+                <div class="img-box">
+                    <img src="images/darkmatter.jpg" onerror="this.src='https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=600'" class="product-img">
+                </div>
+                <div class="card-info">
+                    <div>
+                        <h3>Dark Matter (70%)</h3>
+                        <span class="origin-badge">Single Origin</span>
+                        <div class="bundle-tag">✨ BUNDLE ELIGIBLE</div>
+                        <p style="font-size: 0.9rem; color: #aaa; margin: 10px 0;">Intense 70% dark vegan chocolate.</p>
+                    </div>
+                    <button class="c-btn" style="margin-top: 10px;">VIEW & ORDER -></button>
+                </div>
+            </div>
+
+            <div class="card" onclick="window.location.href='products.html#card-asteroid'" style="cursor: pointer;">
+                <div class="img-box">
+                    <img src="images/asteroid.jpg" onerror="this.src='https://images.unsplash.com/photo-1511381939415-e44015466834?w=600'" class="product-img">
+                </div>
+                <div class="card-info">
+                    <div>
+                        <h3>Asteroid Crunch</h3>
+                        <span class="origin-badge">Roasted Almonds</span>
+                        <p style="font-size: 0.9rem; color: #aaa; margin: 10px 0;">Creamy milk chocolate with roasted almond rocks.</p>
+                    </div>
+                    <button class="c-btn" style="margin-top: 10px;">VIEW & ORDER -></button>
+                </div>
+            </div>
+
+            <div class="card" onclick="window.location.href='products.html#card-nebula'" style="cursor: pointer;">
+                <div class="img-box">
+                    <img src="images/nebula.jpg" onerror="this.src='https://images.unsplash.com/photo-1621446730506-2351d6e23583?w=600'" class="product-img">
+                </div>
+                <div class="card-info">
+                    <div>
+                        <h3>Nebula Swirl</h3>
+                        <span class="origin-badge">Himalayan Salt Butterscotch</span>
+                        <p style="font-size: 0.9rem; color: #aaa; margin: 10px 0;">Golden caramel with a pinch of sea salt.</p>
+                    </div>
+                    <button class="c-btn" style="margin-top: 10px;">VIEW & ORDER -></button>
+                </div>
+            </div>
+
+            <div class="card" onclick="window.location.href='products.html#card-velvet'" style="cursor: pointer;">
+                <div class="img-box">
+                    <img src="images/velvet.jpg" onerror="this.src='https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=600'" class="product-img">
+                </div>
+                <div class="card-info">
+                    <div>
+                        <h3>Velvet Comet</h3>
+                        <span class="origin-badge">50% Semi-Sweet Chocolate</span>
+                        <div class="bundle-tag">✨ BUNDLE ELIGIBLE</div>
+                        <p style="font-size: 0.9rem; color: #aaa; margin: 10px 0;">Perfectly balanced semi-sweet chocolate.</p>
+                    </div>
+                    <button class="c-btn" style="margin-top: 10px;">VIEW & ORDER -></button>
+                </div>
+            </div>
+
+            <div class="card" onclick="window.location.href='products.html#card-smooth'" style="cursor: pointer;">
+                <div class="img-box">
+                    <img src="images/smooth.jpg" onerror="this.src='https://images.unsplash.com/photo-1548142813-c3a8350e941b?w=600'" class="product-img">
+                </div>
+                <div class="card-info">
+                    <div>
+                        <h3>Smooth Astro</h3>
+                        <span class="origin-badge">35% Classic Milk Chocolate</span>
+                        <div class="bundle-tag">✨ BUNDLE ELIGIBLE</div>
+                        <p style="font-size: 0.9rem; color: #aaa; margin: 10px 0;">Rich, nostalgic classic milk chocolate.</p>
+                    </div>
+                    <button class="c-btn" style="margin-top: 10px;">VIEW & ORDER -></button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
     <section id="about" class="story-section">
         <div class="story-box">
             <h2 style="color: var(--gold); margin-bottom: 20px;">ABOUT THE MISSION</h2>
@@ -154,114 +329,6 @@
                     <li>Powerful Antioxidants</li>
                     <li>Reduces stress levels</li>
                 </ul>
-            </div>
-        </div>
-    </section>
-
-    <section id="shop" class="products">
-        <h2 class="section-header">FLIGHT SUPPLIES</h2>
-        <div class="grid">
-            
-            <div class="card" onclick="window.location.href='products.html#card-celestial'" style="cursor: pointer; border: 2px solid #d4af37; box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);">
-                <div class="img-box">
-                    <img src="images/celestial_box.jpg" 
-                         onclick="event.stopPropagation(); this.src = this.src.includes('box') ? 'images/celestial_open.jpg' : 'images/celestial_box.jpg'" 
-                         onerror="this.src='https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=600'" 
-                         class="product-img" 
-                         title="Tap to peek inside!">
-                </div>
-                <div class="card-info" style="background: linear-gradient(to top, #1a1a1a, #000);">
-                    <div>
-                        <h3 style="color: #d4af37; font-family: 'Orbitron', sans-serif;">Celestial Luxury Combo</h3>
-                        <span class="origin-badge" style="background: #d4af37; color: #000; font-weight:bold;">LIMITED EDITION</span>
-                        <p style="font-size: 0.9rem; color: #ddd; margin: 10px 0;">Celebrate your love with 4 artisan masterpieces, unique flavors & a love letter.</p>
-                    </div>
-                    <button class="c-btn" style="margin-top: 10px; border-color: #d4af37; color: #d4af37;">VIEW & ORDER -></button>
-                </div>
-            </div>
-
-            <div class="card" onclick="window.location.href='products.html#card-milkyway'" style="cursor: pointer;">
-                <div class="img-box">
-                    <img src="images/milkyway.jpg" onerror="this.src='https://images.unsplash.com/photo-1548142813-c3a8350e941b?w=600'" class="product-img">
-                </div>
-                <div class="card-info">
-                    <div>
-                        <h3>Milkyway Explorer</h3>
-                        <span class="origin-badge">100% Milk White Chocolate</span>
-                        <p style="font-size: 0.9rem; color: #aaa; margin: 10px 0;">Pure white chocolate infused with vanilla notes.</p>
-                    </div>
-                    <button class="c-btn" style="margin-top: 10px;">VIEW & ORDER -></button>
-                </div>
-            </div>
-
-            <div class="card" onclick="window.location.href='products.html#card-darkmatter'" style="cursor: pointer;">
-                <div class="img-box">
-                    <img src="images/darkmatter.jpg" onerror="this.src='https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=600'" class="product-img">
-                </div>
-                <div class="card-info">
-                    <div>
-                        <h3>Dark Matter (70%)</h3>
-                        <span class="origin-badge">Single Origin</span>
-                        <p style="font-size: 0.9rem; color: #aaa; margin: 10px 0;">Intense 70% dark vegan chocolate.</p>
-                    </div>
-                    <button class="c-btn" style="margin-top: 10px;">VIEW & ORDER -></button>
-                </div>
-            </div>
-
-            <div class="card" onclick="window.location.href='products.html#card-asteroid'" style="cursor: pointer;">
-                <div class="img-box">
-                    <img src="images/asteroid.jpg" onerror="this.src='https://images.unsplash.com/photo-1511381939415-e44015466834?w=600'" class="product-img">
-                </div>
-                <div class="card-info">
-                    <div>
-                        <h3>Asteroid Crunch</h3>
-                        <span class="origin-badge">Roasted Almonds</span>
-                        <p style="font-size: 0.9rem; color: #aaa; margin: 10px 0;">Creamy milk chocolate with roasted almond rocks.</p>
-                    </div>
-                    <button class="c-btn" style="margin-top: 10px;">VIEW & ORDER -></button>
-                </div>
-            </div>
-
-            <div class="card" onclick="window.location.href='products.html#card-nebula'" style="cursor: pointer;">
-                <div class="img-box">
-                    <img src="images/nebula.jpg" onerror="this.src='https://images.unsplash.com/photo-1621446730506-2351d6e23583?w=600'" class="product-img">
-                </div>
-                <div class="card-info">
-                    <div>
-                        <h3>Nebula Swirl</h3>
-                        <span class="origin-badge">Himalayan Salt Butterscotch</span>
-                        <p style="font-size: 0.9rem; color: #aaa; margin: 10px 0;">Golden caramel with a pinch of sea salt.</p>
-                    </div>
-                    <button class="c-btn" style="margin-top: 10px;">VIEW & ORDER -></button>
-                </div>
-            </div>
-
-            <div class="card" onclick="window.location.href='products.html#card-velvet'" style="cursor: pointer;">
-                <div class="img-box">
-                    <img src="images/velvet.jpg" onerror="this.src='https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=600'" class="product-img">
-                </div>
-                <div class="card-info">
-                    <div>
-                        <h3>Velvet Comet</h3>
-                        <span class="origin-badge">50% Semi-Sweet Chocolate</span>
-                        <p style="font-size: 0.9rem; color: #aaa; margin: 10px 0;">Perfectly balanced semi-sweet chocolate.</p>
-                    </div>
-                    <button class="c-btn" style="margin-top: 10px;">VIEW & ORDER -></button>
-                </div>
-            </div>
-
-            <div class="card" onclick="window.location.href='products.html#card-smooth'" style="cursor: pointer;">
-                <div class="img-box">
-                    <img src="images/smooth.jpg" onerror="this.src='https://images.unsplash.com/photo-1548142813-c3a8350e941b?w=600'" class="product-img">
-                </div>
-                <div class="card-info">
-                    <div>
-                        <h3>Smooth Astro</h3>
-                        <span class="origin-badge">35% Classic Milk Chocolate</span>
-                        <p style="font-size: 0.9rem; color: #aaa; margin: 10px 0;">Rich, nostalgic classic milk chocolate.</p>
-                    </div>
-                    <button class="c-btn" style="margin-top: 10px;">VIEW & ORDER -></button>
-                </div>
             </div>
         </div>
     </section>
@@ -390,7 +457,103 @@
         </svg>
     </a>
 
-    <script src="script.js"></script>      
+    <script src="script.js"></script>     
+    
+    <script>
+        // 1. DEFINE ELIGIBLE PRODUCTS
+        const bundleEligible = ['milkyway', 'darkmatter', 'velvet', 'smooth'];
+
+        // 2. OVERRIDE THE CALCULATE TOTALS FUNCTION
+        // This function replaces the one in script.js to add the Bundle Logic and Co-Pilot Text
+        function calculateTotals() {
+            subtotal = 0; 
+            let count = 0;
+            
+            // Standard Calculation
+            for(let k in cart) { 
+                subtotal += cart[k] * products[k]; 
+                count += cart[k]; 
+            }
+
+            // BUNDLE LOGIC (Min 4 of Eligible Items)
+            let bundleCount = 0;
+            let bundleSubtotal = 0;
+            
+            bundleEligible.forEach(id => {
+                if (cart[id] > 0) {
+                    bundleCount += cart[id];
+                    bundleSubtotal += cart[id] * products[id];
+                }
+            });
+
+            // 12% Discount Trigger
+            let bundleDiscount = 0;
+            if (bundleCount >= 4) {
+                bundleDiscount = Math.round(bundleSubtotal * 0.12);
+            }
+
+            // Shipping & Coupons
+            let valueAfterBundle = subtotal - bundleDiscount;
+            
+            if(valueAfterBundle > 1200) deliveryCharge = 0;
+            else if (valueAfterBundle > 0) deliveryCharge = 99;
+            else deliveryCharge = 0;
+
+            if(valueAfterBundle <= 800) activeCoupon = 0;
+            let couponDiscount = Math.round(valueAfterBundle * (activeCoupon / 100));
+
+            finalTotal = valueAfterBundle + deliveryCharge - couponDiscount;
+
+            // UPDATE UI
+            const elTotal = document.getElementById('totalPrice');
+            const elSub = document.getElementById('subTotalVal');
+            const elDel = document.getElementById('deliveryVal');
+            const elModalTot = document.getElementById('modalTotal');
+            const elDiscDisp = document.getElementById('discountDisplay');
+            const elDiscVal = document.getElementById('discountVal');
+
+            if(elTotal) elTotal.innerText = '₹' + finalTotal;
+            if(elSub) elSub.innerText = '₹' + subtotal;
+            if(elDel) elDel.innerText = deliveryCharge === 0 ? 'FREE' : '₹' + deliveryCharge;
+            if(elModalTot) elModalTot.innerText = '₹' + finalTotal;
+            
+            // Show Savings
+            let totalSavings = bundleDiscount + couponDiscount;
+            if(elDiscDisp && elDiscVal) {
+                if (totalSavings > 0) {
+                    elDiscDisp.style.display = 'flex';
+                    let txt = '-₹' + totalSavings;
+                    if(bundleDiscount > 0) txt += " (Bundle + Coupon)";
+                    elDiscVal.innerText = txt;
+                } else {
+                    elDiscDisp.style.display = 'none';
+                }
+            }
+
+            // CO-PILOT: UPDATE CART BAR TEXT
+            const bar = document.getElementById('cartBar');
+            const barText = bar.querySelector('span'); 
+
+            if(bar) {
+                if(count > 0) {
+                    bar.classList.add('active');
+                    
+                    if (bundleCount > 0 && bundleCount < 4) {
+                        let needed = 4 - bundleCount;
+                        barText.innerHTML = `⚠️ <strong>ADD ${needed} MORE</strong> EXPLORERS FOR 12% OFF!`;
+                        barText.style.color = "#ff6f00"; 
+                    } else if (bundleCount >= 4) {
+                        barText.innerHTML = `✅ <strong>12% SQUAD DISCOUNT UNLOCKED!</strong>`;
+                        barText.style.color = "#25d366";
+                    } else {
+                        barText.innerHTML = "MISSION TOTAL";
+                        barText.style.color = "#888";
+                    }
+                } else {
+                    bar.classList.remove('active');
+                }
+            }
+        }
+    </script>
 </body>
 </html>
-
