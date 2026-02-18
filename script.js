@@ -163,7 +163,7 @@ function updateQty(id, val) {
     if (val > 0 && inventory[id] !== undefined) {
         if (cart[id] >= inventory[id]) {
             sfx('error');
-            alert(`ACCESS DENIED: Only ${inventory[id]} units of ${names[id]} remaining in stock.`);
+            alert(ACCESS DENIED: Only ${inventory[id]} units of ${names[id]} remaining in stock.);
             return;
         }
     }
@@ -307,7 +307,7 @@ function openCart() {
     for(let k in cart) {
         if(cart[k] > 0) {
             hasItems = true;
-            list.innerHTML += `<div style="display:flex; justify-content:space-between; border-bottom:1px solid #333; padding:10px 0;"><div><strong>${names[k]}</strong><br><small>Qty: ${cart[k]}</small></div><div>₹${cart[k]*products[k]}</div></div>`;
+            list.innerHTML += <div style="display:flex; justify-content:space-between; border-bottom:1px solid #333; padding:10px 0;"><div><strong>${names[k]}</strong><br><small>Qty: ${cart[k]}</small></div><div>₹${cart[k]*products[k]}</div></div>;
         }
     }
     if(!hasItems) list.innerHTML = "<p style='text-align:center'>Cart is empty.</p>";
@@ -333,7 +333,7 @@ function startPayment() {
         sfx('error'); alert("⚠️ Please enter a valid 6-digit Pincode."); return;
     }
 
-    const fullAddress = `${address} - Pincode: ${pincode}`;
+    const fullAddress = ${address} - Pincode: ${pincode};
     logOrderToSheet("Pending", fullAddress); 
 
     var options = {
@@ -343,6 +343,19 @@ function startPayment() {
         "name": "Choco-naut",
         "handler": function (response){
             sfx('success'); 
+            
+            // --- META PIXEL PURCHASE EVENT ---
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'Purchase', {
+                    value: finalTotal, 
+                    currency: 'INR',
+                    content_name: 'Choco-naut Order',
+                    content_ids: Object.keys(cart).filter(k => cart[k] > 0),
+                    content_type: 'product'
+                });
+            }
+            // ---------------------------------
+
             paymentId = response.razorpay_payment_id; 
             logOrderToSheet("Confirmed", fullAddress); 
             generateInvoice(name, phone, fullAddress);
@@ -364,7 +377,7 @@ function generateInvoice(name, phone, address) {
     const tbody = document.getElementById('invoiceItems'); tbody.innerHTML = "";
     for(let k in cart) {
         if(cart[k] > 0) {
-            tbody.innerHTML += `<tr><td>${names[k]}</td><td>${cart[k]}</td><td>₹${cart[k]*products[k]}</td></tr>`;
+            tbody.innerHTML += <tr><td>${names[k]}</td><td>${cart[k]}</td><td>₹${cart[k]*products[k]}</td></tr>;
         }
     }
     document.getElementById('invSub').innerText = '₹' + subtotal;
@@ -378,11 +391,11 @@ function sendWhatsApp() {
     sfx('click');
     const name = document.getElementById('invName').innerText;
     const address = document.getElementById('invAddr').innerText;
-    let msg = `*🚀 ORDER: CHOCO-NAUT* %0APID: ${paymentId}%0A`;
-    for(let k in cart) if(cart[k]>0) msg += `📦 ${names[k]} x ${cart[k]}%0A`;
-    msg += `🚚 Delivery: ${deliveryCharge === 0 ? 'FREE' : '₹'+deliveryCharge}%0A`;
-    msg += `💰 PAID: ₹${finalTotal}%0A👤 ${name}%0A📍 ${address}`;
-    window.open(`https://wa.me/917678107458?text=${msg}`, '_blank');
+    let msg = *🚀 ORDER: CHOCO-NAUT* %0APID: ${paymentId}%0A;
+    for(let k in cart) if(cart[k]>0) msg += 📦 ${names[k]} x ${cart[k]}%0A;
+    msg += 🚚 Delivery: ${deliveryCharge === 0 ? 'FREE' : '₹'+deliveryCharge}%0A;
+    msg += 💰 PAID: ₹${finalTotal}%0A👤 ${name}%0A📍 ${address};
+    window.open(https://wa.me/917678107458?text=${msg}, '_blank');
 }
 
 function redirectToHome() {
