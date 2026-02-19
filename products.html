@@ -70,8 +70,7 @@
         body { padding-top: 100px !important; } 
         nav { top: 40px !important; } 
     </style>
-    <!-- Meta Pixel Code -->
-<script>
+    <script>
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -86,7 +85,6 @@ fbq('track', 'PageView');
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1389656802841099&ev=PageView&noscript=1"
 /></noscript>
-<!-- End Meta Pixel Code -->
 </head>
 <body onload="initInventory()">
 
@@ -386,102 +384,5 @@ src="https://www.facebook.com/tr?id=1389656802841099&ev=PageView&noscript=1"
     </div>
 
     <script src="script.js"></script>
-    
-    <script>
-        // 1. DEFINE ELIGIBLE PRODUCTS
-        const bundleEligible = ['milkyway', 'darkmatter', 'velvet', 'smooth'];
-
-        // 2. OVERRIDE THE CALCULATE TOTALS FUNCTION
-        // This function replaces the one in script.js to add the Bundle Logic and Co-Pilot Text
-        function calculateTotals() {
-            subtotal = 0; 
-            let count = 0;
-            
-            // Standard Calculation
-            for(let k in cart) { 
-                subtotal += cart[k] * products[k]; 
-                count += cart[k]; 
-            }
-
-            // BUNDLE LOGIC (Min 4 of Eligible Items)
-            let bundleCount = 0;
-            let bundleSubtotal = 0;
-            
-            bundleEligible.forEach(id => {
-                if (cart[id] > 0) {
-                    bundleCount += cart[id];
-                    bundleSubtotal += cart[id] * products[id];
-                }
-            });
-
-            // 12% Discount Trigger
-            let bundleDiscount = 0;
-            if (bundleCount >= 4) {
-                bundleDiscount = Math.round(bundleSubtotal * 0.12);
-            }
-
-            // Shipping & Coupons
-            let valueAfterBundle = subtotal - bundleDiscount;
-            
-            if(valueAfterBundle > 1200) deliveryCharge = 0;
-            else if (valueAfterBundle > 0) deliveryCharge = 99;
-            else deliveryCharge = 0;
-
-            if(valueAfterBundle <= 800) activeCoupon = 0;
-            let couponDiscount = Math.round(valueAfterBundle * (activeCoupon / 100));
-
-            finalTotal = valueAfterBundle + deliveryCharge - couponDiscount;
-
-            // UPDATE UI
-            const elTotal = document.getElementById('totalPrice');
-            const elSub = document.getElementById('subTotalVal');
-            const elDel = document.getElementById('deliveryVal');
-            const elModalTot = document.getElementById('modalTotal');
-            const elDiscDisp = document.getElementById('discountDisplay');
-            const elDiscVal = document.getElementById('discountVal');
-
-            if(elTotal) elTotal.innerText = '₹' + finalTotal;
-            if(elSub) elSub.innerText = '₹' + subtotal;
-            if(elDel) elDel.innerText = deliveryCharge === 0 ? 'FREE' : '₹' + deliveryCharge;
-            if(elModalTot) elModalTot.innerText = '₹' + finalTotal;
-            
-            // Show Savings
-            let totalSavings = bundleDiscount + couponDiscount;
-            if(elDiscDisp && elDiscVal) {
-                if (totalSavings > 0) {
-                    elDiscDisp.style.display = 'flex';
-                    let txt = '-₹' + totalSavings;
-                    if(bundleDiscount > 0) txt += " (Bundle + Coupon)";
-                    elDiscVal.innerText = txt;
-                } else {
-                    elDiscDisp.style.display = 'none';
-                }
-            }
-
-            // CO-PILOT: UPDATE CART BAR TEXT
-            const bar = document.getElementById('cartBar');
-            const barText = bar.querySelector('span'); 
-
-            if(bar) {
-                if(count > 0) {
-                    bar.classList.add('active');
-                    
-                    if (bundleCount > 0 && bundleCount < 4) {
-                        let needed = 4 - bundleCount;
-                        barText.innerHTML = `⚠️ <strong>ADD ${needed} MORE</strong> EXPLORERS FOR 12% OFF!`;
-                        barText.style.color = "#ff6f00"; 
-                    } else if (bundleCount >= 4) {
-                        barText.innerHTML = `✅ <strong>12% SQUAD DISCOUNT UNLOCKED!</strong>`;
-                        barText.style.color = "#25d366";
-                    } else {
-                        barText.innerHTML = "MISSION TOTAL";
-                        barText.style.color = "#888";
-                    }
-                } else {
-                    bar.classList.remove('active');
-                }
-            }
-        }
-    </script>
 </body>
 </html>
