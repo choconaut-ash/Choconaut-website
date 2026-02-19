@@ -170,8 +170,21 @@ function updateQty(id, val) {
             return;
         }
     }
+    
     cart[id] += val; if(cart[id] < 0) cart[id] = 0;
     
+    // --- META PIXEL ADD TO CART EVENT ---
+    if (val > 0 && typeof fbq !== 'undefined') {
+        fbq('track', 'AddToCart', {
+            content_name: names[id],
+            content_ids: [id],
+            content_type: 'product',
+            value: products[id],
+            currency: 'INR'
+        });
+    }
+    // ------------------------------------
+
     const display = document.getElementById('qty-' + id);
     if(display) display.innerText = cart[id];
     
@@ -366,6 +379,18 @@ function openCart() {
             list.innerHTML += `<div style="display:flex; justify-content:space-between; border-bottom:1px solid #333; padding:10px 0;"><div><strong>${names[k]}</strong><br><small>Qty: ${cart[k]}</small></div><div>₹${cart[k]*products[k]}</div></div>`;
         }
     }
+    
+    // --- META PIXEL INITIATE CHECKOUT EVENT ---
+    if (hasItems && typeof fbq !== 'undefined') {
+        fbq('track', 'InitiateCheckout', {
+            value: finalTotal,
+            currency: 'INR',
+            content_ids: Object.keys(cart).filter(k => cart[k] > 0),
+            content_type: 'product'
+        });
+    }
+    // ------------------------------------------
+
     if(!hasItems) list.innerHTML = "<p style='text-align:center'>Cart is empty.</p>";
     document.getElementById('cartOverlay').classList.add('open');
 }
