@@ -23,6 +23,9 @@ const names = {
     celestial: "Celestial Luxury Combo" 
 };
 
+// BUNDLE LOGIC: Products eligible for the 12% discount
+const bundleEligible = ['milkyway', 'darkmatter', 'velvet', 'smooth'];
+
 let cart = { 
     milkyway: 0, 
     darkmatter: 0, 
@@ -163,7 +166,7 @@ function updateQty(id, val) {
     if (val > 0 && inventory[id] !== undefined) {
         if (cart[id] >= inventory[id]) {
             sfx('error');
-            alert(ACCESS DENIED: Only ${inventory[id]} units of ${names[id]} remaining in stock.);
+            alert(`ACCESS DENIED: Only ${inventory[id]} units of ${names[id]} remaining in stock.`);
             return;
         }
     }
@@ -176,18 +179,45 @@ function updateQty(id, val) {
 }
 
 function calculateTotals() {
-    subtotal = 0; let count = 0;
-    for(let k in cart) { subtotal += cart[k] * products[k]; count += cart[k]; }
+    subtotal = 0; 
+    let count = 0;
+    
+    // Standard Calculation
+    for(let k in cart) { 
+        subtotal += cart[k] * products[k]; 
+        count += cart[k]; 
+    }
 
-    if(subtotal > 1200) deliveryCharge = 0;
-    else if (subtotal > 0) deliveryCharge = 99;
-    else deliveryCharge = 0; 
+    // BUNDLE LOGIC (Min 4 of Eligible Items)
+    let bundleCount = 0;
+    let bundleSubtotal = 0;
+    
+    bundleEligible.forEach(id => {
+        if (cart[id] > 0) {
+            bundleCount += cart[id];
+            bundleSubtotal += cart[id] * products[id];
+        }
+    });
 
-    if(subtotal <= 800) activeCoupon = 0;
+    // 12% Discount Trigger
+    let bundleDiscount = 0;
+    if (bundleCount >= 4) {
+        bundleDiscount = Math.round(bundleSubtotal * 0.12);
+    }
 
-    discount = Math.round(subtotal * (activeCoupon / 100));
-    finalTotal = subtotal + deliveryCharge - discount;
+    // Shipping & Coupons
+    let valueAfterBundle = subtotal - bundleDiscount;
+    
+    if(valueAfterBundle > 1200) deliveryCharge = 0;
+    else if (valueAfterBundle > 0) deliveryCharge = 99;
+    else deliveryCharge = 0;
 
+    if(valueAfterBundle <= 800) activeCoupon = 0;
+    let couponDiscount = Math.round(valueAfterBundle * (activeCoupon / 100));
+
+    finalTotal = valueAfterBundle + deliveryCharge - couponDiscount;
+
+    // UPDATE UI
     const elTotal = document.getElementById('totalPrice');
     const elSub = document.getElementById('subTotalVal');
     const elDel = document.getElementById('deliveryVal');
@@ -200,14 +230,42 @@ function calculateTotals() {
     if(elDel) elDel.innerText = deliveryCharge === 0 ? 'FREE' : '₹' + deliveryCharge;
     if(elModalTot) elModalTot.innerText = '₹' + finalTotal;
     
+    // Show Savings
+    let totalSavings = bundleDiscount + couponDiscount;
     if(elDiscDisp && elDiscVal) {
-        elDiscDisp.style.display = discount > 0 ? 'flex' : 'none';
-        elDiscVal.innerText = '-₹' + discount;
+        if (totalSavings > 0) {
+            elDiscDisp.style.display = 'flex';
+            let txt = '-₹' + totalSavings;
+            if(bundleDiscount > 0 && couponDiscount > 0) txt += " (Bundle + Coupon)";
+            else if (bundleDiscount > 0) txt += " (Bundle 12%)";
+            elDiscVal.innerText = txt;
+        } else {
+            elDiscDisp.style.display = 'none';
+        }
     }
 
+    // CO-PILOT: UPDATE CART BAR TEXT
     const bar = document.getElementById('cartBar');
-    if(bar) {
-        if(count > 0) bar.classList.add('active'); else bar.classList.remove('active');
+    if (bar) {
+        const barText = bar.querySelector('span'); 
+
+        if(count > 0) {
+            bar.classList.add('active');
+            
+            if (bundleCount > 0 && bundleCount < 4) {
+                let needed = 4 - bundleCount;
+                barText.innerHTML = `⚠️ <strong>ADD ${needed} MORE</strong> EXPLORERS FOR 12% OFF!`;
+                barText.style.color = "#ff6f00"; 
+            } else if (bundleCount >= 4) {
+                barText.innerHTML = `✅ <strong>12% SQUAD DISCOUNT UNLOCKED!</strong>`;
+                barText.style.color = "#25d366";
+            } else {
+                barText.innerHTML = "MISSION TOTAL";
+                barText.style.color = "#888";
+            }
+        } else {
+            bar.classList.remove('active');
+        }
     }
 }
 
@@ -231,7 +289,6 @@ const productDetails = {
     velvet: { title: "Velvet Comet", desc: "50% Semi-Sweet Chocolate. The perfect balance.", images: ["images/velvet.jpg", "images/velvet_pack.jpg", "images/velvet_usp.jpg", "images/velvet_benefit.jpg", "images/velvet_ing.jpg", "images/velvet_nutri.jpg"] },
     smooth: { title: "Smooth Astro", desc: "Classic 35% Milk Chocolate. Rich, creamy, and nostalgic.", images: ["images/smooth.jpg", "images/smooth_pack.jpg", "images/smooth_usp.jpg", "images/smooth_benefit.jpg", "images/smooth_ing.jpg", "images/smooth_nutri.jpg"] },
     
-    // UPDATED: Only 2 images for Celestial
     celestial: { 
         title: "Celestial Luxury Edition", 
         desc: "A curated quartet of artisan masterpieces. Two bestsellers paired with two exclusive unreleased flavors and a bespoke love letter. A journey written in the stars.", 
@@ -265,7 +322,6 @@ function openProduct(pid) {
 
 function closeProduct() { sfx('click'); document.getElementById('productModal').classList.remove('open'); }
 
-// FIXED SLIDER LOGIC TO HANDLE VARIABLE IMAGE COUNTS
 function changeSlide(direction) {
     sfx('tick'); 
     slideIndex += direction;
@@ -307,7 +363,7 @@ function openCart() {
     for(let k in cart) {
         if(cart[k] > 0) {
             hasItems = true;
-            list.innerHTML += <div style="display:flex; justify-content:space-between; border-bottom:1px solid #333; padding:10px 0;"><div><strong>${names[k]}</strong><br><small>Qty: ${cart[k]}</small></div><div>₹${cart[k]*products[k]}</div></div>;
+            list.innerHTML += `<div style="display:flex; justify-content:space-between; border-bottom:1px solid #333; padding:10px 0;"><div><strong>${names[k]}</strong><br><small>Qty: ${cart[k]}</small></div><div>₹${cart[k]*products[k]}</div></div>`;
         }
     }
     if(!hasItems) list.innerHTML = "<p style='text-align:center'>Cart is empty.</p>";
@@ -333,7 +389,7 @@ function startPayment() {
         sfx('error'); alert("⚠️ Please enter a valid 6-digit Pincode."); return;
     }
 
-    const fullAddress = ${address} - Pincode: ${pincode};
+    const fullAddress = `${address} - Pincode: ${pincode}`;
     logOrderToSheet("Pending", fullAddress); 
 
     var options = {
@@ -377,7 +433,7 @@ function generateInvoice(name, phone, address) {
     const tbody = document.getElementById('invoiceItems'); tbody.innerHTML = "";
     for(let k in cart) {
         if(cart[k] > 0) {
-            tbody.innerHTML += <tr><td>${names[k]}</td><td>${cart[k]}</td><td>₹${cart[k]*products[k]}</td></tr>;
+            tbody.innerHTML += `<tr><td>${names[k]}</td><td>${cart[k]}</td><td>₹${cart[k]*products[k]}</td></tr>`;
         }
     }
     document.getElementById('invSub').innerText = '₹' + subtotal;
@@ -391,11 +447,11 @@ function sendWhatsApp() {
     sfx('click');
     const name = document.getElementById('invName').innerText;
     const address = document.getElementById('invAddr').innerText;
-    let msg = *🚀 ORDER: CHOCO-NAUT* %0APID: ${paymentId}%0A;
-    for(let k in cart) if(cart[k]>0) msg += 📦 ${names[k]} x ${cart[k]}%0A;
-    msg += 🚚 Delivery: ${deliveryCharge === 0 ? 'FREE' : '₹'+deliveryCharge}%0A;
-    msg += 💰 PAID: ₹${finalTotal}%0A👤 ${name}%0A📍 ${address};
-    window.open(https://wa.me/917678107458?text=${msg}, '_blank');
+    let msg = `*🚀 ORDER: CHOCO-NAUT* %0APID: ${paymentId}%0A`;
+    for(let k in cart) if(cart[k]>0) msg += `📦 ${names[k]} x ${cart[k]}%0A`;
+    msg += `🚚 Delivery: ${deliveryCharge === 0 ? 'FREE' : '₹'+deliveryCharge}%0A`;
+    msg += `💰 PAID: ₹${finalTotal}%0A👤 ${name}%0A📍 ${address}`;
+    window.open(`https://wa.me/917678107458?text=${msg}`, '_blank');
 }
 
 function redirectToHome() {
