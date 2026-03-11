@@ -1,5 +1,5 @@
 // --- 1. CONFIGURATION ---
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxFgczawhEUPt3ceHYN2HaexasKH3C3sSmgbcqnHPlcpF6q0-nrqvz_aN74VCqIfl8/exec"; 
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx0ocaeeiaF634qsplE98Vx2DGroEocQsOoQ79CYjkSmrRsBrBUrYrLUP6UledTL5A/exec"; 
 const RAZORPAY_KEY = "rzp_live_Ryvp1z5m2CNlEo"; 
 
 // --- 2. DATA & STATE ---
