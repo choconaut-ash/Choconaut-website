@@ -1,8 +1,13 @@
-// --- 1. CONFIGURATION ---
+// ==========================================
+// 1. CONFIGURATION
+// ==========================================
+// REPLACE THIS URL with your NEW Web App URL from Google Apps Script
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx0ocaeeiaF634qsplE98Vx2DGroEocQsOoQ79CYjkSmrRsBrBUrYrLUP6UledTL5A/exec"; 
 const RAZORPAY_KEY = "rzp_live_Ryvp1z5m2CNlEo"; 
 
-// --- 2. DATA & STATE ---
+// ==========================================
+// 2. DATA & STATE
+// ==========================================
 const products = { 
     milkyway: 270, 
     darkmatter: 270, 
@@ -42,7 +47,9 @@ let currentSessionOrderId = "ORD-" + Date.now();
 let subtotal = 0, discount = 0, deliveryCharge = 99, finalTotal = 0, paymentId = "", activeCoupon = 0;
 const coupons = { "WELCOME10": 10, "SPACE20": 20, "CHOCO10": 10 };
 
-// --- 3. SOUND ENGINE ---
+// ==========================================
+// 3. SOUND ENGINE
+// ==========================================
 const AudioContext = window.AudioContext || window.webkitAudioContext;
 const audioCtx = new AudioContext();
 
@@ -72,7 +79,9 @@ function sfx(type) {
     osc.connect(gain); gain.connect(audioCtx.destination);
 }
 
-// --- 4. INVENTORY LOGIC ---
+// ==========================================
+// 4. INVENTORY LOGIC
+// ==========================================
 async function initInventory() {
     if(!SCRIPT_URL || SCRIPT_URL.includes("PASTE_YOUR")) {
         console.warn("Script URL missing. Stock validation disabled.");
@@ -161,7 +170,9 @@ async function logOrderToSheet(statusType, overrideAddress = null) {
     }
 }
 
-// --- 5. CART & QUANTITY LOGIC ---
+// ==========================================
+// 5. CART & QUANTITY LOGIC
+// ==========================================
 function updateQty(id, val) {
     if (val > 0 && inventory[id] !== undefined) {
         if (cart[id] >= inventory[id]) {
@@ -183,7 +194,6 @@ function updateQty(id, val) {
             currency: 'INR'
         });
     }
-    // ------------------------------------
 
     const display = document.getElementById('qty-' + id);
     if(display) display.innerText = cart[id];
@@ -228,7 +238,9 @@ function calculateTotals() {
     if(valueAfterBundle <= 800) activeCoupon = 0;
     let couponDiscount = Math.round(valueAfterBundle * (activeCoupon / 100));
 
-    finalTotal = valueAfterBundle + deliveryCharge - couponDiscount;
+    // UPDATE GLOBAL DISCOUNT
+    discount = bundleDiscount + couponDiscount; 
+    finalTotal = subtotal - discount + deliveryCharge;
 
     // UPDATE UI
     const elTotal = document.getElementById('totalPrice');
@@ -244,11 +256,10 @@ function calculateTotals() {
     if(elModalTot) elModalTot.innerText = '₹' + finalTotal;
     
     // Show Savings
-    let totalSavings = bundleDiscount + couponDiscount;
     if(elDiscDisp && elDiscVal) {
-        if (totalSavings > 0) {
+        if (discount > 0) {
             elDiscDisp.style.display = 'flex';
-            let txt = '-₹' + totalSavings;
+            let txt = '-₹' + discount;
             if(bundleDiscount > 0 && couponDiscount > 0) txt += " (Bundle + Coupon)";
             else if (bundleDiscount > 0) txt += " (Bundle 12%)";
             elDiscVal.innerText = txt;
@@ -257,7 +268,7 @@ function calculateTotals() {
         }
     }
 
-    // CO-PILOT: UPDATE CART BAR TEXT
+    // UPDATE CART BAR TEXT
     const bar = document.getElementById('cartBar');
     if (bar) {
         const barText = bar.querySelector('span'); 
@@ -293,7 +304,9 @@ function applyCoupon() {
     }
 }
 
-// --- 6. POPUPS & SLIDER ---
+// ==========================================
+// 6. POPUPS & SLIDER
+// ==========================================
 const productDetails = {
     milkyway: { title: "Milkyway Explorer", desc: "Silky smooth White Chocolate infused with pure Vanilla.", images: ["images/milkyway.jpg", "images/milkyway_pack.jpg", "images/milkyway_usp.jpg", "images/milkyway_benefit.jpg", "images/milkyway_ing.jpg", "images/milkyway_nutri.jpg"] },
     darkmatter: { title: "Dark Matter (70%)", desc: "Intense 70% Dark Chocolate with deep cocoa notes. Vegan.", images: ["images/darkmatter.jpg", "images/darkmatter_pack.jpg", "images/darkmatter_usp.jpg", "images/darkmatter_benefit.jpg", "images/darkmatter_ing.jpg", "images/darkmatter_nutri.jpg"] },
@@ -301,25 +314,14 @@ const productDetails = {
     nebula: { title: "Nebula Swirl", desc: "A galaxy of golden butterscotch Caramel and Sea Salt.", images: ["images/nebula.jpg", "images/nebula_pack.jpg", "images/nebula_usp.jpg", "images/nebula_benefit.jpg", "images/nebula_ing.jpg", "images/nebula_nutri.jpg"] },
     velvet: { title: "Velvet Comet", desc: "50% Semi-Sweet Chocolate. The perfect balance.", images: ["images/velvet.jpg", "images/velvet_pack.jpg", "images/velvet_usp.jpg", "images/velvet_benefit.jpg", "images/velvet_ing.jpg", "images/velvet_nutri.jpg"] },
     smooth: { title: "Smooth Astro", desc: "Classic 35% Milk Chocolate. Rich, creamy, and nostalgic.", images: ["images/smooth.jpg", "images/smooth_pack.jpg", "images/smooth_usp.jpg", "images/smooth_benefit.jpg", "images/smooth_ing.jpg", "images/smooth_nutri.jpg"] },
-    
     celestial: { 
         title: "Celestial Luxury Edition", 
         desc: "A curated quartet of artisan masterpieces. Two bestsellers paired with two exclusive unreleased flavors and a bespoke love letter. A journey written in the stars.", 
-        images: [
-            "images/celestial_box.jpg", 
-            "images/celestial_open.jpg"
-        ] 
+        images: ["images/celestial_box.jpg", "images/celestial_open.jpg"] 
     }
 };
 
-const fallbacks = [
-    "https://images.unsplash.com/photo-1548142813-c3a8350e941b?w=600",
-    "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600",
-    "https://images.unsplash.com/photo-1511381939415-e44015466834?w=600",
-    "https://images.unsplash.com/photo-1548943487-a2e4e43b485c?w=600",
-    "https://images.unsplash.com/photo-1616486029423-aaa478965c96?w=600",
-    "https://images.unsplash.com/photo-1621446730506-2351d6e23583?w=600"
-];
+const fallbacks = ["https://images.unsplash.com/photo-1548142813-c3a8350e941b?w=600", "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600"];
 
 let currentProduct = "", slideIndex = 0;
 const slideCaptions = ["MAIN VIEW", "PACKAGING", "UNIQUE FEATURES", "BENEFITS", "INGREDIENTS", "NUTRITION INFO"];
@@ -338,25 +340,19 @@ function closeProduct() { sfx('click'); document.getElementById('productModal').
 function changeSlide(direction) {
     sfx('tick'); 
     slideIndex += direction;
-    
     const maxImages = productDetails[currentProduct].images.length;
-    
     if(slideIndex >= maxImages) slideIndex = 0; 
     if(slideIndex < 0) slideIndex = maxImages - 1;
-    
     updateSlide();
 }
 
 function updateSlide() {
     const imgEl = document.getElementById('sliderImage');
     const data = productDetails[currentProduct];
+    if (data && data.images && data.images[slideIndex]) imgEl.src = data.images[slideIndex];
+    else imgEl.src = fallbacks[0];
     
-    if (data && data.images && data.images[slideIndex]) {
-        imgEl.src = data.images[slideIndex];
-    } else {
-        imgEl.src = fallbacks[0];
-    }
-    imgEl.onerror = function() { this.src = fallbacks[slideIndex] || fallbacks[0]; };
+    imgEl.onerror = function() { this.src = fallbacks[0]; };
     
     const captionEl = document.getElementById('slideCaption');
     if(captionEl) {
@@ -368,7 +364,9 @@ function updateSlide() {
     }
 }
 
-// --- 7. CHECKOUT & PAYMENT ---
+// ==========================================
+// 7. CHECKOUT & PAYMENT
+// ==========================================
 function openCart() {
     sfx('click');
     const list = document.getElementById('cartItems'); list.innerHTML = "";
@@ -380,20 +378,14 @@ function openCart() {
         }
     }
     
-    // --- META PIXEL INITIATE CHECKOUT EVENT ---
     if (hasItems && typeof fbq !== 'undefined') {
-        fbq('track', 'InitiateCheckout', {
-            value: finalTotal,
-            currency: 'INR',
-            content_ids: Object.keys(cart).filter(k => cart[k] > 0),
-            content_type: 'product'
-        });
+        fbq('track', 'InitiateCheckout', { value: finalTotal, currency: 'INR' });
     }
-    // ------------------------------------------
 
     if(!hasItems) list.innerHTML = "<p style='text-align:center'>Cart is empty.</p>";
     document.getElementById('cartOverlay').classList.add('open');
 }
+
 function closeCart() { sfx('click'); document.getElementById('cartOverlay').classList.remove('open'); }
 
 function startPayment() {
@@ -404,15 +396,9 @@ function startPayment() {
     const email = document.getElementById('email').value;
     const pincode = document.getElementById('pincode').value; 
 
-    if (finalTotal === 0) {
-            sfx('error'); alert("Cart is empty."); return;
-    }
-    if (!name || !phone || !address || !email || !pincode) { 
-        sfx('error'); alert("⚠️ Please fill all details including Pincode."); return; 
-    }
-    if (pincode.length !== 6) {
-        sfx('error'); alert("⚠️ Please enter a valid 6-digit Pincode."); return;
-    }
+    if (finalTotal === 0) { sfx('error'); alert("Cart is empty."); return; }
+    if (!name || !phone || !address || !email || !pincode) { sfx('error'); alert("⚠️ Please fill all details."); return; }
+    if (pincode.length !== 6) { sfx('error'); alert("⚠️ Please enter a 6-digit Pincode."); return; }
 
     const fullAddress = `${address} - Pincode: ${pincode}`;
     logOrderToSheet("Pending", fullAddress); 
@@ -424,19 +410,7 @@ function startPayment() {
         "name": "Choco-naut",
         "handler": function (response){
             sfx('success'); 
-            
-            // --- META PIXEL PURCHASE EVENT ---
-            if (typeof fbq !== 'undefined') {
-                fbq('track', 'Purchase', {
-                    value: finalTotal, 
-                    currency: 'INR',
-                    content_name: 'Choco-naut Order',
-                    content_ids: Object.keys(cart).filter(k => cart[k] > 0),
-                    content_type: 'product'
-                });
-            }
-            // ---------------------------------
-
+            if (typeof fbq !== 'undefined') fbq('track', 'Purchase', { value: finalTotal, currency: 'INR' });
             paymentId = response.razorpay_payment_id; 
             logOrderToSheet("Confirmed", fullAddress); 
             generateInvoice(name, phone, fullAddress);
@@ -457,10 +431,9 @@ function generateInvoice(name, phone, address) {
 
     const tbody = document.getElementById('invoiceItems'); tbody.innerHTML = "";
     for(let k in cart) {
-        if(cart[k] > 0) {
-            tbody.innerHTML += `<tr><td>${names[k]}</td><td>${cart[k]}</td><td>₹${cart[k]*products[k]}</td></tr>`;
-        }
+        if(cart[k] > 0) tbody.innerHTML += `<tr><td>${names[k]}</td><td>${cart[k]}</td><td>₹${cart[k]*products[k]}</td></tr>`;
     }
+    
     document.getElementById('invSub').innerText = '₹' + subtotal;
     document.getElementById('invDisc').innerText = '-₹' + discount;
     document.getElementById('invDel').innerText = deliveryCharge === 0 ? 'FREE' : '₹' + deliveryCharge;
@@ -481,6 +454,5 @@ function sendWhatsApp() {
 
 function redirectToHome() {
     sfx('click');
-    // Reloading clears cart state
     window.location.reload();
 }
