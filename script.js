@@ -47,6 +47,9 @@ let currentSessionOrderId = "ORD-" + Date.now();
 let subtotal = 0, discount = 0, deliveryCharge = 99, finalTotal = 0, paymentId = "", activeCoupon = 0;
 const coupons = { "WELCOME10": 10, "SPACE20": 20, "CHOCO10": 10 };
 
+// GA4 Tracker Flag to prevent duplicate events
+let bundleEventFired = false;
+
 // ==========================================
 // 3. SOUND ENGINE
 // ==========================================
@@ -221,6 +224,21 @@ function calculateTotals() {
             bundleSubtotal += cart[id] * products[id];
         }
     });
+
+    // --- GA4 DATALAYER TRACKING START ---
+    if (bundleCount === 4 && !bundleEventFired) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'bundle_unlocked',
+            'offer_type': '12_percent_off',
+            'item_count': bundleCount
+        });
+        bundleEventFired = true; // Prevents firing again if they add a 5th item
+        console.log("🚀 Choco-naut Tracking: 12% Bundle Unlocked Event Sent!");
+    } else if (bundleCount < 4) {
+        bundleEventFired = false; // Reset if they remove items below the threshold
+    }
+    // --- GA4 DATALAYER TRACKING END ---
 
     // 12% Discount Trigger
     let bundleDiscount = 0;
