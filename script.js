@@ -1,20 +1,8 @@
-Here is your complete, updated `script.js` file.
-
-The logic has been completely rewritten to support the new tiered structure. I also corrected a few instances where the brand name was missing its capitalization (ensuring it accurately reads **Choco-Naut** in your console logs, payment gateway, and WhatsApp invoices).
-
-### Key Updates Made:
-
-* **Tiered Delivery Rule:** The `deliveryCharge` now triggers `₹99` if there is exactly `1` item in the cart, and drops to `0` (FREE) if the cart has `2` or more items.
-* **Tiered Bundle Discounts:** `bundleSubtotal` is now multiplied by `0.10` if 2 or 3 eligible bars are added, and `0.20` if 4 or more are added.
-* **Dynamic UI Messaging:** The `cartBar` text will now dynamically push the user to the next tier depending on their exact cart count.
-* **GA4 Tracking DataLayer:** Replaced the single boolean with a tier-tracking variable (`currentBundleTier`) so your analytics correctly fire distinct events for when a user unlocks the 10% tier vs. the 20% tier.
-
-```javascript
 // ==========================================
 // 1. CONFIGURATION
 // ==========================================
 // REPLACE THIS URL with your NEW Web App URL from Google Apps Script
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx0ocaeeiaF634qsplE98Vx2DGroEocQsOoQ79CYjkSmrRsBrBUrYrLUP6UledTL5A/exec"; 
+const SCRIPT_URL = "[https://script.google.com/macros/s/AKfycbx0ocaeeiaF634qsplE98Vx2DGroEocQsOoQ79CYjkSmrRsBrBUrYrLUP6UledTL5A/exec](https://script.google.com/macros/s/AKfycbx0ocaeeiaF634qsplE98Vx2DGroEocQsOoQ79CYjkSmrRsBrBUrYrLUP6UledTL5A/exec)"; 
 const RAZORPAY_KEY = "rzp_live_Ryvp1z5m2CNlEo"; 
 
 // ==========================================
@@ -341,6 +329,34 @@ function calculateTotals() {
             bar.classList.remove('active');
         }
     }
+
+    // UPDATE CART MODAL PROGRESS BAR
+    const modalProgText = document.getElementById('modalProgressText');
+    const modalProgBar = document.getElementById('modalProgressBar');
+    
+    if (modalProgText && modalProgBar) {
+        if (count === 0) {
+            modalProgText.innerHTML = "Add items to unlock rewards!";
+            modalProgBar.style.width = "0%";
+        } else if (count === 1) {
+            modalProgText.innerHTML = `⚠️ Add 1 more item for 10% OFF + FREE Delivery!`;
+            modalProgText.style.color = "#ff6f00";
+            modalProgBar.style.width = "25%";
+        } else if (bundleCount >= 2 && bundleCount < 4) {
+            let needed = 4 - bundleCount;
+            modalProgText.innerHTML = `✅ 10% OFF + FREE Delivery! Add ${needed} more for 20% OFF!`;
+            modalProgText.style.color = "#25d366";
+            modalProgBar.style.width = "50%";
+        } else if (bundleCount >= 4) {
+            modalProgText.innerHTML = `🚀 20% SQUAD DISCOUNT + FREE Delivery UNLOCKED!`;
+            modalProgText.style.color = "#25d366";
+            modalProgBar.style.width = "100%";
+        } else if (count >= 2 && bundleCount < 2) {
+            modalProgText.innerHTML = `✅ FREE Delivery UNLOCKED! Add bundle items for discounts.`;
+            modalProgText.style.color = "#25d366";
+            modalProgBar.style.width = "50%";
+        }
+    }
 }
 
 function applyCoupon() {
@@ -371,7 +387,7 @@ const productDetails = {
     }
 };
 
-const fallbacks = ["https://images.unsplash.com/photo-1548142813-c3a8350e941b?w=600", "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600"];
+const fallbacks = ["[https://images.unsplash.com/photo-1548142813-c3a8350e941b?w=600](https://images.unsplash.com/photo-1548142813-c3a8350e941b?w=600)", "[https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600](https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600)"];
 
 let currentProduct = "", slideIndex = 0;
 const slideCaptions = ["MAIN VIEW", "PACKAGING", "UNIQUE FEATURES", "BENEFITS", "INGREDIENTS", "NUTRITION INFO"];
@@ -499,12 +515,10 @@ function sendWhatsApp() {
     for(let k in cart) if(cart[k]>0) msg += `📦 ${names[k]} x ${cart[k]}%0A`;
     msg += `🚚 Delivery: ${deliveryCharge === 0 ? 'FREE' : '₹'+deliveryCharge}%0A`;
     msg += `💰 PAID: ₹${finalTotal}%0A👤 ${name}%0A📍 ${address}`;
-    window.open(`https://wa.me/917678107458?text=${msg}`, '_blank');
+    window.open(`[https://wa.me/917678107458?text=$](https://wa.me/917678107458?text=$){msg}`, '_blank');
 }
 
 function redirectToHome() {
     sfx('click');
     window.location.reload();
 }
-
-```
