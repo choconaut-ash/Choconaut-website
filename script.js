@@ -478,6 +478,7 @@ function startPayment() {
         "handler": function (response){
             sfx('success'); 
             if (typeof fbq !== 'undefined') fbq('track', 'Purchase', { value: finalTotal, currency: 'INR' });
+            if (typeof gtag !== 'undefined') gtag('event', 'purchase', { value: finalTotal, currency: 'INR', transaction_id: response.razorpay_payment_id });
             paymentId = response.razorpay_payment_id; 
             logOrderToSheet("Confirmed", fullAddress); 
             generateInvoice(name, phone, fullAddress);
