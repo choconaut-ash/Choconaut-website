@@ -1,3 +1,15 @@
+Here is your complete, updated `script.js` file.
+
+The logic has been completely rewritten to support the new tiered structure. I also corrected a few instances where the brand name was missing its capitalization (ensuring it accurately reads **Choco-Naut** in your console logs, payment gateway, and WhatsApp invoices).
+
+### Key Updates Made:
+
+* **Tiered Delivery Rule:** The `deliveryCharge` now triggers `₹99` if there is exactly `1` item in the cart, and drops to `0` (FREE) if the cart has `2` or more items.
+* **Tiered Bundle Discounts:** `bundleSubtotal` is now multiplied by `0.10` if 2 or 3 eligible bars are added, and `0.20` if 4 or more are added.
+* **Dynamic UI Messaging:** The `cartBar` text will now dynamically push the user to the next tier depending on their exact cart count.
+* **GA4 Tracking DataLayer:** Replaced the single boolean with a tier-tracking variable (`currentBundleTier`) so your analytics correctly fire distinct events for when a user unlocks the 10% tier vs. the 20% tier.
+
+```javascript
 // ==========================================
 // 1. CONFIGURATION
 // ==========================================
@@ -28,7 +40,7 @@ const names = {
     celestial: "Celestial Luxury Combo" 
 };
 
-// BUNDLE LOGIC: Products eligible for the 12% discount
+// BUNDLE LOGIC: Products eligible for the tiered discounts
 const bundleEligible = ['milkyway', 'darkmatter', 'velvet', 'smooth'];
 
 let cart = { 
@@ -47,8 +59,8 @@ let currentSessionOrderId = "ORD-" + Date.now();
 let subtotal = 0, discount = 0, deliveryCharge = 99, finalTotal = 0, paymentId = "", activeCoupon = 0;
 const coupons = { "WELCOME10": 10, "SPACE20": 20, "CHOCO10": 10 };
 
-// GA4 Tracker Flag to prevent duplicate events
-let bundleEventFired = false;
+// GA4 Tracker Flag for Tiered Bundles
+let currentBundleTier = 0;
 
 // ==========================================
 // 3. SOUND ENGINE
@@ -214,7 +226,7 @@ function calculateTotals() {
         count += cart[k]; 
     }
 
-    // BUNDLE LOGIC (Min 4 of Eligible Items)
+    // BUNDLE LOGIC (Min 4 of Eligible Items for 20%, Min 2 for 10%)
     let bundleCount = 0;
     let bundleSubtotal = 0;
     
@@ -226,32 +238,48 @@ function calculateTotals() {
     });
 
     // --- GA4 DATALAYER TRACKING START ---
-    if (bundleCount === 4 && !bundleEventFired) {
+    if (bundleCount >= 4 && currentBundleTier !== 20) {
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
             'event': 'bundle_unlocked',
-            'offer_type': '12_percent_off',
+            'offer_type': '20_percent_off',
             'item_count': bundleCount
         });
-        bundleEventFired = true; // Prevents firing again if they add a 5th item
-        console.log("🚀 Choco-naut Tracking: 12% Bundle Unlocked Event Sent!");
-    } else if (bundleCount < 4) {
-        bundleEventFired = false; // Reset if they remove items below the threshold
+        currentBundleTier = 20;
+        console.log("🚀 Choco-Naut Tracking: 20% Bundle Unlocked Event Sent!");
+    } else if (bundleCount >= 2 && bundleCount < 4 && currentBundleTier !== 10) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'bundle_unlocked',
+            'offer_type': '10_percent_off',
+            'item_count': bundleCount
+        });
+        currentBundleTier = 10;
+        console.log("🚀 Choco-Naut Tracking: 10% Bundle Unlocked Event Sent!");
+    } else if (bundleCount < 2) {
+        currentBundleTier = 0;
     }
     // --- GA4 DATALAYER TRACKING END ---
 
-    // 12% Discount Trigger
+    // Tiered Discount Trigger
     let bundleDiscount = 0;
     if (bundleCount >= 4) {
-        bundleDiscount = Math.round(bundleSubtotal * 0.12);
+        bundleDiscount = Math.round(bundleSubtotal * 0.20);
+    } else if (bundleCount >= 2) {
+        bundleDiscount = Math.round(bundleSubtotal * 0.10);
     }
 
     // Shipping & Coupons
     let valueAfterBundle = subtotal - bundleDiscount;
     
-    if(valueAfterBundle > 1200) deliveryCharge = 0;
-    else if (valueAfterBundle > 0) deliveryCharge = 99;
-    else deliveryCharge = 0;
+    // DELIVERY LOGIC: Delivery applicable ONLY on single item (count === 1)
+    if (count === 0) {
+        deliveryCharge = 0;
+    } else if (count === 1) {
+        deliveryCharge = 99;
+    } else {
+        deliveryCharge = 0; // 2 or more items get FREE delivery
+    }
 
     if(valueAfterBundle <= 800) activeCoupon = 0;
     let couponDiscount = Math.round(valueAfterBundle * (activeCoupon / 100));
@@ -279,7 +307,8 @@ function calculateTotals() {
             elDiscDisp.style.display = 'flex';
             let txt = '-₹' + discount;
             if(bundleDiscount > 0 && couponDiscount > 0) txt += " (Bundle + Coupon)";
-            else if (bundleDiscount > 0) txt += " (Bundle 12%)";
+            else if (bundleCount >= 4) txt += " (Bundle 20%)";
+            else if (bundleCount >= 2) txt += " (Bundle 10%)";
             elDiscVal.innerText = txt;
         } else {
             elDiscDisp.style.display = 'none';
@@ -294,16 +323,19 @@ function calculateTotals() {
         if(count > 0) {
             bar.classList.add('active');
             
-            if (bundleCount > 0 && bundleCount < 4) {
-                let needed = 4 - bundleCount;
-                barText.innerHTML = `⚠️ <strong>ADD ${needed} MORE</strong> EXPLORERS FOR 12% OFF!`;
+            if (count === 1) {
+                barText.innerHTML = `⚠️ <strong>ADD 1 MORE</strong> ITEM FOR 10% OFF + FREE DELIVERY!`;
                 barText.style.color = "#ff6f00"; 
-            } else if (bundleCount >= 4) {
-                barText.innerHTML = `✅ <strong>12% SQUAD DISCOUNT UNLOCKED!</strong>`;
+            } else if (bundleCount >= 2 && bundleCount < 4) {
+                let needed = 4 - bundleCount;
+                barText.innerHTML = `✅ <strong>10% OFF + FREE DELIVERY!</strong> ADD ${needed} MORE FOR 20% OFF!`;
                 barText.style.color = "#25d366";
-            } else {
-                barText.innerHTML = "MISSION TOTAL";
-                barText.style.color = "#888";
+            } else if (bundleCount >= 4) {
+                barText.innerHTML = `🚀 <strong>20% SQUAD DISCOUNT + FREE DELIVERY UNLOCKED!</strong>`;
+                barText.style.color = "#25d366";
+            } else if (count >= 2 && bundleCount < 2) {
+                barText.innerHTML = `✅ <strong>FREE DELIVERY UNLOCKED!</strong>`;
+                barText.style.color = "#25d366";
             }
         } else {
             bar.classList.remove('active');
@@ -425,7 +457,7 @@ function startPayment() {
         "key": RAZORPAY_KEY, 
         "amount": finalTotal * 100, 
         "currency": "INR", 
-        "name": "Choco-naut",
+        "name": "Choco-Naut",
         "handler": function (response){
             sfx('success'); 
             if (typeof fbq !== 'undefined') fbq('track', 'Purchase', { value: finalTotal, currency: 'INR' });
@@ -463,7 +495,7 @@ function sendWhatsApp() {
     sfx('click');
     const name = document.getElementById('invName').innerText;
     const address = document.getElementById('invAddr').innerText;
-    let msg = `*🚀 ORDER: CHOCO-NAUT* %0APID: ${paymentId}%0A`;
+    let msg = `*🚀 ORDER: Choco-Naut* %0APID: ${paymentId}%0A`;
     for(let k in cart) if(cart[k]>0) msg += `📦 ${names[k]} x ${cart[k]}%0A`;
     msg += `🚚 Delivery: ${deliveryCharge === 0 ? 'FREE' : '₹'+deliveryCharge}%0A`;
     msg += `💰 PAID: ₹${finalTotal}%0A👤 ${name}%0A📍 ${address}`;
@@ -474,3 +506,5 @@ function redirectToHome() {
     sfx('click');
     window.location.reload();
 }
+
+```
