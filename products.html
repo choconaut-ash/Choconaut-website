@@ -7,7 +7,7 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Choco-naut Flavors | Premium Space-Themed Chocolates</title>
+    <title>Choco-Naut Flavors | Premium Space-Themed Chocolates</title>
     <meta name="description" content="Discover our 6 signature flavors including Dark Matter (Vegan), Nebula Swirl, and Smooth Astro. Handcrafted artisan chocolate for every astronaut.">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
     
@@ -97,7 +97,7 @@ src="https://www.facebook.com/tr?id=1389656802841099&ev=PageView&noscript=1"
     <div class="promo-banner">
         <div class="promo-text-wrapper">
             <span class="promo-msg msg-1">🚀 INAUGURAL OFFER: Use Code <strong style="color:#000; background:#fff; padding:0 4px; margin: 0 5px;">WELCOME10</strong> for 10% OFF!</span>
-            <span class="promo-msg msg-2">⚠️ FLIGHT PROTOCOL: Buy <strong>4 Explorers</strong> (₹270) & Get <strong>12% OFF!</strong></span>
+            <span class="promo-msg msg-2">⚠️ FLIGHT PROTOCOL: Buy 2 for <strong>10% OFF</strong> | Buy 4+ for <strong>20% OFF</strong> + FREE Delivery!</span>
         </div>
     </div>
 
@@ -119,7 +119,7 @@ src="https://www.facebook.com/tr?id=1389656802841099&ev=PageView&noscript=1"
     <section style="background: #0a0503; padding: 20px 5% 0;">
         <div style="border: 1px solid var(--gold); background: rgba(255, 193, 7, 0.1); padding: 15px; text-align: center; max-width: 800px; margin: 0 auto; border-radius: 5px;">
             <p style="color: var(--gold); margin: 0; font-family: 'Orbitron'; font-size: 0.9rem; letter-spacing: 1px;">
-                // MISSION BRIEF: ASSEMBLE A CREW OF 4+ EXPLORERS (₹270) TO UNLOCK 12% FUEL CREDIT.
+                // MISSION BRIEF: ASSEMBLE A CREW OF 2 EXPLORERS FOR 10% OFF. 4+ UNLOCKS 20% FUEL CREDIT + FREE SHIPPING.
             </p>
         </div>
     </section>
@@ -306,7 +306,7 @@ src="https://www.facebook.com/tr?id=1389656802841099&ev=PageView&noscript=1"
     </section>
 
     <footer>
-        <p>&copy; 2026 Choco-naut. Handcrafted by Omakase Enterprises.</p>
+        <p>&copy; 2026 Choco-Naut. Handcrafted by Omakase Enterprises.</p>
     </footer>
 
     <div id="cartBar" class="cart-bar" onclick="openCart()">
@@ -335,7 +335,22 @@ src="https://www.facebook.com/tr?id=1389656802841099&ev=PageView&noscript=1"
         <div class="modal-box">
             <span class="close-btn" onclick="closeCart()">&times;</span>
             <h2 style="color: var(--gold); text-align: center; margin-bottom: 5px;">MISSION MANIFEST</h2>
-            <p class="delivery-notice" style="text-align:center; color:#888; margin-bottom:15px; font-size:0.9rem;">Orders above ₹1200 qualify for Free Zero-G Shipping!</p>
+            
+            <!-- NEW DYNAMIC PROGRESS BAR -->
+            <div style="background: rgba(255, 255, 255, 0.05); padding: 10px; border-radius: 8px; border: 1px solid #333; margin-bottom: 15px;">
+                <p id="modalProgressText" style="text-align:center; color:#fff; font-size:0.85rem; margin-bottom: 8px; font-weight: bold;">
+                    Add items to unlock rewards!
+                </p>
+                <div style="width: 100%; height: 8px; background: #222; border-radius: 4px; overflow: hidden;">
+                    <div id="modalProgressBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #ff6f00, #ffca28); transition: width 0.4s ease;"></div>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: #888; margin-top: 5px;">
+                    <span>1 Bar</span>
+                    <span>2 Bars (10%)</span>
+                    <span>4+ Bars (20%)</span>
+                </div>
+            </div>
+            
             <div id="cartItems"></div>
             <div class="coupon-box">
                 <input type="text" id="couponCode" class="coupon-input" placeholder="Enter Code (Min Order ₹800)">
