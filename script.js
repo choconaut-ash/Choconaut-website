@@ -2,7 +2,7 @@
 // 1. CONFIGURATION
 // ==========================================
 // REPLACE THIS URL with your NEW Web App URL from Google Apps Script
-const SCRIPT_URL = "[https://script.google.com/macros/s/AKfycbx0ocaeeiaF634qsplE98Vx2DGroEocQsOoQ79CYjkSmrRsBrBUrYrLUP6UledTL5A/exec](https://script.google.com/macros/s/AKfycbx0ocaeeiaF634qsplE98Vx2DGroEocQsOoQ79CYjkSmrRsBrBUrYrLUP6UledTL5A/exec)"; 
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx0ocaeeiaF634qsplE98Vx2DGroEocQsOoQ79CYjkSmrRsBrBUrYrLUP6UledTL5A/exec"; 
 const RAZORPAY_KEY = "rzp_live_Ryvp1z5m2CNlEo"; 
 
 // ==========================================
@@ -45,7 +45,8 @@ let inventory = {};
 let currentSessionOrderId = "ORD-" + Date.now();
 
 let subtotal = 0, discount = 0, deliveryCharge = 99, finalTotal = 0, paymentId = "", activeCoupon = 0;
-const coupons = { "WELCOME10": 10, "SPACE20": 20, "CHOCO10": 10 };
+// WELCOME10 REMOVED HERE:
+const coupons = { "SPACE20": 20, "CHOCO10": 10 };
 
 // GA4 Tracker Flag for Tiered Bundles
 let currentBundleTier = 0;
@@ -387,7 +388,7 @@ const productDetails = {
     }
 };
 
-const fallbacks = ["[https://images.unsplash.com/photo-1548142813-c3a8350e941b?w=600](https://images.unsplash.com/photo-1548142813-c3a8350e941b?w=600)", "[https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600](https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600)"];
+const fallbacks = ["https://images.unsplash.com/photo-1548142813-c3a8350e941b?w=600", "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600"];
 
 let currentProduct = "", slideIndex = 0;
 const slideCaptions = ["MAIN VIEW", "PACKAGING", "UNIQUE FEATURES", "BENEFITS", "INGREDIENTS", "NUTRITION INFO"];
@@ -515,7 +516,7 @@ function sendWhatsApp() {
     for(let k in cart) if(cart[k]>0) msg += `📦 ${names[k]} x ${cart[k]}%0A`;
     msg += `🚚 Delivery: ${deliveryCharge === 0 ? 'FREE' : '₹'+deliveryCharge}%0A`;
     msg += `💰 PAID: ₹${finalTotal}%0A👤 ${name}%0A📍 ${address}`;
-    window.open(`[https://wa.me/917678107458?text=$](https://wa.me/917678107458?text=$){msg}`, '_blank');
+    window.open(`https://wa.me/917678107458?text=${msg}`, '_blank');
 }
 
 function redirectToHome() {
