@@ -314,20 +314,20 @@ function calculateTotals() {
             modalProgText.innerHTML = "Add items to unlock rewards!";
             modalProgBar.style.width = "0%";
         } else if (count === 1) {
-            modalProgText.innerHTML = `⚠️ Add 1 more item for 10% OFF + FREE Delivery!`;
+            modalProgText.innerHTML = `⚠️ Add 1 more item for 10% OFF + Free Delivery!`;
             modalProgText.style.color = "#ff6f00";
             modalProgBar.style.width = "25%";
         } else if (bundleCount >= 2 && bundleCount < 4) {
             let needed = 4 - bundleCount;
-            modalProgText.innerHTML = `✅ 10% OFF + FREE Delivery! Add ${needed} more for 20% OFF!`;
+            modalProgText.innerHTML = `✅ 10% OFF + Free Delivery! Add ${needed} more for 20% OFF!`;
             modalProgText.style.color = "#25d366";
             modalProgBar.style.width = "50%";
         } else if (bundleCount >= 4) {
-            modalProgText.innerHTML = `🚀 20% SQUAD DISCOUNT + FREE Delivery UNLOCKED!`;
+            modalProgText.innerHTML = `🚀 20% SQUAD DISCOUNT + Free Delivery UNLOCKED!`;
             modalProgText.style.color = "#25d366";
             modalProgBar.style.width = "100%";
         } else if (count >= 2 && bundleCount < 2) {
-            modalProgText.innerHTML = `✅ FREE Delivery UNLOCKED! Add bundle items for discounts.`;
+            modalProgText.innerHTML = `✅ Free Delivery UNLOCKED! Add bundle items for discounts.`;
             modalProgText.style.color = "#25d366";
             modalProgBar.style.width = "50%";
         }
@@ -336,11 +336,21 @@ function calculateTotals() {
 
 async function applyCoupon() {
     const code = document.getElementById('couponCode').value.toUpperCase().trim();
+    const emailInput = document.getElementById('email').value.trim();
+    const phoneInput = document.getElementById('phone').value.trim();
+    
     sfx('click');
     
     if (!code) {
         sfx('error');
         alert("⚠️ Please enter a coupon code.");
+        return;
+    }
+
+    // Ensure Email and Phone are filled out at checkout before validating VIP code
+    if (!emailInput || !phoneInput) {
+        sfx('error');
+        alert("⚠️ Please fill in your Email and Phone in the checkout form above before applying a VIP code.");
         return;
     }
 
@@ -362,14 +372,24 @@ async function applyCoupon() {
     if(applyBtn) { applyBtn.innerText = "CHECKING..."; applyBtn.disabled = true; }
 
     try {
-        const response = await fetch(SCRIPT_URL + '?action=validate&code=' + encodeURIComponent(code));
+        const validationUrl = `${SCRIPT_URL}?action=validate&code=${encodeURIComponent(code)}&email=${encodeURIComponent(emailInput)}&phone=${encodeURIComponent(phoneInput)}`;
+        const response = await fetch(validationUrl);
         const data = await response.json();
 
         if (applyBtn) { applyBtn.innerText = "APPLY"; applyBtn.disabled = false; }
 
         if (data.status === 'valid') {
-            sfx('success');
+            let totalCartCount = 0;
+            for (let k in cart) { totalCartCount += cart[k]; }
+
+            // Strict enforcement of minimum bars based on offer type
             if (data.offerType === 'FREE_CRUNCH') {
+                if (totalCartCount < 2) {
+                    sfx('error');
+                    alert("❌ Free Crunch requires a minimum of 2 bars in your cart!");
+                    return;
+                }
+                sfx('success');
                 activeCoupon = 0;
                 hasFreeCrunch = true;
                 if (cart['asteroid'] === 0) {
@@ -378,10 +398,21 @@ async function applyCoupon() {
                     if(qtyDisplay) qtyDisplay.innerText = cart['asteroid'];
                 }
                 alert("✅ VIP Code Applied! Free Asteroid Crunch added to your mission manifest as a gift!");
-            } else {
-                activeCoupon = data.discountPercent; 
+            } else if (data.offerType === '30_PERCENT') {
+                if (totalCartCount < 3) {
+                    sfx('error');
+                    alert("❌ 30% Off requires a minimum of 3 bars in your cart!");
+                    return;
+                }
+                sfx('success');
+                activeCoupon = 30; 
                 hasFreeCrunch = false;
-                alert(`✅ VIP Code Applied Successfully! (${data.discountPercent}% OFF)`);
+                alert(`✅ VIP Code Applied Successfully! (30% OFF)`);
+            } else {
+                sfx('success');
+                activeCoupon = data.discountPercent || 0;
+                hasFreeCrunch = false;
+                alert(`✅ VIP Code Applied Successfully!`);
             }
             calculateTotals();
         } else {
@@ -409,7 +440,6 @@ window.addEventListener('DOMContentLoaded', () => {
             if (couponInput) {
                 couponInput.value = discountCode;
                 openCart();
-                applyCoupon();
             }
         }, 1000);
     }
