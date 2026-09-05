@@ -360,16 +360,78 @@ function calculateTotals() {
     }
 }
 
-function applyCoupon() {
+// LIVE GOOGLE SHEET COUPON VALIDATION FUNCTION
+async function applyCoupon() {
     const code = document.getElementById('couponCode').value.toUpperCase().trim();
     sfx('click');
-    if(subtotal <= 800) { sfx('error'); alert("⚠️ Minimum order of ₹800 required."); return; }
-    if(coupons[code]) {
-        sfx('success'); activeCoupon = coupons[code]; alert("✅ Code Applied!"); calculateTotals();
-    } else {
-        sfx('error'); alert("❌ Invalid Code"); activeCoupon = 0; calculateTotals();
+    
+    if (!code) {
+        sfx('error');
+        alert("⚠️ Please enter a coupon code.");
+        return;
+    }
+
+    // Check predefined fixed coupons first
+    if (coupons[code]) {
+        if (subtotal <= 800) { 
+            sfx('error'); 
+            alert("⚠️ Minimum order of ₹800 required."); 
+            return; 
+        }
+        sfx('success'); 
+        activeCoupon = coupons[code]; 
+        alert("✅ Code Applied!"); 
+        calculateTotals();
+        return;
+    }
+
+    // Otherwise, check against live Google Sheet database via Web App URL
+    const applyBtn = document.querySelector('.coupon-btn');
+    if(applyBtn) { applyBtn.innerText = "CHECKING..."; applyBtn.disabled = true; }
+
+    try {
+        const response = await fetch(SCRIPT_URL + '?action=validate&code=' + encodeURIComponent(code));
+        const data = await response.json();
+
+        if (applyBtn) { applyBtn.innerText = "APPLY"; applyBtn.disabled = false; }
+
+        if (data.status === 'valid') {
+            sfx('success');
+            activeCoupon = data.discountPercent; // e.g., 30 for 30% off, or custom parsed value
+            alert(`✅ VIP Code Applied Successfully! (${data.discountPercent}% OFF)`);
+            calculateTotals();
+        } else {
+            sfx('error');
+            alert("❌ " + (data.message || "Invalid or Expired Code"));
+            activeCoupon = 0;
+            calculateTotals();
+        }
+    } catch (err) {
+        if (applyBtn) { applyBtn.innerText = "APPLY"; applyBtn.disabled = false; }
+        console.error("Coupon validation error:", err);
+        sfx('error');
+        alert("❌ Error validating code. Please try again.");
     }
 }
+
+// AUTOMATIC URL PARAMETER COUPON INTERCEPTOR ON PAGE LOAD
+window.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const discountCode = urlParams.get('discount');
+    
+    if (discountCode) {
+        // Automatically put code into input field and trigger validation after inventory loads
+        setTimeout(() => {
+            const couponInput = document.getElementById('couponCode');
+            if (couponInput) {
+                couponInput.value = discountCode;
+                // Open cart modal so user sees the discount applied automatically
+                openCart();
+                applyCoupon();
+            }
+        }, 1000);
+    }
+});
 
 // ==========================================
 // 6. POPUPS & SLIDER
