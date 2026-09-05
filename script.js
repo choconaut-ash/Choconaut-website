@@ -1,9 +1,7 @@
 // ==========================================
 // 1. CONFIGURATION
 // ==========================================
-// REPLACE THIS URL with your NEW Web App URL from Google Apps Script
- 
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyZOYVS1gQyFUw4POm3tw0acl3fXiQPBmxtn2CMA4RZdLUK7toTCV2FYZH08-Tj3mml/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyZOYVS1gQyFUw4POm3tw0acl3fXiQPBmxtn2CMA4RZdLUK7toTCV2FYZH08-Tj3mml/exec"; 
 const RAZORPAY_KEY = "rzp_live_Ryvp1z5m2CNlEo"; 
 
 // ==========================================
@@ -29,7 +27,6 @@ const names = {
     celestial: "Celestial Luxury Combo" 
 };
 
-// BUNDLE LOGIC: Products eligible for the tiered discounts
 const bundleEligible = ['milkyway', 'darkmatter', 'velvet', 'smooth'];
 
 let cart = { 
@@ -46,10 +43,9 @@ let inventory = {};
 let currentSessionOrderId = "ORD-" + Date.now();
 
 let subtotal = 0, discount = 0, deliveryCharge = 99, finalTotal = 0, paymentId = "", activeCoupon = 0;
-// WELCOME10 REMOVED HERE:
-const coupons = { "SPACE20": 20, "CHOCO10": 10 };
+let hasFreeCrunch = false;
 
-// GA4 Tracker Flag for Tiered Bundles
+const coupons = { "SPACE20": 20, "CHOCO10": 10 };
 let currentBundleTier = 0;
 
 // ==========================================
@@ -100,8 +96,6 @@ async function initInventory() {
         for (let key in rawInventory) {
             inventory[key.toLowerCase().trim()] = rawInventory[key];
         }
-
-        console.log("Cargo Manifest Synced:", inventory);
         updateStockUI();
     } catch (error) {
         console.error("Connection to Mission Control failed:", error);
@@ -189,7 +183,6 @@ function updateQty(id, val) {
     
     cart[id] += val; if(cart[id] < 0) cart[id] = 0;
     
-    // --- META PIXEL ADD TO CART EVENT ---
     if (val > 0 && typeof fbq !== 'undefined') {
         fbq('track', 'AddToCart', {
             content_name: names[id],
@@ -210,13 +203,11 @@ function calculateTotals() {
     subtotal = 0; 
     let count = 0;
     
-    // Standard Calculation
     for(let k in cart) { 
         subtotal += cart[k] * products[k]; 
         count += cart[k]; 
     }
 
-    // BUNDLE LOGIC (Min 4 of Eligible Items for 20%, Min 2 for 10%)
     let bundleCount = 0;
     let bundleSubtotal = 0;
     
@@ -227,31 +218,18 @@ function calculateTotals() {
         }
     });
 
-    // --- GA4 DATALAYER TRACKING START ---
     if (bundleCount >= 4 && currentBundleTier !== 20) {
         window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-            'event': 'bundle_unlocked',
-            'offer_type': '20_percent_off',
-            'item_count': bundleCount
-        });
+        window.dataLayer.push({ 'event': 'bundle_unlocked', 'offer_type': '20_percent_off', 'item_count': bundleCount });
         currentBundleTier = 20;
-        console.log("🚀 Choco-Naut Tracking: 20% Bundle Unlocked Event Sent!");
     } else if (bundleCount >= 2 && bundleCount < 4 && currentBundleTier !== 10) {
         window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-            'event': 'bundle_unlocked',
-            'offer_type': '10_percent_off',
-            'item_count': bundleCount
-        });
+        window.dataLayer.push({ 'event': 'bundle_unlocked', 'offer_type': '10_percent_off', 'item_count': bundleCount });
         currentBundleTier = 10;
-        console.log("🚀 Choco-Naut Tracking: 10% Bundle Unlocked Event Sent!");
     } else if (bundleCount < 2) {
         currentBundleTier = 0;
     }
-    // --- GA4 DATALAYER TRACKING END ---
 
-    // Tiered Discount Trigger
     let bundleDiscount = 0;
     if (bundleCount >= 4) {
         bundleDiscount = Math.round(bundleSubtotal * 0.20);
@@ -259,26 +237,25 @@ function calculateTotals() {
         bundleDiscount = Math.round(bundleSubtotal * 0.10);
     }
 
-    // Shipping & Coupons
     let valueAfterBundle = subtotal - bundleDiscount;
     
-    // DELIVERY LOGIC: Delivery applicable ONLY on single item (count === 1)
     if (count === 0) {
         deliveryCharge = 0;
     } else if (count === 1) {
         deliveryCharge = 99;
     } else {
-        deliveryCharge = 0; // 2 or more items get FREE delivery
+        deliveryCharge = 0; 
     }
 
     if(valueAfterBundle <= 800) activeCoupon = 0;
     let couponDiscount = Math.round(valueAfterBundle * (activeCoupon / 100));
 
-    // UPDATE GLOBAL DISCOUNT
-    discount = bundleDiscount + couponDiscount; 
-    finalTotal = subtotal - discount + deliveryCharge;
+    let freeItemDiscount = hasFreeCrunch ? products['asteroid'] : 0;
 
-    // UPDATE UI
+    discount = bundleDiscount + couponDiscount + freeItemDiscount; 
+    finalTotal = subtotal - discount + deliveryCharge;
+    if (finalTotal < 0) finalTotal = 0;
+
     const elTotal = document.getElementById('totalPrice');
     const elSub = document.getElementById('subTotalVal');
     const elDel = document.getElementById('deliveryVal');
@@ -291,28 +268,26 @@ function calculateTotals() {
     if(elDel) elDel.innerText = deliveryCharge === 0 ? 'FREE' : '₹' + deliveryCharge;
     if(elModalTot) elModalTot.innerText = '₹' + finalTotal;
     
-    // Show Savings
     if(elDiscDisp && elDiscVal) {
         if (discount > 0) {
             elDiscDisp.style.display = 'flex';
             let txt = '-₹' + discount;
-            if(bundleDiscount > 0 && couponDiscount > 0) txt += " (Bundle + Coupon)";
-            else if (bundleCount >= 4) txt += " (Bundle 20%)";
-            else if (bundleCount >= 2) txt += " (Bundle 10%)";
+            let perks = [];
+            if(bundleDiscount > 0) perks.push("Bundle");
+            if(couponDiscount > 0) perks.push("Coupon " + activeCoupon + "%");
+            if(hasFreeCrunch) perks.push("Free Asteroid Crunch");
+            if(perks.length > 0) txt += " (" + perks.join(" + ") + ")";
             elDiscVal.innerText = txt;
         } else {
             elDiscDisp.style.display = 'none';
         }
     }
 
-    // UPDATE CART BAR TEXT
     const bar = document.getElementById('cartBar');
     if (bar) {
         const barText = bar.querySelector('span'); 
-
         if(count > 0) {
             bar.classList.add('active');
-            
             if (count === 1) {
                 barText.innerHTML = `⚠️ <strong>ADD 1 MORE</strong> ITEM FOR 10% OFF + FREE DELIVERY!`;
                 barText.style.color = "#ff6f00"; 
@@ -332,10 +307,8 @@ function calculateTotals() {
         }
     }
 
-    // UPDATE CART MODAL PROGRESS BAR
     const modalProgText = document.getElementById('modalProgressText');
     const modalProgBar = document.getElementById('modalProgressBar');
-    
     if (modalProgText && modalProgBar) {
         if (count === 0) {
             modalProgText.innerHTML = "Add items to unlock rewards!";
@@ -361,7 +334,6 @@ function calculateTotals() {
     }
 }
 
-// LIVE GOOGLE SHEET COUPON VALIDATION FUNCTION
 async function applyCoupon() {
     const code = document.getElementById('couponCode').value.toUpperCase().trim();
     sfx('click');
@@ -372,7 +344,6 @@ async function applyCoupon() {
         return;
     }
 
-    // Check predefined fixed coupons first
     if (coupons[code]) {
         if (subtotal <= 800) { 
             sfx('error'); 
@@ -381,12 +352,12 @@ async function applyCoupon() {
         }
         sfx('success'); 
         activeCoupon = coupons[code]; 
+        hasFreeCrunch = false;
         alert("✅ Code Applied!"); 
         calculateTotals();
         return;
     }
 
-    // Otherwise, check against live Google Sheet database via Web App URL
     const applyBtn = document.querySelector('.coupon-btn');
     if(applyBtn) { applyBtn.innerText = "CHECKING..."; applyBtn.disabled = true; }
 
@@ -398,13 +369,26 @@ async function applyCoupon() {
 
         if (data.status === 'valid') {
             sfx('success');
-            activeCoupon = data.discountPercent; // e.g., 30 for 30% off, or custom parsed value
-            alert(`✅ VIP Code Applied Successfully! (${data.discountPercent}% OFF)`);
+            if (data.offerType === 'FREE_CRUNCH') {
+                activeCoupon = 0;
+                hasFreeCrunch = true;
+                if (cart['asteroid'] === 0) {
+                    cart['asteroid'] = 1;
+                    const qtyDisplay = document.getElementById('qty-asteroid');
+                    if(qtyDisplay) qtyDisplay.innerText = cart['asteroid'];
+                }
+                alert("✅ VIP Code Applied! Free Asteroid Crunch added to your mission manifest as a gift!");
+            } else {
+                activeCoupon = data.discountPercent; 
+                hasFreeCrunch = false;
+                alert(`✅ VIP Code Applied Successfully! (${data.discountPercent}% OFF)`);
+            }
             calculateTotals();
         } else {
             sfx('error');
             alert("❌ " + (data.message || "Invalid or Expired Code"));
             activeCoupon = 0;
+            hasFreeCrunch = false;
             calculateTotals();
         }
     } catch (err) {
@@ -415,18 +399,15 @@ async function applyCoupon() {
     }
 }
 
-// AUTOMATIC URL PARAMETER COUPON INTERCEPTOR ON PAGE LOAD
 window.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const discountCode = urlParams.get('discount');
     
     if (discountCode) {
-        // Automatically put code into input field and trigger validation after inventory loads
         setTimeout(() => {
             const couponInput = document.getElementById('couponCode');
             if (couponInput) {
                 couponInput.value = discountCode;
-                // Open cart modal so user sees the discount applied automatically
                 openCart();
                 applyCoupon();
             }
@@ -504,7 +485,18 @@ function openCart() {
     for(let k in cart) {
         if(cart[k] > 0) {
             hasItems = true;
-            list.innerHTML += `<div style="display:flex; justify-content:space-between; border-bottom:1px solid #333; padding:10px 0;"><div><strong>${names[k]}</strong><br><small>Qty: ${cart[k]}</small></div><div>₹${cart[k]*products[k]}</div></div>`;
+            let itemDisplayPrice = cart[k] * products[k];
+            let note = "";
+            if (k === 'asteroid' && hasFreeCrunch) {
+                if (cart[k] > 1) {
+                    itemDisplayPrice = (cart[k] - 1) * products[k];
+                    note = `<br><small style="color:var(--success)">1x Free Gift Included (₹0)</small>`;
+                } else {
+                    itemDisplayPrice = 0;
+                    note = `<br><small style="color:var(--success)">Free Gift (₹0)</small>`;
+                }
+            }
+            list.innerHTML += `<div style="display:flex; justify-content:space-between; border-bottom:1px solid #333; padding:10px 0;"><div><strong>${names[k]}</strong><br><small>Qty: ${cart[k]}</small>${note}</div><div>₹${itemDisplayPrice}</div></div>`;
         }
     }
     
@@ -562,7 +554,13 @@ function generateInvoice(name, phone, address) {
 
     const tbody = document.getElementById('invoiceItems'); tbody.innerHTML = "";
     for(let k in cart) {
-        if(cart[k] > 0) tbody.innerHTML += `<tr><td>${names[k]}</td><td>${cart[k]}</td><td>₹${cart[k]*products[k]}</td></tr>`;
+        if(cart[k] > 0) {
+            let itemDisplayPrice = cart[k] * products[k];
+            if (k === 'asteroid' && hasFreeCrunch) {
+                itemDisplayPrice = Math.max(0, (cart[k] - 1) * products[k]);
+            }
+            tbody.innerHTML += `<tr><td>${names[k]} ${k === 'asteroid' && hasFreeCrunch ? '(1x Free Gift)' : ''}</td><td>${cart[k]}</td><td>₹${itemDisplayPrice}</td></tr>`;
+        }
     }
     
     document.getElementById('invSub').innerText = '₹' + subtotal;
