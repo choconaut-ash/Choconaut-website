@@ -160,7 +160,6 @@ async function logOrderToSheet(statusType, overrideAddress = null) {
     try {
         await fetch(SCRIPT_URL, {
             method: 'POST',
-            mode: 'no-cors',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
         });
@@ -347,7 +346,6 @@ async function applyCoupon() {
         return;
     }
 
-    // Ensure Email and Phone are filled out at checkout before validating VIP code
     if (!emailInput || !phoneInput) {
         sfx('error');
         alert("⚠️ Please fill in your Email and Phone in the checkout form above before applying a VIP code.");
@@ -382,7 +380,6 @@ async function applyCoupon() {
             let totalCartCount = 0;
             for (let k in cart) { totalCartCount += cart[k]; }
 
-            // Strict enforcement of minimum bars based on offer type
             if (data.offerType === 'FREE_CRUNCH') {
                 if (totalCartCount < 2) {
                     sfx('error');
