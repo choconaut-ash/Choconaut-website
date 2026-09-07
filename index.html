@@ -451,7 +451,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="checkout-form">
                 <input type="text" id="name" class="checkout-input" placeholder="Name" required>
                 <input type="email" id="email" class="checkout-input" placeholder="Email (For Confirmation)" required>
-                <input type="tel" id="phone" class="checkout-input" placeholder="Phone" required>
+                <input type="tel" id="phone" class="checkout-input" placeholder="Phone" required onblur="capturePhone()">
                 <input type="text" id="pincode" class="checkout-input" placeholder="Pincode (6 Digits)" maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 6);" required>
                 <textarea id="address" class="checkout-input" rows="2" placeholder="Full Address" required></textarea>
                 <button onclick="startPayment()" class="pay-btn">💳 PAY SECURELY</button>
@@ -522,6 +522,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </svg>
     </a>
 
-    <script src="script.js?v=20260808"></script>      
+    <script src="script.js?v=20260808"></script>
+    <script>
+    function capturePhone() {
+        const phoneValue = document.getElementById("phone").value;
+        
+        // Only trigger if a valid-length phone number was entered
+        if(phoneValue.length > 9) {
+            fetch("PASTE_YOUR_MAKE_WEBHOOK_URL_HERE", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    phone: phoneValue,
+                    status: "Pending"
+                })
+            }).catch(error => console.error('Error logging cart entry:', error));
+        }
+    }
+    </script>
 </body>
 </html>
