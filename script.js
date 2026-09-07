@@ -1,7 +1,7 @@
 // ==========================================
 // 1. CONFIGURATION
 // ==========================================
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyZOYVS1gQyFUw4POm3tw0acl3fXiQPBmxtn2CMA4RZdLUK7toTCV2FYZH08-Tj3mml/exec"; 
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx0ocaeeiaF634qsplE98Vx2DGroEocQsOoQ79CYjkSmrRsBrBUrYrLUP6UledTL5A/exec"; 
 const RAZORPAY_KEY = "rzp_live_Ryvp1z5m2CNlEo"; 
 
 // ==========================================
