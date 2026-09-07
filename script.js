@@ -2,6 +2,7 @@
 // 1. CONFIGURATION
 // ==========================================
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx0ocaeeiaF634qsplE98Vx2DGroEocQsOoQ79CYjkSmrRsBrBUrYrLUP6UledTL5A/exec"; 
+const COUPON_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx0ocaeeiaF634qsplE98Vx2DGroEocQsOoQ79CYjkSmrRsBrBUrYrLUP6UledTL5A/exec"; 
 const RAZORPAY_KEY = "rzp_live_Ryvp1z5m2CNlEo"; 
 
 // ==========================================
@@ -370,7 +371,7 @@ async function applyCoupon() {
     if(applyBtn) { applyBtn.innerText = "CHECKING..."; applyBtn.disabled = true; }
 
     try {
-        const validationUrl = `${SCRIPT_URL}?action=validate&code=${encodeURIComponent(code)}&email=${encodeURIComponent(emailInput)}&phone=${encodeURIComponent(phoneInput)}`;
+        const validationUrl = `${COUPON_SCRIPT_URL}?action=validate&code=${encodeURIComponent(code)}&email=${encodeURIComponent(emailInput)}&phone=${encodeURIComponent(phoneInput)}`;
         const response = await fetch(validationUrl);
         const data = await response.json();
 
