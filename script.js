@@ -401,7 +401,7 @@ async function applyCoupon() {
                     const qtyDisplay = document.getElementById('qty-asteroid');
                     if(qtyDisplay) qtyDisplay.innerText = cart['asteroid'];
                 }
-                alert("✅ VIP Code Applied! Free Asteroid Crunch added to your mission manifest as a gift!");
+                alert("✅ VIP Code Applied! Free Asteroid Crunch added to your cart as a gift!");
             } else if (data.offerType === '30_PERCENT') {
                 if (totalCartCount < 3) {
                     sfx('error');
@@ -448,7 +448,6 @@ window.addEventListener('DOMContentLoaded', () => {
         }, 1000);
     }
 
-    // Auto-capture contact info as soon as phone number is entered
     const phoneInput = document.getElementById('phone');
     if (phoneInput) {
         const handlePhoneBlur = () => {
