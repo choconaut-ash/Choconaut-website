@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
@@ -206,94 +205,30 @@
     
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
-    <style>
-        .flavor-desc {
-            font-size: 0.95rem;
-            color: #aaa;
-            margin: 15px 0;
-            font-style: italic;
-            line-height: 1.4;
-        }
-
-        /* 1. CYCLING TOP BANNER */
-        .promo-banner {
-            position: fixed; top: 0; left: 0; width: 100%; height: 40px;
-            background: linear-gradient(90deg, #ff6f00, #ffca28, #ff6f00);
-            background-size: 200% 100%;
-            z-index: 6000; display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 4px 15px rgba(255, 111, 0, 0.4);
-            animation: gradientShift 3s linear infinite;
-            overflow: hidden;
-        }
-        @keyframes gradientShift { 0% {background-position: 100% 0;} 100% {background-position: -100% 0;} }
-
-        .promo-text-wrapper { position: relative; width: 100%; height: 100%; text-align: center; }
-        .promo-msg {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            display: flex; align-items: center; justify-content: center;
-            font-family: 'Orbitron', sans-serif; font-weight: bold; font-size: 0.85rem; color: #000;
-            opacity: 0; transform: translateY(20px); transition: 0.5s; padding: 0 10px;
-        }
-
-        /* Cycle Animation */
-        .msg-1 { animation: cycleText1 8s infinite; }
-        .msg-2 { animation: cycleText2 8s infinite; }
-
-        @keyframes cycleText1 {
-            0%, 45% { opacity: 1; transform: translateY(0); }
-            50%, 100% { opacity: 0; transform: translateY(-20px); }
-        }
-        @keyframes cycleText2 {
-            0%, 45% { opacity: 0; transform: translateY(20px); }
-            50%, 95% { opacity: 1; transform: translateY(0); }
-            100% { opacity: 0; transform: translateY(-20px); }
-        }
-
-        /* 2. GLOWING BUNDLE TAGS */
-        .bundle-tag {
-            color: var(--success); font-size: 0.75rem; font-weight: bold;
-            letter-spacing: 1px; text-transform: uppercase;
-            margin: 5px 0; display: inline-block;
-            border: 1px solid var(--success); padding: 2px 8px; border-radius: 4px;
-            animation: pulseTag 2s infinite;
-        }
-        @keyframes pulseTag {
-            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
-            70% { box-shadow: 0 0 0 6px rgba(37, 211, 102, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-        }
-
-        /* 3. LAYOUT OVERRIDES */
-        body { padding-top: 100px !important; } 
-        nav { top: 40px !important; } 
-    </style>
     <script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1389656802841099');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1389656802841099&ev=PageView&noscript=1"
-/></noscript>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1389656802841099');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1389656802841099&ev=PageView&noscript=1"
+    /></noscript>
 </head>
 <body onload="initInventory()">
 
-    <div class="promo-banner">
-        <div class="promo-text-wrapper">
-            <span class="promo-msg msg-1">🚀 INAUGURAL OFFER: 10% OFF & FREE Delivery applied automatically on 2+ bars!</span>
-            <span class="promo-msg msg-2">⚠️ FLIGHT PROTOCOL: Buy 4+ items for <strong>20% OFF</strong> + FREE Delivery!</span>
-        </div>
-    </div>
-
     <nav>
-        <a href="index.html" class="nav-logo" onclick="sfx('click')">CHOCO-NAUT&trade;</a>
+        <div class="nav-brand-container">
+            <div class="offer-pill">🚀 10% OFF 2+ BARS</div>
+            <a href="index.html" class="nav-logo" onclick="sfx('click')">CHOCO-NAUT&trade;</a>
+            <div class="offer-pill">⚠️ 20% OFF 4+ BARS</div>
+        </div>
         <div class="nav-links">
             <a href="index.html" onclick="sfx('click')">HOME</a>
             <a href="about.html" onclick="sfx('click')">ABOUT</a>
@@ -306,14 +241,6 @@ src="https://www.facebook.com/tr?id=1389656802841099&ev=PageView&noscript=1"
         <h1>Explore Our Universe of Flavours</h1>
         <p>Six distinct worlds of taste. Handcrafted for your journey.</p>
     </header>
-
-    <section style="background: #0a0503; padding: 20px 5% 0;">
-        <div style="border: 1px solid var(--gold); background: rgba(255, 193, 7, 0.1); padding: 15px; text-align: center; max-width: 800px; margin: 0 auto; border-radius: 5px;">
-            <p style="color: var(--gold); margin: 0; font-family: 'Orbitron'; font-size: 0.9rem; letter-spacing: 1px;">
-                // MISSION BRIEF: ASSEMBLE A CREW OF 2 EXPLORERS FOR 10% OFF. 4+ UNLOCKS 20% OFF + FREE SHIPPING.
-            </p>
-        </div>
-    </section>
 
     <section class="products" aria-label="Choco-naut chocolate collection">
         <div class="grid">
@@ -600,7 +527,6 @@ src="https://www.facebook.com/tr?id=1389656802841099&ev=PageView&noscript=1"
     function capturePhone() {
         const phoneValue = document.getElementById("phone").value;
         
-        // Only trigger if a valid-length phone number was entered
         if(phoneValue.length > 9) {
             fetch("https://hook.eu1.make.com/6lcudgs7fxvd9pt7h8zfa7aufnk758c8", {
                 method: "POST",
