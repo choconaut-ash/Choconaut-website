@@ -355,3 +355,15 @@ nav {
         line-height: 1.2;
     }
 }
+/* =========================================
+   NEW: SHIPPING PROTOCOL
+   ========================================= */
+.shipping-section { padding: 60px 5%; background: #110b09; border-top: 1px solid #333; }
+.shipping-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; max-width: 1300px; margin: 0 auto; }
+.s-card { background: #0a0503; padding: 25px; border: 1px solid #333; border-radius: 8px; transition: 0.3s; }
+.s-card:hover { border-color: var(--gold); transform: translateY(-5px); box-shadow: 0 5px 15px rgba(255, 193, 7, 0.1); }
+.s-icon { font-size: 2rem; display: block; margin-bottom: 15px; text-align: center; }
+.s-card h4 { color: var(--gold); margin-bottom: 15px; font-family: 'Orbitron'; text-align: center; font-size: 1.1rem; }
+.s-list { list-style: none; }
+.s-list li { color: #aaa; font-size: 0.95rem; margin-bottom: 12px; position: relative; padding-left: 20px; line-height: 1.5; }
+.s-list li::before { content: "›"; color: var(--accent-orange); position: absolute; left: 0; font-weight: bold; font-size: 1.4rem; line-height: 1; top: -2px; }
