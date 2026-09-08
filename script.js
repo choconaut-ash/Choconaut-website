@@ -130,14 +130,19 @@ function updateStockUI() {
 }
 
 async function logOrderToSheet(statusType, overrideAddress = null) {
-    const name = document.getElementById('name').value;
-    const phone = document.getElementById('phone').value;
-    const rawAddress = document.getElementById('address').value;
-    const email = document.getElementById('email').value;
+    const nameEl = document.getElementById('name');
+    const phoneEl = document.getElementById('phone');
+    const addressEl = document.getElementById('address');
+    const emailEl = document.getElementById('email');
+
+    const name = nameEl ? nameEl.value.trim() : "";
+    const phone = phoneEl ? phoneEl.value.trim() : "";
+    const rawAddress = addressEl ? addressEl.value.trim() : "";
+    const email = emailEl ? emailEl.value.trim() : "";
     
     const finalAddress = overrideAddress ? overrideAddress : rawAddress;
 
-    if (!name || !phone) return; 
+    if (!phone) return; 
 
     let itemSummary = "";
     for (let k in cart) {
@@ -148,7 +153,8 @@ async function logOrderToSheet(statusType, overrideAddress = null) {
         type: "logOrder",
         data: {
             orderId: currentSessionOrderId,
-            name: name,
+            status: statusType,
+            name: name || "Customer",
             email: email,
             phone: phone,
             address: finalAddress,
@@ -440,6 +446,19 @@ window.addEventListener('DOMContentLoaded', () => {
                 openCart();
             }
         }, 1000);
+    }
+
+    // Auto-capture contact info as soon as phone number is entered
+    const phoneInput = document.getElementById('phone');
+    if (phoneInput) {
+        const handlePhoneBlur = () => {
+            const phoneVal = phoneInput.value.trim();
+            if (phoneVal.length >= 10 && finalTotal > 0) {
+                logOrderToSheet("Pending");
+            }
+        };
+        phoneInput.addEventListener('blur', handlePhoneBlur);
+        phoneInput.addEventListener('change', handlePhoneBlur);
     }
 });
 
