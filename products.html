@@ -152,24 +152,7 @@
        gtag('config', 'AW-18378507705');
     </script>
     <link rel="stylesheet" href="style.css?v=20260311">
-    
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-
-    <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1389656802841099');
-    fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1389656802841099&ev=PageView&noscript=1"
-    /></noscript>
 </head>
 <body onload="initInventory()">
 
@@ -207,169 +190,173 @@
     </header>
 
     <section class="products" aria-label="Choco-naut chocolate collection">
-        <div class="grid">
-            
-            <div class="card" id="card-celestial" style="border: 2px solid #d4af37; box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);">
-                <div class="sold-out-badge">SOLD OUT</div>
-                <div style="position: absolute; top: 10px; right: 10px; background: #d4af37; color: #000; padding: 5px 10px; font-weight: bold; font-family: 'Rajdhani', sans-serif; z-index: 5;">LIMITED EDITION</div>
+        <div class="carousel-wrapper">
+            <button class="carousel-arrow left-arrow" onclick="scrollCarousel(this, -1)">❮</button>
+            <div class="grid">
                 
-                <div class="img-box" onclick="openProduct('celestial')">
-                    <img src="images/celestial_box.jpg" alt="Choco-naut Celestial Luxury Combo artisan chocolate gift box" onerror="this.src='https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=600'" class="product-img">
-                </div>
-                <div class="card-info">
-                    <div>
-                        <h3 style="color: #d4af37;">Celestial Luxury Combo</h3>
-                        <span class="origin-badge" style="background: #d4af37; color: #000; font-weight: bold;">Celebrate Your Love</span>
-                        <p class="flavor-desc">
-                            A curated collection of four artisan masterpieces. Two bestsellers paired with two exclusive unreleased flavors and a bespoke love letter. A journey written in the stars.
-                        </p>
-                        <span class="price">₹1699</span>
-                    </div>
+                <div class="card" id="card-celestial" style="border: 2px solid #d4af37; box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);">
+                    <div class="sold-out-badge">SOLD OUT</div>
+                    <div style="position: absolute; top: 10px; right: 10px; background: #d4af37; color: #000; padding: 5px 10px; font-weight: bold; font-family: 'Rajdhani', sans-serif; z-index: 5;">LIMITED EDITION</div>
                     
-                    <div class="qty-controls">
-                        <button class="q-btn" id="btn-minus-celestial" onclick="updateQty('celestial', -1)">-</button>
-                        <span id="qty-celestial" class="q-display">0</span>
-                        <button class="q-btn" id="btn-plus-celestial" onclick="updateQty('celestial', 1)">+</button>
+                    <div class="img-box" onclick="openProduct('celestial')">
+                        <img src="images/celestial_box.jpg" alt="Choco-naut Celestial Luxury Combo artisan chocolate gift box" onerror="this.src='https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=600'" class="product-img">
                     </div>
-                    <button onclick="updateQty('celestial', 1)" style="width: 100%; margin-top: 15px; padding: 10px; background: #d4af37; color: #000; font-weight: bold; border: none; font-family: 'Orbitron', sans-serif; cursor: pointer;">ADD TO CART</button>
-                </div>
-            </div>
-            
-            <div class="card" id="card-milkyway">
-                <div class="sold-out-badge">SOLD OUT</div>
-                <div class="img-box" onclick="openProduct('milkyway')">
-                    <img src="images/milkyway.jpg" alt="Choco-naut Milkyway Explorer white chocolate" onerror="this.src='https://images.unsplash.com/photo-1548142813-c3a8350e941b?w=600'" class="product-img">
-                </div>
-                <div class="card-info">
-                    <div>
-                        <h3>Milkyway Explorer</h3>
-                        <span class="origin-badge">100% Milk White Chocolate</span>
-                        <div class="bundle-tag">✨ BUNDLE ELIGIBLE</div>
-                        <p class="flavor-desc">
-                            A journey into pure sweetness. This premium white chocolate is rich with cocoa butter and vanilla notes, guiding you through the bright stars of the Milky Way.
-                        </p>
-                        <span class="price">₹270</span>
-                    </div>
-                    <div class="qty-controls">
-                        <button class="q-btn" id="btn-minus-milkyway" onclick="updateQty('milkyway', -1)">-</button>
-                        <span id="qty-milkyway" class="q-display">0</span>
-                        <button class="q-btn" id="btn-plus-milkyway" onclick="updateQty('milkyway', 1)">+</button>
+                    <div class="card-info">
+                        <div>
+                            <h3 style="color: #d4af37;">Celestial Luxury Combo</h3>
+                            <span class="origin-badge" style="background: #d4af37; color: #000; font-weight: bold;">Celebrate Your Love</span>
+                            <p class="flavor-desc">
+                                A curated collection of four artisan masterpieces. Two bestsellers paired with two exclusive unreleased flavors and a bespoke love letter. A journey written in the stars.
+                            </p>
+                            <span class="price">₹1699</span>
+                        </div>
+                        
+                        <div class="qty-controls">
+                            <button class="q-btn" id="btn-minus-celestial" onclick="updateQty('celestial', -1)">-</button>
+                            <span id="qty-celestial" class="q-display">0</span>
+                            <button class="q-btn" id="btn-plus-celestial" onclick="updateQty('celestial', 1)">+</button>
+                        </div>
+                        <button onclick="updateQty('celestial', 1)" style="width: 100%; margin-top: 15px; padding: 10px; background: #d4af37; color: #000; font-weight: bold; border: none; font-family: 'Orbitron', sans-serif; cursor: pointer;">ADD TO CART</button>
                     </div>
                 </div>
-            </div>
+                
+                <div class="card" id="card-milkyway">
+                    <div class="sold-out-badge">SOLD OUT</div>
+                    <div class="img-box" onclick="openProduct('milkyway')">
+                        <img src="images/milkyway.jpg" alt="Choco-naut Milkyway Explorer white chocolate" onerror="this.src='https://images.unsplash.com/photo-1548142813-c3a8350e941b?w=600'" class="product-img">
+                    </div>
+                    <div class="card-info">
+                        <div>
+                            <h3>Milkyway Explorer</h3>
+                            <span class="origin-badge">100% Milk White Chocolate</span>
+                            <div class="bundle-tag">✨ BUNDLE ELIGIBLE</div>
+                            <p class="flavor-desc">
+                                A journey into pure sweetness. This premium white chocolate is rich with cocoa butter and vanilla notes, guiding you through the bright stars of the Milky Way.
+                            </p>
+                            <span class="price">₹270</span>
+                        </div>
+                        <div class="qty-controls">
+                            <button class="q-btn" id="btn-minus-milkyway" onclick="updateQty('milkyway', -1)">-</button>
+                            <span id="qty-milkyway" class="q-display">0</span>
+                            <button class="q-btn" id="btn-plus-milkyway" onclick="updateQty('milkyway', 1)">+</button>
+                        </div>
+                    </div>
+                </div>
 
-            <div class="card" id="card-darkmatter">
-                <div class="sold-out-badge">SOLD OUT</div>
-                <div class="img-box" onclick="openProduct('darkmatter')">
-                    <img src="images/darkmatter.jpg" alt="Choco-naut Dark Matter 70 percent dark chocolate" onerror="this.src='https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=600'" class="product-img">
-                </div>
-                <div class="card-info">
-                    <div>
-                        <h3>Dark Matter (70%)</h3>
-                        <span class="origin-badge">Single Origin</span>
-                        <div class="bundle-tag">✨ BUNDLE ELIGIBLE</div>
-                        <p class="flavor-desc">
-                            Experience the gravity of pure cocoa. This 70% dark chocolate is intense, mysterious, and completely vegan. A sophisticated treat for the serious explorer.
-                        </p>
-                        <span class="price">₹270</span>
+                <div class="card" id="card-darkmatter">
+                    <div class="sold-out-badge">SOLD OUT</div>
+                    <div class="img-box" onclick="openProduct('darkmatter')">
+                        <img src="images/darkmatter.jpg" alt="Choco-naut Dark Matter 70 percent dark chocolate" onerror="this.src='https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=600'" class="product-img">
                     </div>
-                    <div class="qty-controls">
-                        <button class="q-btn" id="btn-minus-darkmatter" onclick="updateQty('darkmatter', -1)">-</button>
-                        <span id="qty-darkmatter" class="q-display">0</span>
-                        <button class="q-btn" id="btn-plus-darkmatter" onclick="updateQty('darkmatter', 1)">+</button>
+                    <div class="card-info">
+                        <div>
+                            <h3>Dark Matter (70%)</h3>
+                            <span class="origin-badge">Single Origin</span>
+                            <div class="bundle-tag">✨ BUNDLE ELIGIBLE</div>
+                            <p class="flavor-desc">
+                                Experience the gravity of pure cocoa. This 70% dark chocolate is intense, mysterious, and completely vegan. A sophisticated treat for the serious explorer.
+                            </p>
+                            <span class="price">₹270</span>
+                        </div>
+                        <div class="qty-controls">
+                            <button class="q-btn" id="btn-minus-darkmatter" onclick="updateQty('darkmatter', -1)">-</button>
+                            <span id="qty-darkmatter" class="q-display">0</span>
+                            <button class="q-btn" id="btn-plus-darkmatter" onclick="updateQty('darkmatter', 1)">+</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="card" id="card-asteroid">
-                <div class="sold-out-badge">SOLD OUT</div>
-                <div class="img-box" onclick="openProduct('asteroid')">
-                    <img src="images/asteroid.jpg" alt="Choco-naut Asteroid Crunch almond chocolate" onerror="this.src='https://images.unsplash.com/photo-1511381939415-e44015466834?w=600'" class="product-img">
-                </div>
-                <div class="card-info">
-                    <div>
-                        <h3>Asteroid Crunch</h3>
-                        <span class="origin-badge">Roasted Almonds</span>
-                        <p class="flavor-desc">
-                            Brace for impact! We've packed our smooth chocolate with freshly roasted, crunchy almonds. It's a rocky texture explosion that satisfies your deepest cravings.
-                        </p>
-                        <span class="price">₹340</span>
+                <div class="card" id="card-asteroid">
+                    <div class="sold-out-badge">SOLD OUT</div>
+                    <div class="img-box" onclick="openProduct('asteroid')">
+                        <img src="images/asteroid.jpg" alt="Choco-naut Asteroid Crunch almond chocolate" onerror="this.src='https://images.unsplash.com/photo-1511381939415-e44015466834?w=600'" class="product-img">
                     </div>
-                    <div class="qty-controls">
-                        <button class="q-btn" id="btn-minus-asteroid" onclick="updateQty('asteroid', -1)">-</button>
-                        <span id="qty-asteroid" class="q-display">0</span>
-                        <button class="q-btn" id="btn-plus-asteroid" onclick="updateQty('asteroid', 1)">+</button>
+                    <div class="card-info">
+                        <div>
+                            <h3>Asteroid Crunch</h3>
+                            <span class="origin-badge">Roasted Almonds</span>
+                            <p class="flavor-desc">
+                                Brace for impact! We've packed our smooth chocolate with freshly roasted, crunchy almonds. It's a rocky texture explosion that satisfies your deepest cravings.
+                            </p>
+                            <span class="price">₹340</span>
+                        </div>
+                        <div class="qty-controls">
+                            <button class="q-btn" id="btn-minus-asteroid" onclick="updateQty('asteroid', -1)">-</button>
+                            <span id="qty-asteroid" class="q-display">0</span>
+                            <button class="q-btn" id="btn-plus-asteroid" onclick="updateQty('asteroid', 1)">+</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="card" id="card-nebula">
-                <div class="sold-out-badge">SOLD OUT</div>
-                <div class="img-box" onclick="openProduct('nebula')">
-                    <img src="images/nebula.jpg" alt="Choco-naut Nebula Swirl artisan chocolate" onerror="this.src='https://images.unsplash.com/photo-1621446730506-2351d6e23583?w=600'" class="product-img">
-                </div>
-                <div class="card-info">
-                    <div>
-                        <h3>Nebula Swirl</h3>
-                        <span class="origin-badge">Himalayan Salt Butterscotch</span>
-                        <p class="flavor-desc">
-                            A swirling fusion of opposites. Sweet, golden butterscotch caramel meets the sharp tang of sea salt, creating a colorful nebula of flavor that dances on your tongue.
-                        </p>
-                        <span class="price">₹300</span>
+                <div class="card" id="card-nebula">
+                    <div class="sold-out-badge">SOLD OUT</div>
+                    <div class="img-box" onclick="openProduct('nebula')">
+                        <img src="images/nebula.jpg" alt="Choco-naut Nebula Swirl artisan chocolate" onerror="this.src='https://images.unsplash.com/photo-1621446730506-2351d6e23583?w=600'" class="product-img">
                     </div>
-                    <div class="qty-controls">
-                        <button class="q-btn" id="btn-minus-nebula" onclick="updateQty('nebula', -1)">-</button>
-                        <span id="qty-nebula" class="q-display">0</span>
-                        <button class="q-btn" id="btn-plus-nebula" onclick="updateQty('nebula', 1)">+</button>
+                    <div class="card-info">
+                        <div>
+                            <h3>Nebula Swirl</h3>
+                            <span class="origin-badge">Himalayan Salt Butterscotch</span>
+                            <p class="flavor-desc">
+                                A swirling fusion of opposites. Sweet, golden butterscotch caramel meets the sharp tang of sea salt, creating a colorful nebula of flavor that dances on your tongue.
+                            </p>
+                            <span class="price">₹300</span>
+                        </div>
+                        <div class="qty-controls">
+                            <button class="q-btn" id="btn-minus-nebula" onclick="updateQty('nebula', -1)">-</button>
+                            <span id="qty-nebula" class="q-display">0</span>
+                            <button class="q-btn" id="btn-plus-nebula" onclick="updateQty('nebula', 1)">+</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="card" id="card-velvet">
-                <div class="sold-out-badge">SOLD OUT</div>
-                <div class="img-box" onclick="openProduct('velvet')">
-                    <img src="images/velvet.jpg" alt="Choco-naut Velvet Comet artisan chocolate" onerror="this.src='https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=600'" class="product-img">
-                </div>
-                <div class="card-info">
-                    <div>
-                        <h3>Velvet Comet</h3>
-                        <span class="origin-badge">50% Semi-Sweet Chocolate</span>
-                        <div class="bundle-tag">✨ BUNDLE ELIGIBLE</div>
-                        <p class="flavor-desc">
-                            The perfect balance in the cosmos. Not too bitter, not too sweet. This semi-sweet bar trails a long, smooth finish of cocoa richness that lingers like a comet's tail.
-                        </p>
-                        <span class="price">₹270</span>
+                <div class="card" id="card-velvet">
+                    <div class="sold-out-badge">SOLD OUT</div>
+                    <div class="img-box" onclick="openProduct('velvet')">
+                        <img src="images/velvet.jpg" alt="Choco-naut Velvet Comet artisan chocolate" onerror="this.src='https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=600'" class="product-img">
                     </div>
-                    <div class="qty-controls">
-                        <button class="q-btn" id="btn-minus-velvet" onclick="updateQty('velvet', -1)">-</button>
-                        <span id="qty-velvet" class="q-display">0</span>
-                        <button class="q-btn" id="btn-plus-velvet" onclick="updateQty('velvet', 1)">+</button>
+                    <div class="card-info">
+                        <div>
+                            <h3>Velvet Comet</h3>
+                            <span class="origin-badge">50% Semi-Sweet Chocolate</span>
+                            <div class="bundle-tag">✨ BUNDLE ELIGIBLE</div>
+                            <p class="flavor-desc">
+                                The perfect balance in the cosmos. Not too bitter, not too sweet. This semi-sweet bar trails a long, smooth finish of cocoa richness that lingers like a comet's tail.
+                            </p>
+                            <span class="price">₹270</span>
+                        </div>
+                        <div class="qty-controls">
+                            <button class="q-btn" id="btn-minus-velvet" onclick="updateQty('velvet', -1)">-</button>
+                            <span id="qty-velvet" class="q-display">0</span>
+                            <button class="q-btn" id="btn-plus-velvet" onclick="updateQty('velvet', 1)">+</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="card" id="card-smooth">
-                <div class="sold-out-badge">SOLD OUT</div>
-                <div class="img-box" onclick="openProduct('smooth')">
-                    <img src="images/smooth.jpg" alt="Choco-naut Smooth Astro milk chocolate" onerror="this.src='https://images.unsplash.com/photo-1548142813-c3a8350e941b?w=600'" class="product-img">
-                </div>
-                <div class="card-info">
-                    <div>
-                        <h3>Smooth Astro</h3>
-                        <span class="origin-badge">35% Classic Milk Chocolate</span>
-                        <div class="bundle-tag">✨ BUNDLE ELIGIBLE</div>
-                        <p class="flavor-desc">
-                            Glide through a galaxy of silkiness. Our signature milk chocolate is tempered to perfection, offering a creamy, melt-in-your-mouth experience that feels like floating in zero gravity.
-                        </p>
-                        <span class="price">₹270</span>
+                <div class="card" id="card-smooth">
+                    <div class="sold-out-badge">SOLD OUT</div>
+                    <div class="img-box" onclick="openProduct('smooth')">
+                        <img src="images/smooth.jpg" alt="Choco-naut Smooth Astro milk chocolate" onerror="this.src='https://images.unsplash.com/photo-1548142813-c3a8350e941b?w=600'" class="product-img">
                     </div>
-                    <div class="qty-controls">
-                        <button class="q-btn" id="btn-minus-smooth" onclick="updateQty('smooth', -1)">-</button>
-                        <span id="qty-smooth" class="q-display">0</span>
-                        <button class="q-btn" id="btn-plus-smooth" onclick="updateQty('smooth', 1)">+</button>
+                    <div class="card-info">
+                        <div>
+                            <h3>Smooth Astro</h3>
+                            <span class="origin-badge">35% Classic Milk Chocolate</span>
+                            <div class="bundle-tag">✨ BUNDLE ELIGIBLE</div>
+                            <p class="flavor-desc">
+                                Glide through a galaxy of silkiness. Our signature milk chocolate is tempered to perfection, offering a creamy, melt-in-your-mouth experience that feels like floating in zero gravity.
+                            </p>
+                            <span class="price">₹270</span>
+                        </div>
+                        <div class="qty-controls">
+                            <button class="q-btn" id="btn-minus-smooth" onclick="updateQty('smooth', -1)">-</button>
+                            <span id="qty-smooth" class="q-display">0</span>
+                            <button class="q-btn" id="btn-plus-smooth" onclick="updateQty('smooth', 1)">+</button>
+                        </div>
                     </div>
                 </div>
             </div>
+            <button class="carousel-arrow right-arrow" onclick="scrollCarousel(this, 1)">❯</button>
         </div>
     </section>
 
@@ -378,7 +365,7 @@
     </footer>
 
     <div id="cartBar" class="cart-bar" onclick="openCart()">
-        <div style="flex:1"><span style="font-size: 0.8rem; color: #888;">MISSION TOTAL</span><div style="font-size: 1.2rem; font-weight: bold;">TOTAL: <span id="totalPrice">₹0</span></div></div>
+        <div style="flex:1"><span style="font-size: 0.8rem; color: #888;">CART TOTAL</span><div style="font-size: 1.2rem; font-weight: bold;">TOTAL: <span id="totalPrice">₹0</span></div></div>
         <span style="font-weight: bold; border-bottom: 2px solid #000; font-size: 0.9rem;">VIEW CART & PAY -></span>
     </div>
 
@@ -467,7 +454,7 @@
                 <button onclick="window.print()" class="pay-btn" style="background: #fff; color: #000; flex:1; font-size:1rem;">🖨️ PRINT</button>
                 <button onclick="sendWhatsApp()" class="pay-btn" style="background: var(--success); color: #fff; flex:1; font-size:1rem;">📱 WHATSAPP</button>
             </div>
-            <button onclick="redirectToHome()" class="pay-btn" style="background: #333; color: #fff; margin-top: 10px; border: 1px solid var(--gold);">🚀 MISSION COMPLETE (GO HOME)</button>
+            <button onclick="redirectToHome()" class="pay-btn" style="background: #333; color: #fff; margin-top: 10px; border: 1px solid var(--gold);">ORDER COMPLETE (GO HOME)</button>
         </div>
     </div>
 
