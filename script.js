@@ -631,3 +631,16 @@ function redirectToHome() {
     sfx('click');
     window.location.reload();
 }
+
+// ==========================================
+// 8. MOBILE CAROUSEL CONTROLS
+// ==========================================
+function scrollCarousel(btn, direction) {
+    sfx('tick');
+    const wrapper = btn.parentElement;
+    const container = wrapper.querySelector('.grid, .process-grid, .b-grid, .shipping-grid, .review-grid');
+    if (container) {
+        const scrollAmount = container.clientWidth * 0.75; 
+        container.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+    }
+}
