@@ -329,7 +329,33 @@ footer { padding: 40px 5%; background: #000; text-align: center; border-top: 1px
 /* =========================================
    MOBILE HORIZONTAL SWIPE CAROUSELS & RESPONSIVE TWEAKS
    ========================================= */
+
+/* Mobile Carousel Arrow Styling */
+.carousel-wrapper { position: relative; width: 100%; max-width: 1400px; margin: 0 auto; }
+.carousel-arrow {
+    display: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px; height: 40px;
+    background: rgba(10, 5, 3, 0.7);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-size: 1.2rem;
+    border-radius: 50%;
+    z-index: 20; 
+    cursor: pointer;
+    align-items: center; justify-content: center;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+.left-arrow { left: 5px; }
+.right-arrow { right: 5px; }
+
 @media (max-width: 850px) {
+    /* Show the translucent arrows */
+    .carousel-arrow { display: flex; }
+
     /* Fix Hero stacking to allow side-by-side banners */
     .hero { 
         flex-direction: row; 
@@ -345,7 +371,6 @@ footer { padding: 40px 5%; background: #000; text-align: center; border-top: 1px
         order: 1; 
         margin-bottom: 10px;
     }
-    /* Force banners into a neat 50/50 side-by-side grid */
     .hero-side-banner {
         position: relative; 
         top: auto; left: auto; right: auto; 
