@@ -30,7 +30,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'AW-18378507705');
     </script>
     
@@ -90,11 +89,7 @@
     <!-- End Google Tag Manager (noscript) -->
 
     <nav>
-        <div class="nav-brand-container">
-            <div class="offer-pill">🚀 10% OFF 2+ BARS</div>
-            <a class="nav-logo" onclick="sfx('click')">CHOCO-NAUT&trade;</a>
-            <div class="offer-pill">⚠️ 20% OFF 4+ BARS</div>
-        </div>
+        <a class="nav-logo" onclick="sfx('click')">CHOCO-NAUT&trade;</a>
         <div class="nav-links">
             <a href="about.html" onclick="sfx('click')">ABOUT</a>
             <a href="#benefits" onclick="sfx('click')">BENEFITS</a>
@@ -106,6 +101,17 @@
     <section class="hero">
         <img src="images/bg.jpg" onerror="this.src='https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=2072'" class="hero-bg" alt="Background">
         <div class="hero-overlay"></div>
+
+        <!-- NEW: Floating Left Banner -->
+        <div class="hero-side-banner left-banner" onclick="window.location.href='#shop'; sfx('click')">
+            <div class="banner-inner">
+                <span class="icon">🚀</span>
+                <span class="discount">10% OFF</span>
+                <span class="condition">ON 2+ BARS</span>
+                <span class="perk">+ FREE DELIVERY</span>
+            </div>
+        </div>
+
         <div class="hero-content">
             <span class="tagline">INDIAN ORIGIN • BEAN TO BAR</span>
             <h1>CHOCO-NAUT&trade;</h1>
@@ -114,12 +120,21 @@
             </p>
             <a href="#shop" class="btn-main" onclick="sfx('click')">INITIATE LAUNCH</a>
         </div>
+
+        <!-- NEW: Floating Right Banner -->
+        <div class="hero-side-banner right-banner" onclick="window.location.href='#shop'; sfx('click')">
+            <div class="banner-inner">
+                <span class="icon">⚠️</span>
+                <span class="discount">20% OFF</span>
+                <span class="condition">ON 4+ BARS</span>
+                <span class="perk">+ FREE DELIVERY</span>
+            </div>
+        </div>
     </section>
 
     <section id="shop" class="products">
         <h2 class="section-header">FLIGHT SUPPLIES</h2>
         <div class="grid">
-            
             <div class="card" onclick="window.location.href='products.html#card-celestial'" style="cursor: pointer; border: 2px solid #d4af37; box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);">
                 <div class="img-box">
                     <img src="images/celestial_box.jpg" 
@@ -414,7 +429,6 @@
             <span class="close-btn" onclick="closeCart()">&times;</span>
             <h2 style="color: var(--gold); text-align: center; margin-bottom: 5px;">MISSION MANIFEST</h2>
             
-            <!-- NEW DYNAMIC PROGRESS BAR -->
             <div style="background: rgba(255, 255, 255, 0.05); padding: 10px; border-radius: 8px; border: 1px solid #333; margin-bottom: 15px;">
                 <p id="modalProgressText" style="text-align:center; color:#fff; font-size:0.85rem; margin-bottom: 8px; font-weight: bold;">
                     Add items to unlock rewards!
@@ -523,17 +537,11 @@
     <script>
     function capturePhone() {
         const phoneValue = document.getElementById("phone").value;
-        
         if(phoneValue.length > 9) {
             fetch("https://hook.eu1.make.com/6lcudgs7fxvd9pt7h8zfa7aufnk758c8", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    phone: phoneValue,
-                    status: "Pending"
-                })
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ phone: phoneValue, status: "Pending" })
             }).catch(error => console.error('Error logging cart entry:', error));
         }
     }
