@@ -24,7 +24,6 @@
     <meta name="twitter:description" content="Premium Indian bean-to-bar chocolates, handcrafted from carefully sourced cacao.">
     <meta name="twitter:image" content="https://www.choconaut.in/images/bg.jpg">
     
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18378507705"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
@@ -33,7 +32,6 @@
     gtag('config', 'AW-18378507705');
     </script>
     
-    <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -82,7 +80,6 @@
     /></noscript>
 </head>
 <body onload="initInventory()">
-    <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5BH8G53C"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
@@ -115,7 +112,7 @@
             <p style="color: #ddd; margin-bottom: 30px;">
                 Handcrafted artisan chocolate that takes your tastebuds to zero gravity. 
             </p>
-            <a href="#shop" class="btn-main" onclick="sfx('click')">INITIATE LAUNCH</a>
+            <a href="#shop" class="btn-main" onclick="sfx('click')">SHOP NOW</a>
         </div>
 
         <div class="hero-side-banner right-banner" onclick="window.location.href='#shop'; sfx('click')">
@@ -129,113 +126,117 @@
     </section>
 
     <section id="shop" class="products">
-        <h2 class="section-header">EXPLORE OUR UNIVERSE OF FLAVOURS</h2>
-        <div class="grid">
-            <div class="card" onclick="window.location.href='products.html#card-celestial'" style="cursor: pointer; border: 2px solid #d4af37; box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);">
-                <div class="img-box">
-                    <img src="images/celestial_box.jpg" 
-                         onclick="event.stopPropagation(); this.src = this.src.includes('box') ? 'images/celestial_open.jpg' : 'images/celestial_box.jpg'" 
-                         onerror="this.src='https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=600'" 
-                         class="product-img" 
-                         title="Tap to peek inside!">
-                </div>
-                <div class="card-info" style="background: linear-gradient(to top, #1a1a1a, #000);">
-                    <div>
-                        <h3 style="color: #d4af37; font-family: 'Orbitron', sans-serif;">Celestial Luxury Combo</h3>
-                        <span class="origin-badge" style="background: #d4af37; color: #000; font-weight:bold;">LIMITED EDITION</span>
-                        <p style="font-size: 0.9rem; color: #ddd; margin: 10px 0;">Celebrate your love with 4 artisan masterpieces, unique flavors & a love letter.</p>
+        <h2 class="section-header">SHOP CHOCOLATES</h2>
+        <div class="carousel-wrapper">
+            <button class="carousel-arrow left-arrow" onclick="scrollCarousel(this, -1)">❮</button>
+            <div class="grid">
+                <div class="card" onclick="window.location.href='products.html#card-celestial'" style="cursor: pointer; border: 2px solid #d4af37; box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);">
+                    <div class="img-box">
+                        <img src="images/celestial_box.jpg" 
+                             onclick="event.stopPropagation(); this.src = this.src.includes('box') ? 'images/celestial_open.jpg' : 'images/celestial_box.jpg'" 
+                             onerror="this.src='https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=600'" 
+                             class="product-img" 
+                             title="Tap to peek inside!">
                     </div>
-                    <button class="c-btn" style="margin-top: 10px; border-color: #d4af37; color: #d4af37;">VIEW & ORDER -></button>
+                    <div class="card-info" style="background: linear-gradient(to top, #1a1a1a, #000);">
+                        <div>
+                            <h3 style="color: #d4af37; font-family: 'Orbitron', sans-serif;">Celestial Luxury Combo</h3>
+                            <span class="origin-badge" style="background: #d4af37; color: #000; font-weight:bold;">LIMITED EDITION</span>
+                            <p style="font-size: 0.9rem; color: #ddd; margin: 10px 0;">Celebrate your love with 4 artisan masterpieces, unique flavors & a love letter.</p>
+                        </div>
+                        <button class="c-btn" style="margin-top: 10px; border-color: #d4af37; color: #d4af37;">VIEW & ORDER -></button>
+                    </div>
                 </div>
-            </div>
 
-            <div class="card" onclick="window.location.href='products.html#card-milkyway'" style="cursor: pointer;">
-                <div class="img-box">
-                    <img src="images/milkyway.jpg" onerror="this.src='https://images.unsplash.com/photo-1548142813-c3a8350e941b?w=600'" class="product-img">
-                </div>
-                <div class="card-info">
-                    <div>
-                        <h3>Milkyway Explorer</h3>
-                        <span class="origin-badge">100% Milk White Chocolate</span>
-                        <div class="bundle-tag">✨ BUNDLE ELIGIBLE</div>
-                        <p style="font-size: 0.9rem; color: #aaa; margin: 10px 0;">Pure white chocolate infused with vanilla notes.</p>
+                <div class="card" onclick="window.location.href='products.html#card-milkyway'" style="cursor: pointer;">
+                    <div class="img-box">
+                        <img src="images/milkyway.jpg" onerror="this.src='https://images.unsplash.com/photo-1548142813-c3a8350e941b?w=600'" class="product-img">
                     </div>
-                    <button class="c-btn" style="margin-top: 10px;">VIEW & ORDER -></button>
+                    <div class="card-info">
+                        <div>
+                            <h3>Milkyway Explorer</h3>
+                            <span class="origin-badge">100% Milk White Chocolate</span>
+                            <div class="bundle-tag">✨ BUNDLE ELIGIBLE</div>
+                            <p style="font-size: 0.9rem; color: #aaa; margin: 10px 0;">Pure white chocolate infused with vanilla notes.</p>
+                        </div>
+                        <button class="c-btn" style="margin-top: 10px;">VIEW & ORDER -></button>
+                    </div>
                 </div>
-            </div>
 
-            <div class="card" onclick="window.location.href='products.html#card-darkmatter'" style="cursor: pointer;">
-                <div class="img-box">
-                    <img src="images/darkmatter.jpg" onerror="this.src='https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=600'" class="product-img">
-                </div>
-                <div class="card-info">
-                    <div>
-                        <h3>Dark Matter (70%)</h3>
-                        <span class="origin-badge">Single Origin</span>
-                        <div class="bundle-tag">✨ BUNDLE ELIGIBLE</div>
-                        <p style="font-size: 0.9rem; color: #aaa; margin: 10px 0;">Intense 70% dark vegan chocolate.</p>
+                <div class="card" onclick="window.location.href='products.html#card-darkmatter'" style="cursor: pointer;">
+                    <div class="img-box">
+                        <img src="images/darkmatter.jpg" onerror="this.src='https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=600'" class="product-img">
                     </div>
-                    <button class="c-btn" style="margin-top: 10px;">VIEW & ORDER -></button>
+                    <div class="card-info">
+                        <div>
+                            <h3>Dark Matter (70%)</h3>
+                            <span class="origin-badge">Single Origin</span>
+                            <div class="bundle-tag">✨ BUNDLE ELIGIBLE</div>
+                            <p style="font-size: 0.9rem; color: #aaa; margin: 10px 0;">Intense 70% dark vegan chocolate.</p>
+                        </div>
+                        <button class="c-btn" style="margin-top: 10px;">VIEW & ORDER -></button>
+                    </div>
                 </div>
-            </div>
 
-            <div class="card" onclick="window.location.href='products.html#card-asteroid'" style="cursor: pointer;">
-                <div class="img-box">
-                    <img src="images/asteroid.jpg" onerror="this.src='https://images.unsplash.com/photo-1511381939415-e44015466834?w=600'" class="product-img">
-                </div>
-                <div class="card-info">
-                    <div>
-                        <h3>Asteroid Crunch</h3>
-                        <span class="origin-badge">Roasted Almonds</span>
-                        <p style="font-size: 0.9rem; color: #aaa; margin: 10px 0;">Creamy milk chocolate with roasted almond rocks.</p>
+                <div class="card" onclick="window.location.href='products.html#card-asteroid'" style="cursor: pointer;">
+                    <div class="img-box">
+                        <img src="images/asteroid.jpg" onerror="this.src='https://images.unsplash.com/photo-1511381939415-e44015466834?w=600'" class="product-img">
                     </div>
-                    <button class="c-btn" style="margin-top: 10px;">VIEW & ORDER -></button>
+                    <div class="card-info">
+                        <div>
+                            <h3>Asteroid Crunch</h3>
+                            <span class="origin-badge">Roasted Almonds</span>
+                            <p style="font-size: 0.9rem; color: #aaa; margin: 10px 0;">Creamy milk chocolate with roasted almond rocks.</p>
+                        </div>
+                        <button class="c-btn" style="margin-top: 10px;">VIEW & ORDER -></button>
+                    </div>
                 </div>
-            </div>
 
-            <div class="card" onclick="window.location.href='products.html#card-nebula'" style="cursor: pointer;">
-                <div class="img-box">
-                    <img src="images/nebula.jpg" onerror="this.src='https://images.unsplash.com/photo-1621446730506-2351d6e23583?w=600'" class="product-img">
-                </div>
-                <div class="card-info">
-                    <div>
-                        <h3>Nebula Swirl</h3>
-                        <span class="origin-badge">Himalayan Salt Butterscotch</span>
-                        <p style="font-size: 0.9rem; color: #aaa; margin: 10px 0;">Golden caramel with a pinch of sea salt.</p>
+                <div class="card" onclick="window.location.href='products.html#card-nebula'" style="cursor: pointer;">
+                    <div class="img-box">
+                        <img src="images/nebula.jpg" onerror="this.src='https://images.unsplash.com/photo-1621446730506-2351d6e23583?w=600'" class="product-img">
                     </div>
-                    <button class="c-btn" style="margin-top: 10px;">VIEW & ORDER -></button>
+                    <div class="card-info">
+                        <div>
+                            <h3>Nebula Swirl</h3>
+                            <span class="origin-badge">Himalayan Salt Butterscotch</span>
+                            <p style="font-size: 0.9rem; color: #aaa; margin: 10px 0;">Golden caramel with a pinch of sea salt.</p>
+                        </div>
+                        <button class="c-btn" style="margin-top: 10px;">VIEW & ORDER -></button>
+                    </div>
                 </div>
-            </div>
 
-            <div class="card" onclick="window.location.href='products.html#card-velvet'" style="cursor: pointer;">
-                <div class="img-box">
-                    <img src="images/velvet.jpg" onerror="this.src='https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=600'" class="product-img">
-                </div>
-                <div class="card-info">
-                    <div>
-                        <h3>Velvet Comet</h3>
-                        <span class="origin-badge">50% Semi-Sweet Chocolate</span>
-                        <div class="bundle-tag">✨ BUNDLE ELIGIBLE</div>
-                        <p style="font-size: 0.9rem; color: #aaa; margin: 10px 0;">Perfectly balanced semi-sweet chocolate.</p>
+                <div class="card" onclick="window.location.href='products.html#card-velvet'" style="cursor: pointer;">
+                    <div class="img-box">
+                        <img src="images/velvet.jpg" onerror="this.src='https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=600'" class="product-img">
                     </div>
-                    <button class="c-btn" style="margin-top: 10px;">VIEW & ORDER -></button>
+                    <div class="card-info">
+                        <div>
+                            <h3>Velvet Comet</h3>
+                            <span class="origin-badge">50% Semi-Sweet Chocolate</span>
+                            <div class="bundle-tag">✨ BUNDLE ELIGIBLE</div>
+                            <p style="font-size: 0.9rem; color: #aaa; margin: 10px 0;">Perfectly balanced semi-sweet chocolate.</p>
+                        </div>
+                        <button class="c-btn" style="margin-top: 10px;">VIEW & ORDER -></button>
+                    </div>
                 </div>
-            </div>
 
-            <div class="card" onclick="window.location.href='products.html#card-smooth'" style="cursor: pointer;">
-                <div class="img-box">
-                    <img src="images/smooth.jpg" onerror="this.src='https://images.unsplash.com/photo-1548142813-c3a8350e941b?w=600'" class="product-img">
-                </div>
-                <div class="card-info">
-                    <div>
-                        <h3>Smooth Astro</h3>
-                        <span class="origin-badge">35% Classic Milk Chocolate</span>
-                        <div class="bundle-tag">✨ BUNDLE ELIGIBLE</div>
-                        <p style="font-size: 0.9rem; color: #aaa; margin: 10px 0;">Rich, nostalgic classic milk chocolate.</p>
+                <div class="card" onclick="window.location.href='products.html#card-smooth'" style="cursor: pointer;">
+                    <div class="img-box">
+                        <img src="images/smooth.jpg" onerror="this.src='https://images.unsplash.com/photo-1548142813-c3a8350e941b?w=600'" class="product-img">
                     </div>
-                    <button class="c-btn" style="margin-top: 10px;">VIEW & ORDER -></button>
+                    <div class="card-info">
+                        <div>
+                            <h3>Smooth Astro</h3>
+                            <span class="origin-badge">35% Classic Milk Chocolate</span>
+                            <div class="bundle-tag">✨ BUNDLE ELIGIBLE</div>
+                            <p style="font-size: 0.9rem; color: #aaa; margin: 10px 0;">Rich, nostalgic classic milk chocolate.</p>
+                        </div>
+                        <button class="c-btn" style="margin-top: 10px;">VIEW & ORDER -></button>
+                    </div>
                 </div>
             </div>
+            <button class="carousel-arrow right-arrow" onclick="scrollCarousel(this, 1)">❯</button>
         </div>
     </section>
     
@@ -258,27 +259,31 @@
     <section class="process-section">
         <h2 class="section-header" style="margin-bottom: 10px;">FLIGHT TRAJECTORY</h2>
         <p style="text-align: center; margin-bottom: 20px;">Our 4-Stage Protocol from Bean to Bar</p>
-        <div class="process-grid">
-            <div class="process-card" onclick="sfx('click')">
-                <span class="p-icon">🔥</span>
-                <h4 class="p-title">1. SLOW ROAST</h4>
-                <p class="p-desc">We gently roast the beans at low temperatures to unlock the hidden aromatic profiles.</p>
+        <div class="carousel-wrapper">
+            <button class="carousel-arrow left-arrow" onclick="scrollCarousel(this, -1)">❮</button>
+            <div class="process-grid">
+                <div class="process-card" onclick="sfx('click')">
+                    <span class="p-icon">🔥</span>
+                    <h4 class="p-title">1. SLOW ROAST</h4>
+                    <p class="p-desc">We gently roast the beans at low temperatures to unlock the hidden aromatic profiles.</p>
+                </div>
+                <div class="process-card" onclick="sfx('click')">
+                    <span class="p-icon">🌪️</span>
+                    <h4 class="p-title">2. CRACK & WINNOW</h4>
+                    <p class="p-desc">The beans are cracked and the shells (husk) are removed using air flow.</p>
+                </div>
+                <div class="process-card" onclick="sfx('click')">
+                    <span class="p-icon">⚙️</span>
+                    <h4 class="p-title">3. STONE GRIND</h4>
+                    <p class="p-desc">We grind the nibs with organic sugar in stone melangers for 72 hours continuously.</p>
+                </div>
+                <div class="process-card" onclick="sfx('click')">
+                    <span class="p-icon">🌡️</span>
+                    <h4 class="p-title">4. TEMPER & MOLD</h4>
+                    <p class="p-desc">The liquid chocolate is tempered to give it that perfect glossy finish and snap.</p>
+                </div>
             </div>
-            <div class="process-card" onclick="sfx('click')">
-                <span class="p-icon">🌪️</span>
-                <h4 class="p-title">2. CRACK & WINNOW</h4>
-                <p class="p-desc">The beans are cracked and the shells (husk) are removed using air flow.</p>
-            </div>
-            <div class="process-card" onclick="sfx('click')">
-                <span class="p-icon">⚙️</span>
-                <h4 class="p-title">3. STONE GRIND</h4>
-                <p class="p-desc">We grind the nibs with organic sugar in stone melangers for 72 hours continuously.</p>
-            </div>
-            <div class="process-card" onclick="sfx('click')">
-                <span class="p-icon">🌡️</span>
-                <h4 class="p-title">4. TEMPER & MOLD</h4>
-                <p class="p-desc">The liquid chocolate is tempered to give it that perfect glossy finish and snap.</p>
-            </div>
+            <button class="carousel-arrow right-arrow" onclick="scrollCarousel(this, 1)">❯</button>
         </div>
     </section>
 
@@ -306,90 +311,102 @@
             </div>
         </div>
 
-        <div class="b-grid">
-            <div class="b-card" onclick="sfx('click')">
-                <div class="b-head"><span class="b-icon">💧</span> CACAO BUTTER</div>
-                <ul class="b-list">
-                    <li>Heart-healthy Stearic Acid</li>
-                    <li>Melts at body temperature</li>
-                </ul>
+        <div class="carousel-wrapper">
+            <button class="carousel-arrow left-arrow" onclick="scrollCarousel(this, -1)">❮</button>
+            <div class="b-grid">
+                <div class="b-card" onclick="sfx('click')">
+                    <div class="b-head"><span class="b-icon">💧</span> CACAO BUTTER</div>
+                    <ul class="b-list">
+                        <li>Heart-healthy Stearic Acid</li>
+                        <li>Melts at body temperature</li>
+                    </ul>
+                </div>
+                <div class="b-card" onclick="sfx('click')">
+                    <div class="b-head"><span class="b-icon">🌑</span> CACAO NIBS</div>
+                    <ul class="b-list">
+                        <li>High in dietary fiber</li>
+                        <li>Natural mood enhancer</li>
+                    </ul>
+                </div>
+                <div class="b-card" onclick="sfx('click')">
+                    <div class="b-head"><span class="b-icon">🛡️</span> DARK CHOCOLATE</div>
+                    <ul class="b-list">
+                        <li>Powerful Antioxidants</li>
+                        <li>Reduces stress levels</li>
+                    </ul>
+                </div>
             </div>
-            <div class="b-card" onclick="sfx('click')">
-                <div class="b-head"><span class="b-icon">🌑</span> CACAO NIBS</div>
-                <ul class="b-list">
-                    <li>High in dietary fiber</li>
-                    <li>Natural mood enhancer</li>
-                </ul>
-            </div>
-            <div class="b-card" onclick="sfx('click')">
-                <div class="b-head"><span class="b-icon">🛡️</span> DARK CHOCOLATE</div>
-                <ul class="b-list">
-                    <li>Powerful Antioxidants</li>
-                    <li>Reduces stress levels</li>
-                </ul>
-            </div>
+            <button class="carousel-arrow right-arrow" onclick="scrollCarousel(this, 1)">❯</button>
         </div>
     </section>
 
     <section id="shipping" class="shipping-section">
         <h2 class="section-header">SHIPPING PROTOCOL</h2>
-        <div class="shipping-grid">
-            <div class="s-card">
-                <span class="s-icon">⏱️</span>
-                <h4>LAUNCH SCHEDULE</h4>
-                <ul class="s-list">
-                    <li>Orders placed before 7 PM will be dispatched within 24 hours.</li>
-                    <li>Orders placed after 7 PM will be dispatched within 48 hours.</li>
-                    <li>Orders received on Saturday after 7 PM will be dispatched on Monday.</li>
-                </ul>
-            </div>
-            
-            <div class="s-card">
-                <span class="s-icon">📡</span>
-                <h4>TRACKING & DELIVERY</h4>
-                <ul class="s-list">
-                    <li>Products will be delivered strictly to the address mentioned while placing the order.</li>
-                    <li>You will get an email with the tracking details as soon as the product is shipped.</li>
-                </ul>
-            </div>
+        <div class="carousel-wrapper">
+            <button class="carousel-arrow left-arrow" onclick="scrollCarousel(this, -1)">❮</button>
+            <div class="shipping-grid">
+                <div class="s-card">
+                    <span class="s-icon">⏱️</span>
+                    <h4>DISPATCH TIMELINES</h4>
+                    <ul class="s-list">
+                        <li>Orders placed before 7 PM will be dispatched within 24 hours.</li>
+                        <li>Orders placed after 7 PM will be dispatched within 48 hours.</li>
+                        <li>Orders received on Saturday after 7 PM will be dispatched on Monday.</li>
+                    </ul>
+                </div>
+                
+                <div class="s-card">
+                    <span class="s-icon">📡</span>
+                    <h4>TRACKING & DELIVERY</h4>
+                    <ul class="s-list">
+                        <li>Products will be delivered strictly to the address mentioned while placing the order.</li>
+                        <li>You will get an email with the tracking details as soon as the product is shipped.</li>
+                    </ul>
+                </div>
 
-            <div class="s-card">
-                <span class="s-icon">⚠️</span>
-                <h4>DELIVERY CONDITIONS</h4>
-                <ul class="s-list">
-                    <li>Delivery timing depends on weather, traffic, and unforeseen events. We do not guarantee delivery time for local deliveries during festivals.</li>
-                    <li>We endeavor to deliver as early as possible, but we are not responsible for delays caused by courier companies or if the customer is unavailable.</li>
-                </ul>
-            </div>
+                <div class="s-card">
+                    <span class="s-icon">⚠️</span>
+                    <h4>DELIVERY CONDITIONS</h4>
+                    <ul class="s-list">
+                        <li>Delivery timing depends on weather, traffic, and unforeseen events. We do not guarantee delivery time for local deliveries during festivals.</li>
+                        <li>We endeavor to deliver as early as possible, but we are not responsible for delays caused by courier companies or if the customer is unavailable.</li>
+                    </ul>
+                </div>
 
-            <div class="s-card">
-                <span class="s-icon">📜</span>
-                <h4>TAXES & DUTIES</h4>
-                <ul class="s-list">
-                    <li>Any post-shipment charges like GST, Customs Tax, Excise Duty, or local taxes in your specific region are the liability of the customer.</li>
-                </ul>
+                <div class="s-card">
+                    <span class="s-icon">📜</span>
+                    <h4>TAXES & DUTIES</h4>
+                    <ul class="s-list">
+                        <li>Any post-shipment charges like GST, Customs Tax, Excise Duty, or local taxes in your specific region are the liability of the customer.</li>
+                    </ul>
+                </div>
             </div>
+            <button class="carousel-arrow right-arrow" onclick="scrollCarousel(this, 1)">❯</button>
         </div>
     </section>
 
     <section id="reviews" class="reviews-section">
-        <h2 class="section-header">MISSION LOGS</h2>
-        <div class="review-grid">
-            <div class="review-card">
-                <div class="stars">★★★★★</div>
-                <p>"The Velvet Comet is out of this world! The packaging was perfect, and the ice packs kept everything solid despite the heat."</p>
-                <span>- Rahul S.</span>
+        <h2 class="section-header">CUSTOMER REVIEWS</h2>
+        <div class="carousel-wrapper">
+            <button class="carousel-arrow left-arrow" onclick="scrollCarousel(this, -1)">❮</button>
+            <div class="review-grid">
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"The Velvet Comet is out of this world! The packaging was perfect, and the ice packs kept everything solid despite the heat."</p>
+                    <span>- Rahul S.</span>
+                </div>
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"Asteroid crunch lived up to the hype. Easily the best bean-to-bar chocolate I've had. Will be ordering the bundle next time."</p>
+                    <span>- Priya M.</span>
+                </div>
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"Ordered the Celestial box for my anniversary. The premium feel and the unique flavors blew us away. Highly recommended!"</p>
+                    <span>- Amit K.</span>
+                </div>
             </div>
-            <div class="review-card">
-                <div class="stars">★★★★★</div>
-                <p>"Asteroid crunch lived up to the hype. Easily the best bean-to-bar chocolate I've had. Will be ordering the bundle next time."</p>
-                <span>- Priya M.</span>
-            </div>
-            <div class="review-card">
-                <div class="stars">★★★★★</div>
-                <p>"Ordered the Celestial box for my anniversary. The premium feel and the unique flavors blew us away. Highly recommended!"</p>
-                <span>- Amit K.</span>
-            </div>
+            <button class="carousel-arrow right-arrow" onclick="scrollCarousel(this, 1)">❯</button>
         </div>
     </section>
 
@@ -416,7 +433,7 @@
     </section>
 
     <div id="cartBar" class="cart-bar" onclick="openCart()">
-        <div style="flex:1"><span style="font-size: 0.8rem; color: #888;">MISSION TOTAL</span><div style="font-size: 1.2rem; font-weight: bold;">TOTAL: <span id="totalPrice">₹0</span></div></div>
+        <div style="flex:1"><span style="font-size: 0.8rem; color: #888;">CART TOTAL</span><div style="font-size: 1.2rem; font-weight: bold;">TOTAL: <span id="totalPrice">₹0</span></div></div>
         <span style="font-weight: bold; border-bottom: 2px solid #000; font-size: 0.9rem;">VIEW CART & PAY -></span>
     </div>
 
@@ -497,7 +514,7 @@
                 <button onclick="window.print()" class="pay-btn" style="background: #fff; color: #000; flex:1; font-size:1rem;">🖨️ PRINT</button>
                 <button onclick="sendWhatsApp()" class="pay-btn" style="background: var(--success); color: #fff; flex:1; font-size:1rem;">📱 WHATSAPP</button>
             </div>
-            <button onclick="redirectToHome()" class="pay-btn" style="background: #333; color: #fff; margin-top: 10px; border: 1px solid var(--gold);">🚀 MISSION COMPLETE (GO HOME)</button>
+            <button onclick="redirectToHome()" class="pay-btn" style="background: #333; color: #fff; margin-top: 10px; border: 1px solid var(--gold);">ORDER COMPLETE (GO HOME)</button>
 
         </div>
     </div>
