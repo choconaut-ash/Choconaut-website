@@ -420,7 +420,7 @@
             <div class="checkout-form">
                 <input type="text" id="name" class="checkout-input" placeholder="Name" required>
                 <input type="email" id="email" class="checkout-input" placeholder="Email (For Confirmation)" required>
-                <input type="tel" id="phone" class="checkout-input" placeholder="Phone" required onblur="capturePhone()">
+                <input type="tel" id="phone" class="checkout-input" placeholder="Phone (10 Digits)" required maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);" onblur="capturePhone()">
                 <input type="text" id="pincode" class="checkout-input" placeholder="Pincode (6 Digits)" maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 6);" required>
                 <textarea id="address" class="checkout-input" rows="2" placeholder="Full Address" required></textarea>
                 <button onclick="startPayment()" class="pay-btn">💳 PAY SECURELY</button>
