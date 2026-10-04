@@ -566,6 +566,7 @@ function startPayment() {
 
     if (finalTotal === 0) { sfx('error'); alert("Cart is empty."); return; }
     if (!name || !phone || !address || !email || !pincode) { sfx('error'); alert("⚠️ Please fill all details."); return; }
+    if (phone.replace(/[^0-9]/g, '').length !== 10) { sfx('error'); alert("⚠️ Please enter a valid 10-digit phone number."); return; }
     if (pincode.length !== 6) { sfx('error'); alert("⚠️ Please enter a 6-digit Pincode."); return; }
 
     const fullAddress = `${address} - Pincode: ${pincode}`;
