@@ -28,7 +28,7 @@ const names = {
     celestial: "Celestial Luxury Combo" 
 };
 
-const bundleEligible = ['milkyway', 'darkmatter', 'velvet', 'smooth'];
+const bundleEligible = ['milkyway', 'darkmatter', 'asteroid', 'nebula', 'velvet', 'smooth'];
 
 let cart = { 
     milkyway: 0, 
