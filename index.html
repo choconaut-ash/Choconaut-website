@@ -1,3 +1,17 @@
+You are completely right to call me out. No, I **did not** fully execute point #5 the way you intended.
+
+In my previous response, I only added the interactive closed/open box toggle inside the pop-up modal. But you wanted that exact same interactive closed/open box toggle functionality (just like your product page) added to a card or element on the main page so customers can peek inside the Diwali box right from the homepage.
+
+Let's fix this right now so it matches your exact vision:
+
+1. We will add a dedicated, beautiful **Diwali Gift Box Preview Card** directly into the shop grid on `index.html` (right alongside your other chocolate bars).
+2. Just like your product page cards, this card will feature the **closed/open box image toggle** when clicked, along with an **"ORDER NOW"** button that takes them directly to `diwali.html`.
+
+Here is the complete, final `index.html` code with the interactive product card included:
+
+### Replace your `index.html` entirely with this code:
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -243,7 +257,26 @@
         <div class="carousel-wrapper">
             <button class="carousel-arrow left-arrow" onclick="scrollCarousel(this, -1)">❮</button>
             <div class="grid">
-                <!-- Celestial Luxury Combo completely removed -->
+                
+                <!-- NEW: Diwali Box Interactive Card in Shop Grid -->
+                <div class="card" onclick="window.location.href='diwali.html'" style="cursor: pointer; border: 2px solid #D4AF37; box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); background: #111;">
+                    <div class="img-box" style="position: relative;" onclick="event.stopPropagation(); toggleCardDiwaliImage(this)">
+                        <img src="images/diwali_closed.jpeg" 
+                             onerror="this.src='https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=600'" 
+                             class="product-img card-diwali-img" 
+                             title="Tap to peek inside!">
+                        <span style="position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.8); color: #D4AF37; font-size: 0.7rem; padding: 3px 8px; border-radius: 4px; font-weight: bold; letter-spacing: 1px;">🔄 TAP TO PEEK INSIDE</span>
+                    </div>
+                    <div class="card-info" style="background: linear-gradient(to top, #2b1b17, #060B19);">
+                        <div>
+                            <h3 style="color: #FFD700; font-family: 'Playfair Display', serif;">Diwali 2026 Gift Box</h3>
+                            <span class="origin-badge" style="background: #7A191B; color: #FFF; font-weight:bold;">FESTIVE SPECIAL</span>
+                            <div class="bundle-tag" style="color: #4CAF50;">✨ FREE DELIVERY + 10% OFF 5+</div>
+                            <p style="font-size: 0.9rem; color: #E2E8F0; margin: 10px 0;">Handcrafted chocolates + a special festive gift. Classic, Signature & Premium ranges.</p>
+                        </div>
+                        <button class="c-btn" style="margin-top: 10px; border-color: #D4AF37; color: #FFD700; background: #7A191B; font-weight: bold;">ORDER NOW -></button>
+                    </div>
+                </div>
 
                 <div class="card" onclick="window.location.href='products.html#card-milkyway'" style="cursor: pointer;">
                     <div class="img-box">
@@ -676,6 +709,17 @@
             }
         }
 
+        // Toggle function for the Diwali card inside the shop grid
+        function toggleCardDiwaliImage(boxContainer) {
+            sfx('click');
+            const imgEl = boxContainer.querySelector('.card-diwali-img');
+            if (imgEl.src.includes('diwali_closed.jpeg')) {
+                imgEl.src = "images/diwali_open.jpeg";
+            } else {
+                imgEl.src = "images/diwali_closed.jpeg";
+            }
+        }
+
         function closeDiwaliPopup() {
             document.getElementById('diwaliPromoPopup').classList.remove('show');
             sessionStorage.setItem('diwaliPopupShown', 'true');
@@ -705,3 +749,5 @@
     </script>
 </body>
 </html>
+
+```
