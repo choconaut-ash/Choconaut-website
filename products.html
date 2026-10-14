@@ -143,7 +143,7 @@
       ]
     }
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18378507705"></script>
     <script>
        window.dataLayer = window.dataLayer || [];
@@ -153,6 +153,64 @@
     </script>
     <link rel="stylesheet" href="style.css?v=20260311">
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    
+    <style>
+        /* NEW: Double-Width Diwali Feature Card for the Shop Grid */
+        .diwali-feature {
+            grid-column: span 2; /* Takes up 2 standard columns */
+            min-width: 620px !important; /* Forces double width */
+            display: flex !important;
+            flex-direction: row;
+            padding: 0 !important; /* Reset padding to let image reach edges */
+            overflow: hidden;
+            border: 2px solid #D4AF37 !important;
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.5) !important;
+            background: #111 !important;
+        }
+        .diwali-feature .feature-img-box {
+            width: 45%;
+            position: relative;
+            background: #000;
+            cursor: pointer;
+        }
+        .diwali-feature .feature-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: opacity 0.3s ease;
+        }
+        .diwali-feature .feature-card-info {
+            width: 55%;
+            padding: 25px 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: linear-gradient(to right, #2b1b17, #060B19);
+        }
+        .diwali-img-hint {
+            position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
+            background: rgba(0,0,0,0.7); color: #fff; font-size: 0.75rem; padding: 4px 10px;
+            border-radius: 4px; letter-spacing: 1px; pointer-events: none; font-weight: bold; z-index: 5;
+        }
+        
+        /* Mobile fallback for Double-Width Card */
+        @media (max-width: 768px) {
+            .diwali-feature {
+                grid-column: span 1;
+                min-width: 300px !important;
+                flex-direction: column;
+            }
+            .diwali-feature .feature-img-box {
+                width: 100%;
+                height: 250px;
+            }
+            .diwali-feature .feature-card-info {
+                width: 100%;
+                background: linear-gradient(to top, #060B19, #2b1b17);
+            }
+        }
+    </style>
 </head>
 <body onload="initInventory()">
 
@@ -194,27 +252,26 @@
             <button class="carousel-arrow left-arrow" onclick="scrollCarousel(this, -1)">❮</button>
             <div class="grid">
                 
-                <!-- DIWALI 2026 LANDING PAGE REDIRECT CARD -->
-                <div class="card" id="card-diwali" style="border: 2px solid #d4af37; box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);">
-                    <div style="position: absolute; top: 10px; right: 10px; background: #d4af37; color: #000; padding: 5px 10px; font-weight: bold; font-family: 'Rajdhani', sans-serif; z-index: 5;">DIWALI EXCLUSIVE</div>
-                    
-                    <a href="diwali.html" class="img-box" style="display: block; cursor: pointer;">
-                        <img src="images/diwali_box.jpeg" alt="Choco-naut Diwali 2026 Collection" onerror="this.src='https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=600'" class="product-img">
-                    </a>
-                    
-                    <div class="card-info">
+                <!-- Double-Width Diwali Feature Card with Interactive Toggle -->
+                <div class="card diwali-feature" onclick="window.location.href='diwali.html'" style="cursor: pointer;">
+                    <!-- Left Side: Interactive Image Area -->
+                    <div class="feature-img-box" onclick="event.stopPropagation(); toggleCardDiwaliImage(this)" title="Tap to peek inside!">
+                        <img src="images/diwali_closed.jpeg" 
+                             onerror="this.src='https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=600'" 
+                             class="card-diwali-img" alt="Diwali Box">
+                        <span class="diwali-img-hint">🔄 TAP TO PEEK INSIDE</span>
+                    </div>
+                    <!-- Right Side: Text & Call to Action -->
+                    <div class="feature-card-info">
                         <div>
-                            <h3 style="color: #d4af37;">Diwali 2026 Collection</h3>
-                            <span class="origin-badge" style="background: #d4af37; color: #000; font-weight: bold;">Corporate & Festive Gifting</span>
-                            <p class="flavor-desc" style="margin-top: 10px;">
-                                Step into our dedicated Diwali portal. Discover our exclusive festive curation, check availability, and secure your pre-orders for the Oct 22-25 dispatch.
-                            </p>
+                            <h3 style="color: #FFD700; font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 5px;">Diwali 2026 Box</h3>
+                            <span class="origin-badge" style="background: #7A191B; color: #FFF; font-weight:bold; padding: 4px 10px;">FESTIVE SPECIAL</span>
+                            <div class="bundle-tag" style="color: #4CAF50; margin-top: 10px; font-size: 0.95rem;">✨ FREE DELIVERY + 10% OFF 5+</div>
+                            <p style="font-size: 1rem; color: #E2E8F0; margin: 15px 0; line-height: 1.5;">Handcrafted chocolates combined with a beautiful handcrafted festive gift. Explore our Classic, Signature, and Premium ranges.</p>
                         </div>
-                        
-                        <a href="diwali.html" style="display: block; text-align: center; width: 100%; margin-top: 25px; padding: 12px; background: #d4af37; color: #000; font-weight: bold; border: none; font-family: 'Orbitron', sans-serif; text-decoration: none; text-transform: uppercase;">ENTER DIWALI PORTAL</a>
+                        <button class="c-btn" style="margin-top: 10px; border-color: #D4AF37; color: #111; background: #FFD700; font-weight: 900; text-transform: uppercase;">ORDER NOW -></button>
                     </div>
                 </div>
-                <!-- END DIWALI CARD -->
 
                 <div class="card" id="card-milkyway">
                     <div class="sold-out-badge">SOLD OUT</div>
@@ -455,6 +512,19 @@
             <button onclick="redirectToHome()" class="pay-btn" style="background: #333; color: #fff; margin-top: 10px; border: 1px solid var(--gold);">ORDER COMPLETE (GO HOME)</button>
         </div>
     </div>
+
+    <!-- Script to trigger Diwali Image Toggling -->
+    <script>
+        function toggleCardDiwaliImage(boxContainer) {
+            sfx('click');
+            const imgEl = boxContainer.querySelector('.card-diwali-img');
+            if (imgEl.src.includes('diwali_closed.jpeg')) {
+                imgEl.src = "images/diwali_open.jpeg";
+            } else {
+                imgEl.src = "images/diwali_closed.jpeg";
+            }
+        }
+    </script>
 
     <script src="script.js?v=20260808"></script>
     <script>
