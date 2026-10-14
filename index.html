@@ -295,7 +295,7 @@
             <button class="carousel-arrow left-arrow" onclick="scrollCarousel(this, -1)">❮</button>
             <div class="grid">
                 
-                <!-- NEW: Double-Width Diwali Feature Card with Interactive Toggle -->
+                <!-- Double-Width Diwali Feature Card with Interactive Toggle -->
                 <div class="card diwali-feature" onclick="window.location.href='diwali.html'" style="cursor: pointer;">
                     <!-- Left Side: Interactive Image Area -->
                     <!-- event.stopPropagation() stops the click from jumping to diwali.html instantly -->
@@ -745,15 +745,12 @@
 
         function closeDiwaliPopup() {
             document.getElementById('diwaliPromoPopup').classList.remove('show');
-            sessionStorage.setItem('diwaliPopupShown', 'true');
         }
 
         window.addEventListener('load', function() {
-            if (!sessionStorage.getItem('diwaliPopupShown')) {
-                setTimeout(() => {
-                    document.getElementById('diwaliPromoPopup').classList.add('show');
-                }, 1500); 
-            }
+            setTimeout(() => {
+                document.getElementById('diwaliPromoPopup').classList.add('show');
+            }, 1500); 
         });
     </script>
 
