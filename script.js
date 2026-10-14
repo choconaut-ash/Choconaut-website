@@ -569,7 +569,20 @@ function startPayment() {
     if (phone.replace(/[^0-9]/g, '').length !== 10) { sfx('error'); alert("⚠️ Please enter a valid 10-digit phone number."); return; }
     if (pincode.length !== 6) { sfx('error'); alert("⚠️ Please enter a 6-digit Pincode."); return; }
 
-    const fullAddress = `${address} - Pincode: ${pincode}`;
+    let fullAddress = `${address} - Pincode: ${pincode}`; 
+
+    // --- DIWALI LOGIC: Check if the date picker exists on this page ---
+    const datePicker = document.getElementById("diwaliDate");
+    if (datePicker) {
+        if (!datePicker.value) {
+            sfx('error');
+            alert("⚠️ Please select a Requested Delivery Date for your Diwali box!");
+            return;
+        }
+        fullAddress = fullAddress + " | Delivery Requested For: " + datePicker.value;
+    }
+    // -------------------------------------------------------------------
+
     logOrderToSheet("Pending", fullAddress); 
 
     var options = {
