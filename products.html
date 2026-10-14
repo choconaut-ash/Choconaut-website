@@ -194,36 +194,28 @@
             <button class="carousel-arrow left-arrow" onclick="scrollCarousel(this, -1)">❮</button>
             <div class="grid">
                 
-                <!-- NEW DIWALI 2026 BLOCK -->
-                <div class="card" id="card-diwali" style="grid-column: span 2; border: 2px solid #d4af37; box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);">
-                    <div style="position: absolute; top: 10px; right: 10px; background: #d4af37; color: #000; padding: 5px 10px; font-weight: bold; font-family: 'Rajdhani', sans-serif; z-index: 5; text-transform: uppercase;">PRE-ORDER NOW</div>
+                <!-- DIWALI 2026 LANDING PAGE REDIRECT CARD -->
+                <div class="card" id="card-diwali" style="border: 2px solid #d4af37; box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);">
+                    <div style="position: absolute; top: 10px; right: 10px; background: #d4af37; color: #000; padding: 5px 10px; font-weight: bold; font-family: 'Rajdhani', sans-serif; z-index: 5;">DIWALI EXCLUSIVE</div>
                     
-                    <div class="img-box" onclick="openProduct('diwali')">
-                        <img src="images/diwali_box.jpeg" alt="Choco-naut Diwali 2026 Corporate Gifting Box" onerror="this.src='https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=600'" class="product-img">
-                    </div>
+                    <a href="diwali.html" class="img-box" style="display: block; cursor: pointer;">
+                        <img src="images/diwali_box.jpeg" alt="Choco-naut Diwali 2026 Collection" onerror="this.src='https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=600'" class="product-img">
+                    </a>
                     
                     <div class="card-info">
                         <div>
-                            <h3 style="color: #d4af37;">Diwali 2026 Corporate Collection</h3>
-                            <span class="origin-badge" style="background: #d4af37; color: #000; font-weight: bold;">12 Premium Handcrafted Bonbons</span>
-                            <p class="flavor-desc">
-                                The ultimate festive gift. An exclusive 12-piece assortment featuring our finest artisanal flavors, packaged in a luxurious gold-foiled box. <br><br>
-                                <strong>Dispatch Window:</strong> Strictly between Oct 22 - Oct 25.<br>
-                                <em style="font-size: 0.8rem; color: #888;">*Ideal for corporate gifting and bulk orders.</em>
+                            <h3 style="color: #d4af37;">Diwali 2026 Collection</h3>
+                            <span class="origin-badge" style="background: #d4af37; color: #000; font-weight: bold;">Corporate & Festive Gifting</span>
+                            <p class="flavor-desc" style="margin-top: 10px;">
+                                Step into our dedicated Diwali portal. Discover our exclusive festive curation, check availability, and secure your pre-orders for the Oct 22-25 dispatch.
                             </p>
-                            <span class="price" style="font-size: 1.4rem; color: var(--gold); display: block; margin-top: 10px;">₹1499</span>
                         </div>
                         
-                        <div class="qty-controls" style="margin-top: 15px;">
-                            <button class="q-btn" id="btn-minus-diwali" onclick="updateQty('diwali', -1)">-</button>
-                            <span id="qty-diwali" class="q-display">0</span>
-                            <button class="q-btn" id="btn-plus-diwali" onclick="updateQty('diwali', 1)">+</button>
-                        </div>
-                        <button onclick="updateQty('diwali', 1)" style="width: 100%; margin-top: 15px; padding: 10px; background: #d4af37; color: #000; font-weight: bold; border: none; font-family: 'Orbitron', sans-serif; cursor: pointer; text-transform: uppercase;">ADD PRE-ORDER</button>
+                        <a href="diwali.html" style="display: block; text-align: center; width: 100%; margin-top: 25px; padding: 12px; background: #d4af37; color: #000; font-weight: bold; border: none; font-family: 'Orbitron', sans-serif; text-decoration: none; text-transform: uppercase;">ENTER DIWALI PORTAL</a>
                     </div>
                 </div>
-                <!-- END DIWALI BLOCK -->
-                
+                <!-- END DIWALI CARD -->
+
                 <div class="card" id="card-milkyway">
                     <div class="sold-out-badge">SOLD OUT</div>
                     <div class="img-box" onclick="openProduct('milkyway')">
@@ -428,13 +420,6 @@
                 <input type="email" id="email" class="checkout-input" placeholder="Email (For Confirmation)" required>
                 <input type="tel" id="phone" class="checkout-input" placeholder="Phone (10 Digits)" required maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);" onblur="capturePhone()">
                 <input type="text" id="pincode" class="checkout-input" placeholder="Pincode (6 Digits)" maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 6);" required>
-                
-                <!-- NEW: Diwali Date Picker inside Checkout Form -->
-                <input type="date" id="diwaliDate" class="checkout-input" title="Requested Delivery Date" style="color: #999; margin-bottom: 5px;">
-                <small style="display: block; text-align: left; color: #d4af37; margin: 0 0 10px 5px; font-size: 0.75rem; font-weight: bold;">
-                    *Required: Select Delivery Date for Diwali Pre-Orders (Oct 22-25)
-                </small>
-                
                 <textarea id="address" class="checkout-input" rows="2" placeholder="Full Address" required></textarea>
                 <button onclick="startPayment()" class="pay-btn">💳 PAY SECURELY</button>
             </div>
