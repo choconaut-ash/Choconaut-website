@@ -88,7 +88,7 @@
         .diwali-center-banner {
             display: block;
             margin: 30px auto 0;
-            background: rgba(122, 25, 27, 0.85); /* Deep Festive Maroon matching Diwali page */
+            background: rgba(122, 25, 27, 0.85); 
             border: 2px solid #D4AF37;
             border-radius: 8px;
             padding: 15px 30px;
@@ -154,8 +154,16 @@
         .diwali-popup-content p {
             color: #5D4037; font-size: 1.1rem; font-weight: 600; margin-bottom: 20px;
         }
+        .diwali-popup-img-box {
+            position: relative; cursor: pointer; border-radius: 8px; overflow: hidden; border: 2px solid #EADDCD; margin-bottom: 15px;
+        }
         .diwali-popup-content img {
-            width: 100%; height: 220px; object-fit: cover; border-radius: 8px; border: 2px solid #EADDCD;
+            width: 100%; height: 220px; object-fit: cover; display: block; transition: opacity 0.3s ease;
+        }
+        .diwali-img-hint {
+            position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
+            background: rgba(0,0,0,0.7); color: #fff; font-size: 0.75rem; padding: 4px 10px;
+            border-radius: 4px; letter-spacing: 1px; pointer-events: none;
         }
         .diwali-popup-close {
             position: absolute; top: -15px; right: -15px; font-size: 1.8rem;
@@ -213,10 +221,10 @@
             </p>
             <a href="#shop" class="btn-main" onclick="sfx('click')">SHOP NOW</a>
             
-            <!-- NEW: Central Floating Diwali Banner -->
+            <!-- Central Floating Diwali Banner (Order Now) -->
             <a href="diwali.html" class="diwali-center-banner" onclick="sfx('click')">
                 <span class="d-title">✨ DIWALI 2026 COLLECTION ✨</span>
-                <span class="d-sub">PRE-BOOK CORPORATE & GIFT BOXES</span>
+                <span class="d-sub">ORDER CORPORATE & GIFT BOXES NOW</span>
             </a>
         </div>
 
@@ -653,19 +661,37 @@
         </svg>
     </a>
 
-    <!-- NEW: Diwali Promotional Pop-up Modal -->
+    <!-- Diwali Promotional Pop-up Modal with Dual-View Image Preview -->
     <div id="diwaliPromoPopup" class="diwali-popup-overlay">
         <div class="diwali-popup-content">
             <span class="diwali-popup-close" onclick="closeDiwaliPopup()">&times;</span>
-            <img src="images/diwali_closed.jpeg" onerror="this.src='https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=600'" alt="Diwali 2026 Collection">
+            
+            <div class="diwali-popup-img-box" onclick="toggleDiwaliPopupImage()" title="Tap to toggle open/closed box view!">
+                <img id="popupDiwaliImg" src="images/diwali_closed.jpeg" onerror="this.src='https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=600'" alt="Diwali Box Preview">
+                <div class="diwali-img-hint">🔄 TAP TO PEEK INSIDE</div>
+            </div>
+
             <h2>Make This Diwali Sweeter</h2>
             <p>Premium artisan chocolate boxes. Free delivery & corporate bulk discounts available!</p>
-            <a href="diwali.html" class="btn-diwali" onclick="sfx('click')">EXPLORE DIWALI COLLECTION</a>
+            <a href="diwali.html" class="btn-diwali" onclick="sfx('click')">ORDER NOW</a>
         </div>
     </div>
 
-    <!-- NEW: Script to trigger Diwali Pop-up automatically -->
+    <!-- Script to trigger Diwali Pop-up and Image Toggling -->
     <script>
+        let popupImageState = 0; // 0 = closed, 1 = open
+        function toggleDiwaliPopupImage() {
+            sfx('click');
+            const imgEl = document.getElementById('popupDiwaliImg');
+            if (popupImageState === 0) {
+                imgEl.src = "images/diwali_open.jpeg";
+                popupImageState = 1;
+            } else {
+                imgEl.src = "images/diwali_closed.jpeg";
+                popupImageState = 0;
+            }
+        }
+
         function closeDiwaliPopup() {
             document.getElementById('diwaliPromoPopup').classList.remove('show');
             sessionStorage.setItem('diwaliPopupShown', 'true');
