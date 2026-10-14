@@ -3,48 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Choco-naut | Diwali 2026 Collection</title>
+    <title>Choco-naut | Diwali 2026 Celebration</title>
     <meta name="description" content="Celebrate the festival of lights with handcrafted chocolates, thoughtful gifting, and a little surprise that makes your gift mean even more.">
-    <!-- Using Playfair Display for elegant headings, Rajdhani for modern sans-serif body -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600&family=Rajdhani:wght@500;600;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css?v=20261014">
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     
     <style>
-        /* Ivory & Champagne Premium Festive Theme */
+        /* Midnight Blue & Radiant Gold Festive Theme */
         body {
-            background-color: #FCFBF8; 
-            /* Subtle festive mandala/star background pattern */
-            background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50 15 C50 15 55 45 85 50 C85 50 55 55 50 85 C50 85 45 55 15 50 C15 50 45 45 50 15 Z" fill="rgba(212, 175, 55, 0.07)"/></svg>');
-            color: #3E2723;
+            background-color: #060B19; /* Deep Space / Midnight Blue */
+            background-image: 
+                radial-gradient(circle at top right, rgba(255, 140, 0, 0.15), transparent 40%),
+                radial-gradient(circle at bottom left, rgba(212, 175, 55, 0.15), transparent 40%);
+            background-attachment: fixed;
+            color: #E2E8F0;
             font-family: 'Rajdhani', sans-serif;
             line-height: 1.6;
+            font-size: 1.1rem; /* Larger base font for better readability */
         }
 
         h1, h2, h3, h4 {
             font-family: 'Playfair Display', serif;
-            color: #2b1b17;
-            font-weight: 700;
+            color: #FFD700; /* Vibrant Gold */
+            font-weight: 800;
+            text-shadow: 0 2px 10px rgba(255, 215, 0, 0.3);
         }
 
         /* Marquee Flash Message */
         .marquee-container {
-            background: linear-gradient(90deg, #D4AF37, #F3ECE1, #D4AF37);
-            color: #3E2723;
-            padding: 8px 0;
+            background: linear-gradient(90deg, #FF8C00, #FFD700, #FF8C00); /* Festive Orange to Gold */
+            color: #000;
+            padding: 10px 0;
             overflow: hidden;
             position: relative;
             z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.4);
         }
         .marquee-content {
             display: inline-block;
             white-space: nowrap;
-            animation: marquee 25s linear infinite;
-            font-family: 'Rajdhani', sans-serif;
-            font-weight: 700;
-            letter-spacing: 2px;
-            font-size: 1rem;
+            animation: marquee 20s linear infinite;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            letter-spacing: 3px;
+            font-size: 1.05rem;
         }
         @keyframes marquee {
             0% { transform: translateX(100vw); }
@@ -53,158 +56,190 @@
 
         /* Navigation */
         nav {
-            background: #FCFBF8;
-            border-bottom: 1px solid #EADDCD;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
-            position: relative;
+            background: rgba(6, 11, 25, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            position: sticky;
+            top: 0;
+            z-index: 90;
         }
         .nav-logo {
-            font-family: 'Playfair Display', serif;
-            color: #3E2723 !important;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-shadow: none;
+            font-family: 'Orbitron', sans-serif;
+            color: #FFD700 !important;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
         }
-        .nav-links a { color: #5D4037 !important; font-weight: 600; }
-        .nav-links a:hover { color: #D4AF37 !important; }
+        .nav-links a { color: #fff !important; font-weight: 700; letter-spacing: 1px; }
+        .nav-links a:hover { color: #FFD700 !important; text-shadow: 0 0 10px rgba(255,215,0,0.5); }
 
         /* General Section Styling */
         section {
-            padding: 80px 20px;
-            max-width: 1000px;
+            padding: 90px 20px;
+            max-width: 1050px;
             margin: 0 auto;
         }
         .text-center { text-align: center; }
-        .gold-text { color: #D4AF37; }
-        .divider { width: 50px; height: 2px; background: #D4AF37; margin: 20px auto; }
+        .divider { width: 80px; height: 3px; background: linear-gradient(90deg, transparent, #FFD700, transparent); margin: 25px auto; }
 
         /* Hero Section */
-        .hero-light {
+        .hero-dark {
             padding: 80px 20px;
             text-align: center;
-            background: linear-gradient(to bottom, transparent, #F3ECE1);
-            border-bottom: 1px solid #EADDCD;
             position: relative;
         }
-        .hero-light h1 {
-            font-size: 3.5rem;
-            line-height: 1.2;
+        .hero-dark h1 {
+            font-size: 4rem;
+            line-height: 1.1;
             margin-bottom: 20px;
-            color: #3E2723;
+            background: linear-gradient(to right, #FFD700, #FF8C00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: none; /* Removed to let gradient shine, but added drop shadow on container if needed */
+            filter: drop-shadow(0px 4px 10px rgba(255, 140, 0, 0.4));
         }
-        .hero-light p.subhead {
-            font-size: 1.3rem;
-            max-width: 700px;
+        .hero-dark p.subhead {
+            font-size: 1.4rem;
+            max-width: 750px;
             margin: 0 auto 30px;
-            color: #5D4037;
+            color: #F8FAFC;
+            font-weight: 600;
         }
         .hero-image-wrapper {
             margin: 40px auto 0;
-            max-width: 800px;
-            border-radius: 8px;
+            max-width: 850px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 15px 40px rgba(62, 39, 35, 0.15);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(212, 175, 55, 0.2);
             border: 2px solid #D4AF37;
+            position: relative;
+        }
+        .hero-image-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            box-shadow: inset 0 0 20px rgba(255,215,0,0.2);
+            pointer-events: none;
         }
         .hero-image-wrapper img { width: 100%; display: block; }
 
         /* Buttons */
         .btn-gold {
             display: inline-block;
-            background: linear-gradient(135deg, #D4AF37, #b5952f);
-            color: #fff !important;
-            padding: 15px 35px;
-            font-family: 'Rajdhani', sans-serif;
-            font-weight: 700;
-            font-size: 1.1rem;
-            letter-spacing: 1px;
+            background: linear-gradient(45deg, #FF8C00, #FFD700);
+            color: #000 !important;
+            padding: 16px 40px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
             text-decoration: none;
             transition: all 0.3s;
             text-transform: uppercase;
-            box-shadow: 0 4px 15px rgba(212,175,55,0.2);
+            box-shadow: 0 8px 25px rgba(255, 140, 0, 0.4);
         }
-        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(212,175,55,0.4); }
+        .btn-gold:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 12px 35px rgba(255, 215, 0, 0.6); }
         
         .btn-outline {
             display: inline-block;
-            background: transparent;
-            color: #3E2723 !important;
+            background: rgba(212, 175, 55, 0.1);
+            color: #FFD700 !important;
             padding: 14px 34px;
-            font-family: 'Rajdhani', sans-serif;
-            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
             font-size: 1.1rem;
-            letter-spacing: 1px;
-            border: 2px solid #3E2723;
-            border-radius: 4px;
+            letter-spacing: 2px;
+            border: 2px solid #FFD700;
+            border-radius: 6px;
             cursor: pointer;
             text-decoration: none;
             transition: all 0.3s;
-            margin-left: 10px;
+            margin-left: 15px;
             text-transform: uppercase;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
         }
-        .btn-outline:hover { background: #3E2723; color: #fff !important; }
+        .btn-outline:hover { background: #FFD700; color: #000 !important; box-shadow: 0 0 25px rgba(212, 175, 55, 0.6); }
 
         /* Products Grid */
         .box-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
             margin-top: 50px;
         }
         .product-card {
-            background: #fff;
-            border: 1px solid #EADDCD;
-            padding: 30px;
-            border-radius: 8px;
+            background: rgba(15, 23, 42, 0.7); /* Deep elegant slate */
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 35px;
+            border-radius: 12px;
             text-align: left;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
-            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 20px rgba(255,255,255,0.02);
+            transition: transform 0.4s, box-shadow 0.4s, border-color 0.4s;
             display: flex;
             flex-direction: column;
+            position: relative;
         }
-        .product-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(212, 175, 55, 0.15); border-color: #D4AF37; }
-        .product-card h3 { font-size: 2rem; margin-bottom: 5px; color: #3E2723; }
-        .product-card p.desc { font-style: italic; color: #8D6E63; margin-bottom: 20px; font-size: 1rem;}
-        .product-card h4 { font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
-        .product-card ul { list-style: none; padding: 0; margin-bottom: 25px; flex-grow: 1; }
-        .product-card ul li { position: relative; padding-left: 15px; margin-bottom: 8px; color: #5D4037; font-size: 0.95rem; }
-        .product-card ul li::before { content: '✨'; color: #D4AF37; position: absolute; left: -5px; top: 0; font-size: 0.8rem; line-height: 1.5; }
-        .product-img-small { width: 100%; border-radius: 4px; margin-bottom: 20px; border: 1px solid #f5f5f5; }
+        .product-card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 30px rgba(212, 175, 55, 0.3); 
+            border-color: #FFD700; 
+        }
+        .product-card h3 { font-size: 2.2rem; margin-bottom: 5px; color: #FFD700; font-family: 'Orbitron', sans-serif; letter-spacing: 1px;}
+        .product-card p.desc { color: #CBD5E1; margin-bottom: 25px; font-size: 1.1rem; font-weight: 500;}
+        .product-card h4 { font-size: 1.1rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px; color: #fff;}
+        .product-card ul { list-style: none; padding: 0; margin-bottom: 30px; flex-grow: 1; }
+        .product-card ul li { position: relative; padding-left: 25px; margin-bottom: 10px; color: #F1F5F9; font-size: 1.05rem; font-weight: 600;}
+        .product-card ul li::before { content: '✨'; color: #FFD700; position: absolute; left: 0; top: 0; font-size: 0.9rem; line-height: 1.5; }
+        .product-img-small { width: 100%; border-radius: 8px; margin-bottom: 25px; border: 2px solid rgba(212,175,55,0.5); box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
 
         .discount-callout {
-            background: rgba(212, 175, 55, 0.1);
-            border: 1px dashed #D4AF37;
-            color: #3E2723;
+            background: rgba(255, 140, 0, 0.15);
+            border: 1px dashed #FFD700;
+            color: #FFD700;
             text-align: center;
-            padding: 8px;
-            font-size: 0.9rem;
+            padding: 10px;
+            font-size: 1rem;
             font-weight: 700;
-            border-radius: 4px;
-            margin-bottom: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         /* Split Sections */
-        .split-section { display: flex; align-items: center; gap: 50px; flex-wrap: wrap; }
-        .split-text { flex: 1; min-width: 300px; }
-        .split-image { flex: 1; min-width: 300px; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 30px rgba(62, 39, 35, 0.1); border: 2px solid #EADDCD; }
+        .split-section { display: flex; align-items: center; gap: 60px; flex-wrap: wrap; }
+        .split-text { flex: 1; min-width: 320px; }
+        .split-text p { font-size: 1.2rem; margin-bottom: 20px; font-weight: 500; }
+        .split-image { flex: 1; min-width: 320px; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 20px rgba(212,175,55,0.2); border: 2px solid rgba(212, 175, 55, 0.4); }
         .split-image img { width: 100%; display: block; }
 
+        /* Highlight Boxes */
+        .highlight-box {
+            background: rgba(255, 215, 0, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        }
+
         /* FAQs */
-        .faq-item { margin-bottom: 25px; border-bottom: 1px solid #EADDCD; padding-bottom: 15px; }
-        .faq-item h4 { font-size: 1.2rem; margin-bottom: 8px; color: #3E2723; font-family: 'Rajdhani', sans-serif; font-weight: 700; }
-        .faq-item p { color: #5D4037; font-size: 1rem; }
+        .faq-item { margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; }
+        .faq-item h4 { font-size: 1.3rem; margin-bottom: 10px; color: #FFD700; font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: none; letter-spacing: 0; }
+        .faq-item p { color: #E2E8F0; font-size: 1.1rem; font-weight: 500; }
 
         /* Cart Overrides */
-        .cart-bar { background: #fff; border-top: 2px solid #D4AF37; box-shadow: 0 -5px 20px rgba(0,0,0,0.1); color: #3E2723; }
-        .cart-bar span { color: #5D4037 !important; }
-        .modal-box { background: #fff; border: 1px solid #EADDCD; color: #3E2723; box-shadow: 0 20px 50px rgba(0,0,0,0.15); }
-        .modal-box h2 { color: #3E2723 !important; }
-        .close-btn { color: #3E2723 !important; }
-        .checkout-input { background: #FCFBF8; border: 1px solid #ccc; color: #3E2723; width: 100%; box-sizing: border-box; }
-        .checkout-input:focus { border-color: #D4AF37; outline: none; }
+        .cart-bar { background: #060B19; border-top: 2px solid #FFD700; box-shadow: 0 -10px 30px rgba(0,0,0,0.5); color: #fff; }
+        .cart-bar span { color: #CBD5E1 !important; }
+        .modal-box { background: #0B1120; border: 2px solid #FFD700; color: #fff; box-shadow: 0 20px 60px rgba(0,0,0,0.8); }
+        .modal-box h2 { color: #FFD700 !important; }
+        .close-btn { color: #FFD700 !important; text-shadow: 0 0 10px rgba(255,215,0,0.5); }
+        .checkout-input { background: rgba(0,0,0,0.5); border: 1px solid #444; color: #fff; width: 100%; box-sizing: border-box; font-size: 1rem; padding: 12px; }
+        .checkout-input:focus { border-color: #FFD700; outline: none; box-shadow: 0 0 10px rgba(255,215,0,0.3); }
     </style>
 </head>
 <body onload="initInventory()">
@@ -217,18 +252,18 @@
     </div>
 
     <nav>
-        <a href="index.html" class="nav-logo" onclick="sfx('click')">CHOCO-NAUT</a>
+        <a href="index.html" class="nav-logo" onclick="sfx('click')">CHOCO-NAUT&trade;</a>
         <div class="nav-links">
             <a href="index.html" onclick="sfx('click')">BACK TO MAIN SITE</a>
         </div>
     </nav>
     
-    <header class="hero-light">
-        <p style="text-transform: uppercase; letter-spacing: 3px; font-weight: 700; color: #D4AF37; margin-bottom: 10px;">Diwali 2026 Collection</p>
+    <header class="hero-dark">
+        <p style="text-transform: uppercase; letter-spacing: 4px; font-weight: 900; color: #FF8C00; margin-bottom: 15px; font-family: 'Orbitron', sans-serif;">Diwali 2026 Collection</p>
         <h1>Make This Diwali Sweeter.<br>Make It Meaningful.</h1>
         <p class="subhead">Celebrate the festival of lights with handcrafted chocolates, thoughtful gifting, and a little surprise that makes your gift mean even more.</p>
         
-        <div style="margin-top: 30px;">
+        <div style="margin-top: 40px;">
             <a href="#boxes" class="btn-gold" onclick="sfx('click')">Explore the Gift Boxes</a>
             <a href="#corporate" class="btn-outline" onclick="sfx('click')">Corporate Gifting</a>
         </div>
@@ -238,29 +273,31 @@
         </div>
     </header>
 
-    <section class="text-center" style="max-width: 800px;">
-        <h2>This Diwali, Give More Than a Gift.</h2>
+    <section class="text-center" style="max-width: 900px;">
+        <h2 style="font-size: 2.8rem;">This Diwali, Give More Than a Gift.</h2>
         <div class="divider"></div>
-        <p style="font-size: 1.15rem; color: #5D4037;">Diwali is a time for coming together, celebrating relationships, expressing gratitude, and creating memories that last long after the celebrations are over.</p>
-        <p style="font-size: 1.15rem; color: #5D4037;">This year, make your celebrations a little more special with Choco-naut. Our Diwali Gift Box brings together the pleasure of chocolate and the thoughtfulness of a handcrafted festive surprise thoughtfully chosen for the people who make your world brighter.</p>
-        <p style="font-size: 1.15rem; color: #5D4037;">Whether you're gifting your family, surprising a friend, thanking a colleague, or appreciating a valued client, let your gift say what words sometimes cannot.</p>
-        <h3 style="margin-top: 30px; font-style: italic; color: #D4AF37; font-size: 1.6rem;">Because the best gifts aren't just opened. They're remembered.</h3>
+        <p>Diwali is a time for coming together, celebrating relationships, expressing gratitude, and creating memories that last long after the celebrations are over.</p>
+        <p>This year, make your celebrations a little more special with Choco-naut. Our Diwali Gift Box brings together the pleasure of chocolate and the thoughtfulness of a handcrafted festive surprise thoughtfully chosen for the people who make your world brighter.</p>
+        <p>Whether you're gifting your family, surprising a friend, thanking a colleague, or appreciating a valued client, let your gift say what words sometimes cannot.</p>
+        <h3 style="margin-top: 40px; font-style: italic; color: #FF8C00; font-size: 2rem;">Because the best gifts aren't just opened.<br>They're remembered.</h3>
     </section>
 
     <!-- Products -->
-    <section id="boxes" style="background: rgba(255,255,255,0.7); max-width: 100%; padding: 100px 20px; border-top: 1px solid #EADDCD;">
-        <div style="max-width: 1100px; margin: 0 auto;">
+    <section id="boxes" style="background: rgba(0,0,0,0.3); max-width: 100%; padding: 100px 20px; border-top: 1px solid rgba(255,255,255,0.05);">
+        <div style="max-width: 1150px; margin: 0 auto;">
             <div class="text-center">
-                <h2>Your Chocolate, Your Choice.</h2>
+                <h2 style="font-size: 3rem;">Your Chocolate, Your Choice.</h2>
                 <div class="divider"></div>
-                <p style="font-size: 1.1rem; color: #5D4037;">Choose the box that best suits your celebration. Inside every box is a premium gifting experience.</p>
+                <p style="font-size: 1.2rem; color: #CBD5E1;">Choose the box that best suits your celebration. Inside every box is a premium gifting experience.</p>
             </div>
 
             <div class="box-grid">
                 <!-- CLASSIC -->
                 <div class="product-card">
                     <img src="images/diwali_open.jpeg" class="product-img-small" alt="Classic Box">
-                    <h3>CLASSIC</h3>
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px;">
+                        <h3>CLASSIC</h3>
+                    </div>
                     <p class="desc">A thoughtful introduction to chocolate gifting.</p>
                     <h4>Inside the box</h4>
                     <ul>
@@ -270,8 +307,8 @@
                         <li>70% dark chocolate</li>
                         <li>1 handcrafted Diwali gift</li>
                     </ul>
-                    <div class="discount-callout">🎁 Order 5+ Boxes: 10% OFF | 10+ Boxes: 15% OFF</div>
-                    <button class="btn-gold" style="width: 100%; padding: 15px; font-size: 1.1rem; display: flex; justify-content: space-between; align-items: center;" onclick="addPrecuratedBox('Classic Box', 1199)">
+                    <div class="discount-callout">🎁 5+ Boxes: 10% OFF | 10+ Boxes: 15% OFF</div>
+                    <button class="btn-gold" style="width: 100%; padding: 18px; font-size: 1.2rem; display: flex; justify-content: space-between; align-items: center;" onclick="addPrecuratedBox('Classic Box', 1199)">
                         <span>Add To Cart</span>
                         <span>₹1,199</span>
                     </button>
@@ -280,7 +317,9 @@
                 <!-- SIGNATURE -->
                 <div class="product-card">
                     <img src="images/diwali_open.jpeg" class="product-img-small" alt="Signature Box">
-                    <h3>SIGNATURE</h3>
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px;">
+                        <h3>SIGNATURE</h3>
+                    </div>
                     <p class="desc">For those who enjoy a little more variety.</p>
                     <h4>Inside the box</h4>
                     <ul>
@@ -289,8 +328,8 @@
                         <li>Butterscotch chocolate</li>
                         <li>1 handcrafted Diwali gift</li>
                     </ul>
-                    <div class="discount-callout">🎁 Order 5+ Boxes: 10% OFF | 10+ Boxes: 15% OFF</div>
-                    <button class="btn-gold" style="width: 100%; padding: 15px; font-size: 1.1rem; display: flex; justify-content: space-between; align-items: center;" onclick="addPrecuratedBox('Signature Box', 1299)">
+                    <div class="discount-callout">🎁 5+ Boxes: 10% OFF | 10+ Boxes: 15% OFF</div>
+                    <button class="btn-gold" style="width: 100%; padding: 18px; font-size: 1.2rem; display: flex; justify-content: space-between; align-items: center;" onclick="addPrecuratedBox('Signature Box', 1299)">
                         <span>Add To Cart</span>
                         <span>₹1,299</span>
                     </button>
@@ -299,7 +338,9 @@
                 <!-- PREMIUM -->
                 <div class="product-card">
                     <img src="images/diwali_open.jpeg" class="product-img-small" alt="Premium Box">
-                    <h3>PREMIUM</h3>
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px;">
+                        <h3>PREMIUM</h3>
+                    </div>
                     <p class="desc">A richer assortment for a more indulgent celebration.</p>
                     <h4>Inside the box</h4>
                     <ul>
@@ -309,8 +350,8 @@
                         <li>Mixed berries in white chocolate</li>
                         <li>1 handcrafted Diwali gift</li>
                     </ul>
-                    <div class="discount-callout">🎁 Order 5+ Boxes: 10% OFF | 10+ Boxes: 15% OFF</div>
-                    <button class="btn-gold" style="width: 100%; padding: 15px; font-size: 1.1rem; display: flex; justify-content: space-between; align-items: center;" onclick="addPrecuratedBox('Premium Box', 1399)">
+                    <div class="discount-callout">🎁 5+ Boxes: 10% OFF | 10+ Boxes: 15% OFF</div>
+                    <button class="btn-gold" style="width: 100%; padding: 18px; font-size: 1.2rem; display: flex; justify-content: space-between; align-items: center;" onclick="addPrecuratedBox('Premium Box', 1399)">
                         <span>Add To Cart</span>
                         <span>₹1,399</span>
                     </button>
@@ -322,15 +363,15 @@
     <!-- Chocolate Philosophy -->
     <section class="split-section">
         <div class="split-text">
-            <h2>Chocolate Worth Sharing.<br>Crafted With Purpose.</h2>
+            <h2 style="font-size: 2.8rem;">Chocolate Worth Sharing.<br><span style="color: #FF8C00;">Crafted With Purpose.</span></h2>
             <div class="divider" style="margin: 20px 0;"></div>
-            <p style="font-size: 1.1rem; color: #5D4037; margin-bottom: 20px;">At Choco-naut, we believe great chocolate doesn't need unnecessary extras to make an impression. Our approach is rooted in the craft of chocolate-making and an appreciation for the ingredients that make chocolate special.</p>
+            <p>At Choco-naut, we believe great chocolate doesn't need unnecessary extras to make an impression. Our approach is rooted in the craft of chocolate-making and an appreciation for the ingredients that make chocolate special.</p>
             <ul style="list-style: none; padding: 0;">
-                <li style="margin-bottom: 10px; color: #3E2723;"><strong>Bean-to-bar craftsmanship</strong> — a focus on the journey from cacao beans to finished chocolate.</li>
-                <li style="margin-bottom: 10px; color: #3E2723;"><strong>No added flavours or preservatives</strong> — reflecting the stated product philosophy.</li>
-                <li style="margin-bottom: 10px; color: #3E2723;"><strong>A considered ingredient philosophy</strong> — letting the character of chocolate take centre stage.</li>
+                <li style="margin-bottom: 15px; font-size: 1.15rem; font-weight: 600;"><span style="color: #FFD700; margin-right: 10px;">✨</span> <strong>Bean-to-bar craftsmanship</strong> — a focus on the journey from cacao beans to finished chocolate.</li>
+                <li style="margin-bottom: 15px; font-size: 1.15rem; font-weight: 600;"><span style="color: #FFD700; margin-right: 10px;">✨</span> <strong>No added flavours or preservatives</strong> — reflecting the stated product philosophy.</li>
+                <li style="margin-bottom: 15px; font-size: 1.15rem; font-weight: 600;"><span style="color: #FFD700; margin-right: 10px;">✨</span> <strong>A considered ingredient philosophy</strong> — letting the character of chocolate take centre stage.</li>
             </ul>
-            <p style="font-size: 1.1rem; color: #5D4037; margin-top: 20px; font-style: italic;">This Diwali, share something you can feel good about gifting: chocolate chosen not just for the occasion, but for the experience it creates.</p>
+            <p style="margin-top: 30px; font-style: italic; color: #FFD700; font-weight: 700; font-size: 1.3rem;">This Diwali, share something you can feel good about gifting: chocolate chosen not just for the occasion, but for the experience it creates.</p>
         </div>
         <div class="split-image">
             <img src="images/diwali_bars.png" alt="Choco-naut artisan chocolate bars">
@@ -338,83 +379,83 @@
     </section>
 
     <!-- Handcrafted Gift -->
-    <section class="text-center" style="background: #fff; max-width: 100%; padding: 80px 20px; border-top: 1px solid #EADDCD; border-bottom: 1px solid #EADDCD;">
-        <div style="max-width: 800px; margin: 0 auto;">
-            <h2>Your Gift Can Make Someone Else's Diwali Brighter Too.</h2>
+    <section class="text-center highlight-box" style="margin-top: 40px; margin-bottom: 40px;">
+        <div style="max-width: 850px; margin: 0 auto;">
+            <h2 style="font-size: 2.5rem;">Your Gift Can Make Someone Else's Diwali Brighter Too.</h2>
             <div class="divider"></div>
-            <p style="font-size: 1.15rem; color: #5D4037;">A celebration becomes even more beautiful when its joy reaches beyond our own homes.</p>
-            <p style="font-size: 1.15rem; color: #5D4037;">Every Choco-naut Diwali Gift Box includes a handcrafted festive gift made by underprivileged families. We source these gifts directly from them, helping support their work and making their Diwali a little more special, too.</p>
-            <p style="font-size: 1.15rem; color: #5D4037;">So when you choose Choco-naut this Diwali, you're not just gifting chocolates and a festive surprise. You're sharing sweetness, supporting craftsmanship, and extending the spirit of Diwali to another family.</p>
-            <h3 style="margin-top: 20px; color: #D4AF37;">One gift. More than one reason to celebrate.</h3>
+            <p>A celebration becomes even more beautiful when its joy reaches beyond our own homes.</p>
+            <p>Every Choco-naut Diwali Gift Box includes a handcrafted festive gift made by underprivileged families. We source these gifts directly from them, helping support their work and making their Diwali a little more special, too.</p>
+            <p>So when you choose Choco-naut this Diwali, you're not just gifting chocolates and a festive surprise. You're sharing sweetness, supporting craftsmanship, and extending the spirit of Diwali to another family.</p>
+            <h3 style="margin-top: 30px; color: #FF8C00; font-size: 1.8rem;">One gift. More than one reason to celebrate.</h3>
         </div>
     </section>
 
     <!-- Corporate Gifting -->
     <section id="corporate" class="split-section">
         <div class="split-text">
-            <h2>Make Your Business Gifting More Meaningful.</h2>
+            <h2 style="font-size: 2.8rem;">Make Your Business Gifting More Meaningful.</h2>
             <div class="divider" style="margin: 20px 0;"></div>
-            <p style="font-size: 1.1rem; color: #5D4037;">This Diwali, thank your employees, delight your clients, and strengthen business relationships with Choco-naut's festive chocolate gifting boxes.</p>
-            <h4 style="margin-top: 20px; font-family: 'Rajdhani', sans-serif; font-size: 1.2rem;">Planning a bulk order?</h4>
-            <p style="color: #5D4037;">Tell us your quantity, preferred variant, delivery location, and budget. Contact us to discuss your requirements and applicable bulk-order pricing.</p>
-            <div style="background: #fff; border: 1px dashed #D4AF37; padding: 15px; border-radius: 8px; margin-top: 15px;">
-                <p style="margin: 0; color: #3E2723; font-weight: 700;">📞 Call or WhatsApp: <a href="https://wa.me/917678107458" style="color: #D4AF37; text-decoration: none;">+91-7678107458</a></p>
-                <p style="margin: 5px 0 0 0; color: #3E2723; font-weight: 700;">✉️ Email: <a href="mailto:contact@choconaut.in" style="color: #D4AF37; text-decoration: none;">contact@choconaut.in</a></p>
+            <p>This Diwali, thank your employees, delight your clients, and strengthen business relationships with Choco-naut's festive chocolate gifting boxes.</p>
+            <h4 style="margin-top: 30px; font-family: 'Rajdhani', sans-serif; font-size: 1.4rem; color: #fff;">Planning a bulk order?</h4>
+            <p>Tell us your quantity, preferred variant, delivery location, and budget. Contact us to discuss your requirements and applicable bulk-order pricing.</p>
+            <div style="background: rgba(0,0,0,0.4); border: 2px dashed #FFD700; padding: 25px; border-radius: 8px; margin-top: 25px;">
+                <p style="margin: 0; color: #fff; font-weight: 700; font-size: 1.3rem;">📞 Call/WhatsApp: <a href="https://wa.me/917678107458" style="color: #FFD700; text-decoration: none;">+91-7678107458</a></p>
+                <p style="margin: 10px 0 0 0; color: #fff; font-weight: 700; font-size: 1.3rem;">✉️ Email: <a href="mailto:contact@choconaut.in" style="color: #FFD700; text-decoration: none;">contact@choconaut.in</a></p>
             </div>
         </div>
-        <div class="split-text" style="background: #F3ECE1; padding: 40px; border-radius: 8px; border: 1px solid #EADDCD;">
-            <h3 style="margin-bottom: 20px;">Who is this box perfect for?</h3>
-            <h4 style="font-family: 'Rajdhani', sans-serif; font-size: 1.2rem; color: #D4AF37;">Family & loved ones</h4>
-            <p style="color: #5D4037; margin-bottom: 15px;">Make family gatherings, festive visits, and moments of gratitude a little sweeter with a thoughtful gift.</p>
+        <div class="split-text highlight-box">
+            <h3 style="margin-bottom: 25px; font-size: 2rem;">Who is this box perfect for?</h3>
+            <h4 style="font-family: 'Rajdhani', sans-serif; font-size: 1.4rem; color: #FF8C00; text-transform: uppercase;">Family & loved ones</h4>
+            <p style="margin-bottom: 20px;">Make family gatherings, festive visits, and moments of gratitude a little sweeter with a thoughtful gift.</p>
             
-            <h4 style="font-family: 'Rajdhani', sans-serif; font-size: 1.2rem; color: #D4AF37;">Friends & hosts</h4>
-            <p style="color: #5D4037; margin-bottom: 15px;">A meaningful way to thank the people welcoming you into their homes or making your year special.</p>
+            <h4 style="font-family: 'Rajdhani', sans-serif; font-size: 1.4rem; color: #FF8C00; text-transform: uppercase;">Friends & hosts</h4>
+            <p style="margin-bottom: 20px;">A meaningful way to thank the people welcoming you into their homes or making your year special.</p>
             
-            <h4 style="font-family: 'Rajdhani', sans-serif; font-size: 1.2rem; color: #D4AF37;">Employees & clients</h4>
-            <p style="color: #5D4037;">Show appreciation to your team, business partners, and valued customers with gifting that combines indulgence and thoughtfulness.</p>
+            <h4 style="font-family: 'Rajdhani', sans-serif; font-size: 1.4rem; color: #FF8C00; text-transform: uppercase;">Employees & clients</h4>
+            <p>Show appreciation to your team, business partners, and valued customers with gifting that combines indulgence and thoughtfulness.</p>
         </div>
     </section>
 
-    <section class="text-center" style="background: #fff; max-width: 100%; border-top: 1px solid #EADDCD;">
-        <div style="max-width: 900px; margin: 0 auto;">
-            <h2>Three Simple Steps to a Sweeter Diwali</h2>
+    <section class="text-center" style="background: rgba(0,0,0,0.3); max-width: 100%; border-top: 1px solid rgba(255,255,255,0.05); padding: 80px 20px;">
+        <div style="max-width: 1000px; margin: 0 auto;">
+            <h2 style="font-size: 2.8rem;">Three Simple Steps to a Sweeter Diwali</h2>
             <div class="divider"></div>
-            <div style="display: flex; gap: 30px; justify-content: center; flex-wrap: wrap; margin-top: 40px;">
-                <div style="flex: 1; min-width: 250px;">
-                    <h1 style="color: #D4AF37; font-size: 4rem; margin: 0; line-height: 1;">1</h1>
-                    <h4 style="font-family: 'Rajdhani', sans-serif; font-size: 1.3rem;">Choose your box.</h4>
-                    <p style="color: #5D4037;">Select Classic, Signature, or Premium according to your preference and budget.</p>
+            <div style="display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; margin-top: 50px;">
+                <div style="flex: 1; min-width: 250px; background: rgba(255,255,255,0.02); padding: 30px; border-radius: 12px; border: 1px solid rgba(212,175,55,0.2);">
+                    <h1 style="color: #FFD700; font-size: 5rem; margin: 0; line-height: 1; font-family: 'Orbitron', sans-serif; text-shadow: 0 0 20px rgba(255,215,0,0.4);">1</h1>
+                    <h4 style="font-family: 'Rajdhani', sans-serif; font-size: 1.5rem; margin-top: 15px; color: #fff;">Choose your box.</h4>
+                    <p>Select Classic, Signature, or Premium according to your preference and budget.</p>
                 </div>
-                <div style="flex: 1; min-width: 250px;">
-                    <h1 style="color: #D4AF37; font-size: 4rem; margin: 0; line-height: 1;">2</h1>
-                    <h4 style="font-family: 'Rajdhani', sans-serif; font-size: 1.3rem;">Place your order.</h4>
-                    <p style="color: #5D4037;">Order through our website and select your preferred delivery date at checkout.</p>
+                <div style="flex: 1; min-width: 250px; background: rgba(255,255,255,0.02); padding: 30px; border-radius: 12px; border: 1px solid rgba(212,175,55,0.2);">
+                    <h1 style="color: #FFD700; font-size: 5rem; margin: 0; line-height: 1; font-family: 'Orbitron', sans-serif; text-shadow: 0 0 20px rgba(255,215,0,0.4);">2</h1>
+                    <h4 style="font-family: 'Rajdhani', sans-serif; font-size: 1.5rem; margin-top: 15px; color: #fff;">Place your order.</h4>
+                    <p>Order through our website and select your preferred delivery date at checkout.</p>
                 </div>
-                <div style="flex: 1; min-width: 250px;">
-                    <h1 style="color: #D4AF37; font-size: 4rem; margin: 0; line-height: 1;">3</h1>
-                    <h4 style="font-family: 'Rajdhani', sans-serif; font-size: 1.3rem;">Share the joy.</h4>
-                    <p style="color: #5D4037;">Complete your gifting plans and make this Diwali memorable for the people who matter.</p>
+                <div style="flex: 1; min-width: 250px; background: rgba(255,255,255,0.02); padding: 30px; border-radius: 12px; border: 1px solid rgba(212,175,55,0.2);">
+                    <h1 style="color: #FFD700; font-size: 5rem; margin: 0; line-height: 1; font-family: 'Orbitron', sans-serif; text-shadow: 0 0 20px rgba(255,215,0,0.4);">3</h1>
+                    <h4 style="font-family: 'Rajdhani', sans-serif; font-size: 1.5rem; margin-top: 15px; color: #fff;">Share the joy.</h4>
+                    <p>Complete your gifting plans and make this Diwali memorable for the people who matter.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- FAQs -->
-    <section style="max-width: 800px;">
-        <h2 class="text-center">Frequently Asked Questions</h2>
+    <section style="max-width: 900px;">
+        <h2 class="text-center" style="font-size: 2.8rem;">Frequently Asked Questions</h2>
         <div class="divider"></div>
-        <div style="margin-top: 40px;">
+        <div style="margin-top: 50px;">
             <div class="faq-item">
                 <h4>What are the prices of the Choco-naut Diwali Gift Boxes?</h4>
-                <p>Classic is ₹1,199, Signature is ₹1,299, and Premium is ₹1,399. We offer an automatic 10% discount on orders of 5+ boxes, and 15% off for 10+ boxes!</p>
+                <p>Classic is ₹1,199, Signature is ₹1,299, and Premium is ₹1,399. We offer an automatic <strong>10% discount on orders of 5+ boxes</strong>, and <strong>15% off for 10+ boxes!</strong></p>
             </div>
             <div class="faq-item">
                 <h4>Do you deliver across India and how much does it cost?</h4>
-                <p>Yes, Choco-naut offers India-wide delivery, and for our Diwali Celebration boxes, delivery is absolutely FREE!</p>
+                <p>Yes, Choco-naut offers India-wide delivery, and for our Diwali Celebration boxes, delivery is <strong>absolutely FREE!</strong></p>
             </div>
             <div class="faq-item">
                 <h4>When will my box be delivered?</h4>
-                <p>Deliveries commence from 23rd October 2026. Because our chocolates are made fresh to order, dispatch takes 2-3 days. You can select your preferred delivery date at checkout.</p>
+                <p>Deliveries commence from <strong>23rd October 2026</strong>. Because our chocolates are made fresh to order, dispatch takes 2-3 days. You can safely select your preferred delivery date directly inside the checkout cart.</p>
             </div>
             <div class="faq-item">
                 <h4>What makes the Diwali box special?</h4>
@@ -422,46 +463,46 @@
             </div>
             <div class="faq-item">
                 <h4>Can I place a corporate or bulk order?</h4>
-                <p>Yes. Contact us on WhatsApp/Call at +91-7678107458 or email contact@choconaut.in with your requirements.</p>
+                <p>Yes. Contact us on WhatsApp/Call at <strong>+91-7678107458</strong> or email <strong>contact@choconaut.in</strong> with your requirements for specialized service.</p>
             </div>
         </div>
     </section>
 
-    <section class="text-center" style="background: #F3ECE1; max-width: 100%; padding: 100px 20px;">
-        <p style="text-transform: uppercase; letter-spacing: 3px; font-weight: 700; color: #D4AF37; margin-bottom: 10px;">THIS DIWALI, GIFT WITH HEART</p>
-        <h2 style="font-size: 3rem; margin-bottom: 20px;">Let Your Gifts Say a Little More.</h2>
-        <p style="font-size: 1.2rem; color: #5D4037; max-width: 700px; margin: 0 auto 30px;">Give your loved ones something delicious. Give them something thoughtful. And share the joy of a celebration that reaches a little further.</p>
-        <a href="#boxes" class="btn-gold" onclick="sfx('click')">Shop Diwali Gift Boxes</a>
-        <p style="margin-top: 30px; color: #8D6E63;">Need help or planning bulk gifting?<br><strong>WhatsApp +91-7678107458</strong></p>
+    <section class="text-center" style="background: rgba(0,0,0,0.5); max-width: 100%; padding: 120px 20px; border-top: 2px solid #D4AF37;">
+        <p style="text-transform: uppercase; letter-spacing: 4px; font-weight: 900; color: #FF8C00; margin-bottom: 15px; font-family: 'Orbitron', sans-serif;">THIS DIWALI, GIFT WITH HEART</p>
+        <h2 style="font-size: 3.5rem; margin-bottom: 25px;">Let Your Gifts Say a Little More.</h2>
+        <p style="font-size: 1.3rem; color: #E2E8F0; max-width: 750px; margin: 0 auto 40px; font-weight: 500;">Give your loved ones something delicious. Give them something thoughtful. And share the joy of a celebration that reaches a little further.</p>
+        <a href="#boxes" class="btn-gold" onclick="sfx('click')" style="font-size: 1.3rem; padding: 20px 50px;">Shop Diwali Gift Boxes</a>
+        <p style="margin-top: 40px; font-size: 1.2rem;">Need help or planning bulk gifting?<br><strong style="color: #FFD700;">WhatsApp / Call: +91-7678107458</strong></p>
     </section>
 
     <!-- REQUIRED CART BAR & MODALS FROM INDEX.HTML -->
     <div id="cartBar" class="cart-bar" onclick="openCart()">
-        <div style="flex:1"><span style="font-size: 0.8rem; color: #888;">CART TOTAL</span><div style="font-size: 1.2rem; font-weight: bold;">TOTAL: <span id="totalPrice">₹0</span></div></div>
-        <span style="font-weight: bold; border-bottom: 2px solid #D4AF37; font-size: 0.9rem;">VIEW CART & PAY -></span>
+        <div style="flex:1"><span style="font-size: 0.8rem; color: #888;">CART TOTAL</span><div style="font-size: 1.2rem; font-weight: bold; color: #fff;">TOTAL: <span id="totalPrice" style="color: #FFD700;">₹0</span></div></div>
+        <span style="font-weight: bold; border-bottom: 2px solid #FFD700; font-size: 0.9rem; color: #FFD700;">VIEW CART & PAY -></span>
     </div>
 
     <div id="cartOverlay" class="modal-overlay">
         <div class="modal-box">
             <span class="close-btn" onclick="closeCart()">&times;</span>
-            <h2 style="text-align: center; margin-bottom: 15px; font-family: 'Playfair Display', serif;">YOUR CART</h2>
+            <h2 style="text-align: center; margin-bottom: 15px; font-family: 'Orbitron', sans-serif;">YOUR CART</h2>
             <div id="cartItems"></div>
             
-            <div style="margin-top: 15px; border-top: 1px solid #EADDCD; padding-top: 15px;">
-                <div style="display:flex; justify-content:space-between; margin-bottom:5px;"><span>Subtotal:</span><span id="subTotalVal">₹0</span></div>
-                <div style="display:flex; justify-content:space-between; margin-bottom:5px; display:none;" id="discountDisplay"><span>Discount:</span><span id="discountVal" style="color:#4CAF50; font-weight:bold;">-₹0</span></div>
-                <div style="display:flex; justify-content:space-between; margin-bottom:5px;"><span>Delivery Charge:</span><span id="deliveryVal" style="color:#D4AF37; font-weight:bold;">FREE</span></div>
-                <div style="text-align: right; font-size: 1.5rem; color: #D4AF37; font-weight: bold; margin-top: 10px;">Total: <span id="modalTotal">₹0</span></div>
+            <div style="margin-top: 15px; border-top: 1px solid #333; padding-top: 15px;">
+                <div style="display:flex; justify-content:space-between; margin-bottom:5px;"><span>Subtotal:</span><span id="subTotalVal" style="color:#fff;">₹0</span></div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:5px; display:none;" id="discountDisplay"><span>Discount:</span><span id="discountVal" style="color:#FF8C00; font-weight:bold;">-₹0</span></div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:5px;"><span>Delivery Charge:</span><span id="deliveryVal" style="color:#4CAF50; font-weight:bold;">FREE</span></div>
+                <div style="text-align: right; font-size: 1.5rem; color: #FFD700; font-weight: bold; margin-top: 10px;">Total: <span id="modalTotal">₹0</span></div>
             </div>
             
-            <hr style="border-color: #EADDCD; margin: 20px 0;">
+            <hr style="border-color: #333; margin: 20px 0;">
             
             <div class="checkout-form">
                 <!-- NEW DELIVERY DATE SELECTOR -->
-                <div style="margin-bottom: 15px; text-align: left;">
-                    <label style="font-size: 0.9rem; color: #3E2723; font-weight: 700; margin-bottom: 5px; display: block;">Preferred Delivery Date:</label>
-                    <input type="date" id="deliveryDate" class="checkout-input" required>
-                    <p style="font-size: 0.75rem; color: #8D6E63; line-height: 1.3; margin-top: 5px; margin-bottom: 0;">*Deliveries commence 23rd Oct. Chocolates are made fresh to order. Dispatch takes 2-3 days. Delivery times may vary by location. Queries? Call +91-7678107458</p>
+                <div style="margin-bottom: 20px; text-align: left; background: rgba(255,215,0,0.05); padding: 15px; border: 1px solid rgba(255,215,0,0.3); border-radius: 6px;">
+                    <label style="font-size: 1rem; color: #FFD700; font-weight: 700; margin-bottom: 8px; display: block;">Preferred Delivery Date:</label>
+                    <input type="date" id="deliveryDate" class="checkout-input" required style="background: rgba(0,0,0,0.8); border-color: #FFD700; color: #fff;">
+                    <p style="font-size: 0.85rem; color: #ccc; line-height: 1.4; margin-top: 8px; margin-bottom: 0;">*Deliveries commence 23rd Oct. Chocolates are made fresh to order. Dispatch takes 2-3 days. Delivery times may vary by location. Queries? Call +91-7678107458</p>
                 </div>
                 
                 <input type="text" id="name" class="checkout-input" placeholder="Name" required style="margin-bottom: 10px;">
@@ -470,15 +511,15 @@
                 <input type="text" id="pincode" class="checkout-input" placeholder="Pincode (6 Digits)" maxlength="6" required style="margin-bottom: 10px;">
                 <textarea id="address" class="checkout-input" rows="2" placeholder="Full Address" required></textarea>
                 
-                <button onclick="startPayment()" class="btn-gold" style="width: 100%; border-radius: 4px; margin-top: 10px;">💳 PAY SECURELY</button>
+                <button onclick="startPayment()" class="btn-gold" style="width: 100%; border-radius: 6px; margin-top: 15px; padding: 18px;">💳 PAY SECURELY</button>
             </div>
         </div>
     </div>
 
     <div id="invoiceModal" class="modal-overlay">
         <div class="modal-box" style="border: 2px solid #4CAF50;">
-            <div style="text-align: center; border-bottom: 1px solid #EADDCD; padding-bottom: 20px;">
-                <h1 style="color: #3E2723; font-size:1.5rem;">CHOCO-NAUT&trade;</h1>
+            <div style="text-align: center; border-bottom: 1px solid #333; padding-bottom: 20px;">
+                <h1 style="color: #FFD700; font-size:1.5rem; font-family: 'Orbitron', sans-serif;">CHOCO-NAUT&trade;</h1>
                 <p style="color: #4CAF50; font-weight: bold; letter-spacing: 2px;">PAYMENT SUCCESSFUL</p>
                 <p id="invoiceId" style="color: #888; font-size: 0.9rem;">#INV-00000</p>
             </div>
@@ -487,17 +528,17 @@
                 <p><strong>Phone:</strong> <span id="invPhone"></span></p>
                 <p><strong>Address:</strong> <span id="invAddr"></span></p>
             </div>
-            <table class="invoice-table" style="color: #3E2723; border-collapse: collapse; width: 100%; margin-top: 15px;">
-                <thead style="border-bottom: 1px solid #EADDCD;">
+            <table class="invoice-table" style="color: #fff; border-collapse: collapse; width: 100%; margin-top: 15px;">
+                <thead style="border-bottom: 1px solid #333;">
                     <tr><th style="text-align:left; padding:5px 0;">Item</th><th style="text-align:center;">Qty</th><th style="text-align:right;">Price</th></tr>
                 </thead>
                 <tbody id="invoiceItems"></tbody>
             </table>
-            <div style="text-align: right; border-top: 1px solid #EADDCD; padding-top: 15px; margin-top: 15px;">
+            <div style="text-align: right; border-top: 1px solid #333; padding-top: 15px; margin-top: 15px;">
                 <p>Subtotal: <span id="invSub">₹0</span></p>
-                <p style="color: #4CAF50;">Discount: <span id="invDisc">-₹0</span></p>
-                <p>Delivery: <span id="invDel">₹0</span></p>
-                <h2 style="color: #D4AF37; margin-top: 10px;">PAID: <span id="invTotal">₹0</span></h2>
+                <p style="color: #FF8C00;">Discount: <span id="invDisc">-₹0</span></p>
+                <p style="color: #4CAF50;">Delivery: <span id="invDel">FREE</span></p>
+                <h2 style="color: #FFD700; margin-top: 10px;">PAID: <span id="invTotal">₹0</span></h2>
             </div>
         </div>
     </div>
@@ -590,16 +631,13 @@
                 if(diwaliBoxCount > 0) {
                     bar.classList.add('active');
                     if (diwaliBoxCount >= 10) {
-                        barText.innerHTML = `🚀 <strong>15% DISCOUNT APPLIED!</strong> FREE DELIVERY!`;
-                        barText.style.color = "#4CAF50";
+                        barText.innerHTML = `🚀 <strong style="color:#FFD700;">15% DISCOUNT APPLIED!</strong> FREE DELIVERY!`;
                     } else if (diwaliBoxCount >= 5) {
                         let needed = 10 - diwaliBoxCount;
-                        barText.innerHTML = `✅ <strong>10% DISCOUNT APPLIED!</strong> ADD ${needed} MORE FOR 15% OFF!`;
-                        barText.style.color = "#4CAF50";
+                        barText.innerHTML = `✅ <strong style="color:#FFD700;">10% DISCOUNT APPLIED!</strong> ADD ${needed} MORE FOR 15% OFF!`;
                     } else {
                         let needed = 5 - diwaliBoxCount;
-                        barText.innerHTML = `✅ <strong>FREE DELIVERY!</strong> ADD ${needed} MORE BOXES FOR 10% OFF!`;
-                        barText.style.color = "#D4AF37";
+                        barText.innerHTML = `✨ <strong>FREE DELIVERY!</strong> ADD ${needed} MORE BOXES FOR 10% OFF!`;
                     }
                 } else {
                     bar.classList.remove('active');
