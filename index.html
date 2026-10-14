@@ -59,7 +59,6 @@
     }
     </script>
     
-    <!-- Added Playfair Display for the Diwali Pop-up -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css?v=20260311">
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
@@ -84,26 +83,47 @@
         /* =========================================
            DIWALI PROMO INJECTIONS
            ========================================= */
-        
-        /* Hero Announcement Banner */
-        .hero-diwali-banner {
-            background: linear-gradient(90deg, #7A191B, #962022, #7A191B);
-            color: #FFD700;
+
+        /* Central Floating Diwali Box under SHOP NOW */
+        .diwali-center-banner {
+            display: block;
+            margin: 30px auto 0;
+            background: rgba(122, 25, 27, 0.85); /* Deep Festive Maroon matching Diwali page */
+            border: 2px solid #D4AF37;
+            border-radius: 8px;
+            padding: 15px 30px;
             text-align: center;
-            padding: 12px 15px;
-            font-weight: 900;
-            letter-spacing: 2px;
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            border-bottom: 2px solid #D4AF37;
-            font-family: 'Orbitron', sans-serif;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-        }
-        .hero-diwali-banner:hover {
-            background: linear-gradient(90deg, #962022, #7A191B, #962022);
+            text-decoration: none;
             color: #FFF;
+            backdrop-filter: blur(6px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5), 0 0 15px rgba(212, 175, 55, 0.2);
+            transition: all 0.3s ease;
+            width: fit-content;
+            min-width: 280px;
+            cursor: pointer;
+            position: relative;
+            z-index: 10;
+        }
+        .diwali-center-banner:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.6), 0 0 25px rgba(212, 175, 55, 0.5);
+            background: rgba(150, 32, 34, 0.95);
+        }
+        .diwali-center-banner .d-title {
+            font-family: 'Playfair Display', serif;
+            color: #D4AF37;
+            font-size: 1.4rem;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 5px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        .diwali-center-banner .d-sub {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            font-weight: 700;
+            color: #fff;
         }
 
         /* Festive Pop-up Modal */
@@ -172,11 +192,6 @@
         </div>
     </nav>
 
-    <!-- NEW: Top Hero Diwali Banner -->
-    <div class="hero-diwali-banner" onclick="window.location.href='diwali.html'; sfx('click')">
-        ✨ DIWALI 2026 CORPORATE & GIFTING BOXES ARE LIVE! CLICK HERE TO PRE-BOOK ✨
-    </div>
-
     <section class="hero">
         <img src="images/bg.jpg" onerror="this.src='https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=2072'" class="hero-bg" alt="Background">
         <div class="hero-overlay"></div>
@@ -197,6 +212,12 @@
                 Handcrafted artisan chocolate that takes your tastebuds to zero gravity. 
             </p>
             <a href="#shop" class="btn-main" onclick="sfx('click')">SHOP NOW</a>
+            
+            <!-- NEW: Central Floating Diwali Banner -->
+            <a href="diwali.html" class="diwali-center-banner" onclick="sfx('click')">
+                <span class="d-title">✨ DIWALI 2026 COLLECTION ✨</span>
+                <span class="d-sub">PRE-BOOK CORPORATE & GIFT BOXES</span>
+            </a>
         </div>
 
         <div class="hero-side-banner right-banner" onclick="window.location.href='#shop'; sfx('click')">
@@ -651,11 +672,10 @@
         }
 
         window.addEventListener('load', function() {
-            // Check session storage so it doesn't spam the user on every refresh
             if (!sessionStorage.getItem('diwaliPopupShown')) {
                 setTimeout(() => {
                     document.getElementById('diwaliPromoPopup').classList.add('show');
-                }, 1500); // Pops up after 1.5 seconds
+                }, 1500); 
             }
         });
     </script>
