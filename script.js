@@ -15,7 +15,7 @@ const products = {
     nebula: 300, 
     velvet: 270, 
     smooth: 270, 
-    celestial: 1699 
+    diwali: 1499 
 };
 
 const names = { 
@@ -25,7 +25,7 @@ const names = {
     nebula: "Nebula", 
     velvet: "Velvet", 
     smooth: "Smooth", 
-    celestial: "Celestial Luxury Combo" 
+    diwali: "Diwali 2026 Collection" 
 };
 
 const bundleEligible = ['milkyway', 'darkmatter', 'asteroid', 'nebula', 'velvet', 'smooth'];
@@ -37,7 +37,7 @@ let cart = {
     nebula: 0, 
     velvet: 0, 
     smooth: 0, 
-    celestial: 0 
+    diwali: 0 
 };
 
 let inventory = {}; 
@@ -247,8 +247,8 @@ function calculateTotals() {
     
     if (count === 0) {
         deliveryCharge = 0;
-    } else if (count === 1) {
-        deliveryCharge = 99;
+    } else if (count === 1 || (count > 0 && bundleCount === 0)) {
+        deliveryCharge = 99; // Added fallback to ensure no free delivery if only 1 item or just Diwali box (without 2+ bars)
     } else {
         deliveryCharge = 0; 
     }
@@ -471,10 +471,10 @@ const productDetails = {
     nebula: { title: "Nebula Swirl", desc: "A galaxy of golden butterscotch Caramel and Sea Salt.", images: ["images/nebula.jpg", "images/nebula_pack.jpg", "images/nebula_usp.jpg", "images/nebula_benefit.jpg", "images/nebula_ing.jpg", "images/nebula_nutri.jpg"] },
     velvet: { title: "Velvet Comet", desc: "50% Semi-Sweet Chocolate. The perfect balance.", images: ["images/velvet.jpg", "images/velvet_pack.jpg", "images/velvet_usp.jpg", "images/velvet_benefit.jpg", "images/velvet_ing.jpg", "images/velvet_nutri.jpg"] },
     smooth: { title: "Smooth Astro", desc: "Classic 35% Milk Chocolate. Rich, creamy, and nostalgic.", images: ["images/smooth.jpg", "images/smooth_pack.jpg", "images/smooth_usp.jpg", "images/smooth_benefit.jpg", "images/smooth_ing.jpg", "images/smooth_nutri.jpg"] },
-    celestial: { 
-        title: "Celestial Luxury Edition", 
-        desc: "A curated quartet of artisan masterpieces. Two bestsellers paired with two exclusive unreleased flavors and a bespoke love letter. A journey written in the stars.", 
-        images: ["images/celestial_box.jpg", "images/celestial_open.jpg"] 
+    diwali: { 
+        title: "Diwali 2026 Corporate Collection", 
+        desc: "The ultimate festive gift. An exclusive 12-piece assortment featuring our finest artisanal flavors, packaged in a luxurious gold-foiled box.", 
+        images: ["images/diwali_box.jpeg"] 
     }
 };
 
@@ -513,7 +513,7 @@ function updateSlide() {
     
     const captionEl = document.getElementById('slideCaption');
     if(captionEl) {
-        if (currentProduct === 'celestial') {
+        if (currentProduct === 'diwali') {
             captionEl.innerText = slideIndex === 0 ? "OUTSIDE BOX" : "INSIDE BOX";
         } else {
             captionEl.innerText = slideCaptions[slideIndex] || "VIEW";
