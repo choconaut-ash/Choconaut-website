@@ -59,7 +59,8 @@
     }
     </script>
     
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <!-- Added Playfair Display for the Diwali Pop-up -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css?v=20260311">
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
@@ -78,6 +79,84 @@
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=1389656802841099&ev=PageView&noscript=1"
     /></noscript>
+
+    <style>
+        /* =========================================
+           DIWALI PROMO INJECTIONS
+           ========================================= */
+        
+        /* Hero Announcement Banner */
+        .hero-diwali-banner {
+            background: linear-gradient(90deg, #7A191B, #962022, #7A191B);
+            color: #FFD700;
+            text-align: center;
+            padding: 12px 15px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            border-bottom: 2px solid #D4AF37;
+            font-family: 'Orbitron', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        .hero-diwali-banner:hover {
+            background: linear-gradient(90deg, #962022, #7A191B, #962022);
+            color: #FFF;
+        }
+
+        /* Festive Pop-up Modal */
+        .diwali-popup-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85); z-index: 99999;
+            display: flex; justify-content: center; align-items: center;
+            opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+            backdrop-filter: blur(4px);
+        }
+        .diwali-popup-overlay.show {
+            opacity: 1; pointer-events: auto;
+        }
+        .diwali-popup-content {
+            background: #FCFBF8; border: 4px solid #D4AF37;
+            border-radius: 12px; width: 92%; max-width: 450px;
+            position: relative; text-align: center; padding: 25px 20px;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.3);
+            color: #3A2320; font-family: 'Rajdhani', sans-serif;
+            transform: translateY(30px); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .diwali-popup-overlay.show .diwali-popup-content {
+            transform: translateY(0);
+        }
+        .diwali-popup-content h2 {
+            color: #7A191B; margin: 15px 0 5px; font-family: 'Playfair Display', serif; font-size: 2.2rem; line-height: 1.1;
+        }
+        .diwali-popup-content p {
+            color: #5D4037; font-size: 1.1rem; font-weight: 600; margin-bottom: 20px;
+        }
+        .diwali-popup-content img {
+            width: 100%; height: 220px; object-fit: cover; border-radius: 8px; border: 2px solid #EADDCD;
+        }
+        .diwali-popup-close {
+            position: absolute; top: -15px; right: -15px; font-size: 1.8rem;
+            color: #FFF; background: #333; border: 2px solid #D4AF37;
+            width: 40px; height: 40px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; font-weight: bold; box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            transition: 0.2s;
+        }
+        .diwali-popup-close:hover { background: #7A191B; }
+        .btn-diwali {
+            display: inline-block; background: #7A191B; color: #FFF;
+            padding: 14px 30px; font-weight: 900; border-radius: 6px;
+            text-decoration: none; font-size: 1.1rem; width: 90%;
+            text-transform: uppercase; border: 2px solid #7A191B;
+            transition: all 0.3s; box-shadow: 0 5px 15px rgba(122, 25, 27, 0.3);
+        }
+        .btn-diwali:hover {
+            background: #FFF; color: #7A191B; border-color: #7A191B;
+        }
+    </style>
 </head>
 <body onload="initInventory()">
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5BH8G53C"
@@ -92,6 +171,11 @@
             <a href="#contact" onclick="sfx('click')">CONTACT</a>
         </div>
     </nav>
+
+    <!-- NEW: Top Hero Diwali Banner -->
+    <div class="hero-diwali-banner" onclick="window.location.href='diwali.html'; sfx('click')">
+        ✨ DIWALI 2026 CORPORATE & GIFTING BOXES ARE LIVE! CLICK HERE TO PRE-BOOK ✨
+    </div>
 
     <section class="hero">
         <img src="images/bg.jpg" onerror="this.src='https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=2072'" class="hero-bg" alt="Background">
@@ -547,6 +631,34 @@
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
         </svg>
     </a>
+
+    <!-- NEW: Diwali Promotional Pop-up Modal -->
+    <div id="diwaliPromoPopup" class="diwali-popup-overlay">
+        <div class="diwali-popup-content">
+            <span class="diwali-popup-close" onclick="closeDiwaliPopup()">&times;</span>
+            <img src="images/diwali_closed.jpeg" onerror="this.src='https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=600'" alt="Diwali 2026 Collection">
+            <h2>Make This Diwali Sweeter</h2>
+            <p>Premium artisan chocolate boxes. Free delivery & corporate bulk discounts available!</p>
+            <a href="diwali.html" class="btn-diwali" onclick="sfx('click')">EXPLORE DIWALI COLLECTION</a>
+        </div>
+    </div>
+
+    <!-- NEW: Script to trigger Diwali Pop-up automatically -->
+    <script>
+        function closeDiwaliPopup() {
+            document.getElementById('diwaliPromoPopup').classList.remove('show');
+            sessionStorage.setItem('diwaliPopupShown', 'true');
+        }
+
+        window.addEventListener('load', function() {
+            // Check session storage so it doesn't spam the user on every refresh
+            if (!sessionStorage.getItem('diwaliPopupShown')) {
+                setTimeout(() => {
+                    document.getElementById('diwaliPromoPopup').classList.add('show');
+                }, 1500); // Pops up after 1.5 seconds
+            }
+        });
+    </script>
 
     <script src="script.js?v=20260808"></script>
     <script>
