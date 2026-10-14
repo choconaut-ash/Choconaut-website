@@ -3,98 +3,235 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Choco-naut | Exclusive Diwali Collection</title>
-    <meta name="description" content="Celebrate Diwali with Choco-naut's limited edition artisan chocolate gift boxes.">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <title>Choco-naut | ✨ Exclusive Diwali 2026 Celebration ✨</title>
+    <meta name="description" content="Celebrate with Choco-naut's limited-edition Diwali chocolate gift boxes. Built by you, with premium artisan flavors & festive handmade gifts.">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Rajdhani:wght@400;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css?v=20261014">
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     
     <style>
-        .diwali-hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.9)), url('images/diwali_closed.jpg') center/cover;
-            text-align: center;
-            padding: 100px 20px;
-            border-bottom: 2px solid #d4af37;
-        }
-        .diwali-hero h1 { color: #d4af37; font-size: 3rem; text-shadow: 0 0 20px rgba(212, 175, 55, 0.5); margin-bottom: 15px; }
-        .diwali-hero p { color: #fff; max-width: 600px; margin: 0 auto; font-size: 1.2rem; }
-        
-        .diwali-card {
-            border: 2px solid #d4af37 !important;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
-            background: linear-gradient(to top, #1a1a1a, #0a0a0a) !important;
-            cursor: pointer;
+        /* Festive Red & Gold Theme Overrides */
+        body {
+            background-color: #3b0700; /* Deep Royal Crimson Red */
+            background-image: 
+                radial-gradient(circle at top, rgba(235, 143, 0, 0.25), transparent 60%),
+                radial-gradient(circle at bottom, rgba(163, 0, 0, 0.4), transparent 80%),
+                url('https://images.unsplash.com/photo-1601919051950-bb9f3ffb3fee?q=80&w=1500'); /* Subtle patterns */
+            background-attachment: fixed;
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
         }
 
-        /* Box Builder UI Styles */
-        .builder-slots {
-            display: flex; gap: 10px; justify-content: center; margin: 20px 0; flex-wrap: wrap;
+        /* Top traditional garlands (Toran) */
+        .marigold-garland {
+            background: radial-gradient(circle, #ffca28 20%, #ff8f00 60%, transparent 100%);
+            height: 14px;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 99;
+            box-shadow: 0 4px 10px rgba(255,143,0,0.5);
+            background-image: repeating-linear-gradient(90deg, #ff9e00 0px, #ff9e00 20px, #ffca28 20px, #ffca28 40px);
         }
-        .slot {
-            width: 60px; height: 80px; border: 2px dashed #d4af37; display: flex; 
-            align-items: center; justify-content: center; font-size: 0.7rem; 
-            text-align: center; border-radius: 5px; color: #888; background: #111;
+
+        nav {
+            background: linear-gradient(to bottom, #2b0000 70%, transparent);
+            border-bottom: 2px solid #d4af37;
+            box-shadow: 0 4px 15px rgba(212,175,55,0.15);
+        }
+        .nav-logo {
+            font-family: 'Cinzel', serif;
+            color: #d4af37 !important;
+            text-shadow: 0 0 10px rgba(212,175,55,0.4);
+        }
+
+        /* Luxurious Banner Section */
+        .diwali-hero {
+            background: linear-gradient(rgba(43, 0, 0, 0.4), rgba(15, 0, 0, 0.9)), url('images/diwali_closed.jpg') center/cover;
+            text-align: center;
+            padding: 110px 20px;
+            border-bottom: 3px double #d4af37;
+            box-shadow: inset 0 -30px 60px rgba(10,0,0,0.9);
             position: relative;
         }
-        .slot.filled { border-style: solid; background: #222; color: #d4af37; font-weight: bold; }
+        .diwali-hero h1 { 
+            font-family: 'Cinzel', serif;
+            color: #ffe082; 
+            font-size: 3.5rem; 
+            letter-spacing: 2px;
+            text-shadow: 0 0 25px #d4af37, 0 0 40px #ff6f00; 
+            margin-bottom: 10px; 
+            animation: pulsate 3s ease-in-out infinite;
+        }
+        .diwali-hero p { 
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: #ffd54f; 
+            max-width: 650px; 
+            margin: 15px auto 0; 
+            font-size: 1.3rem; 
+            text-shadow: 1px 1px 3px #000;
+        }
+
+        /* High-Density Explainer Section (Resolves "Empty Page") */
+        .how-it-works {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(80, 10, 5, 0.9), rgba(40, 5, 2, 0.95));
+            border: 2px solid #d4af37;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+        .how-grid {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 25px;
+        }
+        .how-step {
+            flex: 1;
+            min-width: 250px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px;
+            box-shadow: inset 0 0 15px rgba(212,175,55,0.05);
+        }
+        .how-step h4 { color: #ffe082; font-family: 'Cinzel', serif; font-size: 1.1rem; margin-bottom: 10px; }
+        .how-step p { font-size: 0.95rem; color: #ddd; line-height: 1.4; }
+
+        /* Diwali Products Cards Styling */
+        .diwali-card {
+            border: 2px solid #d4af37 !important;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(255, 143, 0, 0.25), inset 0 0 20px rgba(255, 143, 0, 0.1);
+            background: linear-gradient(to top, #4a0c02, #240200) !important; /* Crimson Red Gradient */
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        .diwali-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 35px rgba(212, 175, 55, 0.5);
+        }
+        .diwali-badge {
+            position: absolute; 
+            top: 15px; 
+            right: 15px; 
+            background: linear-gradient(135deg, #ffd54f, #f57c00); 
+            color: #000; 
+            padding: 6px 14px; 
+            font-weight: 800; 
+            border-radius: 20px;
+            font-size: 0.85rem;
+            z-index: 5;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .builder-slots {
+            display: flex; gap: 15px; justify-content: center; margin: 25px 0; flex-wrap: wrap;
+        }
+        .slot {
+            width: 75px; height: 100px; border: 2px dashed #ffe082; display: flex; 
+            align-items: center; justify-content: center; font-size: 0.75rem; 
+            text-align: center; border-radius: 8px; color: #ffb74d; background: #2b0401;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5); transition: 0.3s;
+        }
+        .slot.filled { border-style: solid; border-color: #ffd54f; background: #610e05; color: #fff; font-weight: bold; text-shadow: 1px 1px 2px #000; }
         
         .flavor-btn {
-            background: transparent; border: 1px solid #555; color: #ddd; 
-            padding: 8px 12px; margin: 5px; border-radius: 4px; cursor: pointer;
-            font-family: 'Rajdhani', sans-serif; transition: 0.3s;
+            background: linear-gradient(rgba(255,255,255,0.02), rgba(0,0,0,0.4)); border: 1px solid #ffb74d; color: #ffe082; 
+            padding: 10px 15px; margin: 6px; border-radius: 6px; cursor: pointer;
+            font-family: 'Rajdhani', sans-serif; font-weight: 600; font-size: 0.95rem; transition: all 0.2s;
         }
-        .flavor-btn:hover { border-color: #d4af37; color: #d4af37; }
-        .flavor-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+        .flavor-btn:hover { border-color: #ffd54f; color: #fff; background: rgba(255, 143, 0, 0.3); transform: scale(1.05); }
+        .flavor-btn:disabled { opacity: 0.2; cursor: not-allowed; }
+
+        /* Animation */
+        @keyframes pulsate {
+            0% { transform: scale(1); text-shadow: 0 0 25px #d4af37, 0 0 40px #ff6f00; }
+            50% { transform: scale(1.03); text-shadow: 0 0 35px #ffe082, 0 0 60px #e65100; }
+            100% { transform: scale(1); text-shadow: 0 0 25px #d4af37, 0 0 40px #ff6f00; }
+        }
     </style>
 </head>
 <body onload="initInventory()">
+    <div class="marigold-garland"></div>
 
     <nav>
         <a href="index.html" class="nav-logo" onclick="sfx('click')">CHOCO-NAUT&trade;</a>
         <div class="nav-links">
-            <a href="index.html" onclick="sfx('click')">BACK TO MAIN SITE</a>
+            <a href="index.html" onclick="sfx('click')">RETURN TO EARTH</a>
         </div>
     </nav>
     
     <header class="diwali-hero">
-        <h1>FESTIVAL OF LIGHTS</h1>
-        <p>Premium handcrafted bean-to-bar curations. Each box contains 4 artisan bars and a beautiful golden beaded tea-light holder.</p>
+        <h1>✨ DIWALI CELEBRATION BOX ✨</h1>
+        <p>Ignite the festive cheer with handcrafted, space-grade Indian artisan chocolate boxes combined with gorgeous handcrafted local gifts. Designed entirely by you, built for those who light up your universe.</p>
     </header>
 
-    <section class="products" style="padding-top: 40px;">
-        <h2 class="section-header" style="font-size: 1.5rem;">SELECT YOUR TIER TO BUILD YOUR BOX</h2>
-        <div class="grid" style="justify-content: center; display: flex; flex-wrap: wrap; gap: 30px;">
+    <!-- EXPLAINER SECTION (Fills visual space, adds deep context) -->
+    <section class="how-it-works">
+        <h2 style="font-family: 'Cinzel', serif; color: #ffe082; text-shadow: 0 0 15px rgba(255,143,0,0.3); font-size: 1.8rem; margin-bottom: 5px;">HOW YOUR CELEBRATION BOX IS MADE</h2>
+        <p style="font-family: 'Playfair Display', serif; font-style: italic; color: #ccc; margin-bottom: 10px;">A personalized, 3-step masterfully curated premium Diwali experience.</p>
+        
+        <div class="how-grid">
+            <div class="how-step">
+                <span style="font-size: 2.2rem;">🎁</span>
+                <h4>1. Pick A Box Level</h4>
+                <p>Choose between the Classic, Signature, or Premium collection based on the chocolate bars you'd love to Gift.</p>
+            </div>
+            <div class="how-step">
+                <span style="font-size: 2.2rem;">🍫</span>
+                <h4>2. Select Your Bars</h4>
+                <p>Select your 4 bespoke bars straight from our luxury Classic & Premium stone-ground natural dark and milk chocolate lists.</p>
+            </div>
+            <div class="how-step">
+                <span style="font-size: 2.2rem;">🏮</span>
+                <h4>3. Handcrafted Gift Inside</h4>
+                <p>We pack it together with a stunning, golden hand-beaded metal floral tea-light Holder (worth ₹299) completely free inside!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN PRODUCT LISTING -->
+    <section class="products" style="padding-top: 10px; max-width: 1200px; margin: 0 auto;">
+        <h2 class="section-header" style="font-family: 'Cinzel', serif; font-size: 2rem; color: #ffe082; text-shadow: 0 0 10px rgba(255,143,0,0.3);">BUILD YOUR CELEBRATION BOX</h2>
+        <div class="grid" style="justify-content: center; display: flex; flex-wrap: wrap; gap: 30px; margin-top: 30px; padding: 0 20px;">
             
             <!-- CLASSIC TIER -->
             <div class="card diwali-card" onclick="openBuilder('Classic', 1199)">
-                <div style="position: absolute; top: 10px; right: 10px; background: #d4af37; color: #000; padding: 5px 10px; font-weight: bold; z-index: 5;">₹1,199</div>
-                <div class="img-box"><img src="images/diwali_open.jpg" class="product-img"></div>
-                <div class="card-info" style="text-align: center;">
-                    <h3 style="color: #d4af37; font-size: 1.5rem;">CLASSIC BOX</h3>
-                    <p style="color: #aaa; font-size: 0.9rem; margin: 10px 0;">Choose 4 bars from our Classic flavors.</p>
-                    <button class="c-btn" style="width: 100%; border-color: #d4af37; color: #d4af37;">BUILD THIS BOX -></button>
+                <div class="diwali-badge">₹1,199</div>
+                <div class="img-box" style="border-bottom: 2px solid #d4af37;"><img src="images/diwali_open.jpg" class="product-img"></div>
+                <div class="card-info" style="text-align: center; padding: 20px 15px;">
+                    <h3 style="color: #ffd54f; font-family: 'Cinzel', serif; font-size: 1.5rem;">CLASSIC BOX</h3>
+                    <p style="color: #ddd; font-size: 1rem; margin: 10px 0; line-height: 1.4;">Choose 4 custom bars strictly from our rich, nostalgic Classic Group list. Includes the artisanal packaging and golden beaded Diya gift!</p>
+                    <button class="c-btn" style="width: 100%; border-color: #ffe082; color: #ffe082; font-weight: 700;">SELECT & BUILD THIS BOX -></button>
                 </div>
             </div>
 
             <!-- SIGNATURE TIER -->
             <div class="card diwali-card" onclick="openBuilder('Signature', 1299)">
-                <div style="position: absolute; top: 10px; right: 10px; background: #d4af37; color: #000; padding: 5px 10px; font-weight: bold; z-index: 5;">₹1,299</div>
-                <div class="img-box"><img src="images/diwali_open.jpg" class="product-img"></div>
-                <div class="card-info" style="text-align: center;">
-                    <h3 style="color: #d4af37; font-size: 1.5rem;">SIGNATURE BOX</h3>
-                    <p style="color: #aaa; font-size: 0.9rem; margin: 10px 0;">Choose 2 Classic bars + 2 Premium bars.</p>
-                    <button class="c-btn" style="width: 100%; border-color: #d4af37; color: #d4af37;">BUILD THIS BOX -></button>
+                <div class="diwali-badge" style="background: linear-gradient(135deg, #ffd54f, #e65100); border: 1px solid #fff;">₹1,299</div>
+                <div class="img-box" style="border-bottom: 2px solid #d4af37;"><img src="images/diwali_open.jpg" class="product-img"></div>
+                <div class="card-info" style="text-align: center; padding: 20px 15px;">
+                    <h3 style="color: #ffd54f; font-family: 'Cinzel', serif; font-size: 1.5rem;">SIGNATURE BOX</h3>
+                    <p style="color: #ddd; font-size: 1rem; margin: 10px 0; line-height: 1.4;">The ultimate sweet-and-luxurious balance. Build with 2 Classic and 2 indulgent Premium bars. Includes our handcrafted beaded floral Diya!</p>
+                    <button class="c-btn" style="width: 100%; border-color: #ffe082; color: #ffe082; font-weight: 700;">SELECT & BUILD THIS BOX -></button>
                 </div>
             </div>
 
             <!-- PREMIUM TIER -->
             <div class="card diwali-card" onclick="openBuilder('Premium', 1399)">
-                <div style="position: absolute; top: 10px; right: 10px; background: #d4af37; color: #000; padding: 5px 10px; font-weight: bold; z-index: 5;">₹1,399</div>
-                <div class="img-box"><img src="images/diwali_open.jpg" class="product-img"></div>
-                <div class="card-info" style="text-align: center;">
-                    <h3 style="color: #d4af37; font-size: 1.5rem;">PREMIUM BOX</h3>
-                    <p style="color: #aaa; font-size: 0.9rem; margin: 10px 0;">Choose 4 bars from our Premium flavors.</p>
-                    <button class="c-btn" style="width: 100%; border-color: #d4af37; color: #d4af37;">BUILD THIS BOX -></button>
+                <div class="diwali-badge">₹1,399</div>
+                <div class="img-box" style="border-bottom: 2px solid #d4af37;"><img src="images/diwali_open.jpg" class="product-img"></div>
+                <div class="card-info" style="text-align: center; padding: 20px 15px;">
+                    <h3 style="color: #ffd54f; font-family: 'Cinzel', serif; font-size: 1.5rem;">PREMIUM BOX</h3>
+                    <p style="color: #ddd; font-size: 1rem; margin: 10px 0; line-height: 1.4;">4 premium loaded chocolate bars exclusively chosen from our high-end flavor roster. Packaged perfectly alongside our golden beaded floral Diya!</p>
+                    <button class="c-btn" style="width: 100%; border-color: #ffe082; color: #ffe082; font-weight: 700;">SELECT & BUILD THIS BOX -></button>
                 </div>
             </div>
 
@@ -103,10 +240,10 @@
 
     <!-- BOX BUILDER MODAL -->
     <div id="builderModal" class="modal-overlay">
-        <div class="modal-box" style="border: 2px solid #d4af37; background: #050505;">
-            <span class="close-btn" onclick="document.getElementById('builderModal').classList.remove('open')">&times;</span>
-            <h2 id="builderTitle" style="color: #d4af37; text-align: center; margin-bottom: 5px;">BUILD YOUR BOX</h2>
-            <p id="builderRules" style="text-align: center; color: #888; font-size: 0.9rem; margin-bottom: 15px;"></p>
+        <div class="modal-box" style="border: 2px solid #ffd54f; background: linear-gradient(#310401, #140100); max-width: 600px;">
+            <span class="close-btn" onclick="document.getElementById('builderModal').classList.remove('open')" style="color: #ffe082;">&times;</span>
+            <h2 id="builderTitle" style="color: #ffd54f; font-family: 'Cinzel', serif; text-align: center; margin-bottom: 5px; text-shadow: 0 0 10px rgba(255,143,0,0.4);">BUILD YOUR BOX</h2>
+            <p id="builderRules" style="text-align: center; color: #ffb74d; font-size: 0.95rem; font-weight: 600; margin-bottom: 15px;"></p>
             
             <div class="builder-slots" id="slotsContainer">
                 <div class="slot" id="slot0">Empty</div>
@@ -115,12 +252,12 @@
                 <div class="slot" id="slot3">Empty</div>
             </div>
             <div style="text-align: center; margin-bottom: 15px;">
-                <button onclick="resetBuilder()" class="c-btn" style="font-size: 0.7rem; padding: 5px 10px;">↺ RESET SLOTS</button>
+                <button onclick="resetBuilder()" class="c-btn" style="font-size: 0.75rem; padding: 6px 14px; border-color: #ffd54f; color: #ffd54f;">↺ CLEAR SELECTIONS</button>
             </div>
 
             <div id="classicSection">
-                <h4 style="color: #fff; margin-top: 15px; border-bottom: 1px solid #333; padding-bottom: 5px;">CLASSIC FLAVORS</h4>
-                <div id="classicButtons">
+                <h4 style="color: #ffd54f; margin-top: 15px; border-bottom: 1px solid #5d0f06; padding-bottom: 5px; font-family: 'Cinzel', serif;">CLASSIC FLAVORS</h4>
+                <div id="classicButtons" style="display: flex; flex-wrap: wrap; justify-content: center; padding: 5px;">
                     <button class="flavor-btn" onclick="addFlavor('Classic', 'White Chocolate')">White Choc</button>
                     <button class="flavor-btn" onclick="addFlavor('Classic', '35% Milk Chocolate')">35% Milk</button>
                     <button class="flavor-btn" onclick="addFlavor('Classic', '50% Milk Chocolate')">50% Milk</button>
@@ -129,8 +266,8 @@
             </div>
 
             <div id="premiumSection">
-                <h4 style="color: #fff; margin-top: 15px; border-bottom: 1px solid #333; padding-bottom: 5px;">PREMIUM FLAVORS</h4>
-                <div id="premiumButtons">
+                <h4 style="color: #ffd54f; margin-top: 15px; border-bottom: 1px solid #5d0f06; padding-bottom: 5px; font-family: 'Cinzel', serif;">PREMIUM FLAVORS</h4>
+                <div id="premiumButtons" style="display: flex; flex-wrap: wrap; justify-content: center; padding: 5px;">
                     <button class="flavor-btn" onclick="addFlavor('Premium', 'Butterscotch Salt')">Butterscotch Salt</button>
                     <button class="flavor-btn" onclick="addFlavor('Premium', 'Roasted Almonds')">Roasted Almonds</button>
                     <button class="flavor-btn" onclick="addFlavor('Premium', 'Mix Berries')">Mix Berries</button>
@@ -138,60 +275,59 @@
                 </div>
             </div>
 
-            <button id="addBoxBtn" class="pay-btn" style="width: 100%; margin-top: 25px; opacity: 0.5; pointer-events: none;" onclick="addBoxToCart()">ADD BOX TO CART</button>
+            <button id="addBoxBtn" class="pay-btn" style="width: 100%; margin-top: 25px; opacity: 0.5; pointer-events: none; border: 1px solid #ffd54f;" onclick="addBoxToCart()">ADD BOX TO CART</button>
         </div>
     </div>
 
     <!-- REQUIRED CART BAR & MODALS FROM INDEX.HTML -->
-    <div id="cartBar" class="cart-bar" onclick="openCart()">
-        <div style="flex:1"><span style="font-size: 0.8rem; color: #888;">CART TOTAL</span><div style="font-size: 1.2rem; font-weight: bold;">TOTAL: <span id="totalPrice">₹0</span></div></div>
-        <span style="font-weight: bold; border-bottom: 2px solid #000; font-size: 0.9rem;">VIEW CART & PAY -></span>
+    <div id="cartBar" class="cart-bar" onclick="openCart()" style="border-top: 3px solid #d4af37; background: #240200;">
+        <div style="flex:1"><span style="font-size: 0.8rem; color: #ffb74d; font-weight: bold;">CART TOTAL</span><div style="font-size: 1.2rem; font-weight: bold; color: #ffe082;">TOTAL: <span id="totalPrice">₹0</span></div></div>
+        <span style="font-weight: bold; border-bottom: 2px solid #ffd54f; font-size: 0.9rem; color: #ffd54f;">VIEW CART & PAY -></span>
     </div>
 
     <div id="cartOverlay" class="modal-overlay">
-        <div class="modal-box">
-            <span class="close-btn" onclick="closeCart()">&times;</span>
-            <h2 style="color: var(--gold); text-align: center; margin-bottom: 15px;">YOUR CART</h2>
+        <div class="modal-box" style="border: 2px solid #ffd54f; background: linear-gradient(#310401, #140100);">
+            <span class="close-btn" onclick="closeCart()" style="color: #ffd54f;">&times;</span>
+            <h2 style="color: #ffd54f; font-family: 'Cinzel', serif; text-align: center; margin-bottom: 15px; text-shadow: 0 0 10px rgba(255,143,0,0.4);">YOUR CART</h2>
             <div id="cartItems"></div>
-            <div style="margin-top: 10px;">
+            <div style="margin-top: 15px; border-top: 1px solid #5d0f06; padding-top: 15px;">
                 <div style="display:flex; justify-content:space-between; margin-bottom:5px;"><span>Subtotal:</span><span id="subTotalVal" style="color: #fff;">₹0</span></div>
-                <div style="display:flex; justify-content:space-between; margin-bottom:5px;"><span>Delivery Charge:</span><span id="deliveryVal">₹99</span></div>
-                <div style="text-align: right; font-size: 1.5rem; color: var(--gold); font-weight: bold; margin-top: 10px;">Total: <span id="modalTotal">₹0</span></div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:5px;"><span>Delivery Charge:</span><span id="deliveryVal" style="color: #ffd54f;">₹99</span></div>
+                <div style="text-align: right; font-size: 1.6rem; color: #ffd54f; font-weight: bold; margin-top: 10px;">Total: <span id="modalTotal">₹0</span></div>
             </div>
-            <hr style="border-color: #333; margin: 20px 0;">
+            <hr style="border-color: #5d0f06; margin: 20px 0;">
             <div class="checkout-form">
                 <input type="text" id="name" class="checkout-input" placeholder="Name" required>
                 <input type="email" id="email" class="checkout-input" placeholder="Email (For Confirmation)" required>
                 <input type="tel" id="phone" class="checkout-input" placeholder="Phone (10 Digits)" required maxlength="10">
                 <input type="text" id="pincode" class="checkout-input" placeholder="Pincode (6 Digits)" maxlength="6" required>
                 <textarea id="address" class="checkout-input" rows="2" placeholder="Full Address" required></textarea>
-                <button onclick="startPayment()" class="pay-btn">💳 PAY SECURELY</button>
+                <button onclick="startPayment()" class="pay-btn" style="background: linear-gradient(135deg, #ffca28, #f57c00); color: #000; border: none; font-weight: bold;">💳 PAY SECURELY</button>
             </div>
         </div>
     </div>
 
     <div id="invoiceModal" class="modal-overlay">
-        <!-- Kept empty here to save space, but script.js populates it dynamically anyway! -->
-        <div class="modal-box" style="background: #0a0503; border: 2px solid var(--success);">
-            <div style="text-align: center; border-bottom: 1px solid #333; padding-bottom: 20px;">
-                <h1 style="color: var(--gold); font-size:1.5rem;">CHOCO-NAUT&trade;</h1>
+        <div class="modal-box" style="background: #1a0200; border: 2px solid var(--success);">
+            <div style="text-align: center; border-bottom: 1px solid #5d0f06; padding-bottom: 20px;">
+                <h1 style="color: #ffd54f; font-family: 'Cinzel', serif; font-size:1.5rem;">CHOCO-NAUT&trade;</h1>
                 <p style="color: var(--success); font-weight: bold; letter-spacing: 2px;">PAYMENT SUCCESSFUL</p>
-                <p id="invoiceId" style="color: #666; font-size: 0.9rem;">#INV-00000</p>
+                <p id="invoiceId" style="color: #888; font-size: 0.9rem;">#INV-00000</p>
             </div>
             <div style="margin-top: 20px; font-family: monospace; font-size:0.9rem;">
                 <p><strong>Billed To:</strong> <span id="invName"></span></p>
                 <p><strong>Phone:</strong> <span id="invPhone"></span></p>
                 <p><strong>Address:</strong> <span id="invAddr"></span></p>
             </div>
-            <table class="invoice-table">
+            <table class="invoice-table" style="color: #fff;">
                 <thead><tr><th>Item</th><th>Qty</th><th>Price</th></tr></thead>
                 <tbody id="invoiceItems"></tbody>
             </table>
-            <div style="text-align: right; border-top: 1px solid #333; padding-top: 10px;">
+            <div style="text-align: right; border-top: 1px solid #5d0f06; padding-top: 10px;">
                 <p>Subtotal: <span id="invSub">₹0</span></p>
                 <p style="color: var(--success);">Discount: <span id="invDisc">-₹0</span></p>
                 <p>Delivery: <span id="invDel">₹0</span></p>
-                <h2 style="color: var(--gold);">PAID: <span id="invTotal">₹0</span></h2>
+                <h2 style="color: #ffd54f;">PAID: <span id="invTotal">₹0</span></h2>
             </div>
         </div>
     </div>
@@ -209,7 +345,7 @@
             currentTier = tier;
             currentPrice = price;
             
-            document.getElementById('builderTitle').innerText = tier.toUpperCase() + " BOX";
+            document.getElementById('builderTitle').innerText = tier.toUpperCase() + " CELEBRATION BOX";
             
             // Set rules & visibility
             if (tier === 'Classic') {
@@ -217,7 +353,7 @@
                 document.getElementById('classicSection').style.display = "block";
                 document.getElementById('premiumSection').style.display = "none";
             } else if (tier === 'Signature') {
-                document.getElementById('builderRules').innerText = "Choose 2 Classic & 2 Premium Flavors";
+                document.getElementById('builderRules').innerText = "Choose exactly 2 Classic & 2 Premium Flavors";
                 document.getElementById('classicSection').style.display = "block";
                 document.getElementById('premiumSection').style.display = "block";
             } else if (tier === 'Premium') {
@@ -242,15 +378,14 @@
 
         function addFlavor(group, name) {
             sfx('tick');
-            // Check limits based on tier
             let classicCount = selectedFlavors.filter(f => f.group === 'Classic').length;
             let premiumCount = selectedFlavors.filter(f => f.group === 'Premium').length;
             
-            if (selectedFlavors.length >= 4) return; // Full
+            if (selectedFlavors.length >= 4) return; // Already Full
 
             if (currentTier === 'Signature') {
-                if (group === 'Classic' && classicCount >= 2) { alert("You can only select 2 Classic flavors for Signature."); return; }
-                if (group === 'Premium' && premiumCount >= 2) { alert("You can only select 2 Premium flavors for Signature."); return; }
+                if (group === 'Classic' && classicCount >= 2) { alert("You can only select exactly 2 Classic flavors for a Signature box."); return; }
+                if (group === 'Premium' && premiumCount >= 2) { alert("You can only select exactly 2 Premium flavors for a Signature box."); return; }
             }
 
             selectedFlavors.push({ group: group, name: name });
@@ -258,7 +393,7 @@
         }
 
         function updateBuilderUI() {
-            // Fill slots
+            // Fill slots Visually
             for (let i = 0; i < 4; i++) {
                 let slot = document.getElementById('slot' + i);
                 if (selectedFlavors[i]) {
@@ -270,38 +405,33 @@
                 }
             }
 
-            // Enable/Disable Add to Cart button
+            // Toggle "Add Box to Cart" eligibility
             const addBtn = document.getElementById('addBoxBtn');
             if (selectedFlavors.length === 4) {
                 addBtn.style.opacity = "1";
                 addBtn.style.pointerEvents = "auto";
-                addBtn.style.background = "#d4af37";
+                addBtn.style.background = "linear-gradient(135deg, #ffca28, #f57c00)";
                 addBtn.style.color = "#000";
             } else {
                 addBtn.style.opacity = "0.5";
                 addBtn.style.pointerEvents = "none";
                 addBtn.style.background = "transparent";
-                addBtn.style.color = "#d4af37";
+                addBtn.style.color = "#ffb74d";
             }
         }
 
         function addBoxToCart() {
-            // 1. Generate a unique ID for this specific box configuration
             const uniqueId = "diwali_" + Date.now();
-            
-            // 2. Create the display name for the cart and invoice
             const flavorString = selectedFlavors.map(f => f.name).join(", ");
             const fullName = `${currentTier} Diwali Box [${flavorString}]`;
             
-            // 3. Inject it into the global script.js variables!
+            // Push dynamic dynamic values into index inventory & product models
             products[uniqueId] = currentPrice;
             names[uniqueId] = fullName;
-            cart[uniqueId] = 0; // Initialize in cart
+            cart[uniqueId] = 0; 
             
-            // 4. Add 1 to cart
             updateQty(uniqueId, 1);
             
-            // 5. Close builder and open cart
             document.getElementById('builderModal').classList.remove('open');
             openCart();
         }
