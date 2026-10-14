@@ -11,28 +11,32 @@
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     
     <style>
-        /* Rich, Warm Indian Festive Theme */
-        body {
-            background-color: #FCFBF8; /* Soft Cream / Vanilla */
-            /* Subtle repeating rangoli/mandala watermark */
-            background-image: url('data:image/svg+xml;utf8,<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><path d="M60 20 C60 20 65 55 100 60 C100 60 65 65 60 100 C60 100 55 65 20 60 C20 60 55 55 60 20 Z" fill="rgba(212, 175, 55, 0.04)"/></svg>');
+        /* =========================================
+           CRITICAL OVERRIDES FOR MAIN STYLE.CSS 
+           Forces text to be dark brown instead of white
+           ========================================= */
+        body, p, li, div, span, label {
             color: #3A2320; /* Deep Warm Brown */
             font-family: 'Montserrat', sans-serif;
-            line-height: 1.7;
-            font-size: 1.05rem;
+        }
+        h1, h2, h3, h4 {
+            color: #7A191B !important; /* Festive Maroon */
+            font-family: 'Playfair Display', serif !important;
+            margin-top: 0;
+            font-weight: 800;
         }
 
-        h1, h2, h3, h4 {
-            font-family: 'Playfair Display', serif;
-            color: #7A191B; /* Festive Maroon / Crimson */
-            font-weight: 800;
-            margin-top: 0;
+        /* Rich, Warm Indian Festive Theme Background */
+        body {
+            background-color: #F8EEDF !important; /* Light Yellowish-Brown / Warm Beige */
+            background-image: url('data:image/svg+xml;utf8,<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><path d="M60 20 C60 20 65 55 100 60 C100 60 65 65 60 100 C60 100 55 65 20 60 C20 60 55 55 60 20 Z" fill="rgba(212, 175, 55, 0.05)"/></svg>');
+            line-height: 1.7;
+            font-size: 1.05rem;
         }
 
         /* Marquee Flash Message */
         .marquee-container {
             background: linear-gradient(90deg, #7A191B, #A92629, #7A191B);
-            color: #FFF;
             padding: 10px 0;
             overflow: hidden;
             position: relative;
@@ -47,6 +51,7 @@
             font-weight: 700;
             letter-spacing: 2px;
             font-size: 0.95rem;
+            color: #FFF !important; /* Protect from override */
         }
         @keyframes marquee {
             0% { transform: translateX(100vw); }
@@ -55,7 +60,7 @@
 
         /* Navigation */
         nav {
-            background: #FFF;
+            background: #FFF !important;
             border-bottom: 1px solid #EADDCD;
             box-shadow: 0 4px 15px rgba(0,0,0,0.03);
             position: sticky;
@@ -63,11 +68,9 @@
             z-index: 90;
         }
         .nav-logo {
-            font-family: 'Playfair Display', serif;
-            color: #7A191B !important;
-            font-weight: 800;
-            letter-spacing: 1px;
             font-size: 1.5rem;
+            letter-spacing: 1px;
+            text-shadow: none !important;
         }
         .nav-links a { color: #3A2320 !important; font-weight: 700; font-size: 0.9rem; letter-spacing: 1px; }
         .nav-links a:hover { color: #D4AF37 !important; }
@@ -85,20 +88,19 @@
         .hero-festive {
             padding: 80px 20px;
             text-align: center;
-            background: linear-gradient(180deg, #FFFDF8 0%, #F5EBE6 100%);
+            background: linear-gradient(180deg, #FFFDF8 0%, #F8EEDF 100%);
             border-bottom: 1px solid #EADDCD;
         }
         .hero-festive h1 {
             font-size: 4rem;
             line-height: 1.15;
             margin-bottom: 20px;
-            color: #7A191B;
         }
         .hero-festive p.subhead {
             font-size: 1.3rem;
             max-width: 750px;
             margin: 0 auto 30px;
-            color: #5D4037;
+            color: #5D4037 !important;
             font-weight: 500;
         }
         .hero-image-wrapper {
@@ -108,16 +110,14 @@
             overflow: hidden;
             box-shadow: 0 20px 40px rgba(122, 25, 27, 0.15);
             border: 4px solid #fff;
-            position: relative;
         }
         .hero-image-wrapper img { width: 100%; display: block; }
 
         /* Buttons & Controls */
-        .btn-maroon {
+        .btn-maroon, .btn-maroon span {
             display: inline-block;
-            background: #7A191B;
+            background: #7A191B !important;
             color: #FFF !important;
-            padding: 16px 35px;
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
             font-size: 1.1rem;
@@ -130,18 +130,18 @@
             text-transform: uppercase;
             box-shadow: 0 8px 20px rgba(122, 25, 27, 0.2);
         }
-        .btn-maroon:hover { background: #962022; transform: translateY(-2px); box-shadow: 0 10px 25px rgba(122, 25, 27, 0.3); }
+        .btn-maroon:hover { background: #962022 !important; transform: translateY(-2px); box-shadow: 0 10px 25px rgba(122, 25, 27, 0.3); }
         
         .btn-outline {
             display: inline-block;
-            background: #FFF;
+            background: #FFF !important;
             color: #7A191B !important;
             padding: 14px 34px;
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
             font-size: 1.1rem;
             letter-spacing: 1px;
-            border: 2px solid #7A191B;
+            border: 2px solid #7A191B !important;
             border-radius: 6px;
             cursor: pointer;
             text-decoration: none;
@@ -149,7 +149,7 @@
             margin-left: 15px;
             text-transform: uppercase;
         }
-        .btn-outline:hover { background: #7A191B; color: #FFF !important; }
+        .btn-outline:hover { background: #7A191B !important; color: #FFF !important; }
 
         .qty-controls {
             display: flex;
@@ -157,16 +157,16 @@
             justify-content: center;
             gap: 20px;
             margin: 20px 0;
-            background: #FFF9F2;
+            background: #FFF;
             padding: 10px;
             border-radius: 8px;
             border: 1px solid #EADDCD;
         }
         .q-btn {
             width: 40px; height: 40px; 
-            border: 2px solid #7A191B; 
-            background: #FFF; 
-            color: #7A191B; 
+            border: 2px solid #7A191B !important; 
+            background: #FFF !important; 
+            color: #7A191B !important; 
             font-size: 1.5rem; 
             font-weight: bold;
             cursor: pointer; 
@@ -174,8 +174,8 @@
             display: flex; align-items: center; justify-content: center;
             transition: 0.2s;
         }
-        .q-btn:hover { background: #7A191B; color: #FFF; }
-        .q-display { font-size: 1.5rem; font-weight: 800; color: #3A2320; min-width: 30px; text-align: center; }
+        .q-btn:hover { background: #7A191B !important; color: #FFF !important; }
+        .q-display { font-size: 1.5rem; font-weight: 800; color: #3A2320 !important; min-width: 30px; text-align: center; }
 
         /* Products Grid */
         .box-grid {
@@ -185,8 +185,8 @@
             margin-top: 50px;
         }
         .product-card {
-            background: #FFF;
-            border: 1px solid #EADDCD;
+            background: #FFF !important;
+            border: 1px solid #EADDCD !important;
             padding: 35px 25px;
             border-radius: 12px;
             text-align: left;
@@ -199,23 +199,23 @@
         .product-card:hover { 
             transform: translateY(-8px); 
             box-shadow: 0 20px 40px rgba(122, 25, 27, 0.1); 
-            border-color: #D4AF37; 
+            border-color: #D4AF37 !important; 
         }
-        .card-header { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 2px solid #F5EBE6; padding-bottom: 10px; margin-bottom: 15px; }
-        .card-header h3 { font-size: 2.2rem; margin: 0; color: #7A191B; }
-        .card-header .price { font-size: 1.6rem; color: #D4AF37; font-weight: 800; font-family: 'Montserrat', sans-serif; }
+        .card-header { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 2px solid #F8EEDF; padding-bottom: 10px; margin-bottom: 15px; }
+        .card-header h3 { font-size: 2.2rem; margin: 0; }
+        .card-header .price { font-size: 1.6rem; color: #D4AF37 !important; font-weight: 800; font-family: 'Montserrat', sans-serif; }
         
-        .product-card p.desc { color: #8D6E63; margin-bottom: 20px; font-size: 1.05rem; font-weight: 500; font-style: italic;}
-        .product-card h4 { font-size: 1rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; color: #3A2320; font-family: 'Montserrat', sans-serif;}
+        .product-card p.desc { color: #8D6E63 !important; margin-bottom: 20px; font-size: 1.05rem; font-weight: 500; font-style: italic;}
+        .product-card h4 { font-size: 1rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; color: #3A2320 !important; font-family: 'Montserrat', sans-serif;}
         .product-card ul { list-style: none; padding: 0; margin-bottom: 25px; flex-grow: 1; }
-        .product-card ul li { position: relative; padding-left: 25px; margin-bottom: 10px; color: #5D4037; font-size: 1rem; font-weight: 500;}
-        .product-card ul li::before { content: '❖'; color: #D4AF37; position: absolute; left: 0; top: 0; font-size: 1.1rem; line-height: 1.4; }
+        .product-card ul li { position: relative; padding-left: 25px; margin-bottom: 10px; color: #5D4037 !important; font-size: 1rem; font-weight: 500;}
+        .product-card ul li::before { content: '❖'; color: #D4AF37 !important; position: absolute; left: 0; top: 0; font-size: 1.1rem; line-height: 1.4; }
         .product-img-small { width: 100%; border-radius: 8px; margin-bottom: 25px; border: 1px solid #EADDCD; }
 
         .discount-banner {
-            background: rgba(212, 175, 55, 0.1);
-            border: 1px dashed #D4AF37;
-            color: #7A191B;
+            background: rgba(212, 175, 55, 0.1) !important;
+            border: 1px dashed #D4AF37 !important;
+            color: #7A191B !important;
             text-align: center;
             padding: 10px;
             font-size: 0.95rem;
@@ -227,11 +227,11 @@
         .bulk-contact-micro {
             text-align: center;
             font-size: 0.85rem;
-            color: #8D6E63;
+            color: #8D6E63 !important;
             margin-top: 15px;
             line-height: 1.4;
             font-weight: 600;
-            background: #F9F9F9;
+            background: #F8EEDF !important;
             padding: 10px;
             border-radius: 6px;
         }
@@ -244,8 +244,8 @@
 
         /* Highlight Boxes */
         .highlight-box {
-            background: #FFF;
-            border: 1px solid #EADDCD;
+            background: #FFF !important;
+            border: 1px solid #EADDCD !important;
             padding: 50px;
             border-radius: 12px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.03);
@@ -253,17 +253,16 @@
 
         /* FAQs */
         .faq-item { margin-bottom: 30px; border-bottom: 1px solid #EADDCD; padding-bottom: 20px; }
-        .faq-item h4 { font-size: 1.3rem; margin-bottom: 10px; color: #7A191B; font-family: 'Montserrat', sans-serif; font-weight: 700; }
-        .faq-item p { color: #5D4037; font-size: 1.05rem; }
+        .faq-item h4 { font-size: 1.3rem; margin-bottom: 10px; font-family: 'Montserrat', sans-serif; font-weight: 700; }
+        .faq-item p { color: #5D4037 !important; font-size: 1.05rem; }
 
         /* Cart Overrides */
-        .cart-bar { background: #FFF; border-top: 2px solid #D4AF37; box-shadow: 0 -10px 30px rgba(0,0,0,0.05); color: #3A2320; }
-        .cart-bar span { color: #8D6E63 !important; }
-        .modal-box { background: #FFF; border: none; border-top: 6px solid #7A191B; color: #3A2320; box-shadow: 0 20px 60px rgba(0,0,0,0.15); border-radius: 8px;}
-        .modal-box h2 { color: #7A191B !important; font-family: 'Playfair Display', serif; }
+        .cart-bar { background: #FFF !important; border-top: 2px solid #D4AF37 !important; box-shadow: 0 -10px 30px rgba(0,0,0,0.05); }
+        .cart-bar span, .cart-bar div { color: #3A2320 !important; }
+        .modal-box { background: #FFF !important; border: none !important; border-top: 6px solid #7A191B !important; box-shadow: 0 20px 60px rgba(0,0,0,0.15); border-radius: 8px;}
         .close-btn { color: #3A2320 !important; }
-        .checkout-input { background: #FCFBF8; border: 1px solid #D4AF37; color: #3A2320; width: 100%; box-sizing: border-box; font-size: 1rem; padding: 12px; font-family: 'Montserrat', sans-serif; }
-        .checkout-input:focus { border-color: #7A191B; outline: none; box-shadow: 0 0 8px rgba(122, 25, 27, 0.1); }
+        .checkout-input { background: #FCFBF8 !important; border: 1px solid #D4AF37 !important; color: #3A2320 !important; width: 100%; box-sizing: border-box; font-size: 1rem; padding: 12px; font-family: 'Montserrat', sans-serif; }
+        .checkout-input:focus { border-color: #7A191B !important; outline: none; box-shadow: 0 0 8px rgba(122, 25, 27, 0.1); }
     </style>
 </head>
 <body onload="initInventory()">
@@ -283,12 +282,12 @@
     </nav>
     
     <header class="hero-festive">
-        <p style="text-transform: uppercase; letter-spacing: 4px; font-weight: 800; color: #D4AF37; margin-bottom: 15px; font-family: 'Montserrat', sans-serif;">Diwali 2026 Collection</p>
+        <p style="text-transform: uppercase; letter-spacing: 4px; font-weight: 800; color: #D4AF37 !important; margin-bottom: 15px; font-family: 'Montserrat', sans-serif;">Diwali 2026 Collection</p>
         <h1>Make This Diwali Sweeter.<br>Make It Meaningful.</h1>
         <p class="subhead">Celebrate the festival of lights with handcrafted chocolates, thoughtful gifting, and a little surprise that makes your gift mean even more.</p>
         
         <div style="margin-top: 40px;">
-            <a href="#boxes" class="btn-maroon" onclick="sfx('click')">Explore the Gift Boxes</a>
+            <a href="#boxes" class="btn-maroon" onclick="sfx('click')" style="padding: 16px 35px;">Explore the Gift Boxes</a>
             <a href="#corporate" class="btn-outline" onclick="sfx('click')">Corporate Gifting</a>
         </div>
         
@@ -303,16 +302,16 @@
         <p>Diwali is a time for coming together, celebrating relationships, expressing gratitude, and creating memories that last long after the celebrations are over.</p>
         <p>This year, make your celebrations a little more special with Choco-naut. Our Diwali Gift Box brings together the pleasure of chocolate and the thoughtfulness of a handcrafted festive surprise thoughtfully chosen for the people who make your world brighter.</p>
         <p>Whether you're gifting your family, surprising a friend, thanking a colleague, or appreciating a valued client, let your gift say what words sometimes cannot.</p>
-        <h3 style="margin-top: 40px; font-style: italic; color: #D4AF37; font-size: 2rem;">Because the best gifts aren't just opened.<br>They're remembered.</h3>
+        <h3 style="margin-top: 40px; font-style: italic; color: #D4AF37 !important; font-size: 2rem;">Because the best gifts aren't just opened.<br>They're remembered.</h3>
     </section>
 
     <!-- Products -->
-    <section id="boxes" style="background: #FFF4EB; max-width: 100%; padding: 100px 20px; border-top: 1px solid #EADDCD;">
+    <section id="boxes" style="background: rgba(255,255,255,0.6) !important; max-width: 100%; padding: 100px 20px; border-top: 1px solid #EADDCD;">
         <div style="max-width: 1150px; margin: 0 auto;">
             <div class="text-center">
                 <h2 style="font-size: 3rem;">Your Chocolate, Your Choice.</h2>
                 <div class="divider"></div>
-                <p style="font-size: 1.2rem; color: #5D4037; font-weight: 500;">Choose the box that best suits your celebration. Inside every box is a premium gifting experience.</p>
+                <p style="font-size: 1.2rem; color: #5D4037 !important; font-weight: 500;">Choose the box that best suits your celebration. Inside every box is a premium gifting experience.</p>
             </div>
 
             <div class="box-grid">
@@ -341,11 +340,11 @@
                         <button class="q-btn" onclick="updateQty('diwali_classic', 1)">+</button>
                     </div>
                     
-                    <button class="btn-maroon" style="width: 100%; padding: 16px;" onclick="openCart()">VIEW CART & CHECKOUT</button>
+                    <button class="btn-maroon" style="width: 100%; padding: 16px; display:block; text-align:center;" onclick="openCart()">VIEW CART & CHECKOUT</button>
                     
                     <div class="bulk-contact-micro">
-                        Planning a bulk order? (50+ Boxes)<br>
-                        📞 <a href="tel:+917678107458" style="color:#7A191B; text-decoration:none;">+91-7678107458</a> | ✉️ <a href="mailto:contact@choconaut.in" style="color:#7A191B; text-decoration:none;">contact@choconaut.in</a>
+                        Planning a bulk or corporate order?<br>
+                        📞 <a href="tel:+917678107458" style="color:#7A191B !important; text-decoration:none;">+91-7678107458</a> | ✉️ <a href="mailto:contact@choconaut.in" style="color:#7A191B !important; text-decoration:none;">contact@choconaut.in</a>
                     </div>
                 </div>
 
@@ -373,11 +372,11 @@
                         <button class="q-btn" onclick="updateQty('diwali_signature', 1)">+</button>
                     </div>
                     
-                    <button class="btn-maroon" style="width: 100%; padding: 16px;" onclick="openCart()">VIEW CART & CHECKOUT</button>
+                    <button class="btn-maroon" style="width: 100%; padding: 16px; display:block; text-align:center;" onclick="openCart()">VIEW CART & CHECKOUT</button>
                     
                     <div class="bulk-contact-micro">
-                        Planning a bulk order? (50+ Boxes)<br>
-                        📞 <a href="tel:+917678107458" style="color:#7A191B; text-decoration:none;">+91-7678107458</a> | ✉️ <a href="mailto:contact@choconaut.in" style="color:#7A191B; text-decoration:none;">contact@choconaut.in</a>
+                        Planning a bulk or corporate order?<br>
+                        📞 <a href="tel:+917678107458" style="color:#7A191B !important; text-decoration:none;">+91-7678107458</a> | ✉️ <a href="mailto:contact@choconaut.in" style="color:#7A191B !important; text-decoration:none;">contact@choconaut.in</a>
                     </div>
                 </div>
 
@@ -406,11 +405,11 @@
                         <button class="q-btn" onclick="updateQty('diwali_premium', 1)">+</button>
                     </div>
                     
-                    <button class="btn-maroon" style="width: 100%; padding: 16px;" onclick="openCart()">VIEW CART & CHECKOUT</button>
+                    <button class="btn-maroon" style="width: 100%; padding: 16px; display:block; text-align:center;" onclick="openCart()">VIEW CART & CHECKOUT</button>
                     
                     <div class="bulk-contact-micro">
-                        Planning a bulk order? (50+ Boxes)<br>
-                        📞 <a href="tel:+917678107458" style="color:#7A191B; text-decoration:none;">+91-7678107458</a> | ✉️ <a href="mailto:contact@choconaut.in" style="color:#7A191B; text-decoration:none;">contact@choconaut.in</a>
+                        Planning a bulk or corporate order?<br>
+                        📞 <a href="tel:+917678107458" style="color:#7A191B !important; text-decoration:none;">+91-7678107458</a> | ✉️ <a href="mailto:contact@choconaut.in" style="color:#7A191B !important; text-decoration:none;">contact@choconaut.in</a>
                     </div>
                 </div>
             </div>
@@ -424,11 +423,11 @@
             <div class="divider" style="margin: 20px 0;"></div>
             <p>At Choco-naut, we believe great chocolate doesn't need unnecessary extras to make an impression. Our approach is rooted in the craft of chocolate-making and an appreciation for the ingredients that make chocolate special.</p>
             <ul style="list-style: none; padding: 0;">
-                <li style="margin-bottom: 15px; font-weight: 600;"><span style="color: #D4AF37; margin-right: 10px; font-size: 1.2rem;">❖</span> <strong>Bean-to-bar craftsmanship</strong> — a focus on the journey from cacao beans to finished chocolate.</li>
-                <li style="margin-bottom: 15px; font-weight: 600;"><span style="color: #D4AF37; margin-right: 10px; font-size: 1.2rem;">❖</span> <strong>No added flavours or preservatives</strong> — reflecting the stated product philosophy.</li>
-                <li style="margin-bottom: 15px; font-weight: 600;"><span style="color: #D4AF37; margin-right: 10px; font-size: 1.2rem;">❖</span> <strong>A considered ingredient philosophy</strong> — letting the character of chocolate take centre stage.</li>
+                <li style="margin-bottom: 15px; font-weight: 600;"><span style="color: #D4AF37 !important; margin-right: 10px; font-size: 1.2rem;">❖</span> <strong>Bean-to-bar craftsmanship</strong> — a focus on the journey from cacao beans to finished chocolate.</li>
+                <li style="margin-bottom: 15px; font-weight: 600;"><span style="color: #D4AF37 !important; margin-right: 10px; font-size: 1.2rem;">❖</span> <strong>No added flavours or preservatives</strong> — reflecting the stated product philosophy.</li>
+                <li style="margin-bottom: 15px; font-weight: 600;"><span style="color: #D4AF37 !important; margin-right: 10px; font-size: 1.2rem;">❖</span> <strong>A considered ingredient philosophy</strong> — letting the character of chocolate take centre stage.</li>
             </ul>
-            <p style="margin-top: 30px; font-style: italic; color: #7A191B; font-weight: 700; font-size: 1.2rem;">This Diwali, share something you can feel good about gifting: chocolate chosen not just for the occasion, but for the experience it creates.</p>
+            <p style="margin-top: 30px; font-style: italic; color: #7A191B !important; font-weight: 700; font-size: 1.2rem;">This Diwali, share something you can feel good about gifting: chocolate chosen not just for the occasion, but for the experience it creates.</p>
         </div>
         <div class="split-image">
             <img src="images/diwali_bars.png" alt="Choco-naut artisan chocolate bars">
@@ -443,7 +442,7 @@
             <p>A celebration becomes even more beautiful when its joy reaches beyond our own homes.</p>
             <p>Every Choco-naut Diwali Gift Box includes a handcrafted festive gift made by underprivileged families. We source these gifts directly from them, helping support their work and making their Diwali a little more special, too.</p>
             <p>So when you choose Choco-naut this Diwali, you're not just gifting chocolates and a festive surprise. You're sharing sweetness, supporting craftsmanship, and extending the spirit of Diwali to another family.</p>
-            <h3 style="margin-top: 30px; color: #D4AF37; font-size: 1.8rem;">One gift. More than one reason to celebrate.</h3>
+            <h3 style="margin-top: 30px; color: #D4AF37 !important; font-size: 1.8rem;">One gift. More than one reason to celebrate.</h3>
         </div>
     </section>
 
@@ -453,44 +452,44 @@
             <h2 style="font-size: 2.8rem;">Make Your Business Gifting More Meaningful.</h2>
             <div class="divider" style="margin: 20px 0;"></div>
             <p>This Diwali, thank your employees, delight your clients, and strengthen business relationships with Choco-naut's festive chocolate gifting boxes.</p>
-            <h4 style="margin-top: 30px; font-family: 'Montserrat', sans-serif; font-size: 1.4rem; color: #7A191B;">Planning a bulk order?</h4>
+            <h4 style="margin-top: 30px; font-family: 'Montserrat', sans-serif; font-size: 1.4rem;">Planning a bulk order?</h4>
             <p>Tell us your quantity, preferred variant, delivery location, and budget. Contact us to discuss your requirements and applicable bulk-order pricing.</p>
-            <div style="background: #FFF9F2; border: 2px dashed #D4AF37; padding: 25px; border-radius: 8px; margin-top: 25px;">
-                <p style="margin: 0; color: #3A2320; font-weight: 800; font-size: 1.3rem;">📞 Call/WhatsApp: <a href="https://wa.me/917678107458" style="color: #7A191B; text-decoration: none;">+91-7678107458</a></p>
-                <p style="margin: 10px 0 0 0; color: #3A2320; font-weight: 800; font-size: 1.3rem;">✉️ Email: <a href="mailto:contact@choconaut.in" style="color: #7A191B; text-decoration: none;">contact@choconaut.in</a></p>
+            <div style="background: #FFF !important; border: 2px dashed #D4AF37; padding: 25px; border-radius: 8px; margin-top: 25px;">
+                <p style="margin: 0; font-weight: 800; font-size: 1.3rem;">📞 Call/WhatsApp: <a href="https://wa.me/917678107458" style="color: #7A191B !important; text-decoration: none;">+91-7678107458</a></p>
+                <p style="margin: 10px 0 0 0; font-weight: 800; font-size: 1.3rem;">✉️ Email: <a href="mailto:contact@choconaut.in" style="color: #7A191B !important; text-decoration: none;">contact@choconaut.in</a></p>
             </div>
         </div>
-        <div class="split-text highlight-box" style="background: #FFF4EB; border:none;">
+        <div class="split-text highlight-box" style="background: #FFF !important; border:none; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
             <h3 style="margin-bottom: 25px; font-size: 2rem;">Who is this box perfect for?</h3>
-            <h4 style="font-family: 'Montserrat', sans-serif; font-size: 1.2rem; color: #D4AF37; text-transform: uppercase;">Family & loved ones</h4>
+            <h4 style="font-family: 'Montserrat', sans-serif; font-size: 1.2rem; color: #D4AF37 !important; text-transform: uppercase;">Family & loved ones</h4>
             <p style="margin-bottom: 20px;">Make family gatherings, festive visits, and moments of gratitude a little sweeter with a thoughtful gift.</p>
             
-            <h4 style="font-family: 'Montserrat', sans-serif; font-size: 1.2rem; color: #D4AF37; text-transform: uppercase;">Friends & hosts</h4>
+            <h4 style="font-family: 'Montserrat', sans-serif; font-size: 1.2rem; color: #D4AF37 !important; text-transform: uppercase;">Friends & hosts</h4>
             <p style="margin-bottom: 20px;">A meaningful way to thank the people welcoming you into their homes or making your year special.</p>
             
-            <h4 style="font-family: 'Montserrat', sans-serif; font-size: 1.2rem; color: #D4AF37; text-transform: uppercase;">Employees & clients</h4>
+            <h4 style="font-family: 'Montserrat', sans-serif; font-size: 1.2rem; color: #D4AF37 !important; text-transform: uppercase;">Employees & clients</h4>
             <p>Show appreciation to your team, business partners, and valued customers with gifting that combines indulgence and thoughtfulness.</p>
         </div>
     </section>
 
-    <section class="text-center" style="background: #FFF; max-width: 100%; border-top: 1px solid #EADDCD; padding: 80px 20px;">
+    <section class="text-center" style="background: #FFF !important; max-width: 100%; border-top: 1px solid #EADDCD; padding: 80px 20px;">
         <div style="max-width: 1000px; margin: 0 auto;">
             <h2 style="font-size: 2.8rem;">Three Simple Steps to a Sweeter Diwali</h2>
             <div class="divider"></div>
             <div style="display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; margin-top: 50px;">
-                <div style="flex: 1; min-width: 250px; background: #FCFBF8; padding: 30px; border-radius: 12px; border: 1px solid #EADDCD;">
-                    <h1 style="color: #D4AF37; font-size: 5rem; margin: 0; line-height: 1; font-family: 'Playfair Display', serif;">1</h1>
-                    <h4 style="font-family: 'Montserrat', sans-serif; font-size: 1.3rem; margin-top: 15px; color: #7A191B;">Choose your box.</h4>
+                <div style="flex: 1; min-width: 250px; background: #F8EEDF !important; padding: 30px; border-radius: 12px; border: 1px solid #EADDCD;">
+                    <h1 style="color: #D4AF37 !important; font-size: 5rem; margin: 0; line-height: 1; font-family: 'Playfair Display', serif;">1</h1>
+                    <h4 style="font-family: 'Montserrat', sans-serif; font-size: 1.3rem; margin-top: 15px;">Choose your box.</h4>
                     <p>Select Classic, Signature, or Premium according to your preference and budget.</p>
                 </div>
-                <div style="flex: 1; min-width: 250px; background: #FCFBF8; padding: 30px; border-radius: 12px; border: 1px solid #EADDCD;">
-                    <h1 style="color: #D4AF37; font-size: 5rem; margin: 0; line-height: 1; font-family: 'Playfair Display', serif;">2</h1>
-                    <h4 style="font-family: 'Montserrat', sans-serif; font-size: 1.3rem; margin-top: 15px; color: #7A191B;">Place your order.</h4>
+                <div style="flex: 1; min-width: 250px; background: #F8EEDF !important; padding: 30px; border-radius: 12px; border: 1px solid #EADDCD;">
+                    <h1 style="color: #D4AF37 !important; font-size: 5rem; margin: 0; line-height: 1; font-family: 'Playfair Display', serif;">2</h1>
+                    <h4 style="font-family: 'Montserrat', sans-serif; font-size: 1.3rem; margin-top: 15px;">Place your order.</h4>
                     <p>Order through our website and select your preferred delivery date at checkout.</p>
                 </div>
-                <div style="flex: 1; min-width: 250px; background: #FCFBF8; padding: 30px; border-radius: 12px; border: 1px solid #EADDCD;">
-                    <h1 style="color: #D4AF37; font-size: 5rem; margin: 0; line-height: 1; font-family: 'Playfair Display', serif;">3</h1>
-                    <h4 style="font-family: 'Montserrat', sans-serif; font-size: 1.3rem; margin-top: 15px; color: #7A191B;">Share the joy.</h4>
+                <div style="flex: 1; min-width: 250px; background: #F8EEDF !important; padding: 30px; border-radius: 12px; border: 1px solid #EADDCD;">
+                    <h1 style="color: #D4AF37 !important; font-size: 5rem; margin: 0; line-height: 1; font-family: 'Playfair Display', serif;">3</h1>
+                    <h4 style="font-family: 'Montserrat', sans-serif; font-size: 1.3rem; margin-top: 15px;">Share the joy.</h4>
                     <p>Complete your gifting plans and make this Diwali memorable for the people who matter.</p>
                 </div>
             </div>
@@ -525,41 +524,41 @@
         </div>
     </section>
 
-    <section class="text-center" style="background: #7A191B; color: #fff; max-width: 100%; padding: 120px 20px; border-top: 4px solid #D4AF37;">
-        <p style="text-transform: uppercase; letter-spacing: 4px; font-weight: 800; color: #D4AF37; margin-bottom: 15px; font-family: 'Montserrat', sans-serif;">THIS DIWALI, GIFT WITH HEART</p>
-        <h2 style="font-size: 3.5rem; margin-bottom: 25px; color: #fff;">Let Your Gifts Say a Little More.</h2>
-        <p style="font-size: 1.3rem; color: #F5EBE6; max-width: 750px; margin: 0 auto 40px; font-weight: 500;">Give your loved ones something delicious. Give them something thoughtful. And share the joy of a celebration that reaches a little further.</p>
-        <a href="#boxes" class="btn-outline" onclick="sfx('click')" style="font-size: 1.3rem; padding: 18px 50px; background: #fff; color:#7A191B !important;">Shop Diwali Gift Boxes</a>
-        <p style="margin-top: 40px; font-size: 1.1rem; color: #EADDCD;">Need help or planning bulk gifting?<br><strong style="color: #D4AF37; font-size: 1.3rem;">WhatsApp / Call: +91-7678107458</strong></p>
+    <section class="text-center" style="background: #7A191B !important; max-width: 100%; padding: 120px 20px; border-top: 4px solid #D4AF37;">
+        <p style="text-transform: uppercase; letter-spacing: 4px; font-weight: 800; color: #D4AF37 !important; margin-bottom: 15px; font-family: 'Montserrat', sans-serif;">THIS DIWALI, GIFT WITH HEART</p>
+        <h2 style="font-size: 3.5rem; margin-bottom: 25px; color: #FFF !important;">Let Your Gifts Say a Little More.</h2>
+        <p style="font-size: 1.3rem; color: #F5EBE6 !important; max-width: 750px; margin: 0 auto 40px; font-weight: 500;">Give your loved ones something delicious. Give them something thoughtful. And share the joy of a celebration that reaches a little further.</p>
+        <a href="#boxes" class="btn-outline" onclick="sfx('click')" style="font-size: 1.3rem; padding: 18px 50px; background: #FFF !important; color:#7A191B !important;">Shop Diwali Gift Boxes</a>
+        <p style="margin-top: 40px; font-size: 1.1rem; color: #EADDCD !important;">Need help or planning bulk gifting?<br><strong style="color: #D4AF37 !important; font-size: 1.3rem;">WhatsApp / Call: +91-7678107458</strong></p>
     </section>
 
     <!-- REQUIRED CART BAR & MODALS FROM INDEX.HTML -->
     <div id="cartBar" class="cart-bar" onclick="openCart()">
-        <div style="flex:1"><span style="font-size: 0.8rem; color: #8D6E63; font-weight: 700;">CART TOTAL</span><div style="font-size: 1.2rem; font-weight: bold; color: #3A2320;">TOTAL: <span id="totalPrice" style="color: #7A191B;">₹0</span></div></div>
-        <span style="font-weight: bold; border-bottom: 2px solid #D4AF37; font-size: 0.9rem; color: #D4AF37;">VIEW CART & PAY -></span>
+        <div style="flex:1"><span style="font-size: 0.8rem; font-weight: 700;">CART TOTAL</span><div style="font-size: 1.2rem; font-weight: bold;">TOTAL: <span id="totalPrice" style="color: #7A191B !important;">₹0</span></div></div>
+        <span style="font-weight: bold; border-bottom: 2px solid #D4AF37; font-size: 0.9rem; color: #D4AF37 !important;">VIEW CART & PAY -></span>
     </div>
 
     <div id="cartOverlay" class="modal-overlay">
         <div class="modal-box">
             <span class="close-btn" onclick="closeCart()">&times;</span>
-            <h2 style="text-align: center; margin-bottom: 15px; font-family: 'Playfair Display', serif;">YOUR CART</h2>
+            <h2 style="text-align: center; margin-bottom: 15px;">YOUR CART</h2>
             <div id="cartItems"></div>
             
             <div style="margin-top: 15px; border-top: 1px solid #EADDCD; padding-top: 15px;">
-                <div style="display:flex; justify-content:space-between; margin-bottom:5px;"><span>Subtotal:</span><span id="subTotalVal" style="font-weight:600;">₹0</span></div>
-                <div style="display:flex; justify-content:space-between; margin-bottom:5px; display:none;" id="discountDisplay"><span>Discount:</span><span id="discountVal" style="color:#4CAF50; font-weight:bold;">-₹0</span></div>
-                <div style="display:flex; justify-content:space-between; margin-bottom:5px;"><span>Delivery Charge:</span><span id="deliveryVal" style="color:#7A191B; font-weight:bold;">FREE</span></div>
-                <div style="text-align: right; font-size: 1.5rem; color: #D4AF37; font-weight: 800; margin-top: 10px;">Total: <span id="modalTotal">₹0</span></div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:5px;"><span style="color:#3A2320 !important;">Subtotal:</span><span id="subTotalVal" style="font-weight:600; color:#3A2320 !important;">₹0</span></div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:5px; display:none;" id="discountDisplay"><span style="color:#3A2320 !important;">Discount:</span><span id="discountVal" style="color:#4CAF50 !important; font-weight:bold;">-₹0</span></div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:5px;"><span style="color:#3A2320 !important;">Delivery Charge:</span><span id="deliveryVal" style="color:#7A191B !important; font-weight:bold;">FREE</span></div>
+                <div style="text-align: right; font-size: 1.5rem; color: #D4AF37 !important; font-weight: 800; margin-top: 10px;">Total: <span id="modalTotal" style="color:#D4AF37 !important;">₹0</span></div>
             </div>
             
             <hr style="border-color: #EADDCD; margin: 20px 0;">
             
             <div class="checkout-form">
                 <!-- NEW DELIVERY DATE SELECTOR -->
-                <div style="margin-bottom: 20px; text-align: left; background: #FFF9F2; padding: 15px; border: 1px solid #D4AF37; border-radius: 6px;">
-                    <label style="font-size: 1rem; color: #7A191B; font-weight: 700; margin-bottom: 8px; display: block;">Preferred Delivery Date:</label>
-                    <input type="date" id="deliveryDate" class="checkout-input" required style="background: #FFF; border-color: #D4AF37; color: #3A2320; font-weight: 600;">
-                    <p style="font-size: 0.85rem; color: #8D6E63; line-height: 1.4; margin-top: 8px; margin-bottom: 0;">*Deliveries commence 23rd Oct. Chocolates are made fresh to order. Dispatch takes 2-3 days. Delivery times may vary by location. Queries? Call +91-7678107458</p>
+                <div style="margin-bottom: 20px; text-align: left; background: #FFF !important; padding: 15px; border: 1px solid #D4AF37; border-radius: 6px;">
+                    <label style="font-size: 1rem; color: #7A191B !important; font-weight: 700; margin-bottom: 8px; display: block;">Preferred Delivery Date:</label>
+                    <input type="date" id="deliveryDate" class="checkout-input" required style="background: #FFF !important; border-color: #D4AF37 !important; color: #3A2320 !important; font-weight: 600;">
+                    <p style="font-size: 0.85rem; color: #8D6E63 !important; line-height: 1.4; margin-top: 8px; margin-bottom: 0;">*Deliveries commence 23rd Oct. Chocolates are made fresh to order. Dispatch takes 2-3 days. Delivery times may vary by location. Queries? Call +91-7678107458</p>
                 </div>
                 
                 <input type="text" id="name" class="checkout-input" placeholder="Name" required style="margin-bottom: 10px;">
@@ -568,7 +567,7 @@
                 <input type="text" id="pincode" class="checkout-input" placeholder="Pincode (6 Digits)" maxlength="6" required style="margin-bottom: 10px;">
                 <textarea id="address" class="checkout-input" rows="2" placeholder="Full Address" required></textarea>
                 
-                <button onclick="startPayment()" class="btn-maroon" style="width: 100%; border-radius: 6px; margin-top: 15px; padding: 18px;">💳 PAY SECURELY</button>
+                <button onclick="startPayment()" class="btn-maroon" style="width: 100%; border-radius: 6px; margin-top: 15px; padding: 18px; display:block; text-align:center;">💳 PAY SECURELY</button>
             </div>
         </div>
     </div>
@@ -576,26 +575,26 @@
     <div id="invoiceModal" class="modal-overlay">
         <div class="modal-box" style="border: 4px solid #4CAF50;">
             <div style="text-align: center; border-bottom: 1px solid #EADDCD; padding-bottom: 20px;">
-                <h1 style="color: #7A191B; font-size:1.8rem; font-family: 'Playfair Display', serif;">CHOCO-NAUT&trade;</h1>
-                <p style="color: #4CAF50; font-weight: 800; letter-spacing: 2px;">PAYMENT SUCCESSFUL</p>
-                <p id="invoiceId" style="color: #888; font-size: 0.9rem;">#INV-00000</p>
+                <h1 style="color: #7A191B !important; font-size:1.8rem;">CHOCO-NAUT&trade;</h1>
+                <p style="color: #4CAF50 !important; font-weight: 800; letter-spacing: 2px;">PAYMENT SUCCESSFUL</p>
+                <p id="invoiceId" style="color: #888 !important; font-size: 0.9rem;">#INV-00000</p>
             </div>
-            <div style="margin-top: 20px; font-family: monospace; font-size:0.9rem;">
+            <div style="margin-top: 20px; font-family: monospace; font-size:0.9rem; color:#3A2320 !important;">
                 <p><strong>Billed To:</strong> <span id="invName"></span></p>
                 <p><strong>Phone:</strong> <span id="invPhone"></span></p>
                 <p><strong>Address:</strong> <span id="invAddr"></span></p>
             </div>
-            <table class="invoice-table" style="color: #3A2320; border-collapse: collapse; width: 100%; margin-top: 15px;">
+            <table class="invoice-table" style="color: #3A2320 !important; border-collapse: collapse; width: 100%; margin-top: 15px;">
                 <thead style="border-bottom: 1px solid #EADDCD;">
                     <tr><th style="text-align:left; padding:5px 0;">Item</th><th style="text-align:center;">Qty</th><th style="text-align:right;">Price</th></tr>
                 </thead>
                 <tbody id="invoiceItems"></tbody>
             </table>
             <div style="text-align: right; border-top: 1px solid #EADDCD; padding-top: 15px; margin-top: 15px;">
-                <p>Subtotal: <span id="invSub">₹0</span></p>
-                <p style="color: #4CAF50; font-weight: bold;">Discount: <span id="invDisc">-₹0</span></p>
-                <p style="color: #7A191B; font-weight: bold;">Delivery: <span id="invDel">FREE</span></p>
-                <h2 style="color: #D4AF37; margin-top: 10px;">PAID: <span id="invTotal">₹0</span></h2>
+                <p style="color:#3A2320 !important;">Subtotal: <span id="invSub">₹0</span></p>
+                <p style="color: #4CAF50 !important; font-weight: bold;">Discount: <span id="invDisc">-₹0</span></p>
+                <p style="color: #7A191B !important; font-weight: bold;">Delivery: <span id="invDel">FREE</span></p>
+                <h2 style="color: #D4AF37 !important; margin-top: 10px;">PAID: <span id="invTotal">₹0</span></h2>
             </div>
         </div>
     </div>
