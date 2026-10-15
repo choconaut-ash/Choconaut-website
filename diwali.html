@@ -201,6 +201,32 @@
             box-shadow: 0 20px 40px rgba(122, 25, 27, 0.1); 
             border-color: #D4AF37 !important; 
         }
+
+        /* NEW: Most Ordered Highlight for Signature Variant */
+        .product-card.most-ordered {
+            border: 2px solid #D4AF37 !important;
+            box-shadow: 0 15px 35px rgba(122, 25, 27, 0.12);
+        }
+        .most-ordered-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #7A191B, #A92629) !important;
+            color: #FFF !important;
+            border: 2px solid #D4AF37 !important;
+            padding: 5px 18px;
+            border-radius: 25px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            white-space: nowrap;
+            box-shadow: 0 4px 12px rgba(122, 25, 27, 0.25);
+            z-index: 10;
+        }
+
         .card-header { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 2px solid #F8EEDF; padding-bottom: 10px; margin-bottom: 15px; }
         .card-header h3 { font-size: 2.2rem; margin: 0; }
         .card-header .price { font-size: 1.6rem; color: #D4AF37 !important; font-weight: 800; font-family: 'Montserrat', sans-serif; }
@@ -348,8 +374,9 @@
                     </div>
                 </div>
 
-                <!-- SIGNATURE -->
-                <div class="product-card">
+                <!-- SIGNATURE (MOST ORDERED) -->
+                <div class="product-card most-ordered">
+                    <div class="most-ordered-badge">🔥 MOST ORDERED</div>
                     <img src="images/diwali_open.jpeg" class="product-img-small" alt="Signature Box">
                     <div class="card-header">
                         <h3>SIGNATURE</h3>
