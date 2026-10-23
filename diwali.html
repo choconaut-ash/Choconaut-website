@@ -499,7 +499,7 @@
         </div>
     </section>
     
-    <!-- NEW CONCIERGE GIFTING SECTION WITH RULES -->
+    <!-- NEW CONCIERGE GIFTING SECTION WITH VERIFICATION FLOW -->
     <section id="concierge" class="concierge-section">
         <div class="concierge-card">
             <div class="concierge-icon">✨</div>
@@ -522,9 +522,43 @@
             </div>
             
             <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-                <a href="templates/Choconaut_Concierge_Template.xlsx" class="btn-outline" style="padding: 18px 40px;" download>1. Download Recipient Template</a>
-                <a href="mailto:vip@choconaut.in?subject=Concierge%20Gifting%20Order" class="btn-maroon" style="padding: 18px 40px;">2. Email Us Your Order</a>
+                <a href="https://wa.me/917678107458" target="_blank" class="btn-outline" style="padding: 18px 40px;">1. Request Template (WhatsApp)</a>
+                <button onclick="document.getElementById('concierge-order-panel').style.display='block'; window.location.href='#concierge-order-panel';" class="btn-maroon" style="padding: 18px 40px;">2. Select Variant & Pay</button>
             </div>
+            
+            <!-- CONCIERGE ORDER PANEL (Hidden by default) -->
+            <div id="concierge-order-panel" style="display: none; margin-top: 35px; background: #FFF; padding: 30px; border: 1px solid #D4AF37; border-radius: 8px; text-align: left;">
+                <h3 style="color: #7A191B; text-align: center; margin-bottom: 25px;">Select Concierge Variants</h3>
+                
+                <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px;">
+                    <div style="flex: 1; min-width: 250px; border: 1px solid #EADDCD; padding: 20px; border-radius: 8px; text-align: center;">
+                        <h4 style="font-size: 1.2rem; margin-bottom: 5px; color: #7A191B; font-family: 'Montserrat', sans-serif;">Signature</h4>
+                        <div style="color: #D4AF37; font-weight: 800; font-size: 1.4rem; margin-bottom: 10px;">₹1,299</div>
+                        <p style="font-size: 0.9rem; color: #8D6E63; margin-bottom: 15px;">Includes direct shipping & handwritten note.</p>
+                        <div class="qty-controls" style="margin: 0 auto; max-width: 150px;">
+                            <button class="q-btn" onclick="updateQty('concierge_signature', -1)">-</button>
+                            <span class="q-display" id="qty-concierge_signature">0</span>
+                            <button class="q-btn" onclick="updateQty('concierge_signature', 1)">+</button>
+                        </div>
+                    </div>
+                    
+                    <div style="flex: 1; min-width: 250px; border: 1px solid #EADDCD; padding: 20px; border-radius: 8px; text-align: center;">
+                        <h4 style="font-size: 1.2rem; margin-bottom: 5px; color: #7A191B; font-family: 'Montserrat', sans-serif;">Premium</h4>
+                        <div style="color: #D4AF37; font-weight: 800; font-size: 1.4rem; margin-bottom: 10px;">₹1,399</div>
+                        <p style="font-size: 0.9rem; color: #8D6E63; margin-bottom: 15px;">Includes direct shipping & handwritten note.</p>
+                        <div class="qty-controls" style="margin: 0 auto; max-width: 150px;">
+                            <button class="q-btn" onclick="updateQty('concierge_premium', -1)">-</button>
+                            <span class="q-display" id="qty-concierge_premium">0</span>
+                            <button class="q-btn" onclick="updateQty('concierge_premium', 1)">+</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <p id="concierge-moq-warning" style="text-align: center; color: #7A191B; font-weight: bold; margin-top: 25px; display: none;">⚠️ Minimum order of 5 boxes required for Concierge Gifting.</p>
+                
+                <button class="btn-maroon" style="width: 100%; padding: 18px; margin-top: 20px; display:block; text-align:center;" onclick="openCart()">PROCEED TO CART</button>
+            </div>
+            
         </div>
     </section>
 
@@ -729,6 +763,15 @@
         names['diwali_premium'] = 'Premium Diwali Box';
         cart['diwali_premium'] = 0;
 
+        // Concierge Dedicated Products
+        products['concierge_signature'] = 1299;
+        names['concierge_signature'] = 'Concierge Signature Box';
+        cart['concierge_signature'] = 0;
+
+        products['concierge_premium'] = 1399;
+        names['concierge_premium'] = 'Concierge Premium Box';
+        cart['concierge_premium'] = 0;
+
         // 2. Lock Delivery Date calendar to minimum October 23, 2026
         window.addEventListener('DOMContentLoaded', () => {
             const dateEl = document.getElementById('deliveryDate');
@@ -737,34 +780,50 @@
             }
         });
 
-        // 3. Intercept & Override calculateTotals() to apply bulk discounts & free shipping
+        // 3. Intercept & Override calculateTotals() to apply bulk discounts & free shipping appropriately
         window.calculateTotals = function() {
             subtotal = 0; 
             let diwaliBoxCount = 0;
             let standardCount = 0;
+            let conciergeBoxCount = 0;
+            let standardDiwaliSubtotal = 0;
             
             // Tally items
             for(let k in cart) { 
                 subtotal += cart[k] * products[k]; 
-                if(k.startsWith('diwali_')) {
+                if(k.startsWith('concierge_')) {
+                    conciergeBoxCount += cart[k];
+                } else if(k.startsWith('diwali_')) {
                     diwaliBoxCount += cart[k];
+                    standardDiwaliSubtotal += cart[k] * products[k]; // Only discount standard diwali boxes
                 } else {
                     standardCount += cart[k];
                 }
             }
 
-            // Apply Diwali Bulk Discount Logic
+            // Show/Hide MOQ Warning for Concierge Order Panel
+            const cWarning = document.getElementById('concierge-moq-warning');
+            if(cWarning) {
+                if (conciergeBoxCount > 0 && conciergeBoxCount < 5) {
+                    cWarning.style.display = 'block';
+                    cWarning.innerText = `⚠️ You need ${5 - conciergeBoxCount} more Concierge box(es) to meet the minimum order of 5.`;
+                } else {
+                    cWarning.style.display = 'none';
+                }
+            }
+
+            // Apply Diwali Bulk Discount Logic (EXCLUDES CONCIERGE)
             let diwaliDiscount = 0;
             if (diwaliBoxCount >= 10) {
-                diwaliDiscount = Math.round(subtotal * 0.15); // 15% OFF
+                diwaliDiscount = Math.round(standardDiwaliSubtotal * 0.15); // 15% OFF
             } else if (diwaliBoxCount >= 5) {
-                diwaliDiscount = Math.round(subtotal * 0.10); // 10% OFF
+                diwaliDiscount = Math.round(standardDiwaliSubtotal * 0.10); // 10% OFF
             }
 
             discount = diwaliDiscount; 
             
-            // Delivery is free if there's a diwali box
-            if (diwaliBoxCount > 0) {
+            // Delivery is free if there's a diwali box or concierge box
+            if (diwaliBoxCount > 0 || conciergeBoxCount > 0) {
                 deliveryCharge = 0;
             } else {
                 deliveryCharge = (standardCount === 1) ? 99 : 0;
@@ -802,16 +861,18 @@
             const bar = document.getElementById('cartBar');
             if (bar) {
                 const barText = bar.querySelector('span'); 
-                if(diwaliBoxCount > 0) {
+                if(diwaliBoxCount > 0 || conciergeBoxCount > 0) {
                     bar.classList.add('active');
                     if (diwaliBoxCount >= 10) {
                         barText.innerHTML = `🚀 <strong style="color:#4CAF50;">15% DISCOUNT APPLIED!</strong> FREE DELIVERY!`;
                     } else if (diwaliBoxCount >= 5) {
                         let needed = 10 - diwaliBoxCount;
                         barText.innerHTML = `✅ <strong style="color:#4CAF50;">10% DISCOUNT APPLIED!</strong> ADD ${needed} MORE FOR 15% OFF!`;
-                    } else {
+                    } else if (diwaliBoxCount > 0) {
                         let needed = 5 - diwaliBoxCount;
                         barText.innerHTML = `✨ <strong style="color:#7A191B;">FREE DELIVERY!</strong> ADD ${needed} MORE BOXES FOR 10% OFF!`;
+                    } else if (conciergeBoxCount > 0) {
+                        barText.innerHTML = `✨ <strong style="color:#7A191B;">CONCIERGE GIFTING!</strong> FREE DELIVERY!`;
                     }
                 } else {
                     bar.classList.remove('active');
@@ -819,18 +880,31 @@
             }
         };
 
-        // 4. Intercept startPayment to enforce Delivery Date and log it to Google Sheets
+        // 4. Intercept startPayment to enforce Delivery Date, MOQ for Concierge, and log it to Google Sheets
         const originalStartPayment = window.startPayment;
         window.startPayment = function() {
             const dateInput = document.getElementById('deliveryDate').value;
             
-            // Only enforce date selection if they are buying Diwali boxes
+            // Check for Diwali/Concierge boxes
             let hasDiwaliBoxes = false;
-            for(let k in cart) { if(k.startsWith('diwali_') && cart[k] > 0) hasDiwaliBoxes = true; }
+            let conciergeBoxCount = 0;
             
-            if(hasDiwaliBoxes && !dateInput) {
+            for(let k in cart) { 
+                if(k.startsWith('diwali_') && cart[k] > 0) hasDiwaliBoxes = true; 
+                if(k.startsWith('concierge_') && cart[k] > 0) conciergeBoxCount += cart[k];
+            }
+            
+            // Enforce Date Selection
+            if((hasDiwaliBoxes || conciergeBoxCount > 0) && !dateInput) {
                 sfx('error');
                 alert("⚠️ Please select your Preferred Delivery Date before paying.");
+                return;
+            }
+
+            // Enforce Minimum Order Quantity for Concierge Gifting
+            if(conciergeBoxCount > 0 && conciergeBoxCount < 5) {
+                sfx('error');
+                alert("⚠️ Concierge Gifting requires a minimum order of 5 boxes.");
                 return;
             }
             
@@ -838,7 +912,7 @@
             const originalAddress = addrEl.value;
             
             // Temporarily attach date to the address payload so it hits your Google Sheet safely
-            if(originalAddress.trim() !== '' && hasDiwaliBoxes) {
+            if(originalAddress.trim() !== '' && (hasDiwaliBoxes || conciergeBoxCount > 0)) {
                 const dateObj = new Date(dateInput);
                 const formattedDate = dateObj.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
                 addrEl.value = originalAddress + ` | REQ. DELIVERY: ${formattedDate}`;
