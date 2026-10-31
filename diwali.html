@@ -345,6 +345,70 @@
             top: 0; 
             font-size: 1.1rem; 
         }
+
+        /* =========================================
+           📱 MOBILE RESPONSIVENESS OVERRIDES 📱
+           ========================================= */
+        @media (max-width: 768px) {
+            /* 1. Reduce overall spacing & section padding */
+            section { padding: 50px 15px !important; }
+            .hero-festive { padding: 50px 15px !important; }
+            .divider { margin: 15px auto !important; }
+
+            /* 2. Shrink massive text & headings to prevent endless scrolling */
+            .hero-festive h1 { font-size: 2.3rem !important; line-height: 1.2 !important; }
+            .hero-festive p.subhead { font-size: 1.05rem !important; }
+            h2 { font-size: 1.8rem !important; line-height: 1.3 !important; }
+            h3 { font-size: 1.4rem !important; }
+            p { font-size: 0.95rem !important; }
+
+            /* 3. Convert Product Grid into a Horizontal Scroll (Swipeable Carousel) */
+            .box-grid {
+                display: flex !important;
+                flex-wrap: nowrap !important;
+                overflow-x: auto !important;
+                gap: 15px !important;
+                padding: 25px 5px 20px 5px !important; /* Space for scrollbar & most-ordered badge */
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+                margin-top: 30px !important;
+            }
+
+            /* Customize the mobile scrollbar to look premium */
+            .box-grid::-webkit-scrollbar { height: 6px; }
+            .box-grid::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 10px; }
+            .box-grid::-webkit-scrollbar-track { background: rgba(212, 175, 55, 0.1); border-radius: 10px; }
+
+            /* 4. Shrink Product Cards & Ensure they scroll horizontally */
+            .product-card {
+                flex: 0 0 85vw !important; /* Takes up 85% of screen width so the next card peeks in */
+                max-width: 320px !important;
+                scroll-snap-align: center;
+                padding: 20px 15px !important; /* Smaller inside padding */
+            }
+            
+            /* Shrink card contents */
+            .card-header h3 { font-size: 1.4rem !important; }
+            .card-header .price { font-size: 1.1rem !important; }
+            .product-card p.desc { font-size: 0.9rem !important; margin-bottom: 12px !important; }
+            .product-card ul li { font-size: 0.85rem !important; margin-bottom: 8px !important; padding-left: 20px !important; }
+            .product-img-small { margin-bottom: 15px !important; }
+            
+            /* Shrink Buttons */
+            .btn-maroon, .btn-outline { font-size: 0.9rem !important; padding: 12px 20px !important; }
+            
+            /* 5. Fix Concierge panel & Split sections for mobile */
+            .concierge-card { padding: 30px 15px !important; }
+            .concierge-card h2 { font-size: 2rem !important; }
+            .concierge-rules { padding: 15px !important; }
+            .split-section { gap: 30px !important; flex-direction: column !important; }
+            
+            /* Adjust step-by-step numbers */
+            .text-center h1 { font-size: 3.5rem !important; }
+            
+            /* Fix cart overlay sizing on mobile */
+            .modal-box { width: 95% !important; padding: 20px 15px !important; }
+        }
     </style>
 </head>
 <body onload="initInventory()">
