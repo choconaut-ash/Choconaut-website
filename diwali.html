@@ -695,7 +695,7 @@
                 <div style="flex: 1; min-width: 250px; background: #F8EEDF !important; padding: 30px; border-radius: 12px; border: 1px solid #EADDCD;">
                     <h1 style="color: #D4AF37 !important; font-size: 5rem; margin: 0; line-height: 1; font-family: 'Playfair Display', serif;">2</h1>
                     <h4 style="font-family: 'Montserrat', sans-serif; font-size: 1.3rem; margin-top: 15px;">Place your order.</h4>
-                    <p>Order through our website and select your preferred delivery date at checkout.</p>
+                    <p>Order through our website to secure your handcrafted batch before we sell out.</p>
                 </div>
                 <div style="flex: 1; min-width: 250px; background: #F8EEDF !important; padding: 30px; border-radius: 12px; border: 1px solid #EADDCD;">
                     <h1 style="color: #D4AF37 !important; font-size: 5rem; margin: 0; line-height: 1; font-family: 'Playfair Display', serif;">3</h1>
@@ -720,8 +720,8 @@
                 <p>Yes, Choco-naut offers India-wide delivery, and for our Diwali Celebration boxes, delivery is <strong>absolutely FREE!</strong></p>
             </div>
             <div class="faq-item">
-                <h4>When will my box be delivered?</h4>
-                <p>Deliveries commence from <strong>23rd October 2026</strong>. Because our chocolates are made fresh to order, dispatch takes 2-3 days. You can safely select your preferred delivery date directly inside the checkout cart.</p>
+                <h4>When will my box be dispatched?</h4>
+                <p>Because our chocolates are made fresh to order in small batches, all orders are dispatched within <strong>1-2 days</strong> of placing your order. Delivery times depend on your location.</p>
             </div>
             <div class="faq-item">
                 <h4>What makes the Diwali box special?</h4>
@@ -764,11 +764,10 @@
             <hr style="border-color: #EADDCD; margin: 20px 0;">
             
             <div class="checkout-form">
-                <!-- NEW DELIVERY DATE SELECTOR -->
-                <div style="margin-bottom: 20px; text-align: left; background: #FFF !important; padding: 15px; border: 1px solid #D4AF37; border-radius: 6px;">
-                    <label style="font-size: 1rem; color: #7A191B !important; font-weight: 700; margin-bottom: 8px; display: block;">Preferred Delivery Date:</label>
-                    <input type="date" id="deliveryDate" class="checkout-input" required style="background: #FFF !important; border-color: #D4AF37 !important; color: #3A2320 !important; font-weight: 600;">
-                    <p style="font-size: 0.85rem; color: #8D6E63 !important; line-height: 1.4; margin-top: 8px; margin-bottom: 0;">*Deliveries commence 23rd Oct. Chocolates are made fresh to order. Dispatch takes 2-3 days. Delivery times may vary by location. Queries? Call +91-7678107458</p>
+                <!-- SHIPPING NOTIFICATION -->
+                <div style="margin-bottom: 20px; text-align: left; background: #FFF !important; padding: 15px; border: 1px dashed #D4AF37; border-radius: 6px;">
+                    <p style="font-size: 0.95rem; color: #7A191B !important; font-weight: 700; margin-bottom: 5px;">✨ Freshly Crafted for You</p>
+                    <p style="font-size: 0.85rem; color: #8D6E63 !important; line-height: 1.4; margin: 0;">Our chocolates are made fresh to order in small batches. All orders are dispatched within 1-2 days. Queries? Call +91-7678107458</p>
                 </div>
                 
                 <input type="text" id="name" class="checkout-input" placeholder="Name" required style="margin-bottom: 10px;">
@@ -836,15 +835,7 @@
         names['concierge_premium'] = 'Concierge Premium Box';
         cart['concierge_premium'] = 0;
 
-        // 2. Lock Delivery Date calendar to minimum October 23, 2026
-        window.addEventListener('DOMContentLoaded', () => {
-            const dateEl = document.getElementById('deliveryDate');
-            if(dateEl) {
-                dateEl.min = "2026-10-23";
-            }
-        });
-
-        // 3. Intercept & Override calculateTotals() to apply bulk discounts & free shipping appropriately
+        // 2. Intercept & Override calculateTotals() to apply bulk discounts & free shipping appropriately
         window.calculateTotals = function() {
             subtotal = 0; 
             let diwaliBoxCount = 0;
@@ -944,25 +935,14 @@
             }
         };
 
-        // 4. Intercept startPayment to enforce Delivery Date, MOQ for Concierge, and log it to Google Sheets
+        // 3. Intercept startPayment to enforce MOQ for Concierge
         const originalStartPayment = window.startPayment;
         window.startPayment = function() {
-            const dateInput = document.getElementById('deliveryDate').value;
-            
-            // Check for Diwali/Concierge boxes
-            let hasDiwaliBoxes = false;
+            // Check for Concierge boxes
             let conciergeBoxCount = 0;
             
             for(let k in cart) { 
-                if(k.startsWith('diwali_') && cart[k] > 0) hasDiwaliBoxes = true; 
                 if(k.startsWith('concierge_') && cart[k] > 0) conciergeBoxCount += cart[k];
-            }
-            
-            // Enforce Date Selection
-            if((hasDiwaliBoxes || conciergeBoxCount > 0) && !dateInput) {
-                sfx('error');
-                alert("⚠️ Please select your Preferred Delivery Date before paying.");
-                return;
             }
 
             // Enforce Minimum Order Quantity for Concierge Gifting
@@ -972,23 +952,8 @@
                 return;
             }
             
-            const addrEl = document.getElementById('address');
-            const originalAddress = addrEl.value;
-            
-            // Temporarily attach date to the address payload so it hits your Google Sheet safely
-            if(originalAddress.trim() !== '' && (hasDiwaliBoxes || conciergeBoxCount > 0)) {
-                const dateObj = new Date(dateInput);
-                const formattedDate = dateObj.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
-                addrEl.value = originalAddress + ` | REQ. DELIVERY: ${formattedDate}`;
-            }
-            
             // Run the normal checkout process
             originalStartPayment();
-            
-            // Revert the text box UI back so it looks clean to the user
-            setTimeout(() => {
-                addrEl.value = originalAddress;
-            }, 500);
         };
     </script>
 </body>
